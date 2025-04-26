@@ -13,7 +13,7 @@ export default function ProductList() {
     const fetchProducts = async () => {
       try {
         setLoading(true)
-        const response = await fetch('/api/products')
+        const response = await fetch('/api/products/')
 
         console.log('response', response)
 
@@ -41,7 +41,7 @@ export default function ProductList() {
   return (
     <div>
       <h1>Products</h1>
-      {products.length === 0 ? (
+      {/* {products.length === 0 ? (
         <p>No products found</p>
       ) : (
         <ul>
@@ -51,7 +51,7 @@ export default function ProductList() {
             </li>
           ))}
         </ul>
-      )}
+      )} */}
     </div>
   )
 }
