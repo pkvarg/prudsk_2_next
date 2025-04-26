@@ -6,7 +6,10 @@ export async function GET() {
 
   try {
     // Fetch all products
+    // const products = await prisma.video.findMany()
+
     const products = await prisma.video.findMany()
+    console.log(products)
 
     // Return successful response
     return NextResponse.json(products)

@@ -22,15 +22,15 @@ datasource db {
 
 model User {
   id                 String    @id @default(auto()) @map("_id") @db.ObjectId
-  name               String
+  name               String? // Made optional in case some users don't have names
   email              String    @unique
   password           String?
-  isRegistered       Boolean   @default(false)
+  isRegistered       Boolean?  @default(false) // Made optional
   registerToken      String?
-  isAdmin            Boolean   @default(false)
-  isAssistant        Boolean   @default(false)
-  isSubscribed       Boolean   @default(false)
-  isUnsubscribed     Boolean   @default(false)
+  isAdmin            Boolean?  @default(false) // Made optional
+  isAssistant        Boolean?  @default(false) // Made optional
+  isSubscribed       Boolean?  @default(false) // Made optional
+  isUnsubscribed     Boolean?  @default(false) // Made optional
   googleId           String?
   passwordChangedAt  DateTime?
   passwordResetToken String?
@@ -45,7 +45,7 @@ model User {
   banners  Banner[]
   reviews  Review[]
 
-  @@map("users") // Maps to the "users" collection
+  @@map("users")
 }
 
 model Audio {
@@ -58,15 +58,19 @@ model Audio {
   updatedAt   DateTime @updatedAt
 
   // Relations
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @db.ObjectId
+  user   User?   @relation(fields: [userId], references: [id]) // Made optional
+  userId String? @db.ObjectId // Made optional
+
+  @@map("audios")
 }
 
 model Counter {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   visitorsCount Int?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime? @default(now()) // <-- notice the "?" here
+  updatedAt     DateTime? @updatedAt // <-- and maybe here too
+
+  @@map("counters")
 }
 
 model Banner {
@@ -78,38 +82,42 @@ model Banner {
   updatedAt   DateTime @updatedAt
 
   // Relations
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @db.ObjectId
+  user   User?   @relation(fields: [userId], references: [id]) // Made optional
+  userId String? @db.ObjectId // Made optional
+
+  @@map("banners")
 }
 
 model Order {
   id                         String    @id @default(auto()) @map("_id") @db.ObjectId
-  name                       String
-  email                      String
-  orderNumber                String
-  paymentMethod              String
-  taxPrice                   Float     @default(0.0)
-  shippingPrice              Float     @default(0.0)
-  totalPrice                 Float     @default(0.0)
-  isPaid                     Boolean   @default(false)
+  name                       String? // Made optional
+  email                      String? // Made optional
+  orderNumber                String? // Made optional
+  paymentMethod              String? // Made optional
+  taxPrice                   Float?    @default(0.0) // Made optional
+  shippingPrice              Float?    @default(0.0) // Made optional
+  totalPrice                 Float?    @default(0.0) // Made optional
+  isPaid                     Boolean?  @default(false) // Made optional
   paidAt                     DateTime?
-  isDelivered                Boolean   @default(false)
+  isDelivered                Boolean?  @default(false) // Made optional
   deliveredAt                DateTime?
-  isCancelled                Boolean   @default(false)
-  isCancelledOrderNumberUsed Boolean   @default(false)
+  isCancelled                Boolean?  @default(false) // Made optional
+  isCancelledOrderNumberUsed Boolean?  @default(false) // Made optional
   initPaymentId              String?
   createdAt                  DateTime  @default(now())
   updatedAt                  DateTime  @updatedAt
 
   // Complex fields (JSON in MongoDB)
-  orderItems      Json[]
-  shippingAddress Json
+  orderItems      Json? // Made optional (single item)
+  shippingAddress Json? // Made optional
   paymentResult   Json?
   discounts       Json?
 
   // Relations
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @db.ObjectId
+  user   User?   @relation(fields: [userId], references: [id]) // Made optional
+  userId String? @db.ObjectId // Made optional
+
+  @@map("orders")
 }
 
 model Product {
@@ -120,10 +128,10 @@ model Product {
   category        String?
   description     String?
   excerpt         Json?
-  rating          Float    @default(0)
-  numReviews      Int      @default(0)
-  price           Float    @default(0)
-  countInStock    Int      @default(0)
+  rating          Float?   @default(0) // Made optional
+  numReviews      Int?     @default(0) // Made optional
+  price           Float?   @default(0) // Made optional
+  countInStock    Int?     @default(0) // Made optional
   catalog         String?
   weight          String?
   related         Json?
@@ -142,29 +150,28 @@ model Product {
   updatedAt       DateTime @updatedAt
 
   // Relations
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String? @db.ObjectId // Make it optional with the ?
-
+  user       User?      @relation(fields: [userId], references: [id])
+  userId     String?    @db.ObjectId
   reviews    Review[]
   favoriteOf Favorite[]
 
-  @@map("products") // Maps to the "products" collection
+  @@map("products")
 }
 
 model Review {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  rating         Float
-  comment        String
-  isAcknowledged Boolean  @default(false)
+  name           String? // Made optional
+  rating         Float? // Made optional
+  comment        String? // Made optional
+  isAcknowledged Boolean? @default(false) // Made optional
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
   // Relations
-  user      User    @relation(fields: [userId], references: [id])
-  userId    String  @db.ObjectId
-  product   Product @relation(fields: [productId], references: [id])
-  productId String  @db.ObjectId
+  user      User?    @relation(fields: [userId], references: [id]) // Made optional
+  userId    String?  @db.ObjectId // Made optional
+  product   Product? @relation(fields: [productId], references: [id]) // Made optional
+  productId String?  @db.ObjectId // Made optional
 }
 
 model Favorite {
@@ -174,8 +181,8 @@ model Favorite {
   updatedAt  DateTime @updatedAt
 
   // Relations
-  product   Product @relation(fields: [productId], references: [id])
-  productId String  @db.ObjectId
+  product   Product? @relation(fields: [productId], references: [id]) // Made optional
+  productId String?  @db.ObjectId // Made optional
 }
 
 model Video {
@@ -186,6 +193,8 @@ model Video {
   updatedAt  DateTime @updatedAt
 
   // Relations
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @db.ObjectId
+  user   User?   @relation(fields: [userId], references: [id]) // Made optional
+  userId String? @db.ObjectId // Made optional
+
+  @@map("videos")
 }
