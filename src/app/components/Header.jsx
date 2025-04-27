@@ -1,292 +1,224 @@
+'use client'
 import React from 'react'
-//import { useDispatch, useSelector } from 'react-redux' // setup for next js
+import { useDispatch, useSelector } from 'react-redux' // setup for next js
 
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
-//import SearchBox from './SearchBox'
-//import { logout } from '../actions/userActions' // avoid actions
+import SearchBox from './SearchBox'
+import { logoutAndRedirect } from '@/store/slices/userSlice'
 
 import * as Icon from 'react-bootstrap-icons'
 import Link from 'next/link'
 
-// TODO Redux, uncomment and solve
-
 const Header = () => {
-  // const dispatch = useDispatch()
-  // const userLogin = useSelector((state) => state.userLogin)
-  // const { userInfo } = userLogin
+  const dispatch = useDispatch()
+  const { userInfo } = useSelector((state) => state.user)
 
-  // const cart = useSelector((state) => state.cart)
-  // const { cartItems } = cart
+  const { cartItems } = useSelector((state) => state.cart)
 
-  // const logoutHandler = () => {
-  //   dispatch(logout())
-  // }
+  const logoutHandler = () => {
+    dispatch(logoutAndRedirect())
+  }
   return (
+    // TODO Claude orig header from css to tailwind
     <header>
-      {/* grey navbar no mobile */}
-
-      <Navbar expand="lg" className="grey-navbar-top no-mobile">
-        <Container>
-          <div className="grey-navbar-flex">
-            <Link href="/contact" className="grey-navbar-top-contact">
-              <p className="grey-navbar-contact">Kontakt</p>
+      {/* Grey navbar (desktop only) */}
+      <div className="hidden lg:block bg-gray-100 border border-gray-300 h-10">
+        <div className="container mx-auto flex justify-between items-center">
+          <div>
+            <Link
+              href="/contact"
+              className="text-gray-700 text-base font-normal cursor-pointer no-underline"
+            >
+              <p className="m-0">Kontakt</p>
             </Link>
           </div>
-          <div className="grey-navbar-two-links">
-            <Link href="/cart" className="grey-navbar-cart">
+          <div className="flex items-center">
+            <Link href="/cart" className="text-gray-700 mr-9 relative">
               <div>
-                <p className="number-in-cart ">{/* <span>{cartItems.length}</span> */}</p>
-
-                <Icon.Cart2 className="header-basket">Košík</Icon.Cart2>
+                <p className="absolute -right-2 -top-2 inline-block rounded-full w-5 h-5 leading-5 bg-red-500 text-white">
+                  <span className="text-lg ml-1 pb-3"></span>
+                </p>
+                <Icon.Cart2 className="text-2xl font-thin mb-2">Košík</Icon.Cart2>
               </div>
             </Link>
-            {/* {userInfo ? (
-              <NavDropdown title={userInfo.name} id="username">
-                <Link href="profile">
-                  <NavDropdown.Item>Můj profil</NavDropdown.Item>
-                </Link>
-                <NavDropdown.Item onClick={logoutHandler}>Odhlásit se</NavDropdown.Item>
-              </NavDropdown>
-            ) : (
-              <Link href="/login" className="grey-navbar-sign-in">
-                <Nav.Link>
-                  <Icon.Person className="header-user" /> Přihlášení
-                </Nav.Link>
-              </Link>
-            )}
-            {userInfo && userInfo.isAdmin && !userInfo.isAssistant && (
-              <NavDropdown className="admin-menu" title="Admin" id="adminmenu">
-                <Link href="/admin/userlist">
-                  <NavDropdown.Item>Uživatelé</NavDropdown.Item>
-                </Link>
-                <Link href="/admin/productlist">
-                  <NavDropdown.Item>Produkty</NavDropdown.Item>
-                </Link>
-                <Link href="/admin/orderlist">
-                  <NavDropdown.Item>Objednávky</NavDropdown.Item>
-                </Link>
-                <Link href="/admin/audio">
-                  <NavDropdown.Item>Audio</NavDropdown.Item>
-                </Link>
-                <Link href="/admin/video">
-                  <NavDropdown.Item>Video</NavDropdown.Item>
-                </Link>
-                <Link href="/admin/banner">
-                  <NavDropdown.Item>Bannery</NavDropdown.Item>
-                </Link>
-                <Link href="/admin/subscribers">
-                  <NavDropdown.Item>Odběratelé novinek</NavDropdown.Item>
-                </Link>
-              </NavDropdown>
-            )}
-            {userInfo && userInfo.isAssistant && (
-              <NavDropdown title="Asistent" id="adminmenu">
-                <Link href="/admin/audio">
-                  <NavDropdown.Item>Audio</NavDropdown.Item>
-                </Link>
-                <Link href="/admin/video">
-                  <NavDropdown.Item>Video</NavDropdown.Item>
-                </Link>
-                <Link href="/admin/banner">
-                  <NavDropdown.Item>Bannery</NavDropdown.Item>
-                </Link>
-              </NavDropdown>
-            )} */}
+            {/* User authentication links would go here */}
           </div>
-        </Container>
-      </Navbar>
-      {/* Header with Logo ... */}
-      <div className="top-container no-mobile container">
+        </div>
+      </div>
+
+      {/* Header with Logo (desktop only) */}
+      <div className="hidden lg:flex container mx-auto justify-between items-center mt-4 mb-3">
         <div>
           <Link href="/" className="no-underline">
-            <img src="/images/wwwproudbanner.png" className="header-image" alt="prud-zivota"></img>
+            <img src="/images/wwwproudbanner.png" className="w-5/12 mt-4" alt="prud-zivota"></img>
           </Link>
-          <h3 className="header-publisher">Přinášet bohatství Božího slova všemu Božímu lidu</h3>
+          <h3 className="text-[#a07c54] text-xl font-normal italic mb-4 pt-0 pb-0 font-serif">
+            Přinášet bohatství Božího slova všemu Božímu lidu
+          </h3>
         </div>
-        <div className="header-search-box">{/* <SearchBox /> */}</div>
+        <div className="flex-1 max-w-md">{/* SearchBox would go here */}</div>
       </div>
-      {/* Red Navbar, on Mobile is Grey with Toggle */}
-      <Navbar variant="dark" expand="lg" collapseOnSelect>
-        <div className="red-navbar-container">
-          <Container>
+
+      {/* Red Navbar (desktop) / Grey Navbar with toggle (mobile) */}
+      <nav className="lg:bg-[#8a1c1f] bg-gray-100 h-6 lg:h-[25px]">
+        <div className="lg:-translate-y-3 lg:mx-auto relative z-10">
+          <div className="container mx-auto">
             <div>
-              <div className="mobile-navbar mobile-only">
-                <div className="mobile-sign-in mobile-only">
-                  {/* {userInfo ? (
-                    <NavDropdown title={userInfo.name} id="username">
-                      <Link href="profile">
-                        <NavDropdown.Item>Můj profil</NavDropdown.Item>
-                      </Link>
-                      <NavDropdown.Item onClick={logoutHandler}>Odhlásit se</NavDropdown.Item>
-                    </NavDropdown>
-                  ) : (
-                    <Link href="/login">
-                      <Nav.Link className="mobile-sign-in">
-                        <Icon.Person className="header-user" />
-                      </Nav.Link>
-                    </Link>
-                  )}
-
-                  {userInfo && userInfo.isAdmin && !userInfo.isAssistant && (
-                    <NavDropdown title="Admin" id="adminmenu">
-                      <Link href="/admin/userlist">
-                        <NavDropdown.Item>Uživatelé</NavDropdown.Item>
-                      </Link>
-                      <Link href="/admin/productlist">
-                        <NavDropdown.Item>Produkty</NavDropdown.Item>
-                      </Link>
-                      <Link href="/admin/orderlist">
-                        <NavDropdown.Item>Objednávky</NavDropdown.Item>
-                      </Link>
-
-                      <Link href="/admin/audio">
-                        <NavDropdown.Item>Audio</NavDropdown.Item>
-                      </Link>
-                      <Link href="/admin/video">
-                        <NavDropdown.Item>Video</NavDropdown.Item>
-                      </Link>
-                      <Link href="/admin/banner">
-                        <NavDropdown.Item>Bannery</NavDropdown.Item>
-                      </Link>
-                      <Link href="/admin/subscribers">
-                        <NavDropdown.Item>Odběratelé novinek</NavDropdown.Item>
-                      </Link>
-                    </NavDropdown>
-                  )}
-                  {userInfo && userInfo.isAssistant && (
-                    <NavDropdown title="Asistent" id="adminmenu">
-                      <Link href="/admin/audio">
-                        <NavDropdown.Item>Audio</NavDropdown.Item>
-                      </Link>
-                      <Link href="/admin/video">
-                        <NavDropdown.Item>Video</NavDropdown.Item>
-                      </Link>
-                      <Link href="/admin/banner">
-                        <NavDropdown.Item>Bannery</NavDropdown.Item>
-                      </Link>
-                    </NavDropdown>
-                  )} */}
+              {/* Mobile navbar items */}
+              <div className="flex lg:hidden items-center justify-center gap-8 ml-11 -translate-y-3">
+                {/* Mobile sign in */}
+                <div className="flex items-center">
+                  {/* Authentication dropdown would go here */}
                 </div>
 
-                <div className="mobile-cart mobile-only">
-                  <Link href="/cart" className="header-cart mobile-only">
+                {/* Mobile cart */}
+                <div className="flex">
+                  <Link href="/cart" className="relative block">
                     <div>
-                      <p className="number-in-cart">{/* <span>{cartItems.length}</span> */}</p>
-                      <Icon.Cart className="header-cart" />
+                      <p className="absolute -right-2 -top-2 inline-block rounded-full w-5 h-5 leading-5 bg-red-500 text-white"></p>
+                      <Icon.Cart className="text-gray-700" />
                     </div>
                   </Link>
                 </div>
-                <Link href="favorites" className="favorites-heart">
-                  <Icon.HeartFill className="header-heart" />
+
+                {/* Favorites */}
+                <Link href="favorites" className="mb-[2%] ml-[2%]">
+                  <Icon.HeartFill className="text-red-500" />
                 </Link>
               </div>
             </div>
-          </Container>
-          <div aria-controls="basic-navbar-nav" />
-          <div className="mobile-navbar-collapse" id="basic-navbar-nav">
-            <NavDropdown title="Novinky" className="red-navbar-item">
-              <Link href="new-books/2025">
-                <NavDropdown.Item>Knihy 2025</NavDropdown.Item>
-              </Link>
-            </NavDropdown>
-            <NavDropdown title="Podcast" className="red-navbar-item">
-              <Link href="words-of-life">
-                <NavDropdown.Item>Slova života</NavDropdown.Item>
-              </Link>
-              <Link href="life-study">
-                <NavDropdown.Item>Studium života</NavDropdown.Item>
-              </Link>
-            </NavDropdown>
-            <Link href="/video">
-              <div className="red-navbar-item">Video</div>
-            </Link>
-            <NavDropdown title="E-shop" className="red-navbar-item">
-              <Link href="eshop/abecedný-zoznam-kníh">
-                <NavDropdown.Item>Abecední seznam knih</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/Boží-ekonomie">
-                <NavDropdown.Item>Boží ekonomie</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/brožury">
-                <NavDropdown.Item>Brožury</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/církev">
-                <NavDropdown.Item>Církev</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/duch">
-                <NavDropdown.Item>Duch</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/evangelium">
-                <NavDropdown.Item>Evangelium</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/kristus">
-                <NavDropdown.Item>Kristus</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/křesťanská-praxe">
-                <NavDropdown.Item>Křesťanská praxe</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/křesťanská-služba">
-                <NavDropdown.Item>Křesťanská služba</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/letáky">
-                <NavDropdown.Item>Letáky</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/mládež">
-                <NavDropdown.Item>Mládež</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/studium-a-výklad-bible">
-                <NavDropdown.Item>Studium a výklad Bible</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/Trojjediný-Bůh">
-                <NavDropdown.Item>Trojjediný Bůh</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/život">
-                <NavDropdown.Item>Život</NavDropdown.Item>
-              </Link>
-              <Link href="eshop/životopisné">
-                <NavDropdown.Item>Životopisné</NavDropdown.Item>
-              </Link>
-            </NavDropdown>
-            <Link href="/library">
-              <div className="red-navbar-item">Čítárna</div>
-            </Link>
-            <NavDropdown title="Info" className="red-navbar-item">
-              <Link href="watchman-nee">
-                <NavDropdown.Item>Watchman Nee</NavDropdown.Item>
-              </Link>
-              <Link href="witness-lee">
-                <NavDropdown.Item>Witness Lee</NavDropdown.Item>
-              </Link>
-              <Link href="about">
-                <NavDropdown.Item>O nás</NavDropdown.Item>
-              </Link>
-              <Link href="safety-privacy">
-                <NavDropdown.Item>Bezpečnost a soukromí</NavDropdown.Item>
-              </Link>
-            </NavDropdown>
-            <Link href="/contact">
-              <div className="red-navbar-item">Kontakt</div>
+          </div>
+
+          {/* Mobile menu button would go here */}
+
+          {/* Navbar collapse - desktop and mobile */}
+          <div className="lg:flex bg-gray-100 lg:bg-transparent pt-12 lg:pt-0 pl-4 lg:pl-0">
+            {/* Novinky dropdown */}
+            <div className="lg:text-white text-gray-700 lg:mr-4 text-base lg:px-1 lg:py-2 cursor-pointer group relative">
+              <span>Novinky</span>
+              <div className="hidden group-hover:block absolute bg-gray-50 min-w-max shadow-md mt-0 z-10">
+                <Link
+                  href="new-books/2025"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#24b9d6] hover:text-white text-sm"
+                >
+                  Knihy 2025
+                </Link>
+              </div>
+            </div>
+
+            {/* Podcast dropdown */}
+            <div className="lg:text-white text-gray-700 lg:mr-4 text-base lg:px-1 lg:py-2 cursor-pointer group relative">
+              <span>Podcast</span>
+              <div className="hidden group-hover:block absolute bg-gray-50 min-w-max shadow-md mt-0 z-10">
+                <Link
+                  href="words-of-life"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#24b9d6] hover:text-white text-sm"
+                >
+                  Slova života
+                </Link>
+                <Link
+                  href="life-study"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#24b9d6] hover:text-white text-sm"
+                >
+                  Studium života
+                </Link>
+              </div>
+            </div>
+
+            {/* Video link */}
+            <Link href="/video" className="block">
+              <div className="lg:text-white text-gray-700 lg:mr-4 text-base lg:px-1 lg:py-2 lg:hover:bg-[#611316] cursor-pointer">
+                Video
+              </div>
             </Link>
 
-            <Link href="favorites" className="no-mobile">
-              <Icon.HeartFill className="header-heart-white" />
+            {/* E-shop dropdown */}
+            <div className="lg:text-white text-gray-700 lg:mr-4 text-base lg:px-1 lg:py-2 cursor-pointer group relative">
+              <span>E-shop</span>
+              <div className="hidden group-hover:block absolute bg-gray-50 min-w-max shadow-md mt-0 z-10">
+                <Link
+                  href="eshop/abecedný-zoznam-kníh"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#24b9d6] hover:text-white text-sm"
+                >
+                  Abecední seznam knih
+                </Link>
+                <Link
+                  href="eshop/Boží-ekonomie"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#24b9d6] hover:text-white text-sm"
+                >
+                  Boží ekonomie
+                </Link>
+                {/* More eshop categories would go here */}
+              </div>
+            </div>
+
+            {/* Library link */}
+            <Link href="/library" className="block">
+              <div className="lg:text-white text-gray-700 lg:mr-4 text-base lg:px-1 lg:py-2 lg:hover:bg-[#611316] cursor-pointer">
+                Čítárna
+              </div>
+            </Link>
+
+            {/* Info dropdown */}
+            <div className="lg:text-white text-gray-700 lg:mr-4 text-base lg:px-1 lg:py-2 cursor-pointer group relative">
+              <span>Info</span>
+              <div className="hidden group-hover:block absolute bg-gray-50 min-w-max shadow-md mt-0 z-10">
+                <Link
+                  href="watchman-nee"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#24b9d6] hover:text-white text-sm"
+                >
+                  Watchman Nee
+                </Link>
+                <Link
+                  href="witness-lee"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#24b9d6] hover:text-white text-sm"
+                >
+                  Witness Lee
+                </Link>
+                <Link
+                  href="about"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#24b9d6] hover:text-white text-sm"
+                >
+                  O nás
+                </Link>
+                <Link
+                  href="safety-privacy"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#24b9d6] hover:text-white text-sm"
+                >
+                  Bezpečnost a soukromí
+                </Link>
+              </div>
+            </div>
+
+            {/* Contact link */}
+            <Link href="/contact" className="block">
+              <div className="lg:text-white text-gray-700 lg:mr-4 text-base lg:px-1 lg:py-2 lg:hover:bg-[#611316] cursor-pointer">
+                Kontakt
+              </div>
+            </Link>
+
+            {/* Favorites icon (desktop) */}
+            <Link href="favorites" className="hidden lg:block">
+              <Icon.HeartFill className="text-white text-2xl ml-3 hover:text-[#611316]" />
             </Link>
           </div>
         </div>
-      </Navbar>
-      <div className="mobile-logo-under-grey mobile-only">
+      </nav>
+
+      {/* Mobile logo section */}
+      <div className="lg:hidden flex flex-col">
         <Link href="/" className="no-underline">
           <img
             src="/images/wwwproudbanner.png"
-            className="img-mobile-logo-under-grey"
+            className="w-[70vw] ml-[20%] mt-6"
             alt="prud-zivota"
-          ></img>
-          <p className="mobile-under-grey-publisher">
+          />
+          <p className="ml-4 mr-4 mt-4 italic text-[#a07c54] text-2xl font-normal overflow-hidden">
             Přinášet bohatství Božího lidu všemu Božímu lidu
           </p>
         </Link>
 
-        <div className="search-navbar-mobile mobile-only">{/* <SearchBox /> */}</div>
+        <div className="mx-6 mt-4">{/* SearchBox would go here */}</div>
       </div>
     </header>
   )
