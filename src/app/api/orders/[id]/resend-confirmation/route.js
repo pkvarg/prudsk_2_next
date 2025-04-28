@@ -1,6 +1,9 @@
 // @desc sendConfirmationEmailWithInvoice (from Admin menu)
 // @desc GET /api/orders/:id/resend-confirmation
 // @access Private
+
+// TODO router.route('/:id/resend-confirmation').put(protect, admin, sendConfirmationEmailWithInvoice)
+// PUT !!!
 const sendConfirmationEmailWithInvoice = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id)
 

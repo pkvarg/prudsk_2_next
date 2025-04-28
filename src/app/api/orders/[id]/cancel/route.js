@@ -1,9 +1,4 @@
 // app/api/orders/[id]/cancel/route.js
-
-// @desc Update order to Cancelled
-// @desc PUT /api/orders/:id/cancel
-// @access Private/Admin
-
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]'
@@ -11,6 +6,9 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// @desc Update order to Cancelled
+// @desc PUT /api/orders/:id/cancel
+// @access Private/Admin
 export async function PUT(request, { params }) {
   try {
     const session = await getServerSession(authOptions)

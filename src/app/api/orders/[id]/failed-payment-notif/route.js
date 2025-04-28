@@ -1,7 +1,7 @@
 // app/api/orders/[id]/failed-payment/route.js
 
 // @desc Send failed payment notification
-// @desc POST /api/orders/:id/failed-payment
+// @desc POST /api/orders/:id/failed-payment-notif
 // @access Private
 
 import { NextResponse } from 'next/server'

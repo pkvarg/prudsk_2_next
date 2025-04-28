@@ -1,9 +1,4 @@
 // app/api/orders/[id]/paid/route.js
-
-// @desc Update order to Paid No Card (from Admin menu)
-// @desc PUT /api/orders/:id/paid
-// @access Private (Admin only)
-
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]'
@@ -11,6 +6,9 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// @desc Update order to Paid No Card (from Admin menu)
+// @desc PUT /api/orders/:id/paid
+// @access Private (Admin only)
 export async function PUT(request, { params }) {
   try {
     const session = await getServerSession(authOptions)

@@ -1,9 +1,4 @@
 // app/api/users/route.js
-
-// @desc Register a new user
-// @desc POST /api/users/
-// @access Public
-
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
@@ -27,6 +22,9 @@ const createRegisterToken = async (email, baseUrl) => {
   return { registerToken: hashedToken, registerURL }
 }
 
+// @desc Register a new user
+// @desc POST /api/users/
+// @access Public
 export async function POST(request) {
   try {
     const { name, email, password } = await request.json()
@@ -89,8 +87,6 @@ export async function POST(request) {
     )
   }
 }
-
-// app/api/users/route.js
 
 // @desc Get all users
 // @desc GET /api/users

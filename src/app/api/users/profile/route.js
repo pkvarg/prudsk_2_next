@@ -1,9 +1,4 @@
 // app/api/users/profile/route.js
-
-// @desc Get user profile
-// @desc GET /api/users/profile
-// @access Private
-
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]'
@@ -11,6 +6,9 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// @desc Get user profile
+// @desc GET /api/users/profile
+// @access Private
 export async function GET(request) {
   try {
     const session = await getServerSession(authOptions)

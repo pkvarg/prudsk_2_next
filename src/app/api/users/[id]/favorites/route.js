@@ -1,9 +1,4 @@
 // app/api/users/[id]/favorites/route.js
-
-// @desc Add a product to user favorites
-// @desc POST /api/users/:id/favorites
-// @access Private
-
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]'
@@ -11,6 +6,9 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// @desc Add a product to user favorites
+// @desc POST /api/users/:id/favorites
+// @access Private
 export async function POST(request, { params }) {
   try {
     const session = await getServerSession(authOptions)

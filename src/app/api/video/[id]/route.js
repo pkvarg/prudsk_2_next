@@ -1,14 +1,13 @@
 // app/api/video/[id]/route.js
 
-// @desc Fetch single video
-// @desc GET /api/video/:id
-// @access Public
-
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// @desc Fetch single video
+// @desc GET /api/video/:id
+// @access Public
 export async function GET(request, { params }) {
   try {
     const { id } = params

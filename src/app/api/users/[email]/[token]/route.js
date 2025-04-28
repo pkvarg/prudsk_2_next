@@ -1,14 +1,12 @@
 // app/api/users/[email]/[token]/route.js
-
-// @desc Check registration token and activate user
-// @desc GET /api/users/:email/:token/
-// @access Public
-
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// @desc Check registration token and activate user
+// @desc GET /api/users/:email/:token/
+// @access Public
 export async function GET(request, { params }) {
   try {
     const { email, token } = params

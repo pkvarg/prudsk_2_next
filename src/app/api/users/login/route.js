@@ -1,9 +1,5 @@
 // app/api/users/login/route.js
 
-// @desc Auth user & get token
-// @desc POST /api/users/login
-// @access Public
-
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
@@ -18,6 +14,9 @@ const generateToken = (id) => {
   })
 }
 
+// @desc Auth user & get token
+// @desc POST /api/users/login
+// @access Public
 export async function POST(request) {
   try {
     const { email, password } = await request.json()

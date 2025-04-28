@@ -1,9 +1,4 @@
 // app/api/orders/[id]/init-payment/route.js
-
-// @desc Create init payment Id in db
-// @desc PUT /api/orders/:id/init-payment
-// @access Private
-
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]'
@@ -12,6 +7,9 @@ import crypto from 'crypto'
 
 const prisma = new PrismaClient()
 
+// @desc Create init payment Id in db
+// @desc PUT /api/orders/:id/init-payment
+// @access Private
 export async function PUT(request, { params }) {
   try {
     const session = await getServerSession(authOptions)

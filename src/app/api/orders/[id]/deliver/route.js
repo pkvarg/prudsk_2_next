@@ -1,9 +1,4 @@
 // app/api/orders/[id]/deliver/route.js
-
-// @desc Update order to Delivered
-// @desc PUT /api/orders/:id/deliver
-// @access Private/Admin
-
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]'
@@ -12,6 +7,9 @@ import Email from '@/utils/email'
 
 const prisma = new PrismaClient()
 
+// @desc Update order to Delivered
+// @desc PUT /api/orders/:id/deliver
+// @access Private/Admin
 export async function PUT(request, { params }) {
   try {
     const session = await getServerSession(authOptions)

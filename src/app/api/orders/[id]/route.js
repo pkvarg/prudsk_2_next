@@ -1,9 +1,4 @@
 // app/api/orders/[id]/route.js
-
-// @desc Get order by ID
-// @desc GET /api/orders/:id
-// @access Private
-
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]'
@@ -11,6 +6,9 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// @desc Get order by ID
+// @desc GET /api/orders/:id
+// @access Private
 export async function GET(request, { params }) {
   try {
     const session = await getServerSession(authOptions)
