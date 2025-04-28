@@ -299,6 +299,40 @@ class Email {
 
     await this.send('paymentFailed', subject, htmlContent)
   }
+
+  async sendWelcome() {
+    const subject = 'Vítejte v Proud Distribution - Potvrzení registrace'
+
+    // Build HTML content for welcome email with registration confirmation
+    const htmlContent = `
+      <h2>Vítejte v Proud Distribution!</h2>
+      <p>Dobrý den, ${this.name},</p>
+      <p>Děkujeme za registraci na našem e-shopu. Pro dokončení registrace a aktivaci vašeho účtu prosím klikněte na tlačítko níže.</p>
+      
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${this.url}" style="background-color: #4CAF50; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+          Aktivovat účet
+        </a>
+      </div>
+      
+      <p>Pokud tlačítko nefunguje, můžete zkopírovat následující odkaz do prohlížeče:</p>
+      <p>${this.url}</p>
+      
+      <p>Tento odkaz je platný po dobu 24 hodin. Po této době bude nutné provést registraci znovu.</p>
+      
+      <p>Po potvrzení registrace budete mít přístup ke všem funkcím našeho e-shopu:</p>
+      <ul>
+        <li>Správa oblíbených produktů</li>
+        <li>Sledování objednávek</li>
+        <li>Rychlejší proces nákupu</li>
+      </ul>
+      
+      <p>Těšíme se na Vaše nákupy!</p>
+      <p>S pozdravem,<br>Tým Proud Distribution</p>
+    `
+
+    await this.send('welcome', subject, htmlContent)
+  }
 }
 
 export default Email
