@@ -1,20 +1,61 @@
+// app/api/orders/[id]/resend-confirmation/route.js
+
 // @desc sendConfirmationEmailWithInvoice (from Admin menu)
-// @desc GET /api/orders/:id/resend-confirmation
-// @access Private
+// @desc PUT /api/orders/:id/resend-confirmation
+// @access Private/Admin
 
-// TODO router.route('/:id/resend-confirmation').put(protect, admin, sendConfirmationEmailWithInvoice)
-// PUT !!!
-const sendConfirmationEmailWithInvoice = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id)
+import { NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth/next'
+import { authOptions } from '@/app/api/auth/[...nextauth]'
+import { PrismaClient } from '@prisma/client'
+import niceInvoice from '@/utils/invoiceGenerator'
+import Email from '@/utils/email'
+import path from 'path'
 
-  if (order) {
-    // array of items
+const prisma = new PrismaClient()
+
+export async function PUT(request, { params }) {
+  try {
+    const session = await getServerSession(authOptions)
+
+    // Check if user is authenticated and is an admin
+    if (!session || !session.user.isAdmin) {
+      return NextResponse.json(
+        { message: 'Not authorized - admin access required' },
+        { status: 401 },
+      )
+    }
+
+    const { id } = params
+
+    // Find the order with all related data
+    const order = await prisma.order.findUnique({
+      where: { id },
+      include: {
+        orderItems: true,
+        shippingAddress: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+    })
+
+    if (!order) {
+      return NextResponse.json({ message: 'Objednávka nenalezena.' }, { status: 404 })
+    }
+
+    // Process order items for email
     const discounts = order.discounts
     const loop = order.orderItems
     const productsCount = loop.length
     let productsObject = {}
-    loop.map((item, i) => {
-      if (discounts[i].discount > 0) {
+
+    loop.forEach((item, i) => {
+      if (discounts[i] && discounts[i].discount > 0) {
         productsObject[i] =
           ' ' +
           item.qty +
@@ -31,7 +72,7 @@ const sendConfirmationEmailWithInvoice = asyncHandler(async (req, res) => {
       }
     })
 
-    // PRODUCTS OBJECT
+    // Build PRODUCTS OBJECT for email
     productsObject.user = order.name
     productsObject.email = order.email
     productsObject.name = order.name
@@ -41,53 +82,63 @@ const sendConfirmationEmailWithInvoice = asyncHandler(async (req, res) => {
     productsObject.shippingPrice = order.shippingPrice
     productsObject.isPaid = order.isPaid
     productsObject.productsCount = productsCount
-    productsObject.orderId = order._id
+    productsObject.orderId = order.id
     productsObject.paymentMethod = order.paymentMethod
+
+    const addressInfo = order.shippingAddress
     productsObject.addressinfo =
-      order.shippingAddress.address +
+      addressInfo.address +
       ', ' +
-      order.shippingAddress.city +
+      addressInfo.city +
       ', ' +
-      order.shippingAddress.postalCode +
+      addressInfo.postalCode +
       ', ' +
-      order.shippingAddress.country +
+      addressInfo.country +
       ', ' +
-      order.shippingAddress.phone
+      addressInfo.phone
 
     productsObject.billinginfo =
-      order.shippingAddress.billingName +
+      addressInfo.billingName +
       ', ' +
-      order.shippingAddress.billingAddress +
+      addressInfo.billingAddress +
       ', ' +
-      order.shippingAddress.billingCity +
+      addressInfo.billingCity +
       ', ' +
-      order.shippingAddress.billingPostalCode +
+      addressInfo.billingPostalCode +
       ', ' +
-      order.shippingAddress.billingCountry +
-      ', ' +
-      'IČO: ' +
-      order.shippingAddress.billingICO
+      addressInfo.billingCountry +
+      (addressInfo.billingICO ? ', IČO: ' + addressInfo.billingICO : '')
+
     const productsOnly = order.totalPrice - order.shippingPrice
     productsObject.productsOnlyPrice = productsOnly
     productsObject.note = order.shippingAddress.note
 
-    const date = order.createdAt
-    let dateFromJson = new Date(date)
-    let day = dateFromJson.getDate()
-    let month = dateFromJson.getMonth() + 1
-    let year = dateFromJson.getFullYear()
+    // Handle dates for invoice
+    const date = new Date(order.createdAt)
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
     let billingDate = `${day}/${month}/${year}`
+
+    // Function to create Billing due date
     function addMonths(numOfMonths, date) {
-      date.setMonth(date.getMonth() + numOfMonths)
-      // return Real DMY
-      let increasedDay = date.getDate()
-      let increasedMonth = date.getMonth() + 1
-      let increasedYear = date.getFullYear()
+      const newDate = new Date(date)
+      newDate.setMonth(newDate.getMonth() + numOfMonths)
+      // Return formatted DMY
+      let increasedDay = newDate.getDate()
+      let increasedMonth = newDate.getMonth() + 1
+      let increasedYear = newDate.getFullYear()
       let increasedDMY = `${increasedDay}/${increasedMonth}/${increasedYear}`
       return increasedDMY
     }
-    // 👇️ Add months to current Date
-    const dueDate = addMonths(1, dateFromJson)
+
+    // Add months to current Date
+    const dueDate = addMonths(1, date)
+
+    // Get project root for file paths
+    const projectRoot = process.cwd()
+
+    // Prepare invoice details
     const invoiceDetails = {
       shipping: {
         name: order.name,
@@ -117,13 +168,12 @@ const sendConfirmationEmailWithInvoice = asyncHandler(async (req, res) => {
       orderNumber: order.orderNumber,
       header: {
         company_name: 'Adam Surjomartono – Distribuce Proud',
-        company_logo: __dirname + '/utils/wwwproudbanner.png',
+        company_logo: path.join(projectRoot, 'public', 'assets', 'wwwproudbanner.png'),
         company_address: 'Hnězdenská 586/16, 18100 Praha 8, Česká republika',
       },
       ico: 'IČO: 68368844',
       note: order.shippingAddress.note,
       invoice_produced_by: 'Vyhotovil: AS',
-
       footer: {
         text: 'Faktura zároveň slouží jako dodací list',
       },
@@ -134,38 +184,48 @@ const sendConfirmationEmailWithInvoice = asyncHandler(async (req, res) => {
       },
     }
 
-    date.setHours(date.getHours() + 1) // Increase the hour by 1
-    const formattedDate = date.toISOString().replace(/:/g, '-').substring(0, 19) // Format the date as YYYY-MM-DDTHH-MM-SS
+    // Format date for file name
+    const cloneDate = new Date(date)
+    cloneDate.setHours(cloneDate.getHours() + 1) // Increase the hour by 1
+    const formattedDate = cloneDate.toISOString().replace(/:/g, '-').substring(0, 19) // Format as YYYY-MM-DDTHH-MM-SS
 
-    niceInvoice(invoiceDetails, `invoices/${order.orderNumber}_${formattedDate}.pdf`)
-    const fileTosend = `invoices/${order.orderNumber}_${formattedDate}.pdf`
+    // Create invoice path
+    const invoiceDir = path.join(projectRoot, 'invoices')
+    const filePath = path.join(invoiceDir, `${order.orderNumber}_${formattedDate}.pdf`)
 
+    // Generate invoice
+    await niceInvoice(invoiceDetails, filePath)
+
+    // Send appropriate email based on order conditions
     try {
       if (
         order.shippingAddress.country !== 'Česká republika' &&
         order.paymentMethod === 'Platba bankovním převodem předem'
       ) {
         await new Email(productsObject, '', '').sendOrderNotCzToEmail()
-        await new Email(productsObject, '', fileTosend).sendOrderNotCzAdminOnlyToEmail()
+        await new Email(productsObject, '', filePath).sendOrderNotCzAdminOnlyToEmail()
       } else if (
         order.shippingAddress.country === 'Česká republika' &&
         order.paymentMethod === 'Platba bankovním převodem předem'
       ) {
-        await new Email(productsObject, '', fileTosend).sendOrderCzBankTransferToEmail()
-      } else await new Email(productsObject, '', fileTosend).sendOrderToEmail()
+        await new Email(productsObject, '', filePath).sendOrderCzBankTransferToEmail()
+      } else {
+        await new Email(productsObject, '', filePath).sendOrderToEmail()
+      }
 
-      res.status(201).json('Success')
+      return NextResponse.json('Success', { status: 201 })
     } catch (err) {
       console.error('Error sending email:', err)
-      // Optionally, notify the frontend about the email issue
-      res.status(500).json({
-        message:
-          'Objednávka byla vytvořena, ale potvrzovací e-mail obdržíte později. Brzy vás budeme informovat',
-      })
+      return NextResponse.json(
+        {
+          message:
+            'Objednávka byla vytvořena, ale potvrzovací e-mail obdržíte později. Brzy vás budeme informovat',
+        },
+        { status: 500 },
+      )
     }
-  } else {
-    res.status(404).json({
-      message: 'Objednávka nenalezena.',
-    })
+  } catch (error) {
+    console.error('Error resending confirmation email:', error)
+    return NextResponse.json({ message: error.message }, { status: 500 })
   }
-})
+}

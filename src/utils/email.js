@@ -333,6 +333,32 @@ class Email {
 
     await this.send('welcome', subject, htmlContent)
   }
+
+  async sendPaymentErrorEmail() {
+    const subject = `Chyba při zpracování platby`
+
+    // Build HTML content for payment error notification
+    const htmlContent = `
+      <h2>Chyba při zpracování platby</h2>
+      <p>Došlo k chybě při zpracování platby pro objednávku od uživatele: ${this.data.email}</p>
+      
+      <h3>Detaily chyby:</h3>
+      <p>${this.data.error || 'Nespecifikovaná chyba'}</p>
+      
+      <p>Prosím zkontrolujte systém Stripe a případně kontaktujte zákazníka.</p>
+      
+      <p>Tento email je automaticky generován a slouží pouze pro interní účely.</p>
+    `
+
+    // Send to admin email
+    const originalTo = this.to
+    this.to = process.env.ADMIN_EMAIL
+
+    await this.send('paymentError', subject, htmlContent)
+
+    // Restore original recipient
+    this.to = originalTo
+  }
 }
 
 export default Email
