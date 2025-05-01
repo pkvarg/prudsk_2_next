@@ -53,8 +53,8 @@ export async function POST(request) {
         isAdmin: user.isAdmin,
         isAssistant: user.isAssistant || false,
         isSubscribed: user.isSubscribed || false,
-        favorites: user.favorites || [],
-        token: generateToken(user.id),
+        //favorites: user.favorites || [],
+        //token: generateToken(user.id),
       })
     } else {
       return NextResponse.json({ message: 'Neplatný email alebo heslo' }, { status: 401 })

@@ -15,7 +15,8 @@ const Header = () => {
   const { userInfo, setUserInfo, clearUserState } = useUserStore()
   const { cartItems } = useCartStore()
 
-  console.log('userInfo header', userInfo)
+  console.log('header session', session)
+  //console.log('userInfo header', userInfo)
 
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
@@ -32,20 +33,20 @@ const Header = () => {
   }, [])
 
   // Sync Zustand with NextAuth session
-  useEffect(() => {
-    if (!session && userInfo) {
-      // User just signed out
-      clearUserState()
-    } else if (session?.user && !userInfo) {
-      // User signed in
-      setUserInfo({
-        name: session.user.name,
-        email: session.user.email,
-        isAdmin: false,
-        isAssistant: false,
-      })
-    }
-  }, [session, userInfo, clearUserState, setUserInfo])
+  // useEffect(() => {
+  //   if (!session && userInfo) {
+  //     // User just signed out
+  //     clearUserState()
+  //   } else if (session?.user && !userInfo) {
+  //     // User signed in
+  //     setUserInfo({
+  //       name: session.user.name,
+  //       email: session.user.email,
+  //       isAdmin: false,
+  //       isAssistant: false,
+  //     })
+  //   }
+  // }, [session, userInfo, clearUserState, setUserInfo])
 
   const logoutHandler = async () => {
     clearUserState() // Clear Zustand user

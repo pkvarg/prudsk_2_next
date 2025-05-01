@@ -13,7 +13,7 @@ export default function LoginPage() {
   //const callbackUrl = 'http://localhost:3015/auth/github/callback'
   const callbackUrl = 'http://localhost:3015'
 
-  console.log('callburl', callbackUrl)
+  //console.log('callburl', callbackUrl)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -38,18 +38,40 @@ export default function LoginPage() {
       setLoading(true)
       setError('')
 
-      const result = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       })
 
-      if (result?.error) {
-        setError(result.error)
-      } else if (result?.ok) {
-        setUserInfo({ name: email })
-        router.push(callbackUrl)
+      const data = await res.json()
+
+      if (!res.ok) {
+        // Show custom error message from backend
+        setError(data.message || 'Přihlášení selhalo')
+        return
       }
+
+      //console.log('data', data)
+
+      setUserInfo({
+        email: data.email,
+        id: data.id,
+        name: data.name,
+        role: data.isAdmin ? 'admin' : 'user',
+      })
+
+      // At this point, you got what you needed
+      // Manually trigger session creation
+      await signIn('credentials', {
+        redirect: false,
+        email: data.email,
+        id: data.id,
+        name: data.name,
+        role: data.isAdmin ? 'admin' : 'user',
+      })
+
+      router.push(callbackUrl)
     } catch (err) {
       setError('Přihlášení selhalo. Zkuste to znovu.')
     } finally {

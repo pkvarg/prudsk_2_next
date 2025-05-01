@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
-import Email from '@/utils/email'
+//import Email from '@/utils/email'
 import { headers } from 'next/headers'
 
 const prisma = new PrismaClient()
@@ -30,7 +30,7 @@ export async function POST(request) {
     const { name, email, password } = await request.json()
 
     // Get the host from headers
-    const headersList = headers()
+    const headersList = await headers()
     const host = headersList.get('host')
 
     // Determine protocol (in production, Next.js is typically behind HTTPS)
@@ -62,7 +62,7 @@ export async function POST(request) {
         isRegistered: false,
         registerToken,
         isAdmin: false, // Default values
-        favorites: [],
+        //favorites: [],
       },
     })
 
@@ -73,7 +73,7 @@ export async function POST(request) {
         email: user.email,
       }
 
-      await new Email(userData, registerURL).sendWelcome()
+      // await new Email(userData, registerURL).sendWelcome()
 
       return NextResponse.json('OK', { status: 201 })
     } else {
