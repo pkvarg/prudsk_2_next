@@ -1,11 +1,9 @@
 'use client'
-
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import useUserStore from './../../store/userStore'
-// Optional: You can use these icons or your own
 import { PersonFill, LockFill, ExclamationCircleFill } from 'react-bootstrap-icons'
 
 export default function LoginPage() {
@@ -24,6 +22,8 @@ export default function LoginPage() {
 
   // Get the setUserInfo function from your Zustand store
   const setUserInfo = useUserStore((state) => state.setUserInfo)
+
+  const { data: session } = useSession()
 
   // Handle credentials login
   const handleCredentialsLogin = async (e) => {
@@ -57,16 +57,28 @@ export default function LoginPage() {
     }
   }
 
-  // Handle GitHub login
   const handleGitHubLogin = async () => {
     try {
-      const gitHub = await signIn('github', { callbackUrl })
-      console.log('ghres', gitHub)
-      //setUserInfo({ name: email })
+      await signIn('github', { callbackUrl }) // or your dashboard URL
     } catch (err) {
       setError('Přihlášení přes GitHub selhalo. Zkuste to znovu.')
     }
   }
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signIn('google', { callbackUrl })
+    } catch (err) {
+      setError('Přihlášení přes Google selhalo. Zkuste to znovu.')
+    }
+  }
+
+  // useEffect(() => {
+  //   if (session?.user?.email) {
+  //     console.log('User email:', session.user.email)
+  //     setUserInfo({ name: session.user.email }) // Or whatever state you want to update
+  //   }
+  // }, [session])
 
   return (
     <div className="flex justify-center items-center min-h-[80vh] px-4">
@@ -172,6 +184,38 @@ export default function LoginPage() {
         <div className="space-y-3">
           <button
             type="button"
+            onClick={handleGoogleLogin}
+            className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 48 48"
+              className="mr-2"
+            >
+              <path
+                fill="#EA4335"
+                d="M24 9.5c3.54 0 6.74 1.22 9.26 3.22l6.9-6.9C35.78 2.01 30.2 0 24 0 14.64 0 6.65 5.67 2.92 13.74l8.02 6.23C13.3 13.26 18.26 9.5 24 9.5z"
+              />
+              <path
+                fill="#4285F4"
+                d="M46.15 24.54c0-1.53-.14-3.01-.4-4.45H24v8.43h12.4c-.54 2.9-2.1 5.37-4.5 7.06l7.05 5.46C42.63 37.21 46.15 31.34 46.15 24.54z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M10.94 28.12a14.57 14.57 0 0 1-.76-4.62c0-1.6.27-3.15.76-4.62l-8.02-6.23A23.93 23.93 0 0 0 0 23.5c0 3.83.91 7.45 2.53 10.62l8.41-6z"
+              />
+              <path
+                fill="#34A853"
+                d="M24 48c6.2 0 11.4-2.03 15.2-5.52l-7.05-5.46c-2.06 1.38-4.71 2.18-8.15 2.18-5.74 0-10.7-3.76-12.57-8.97l-8.41 6C6.65 42.33 14.64 48 24 48z"
+              />
+              <path fill="none" d="M0 0h48v48H0z" />
+            </svg>
+            Přihlásit se přes Google
+          </button>
+          <button
+            type="button"
             onClick={handleGitHubLogin}
             className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
@@ -184,8 +228,8 @@ export default function LoginPage() {
               viewBox="0 0 16 16"
             >
               <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
-            </svg>{' '}
-            Přihlásit se přes GitHub
+            </svg>
+            <span className="ml-1">Přihlásit se přes GitHub</span>
           </button>
         </div>
 

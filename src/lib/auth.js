@@ -1,13 +1,24 @@
 import NextAuth from 'next-auth'
-import GitHub from 'next-auth/providers/github'
+import GitHubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
+
 import Credentials from 'next-auth/providers/credentials'
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   //providers: [GitHub],
   providers: [
-    GitHub({
+    GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      authorization: {
+        params: {
+          scope: 'read:user user:email', // crucial for email access
+        },
+      },
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     Credentials({
       name: 'Credentials',
@@ -41,4 +52,23 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      // Optional: log or inspect `profile`
+      return true
+    },
+    async jwt({ token, user, account, profile }) {
+      if (account && profile) {
+        token.email = profile.email
+      }
+      return token
+    },
+    async session({ session, token, user }) {
+      if (token?.email) {
+        session.user.email = token.email
+      }
+      return session
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 })
