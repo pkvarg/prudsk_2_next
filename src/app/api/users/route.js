@@ -8,18 +8,20 @@ import { headers } from 'next/headers'
 
 const prisma = new PrismaClient()
 
-// Helper function to create registration token
-const createRegisterToken = async (email, baseUrl) => {
-  // Create a random token
-  const registerToken = crypto.randomBytes(32).toString('hex')
+async function createRegisterToken(email, url) {
+  const token = crypto.randomBytes(32).toString('hex')
+  const registerToken = crypto.createHash('sha256').update(token).digest('hex')
 
-  // Hash the token
-  const hashedToken = crypto.createHash('sha256').update(registerToken).digest('hex')
+  const encodedEmail = encodeURIComponent(email)
 
-  // Create the registration URL
-  const registerURL = `${baseUrl}/api/users/verify/${registerToken}`
+  const registerURL = `${url}/registerLink/${encodedEmail}/${registerToken}`
 
-  return { registerToken: hashedToken, registerURL }
+  const data = {
+    registerToken,
+    registerURL,
+  }
+
+  return data
 }
 
 // @desc Register a new user
@@ -62,16 +64,51 @@ export async function POST(request) {
         isRegistered: false,
         registerToken,
         isAdmin: false, // Default values
-        //favorites: [],
       },
     })
+
+    // TEMP
+    // const user = {
+    //   name,
+    //   email,
+    // }
 
     if (user) {
       // Send welcome email with verification link
       const userData = {
         name: user.name,
         email: user.email,
+        url: registerURL,
+        origin: 'PROUD2NEXT',
       }
+
+      // call API
+
+      //const apiUrl = 'https://hono-api.pictusweb.com/api/contact'
+      const apiUrl = 'http://localhost:3013/api/proud2next/register'
+
+      // Make the API request
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      })
+
+      // Check if request was successful
+      if (!response.ok) {
+        const errorData = await response.json()
+        return {
+          success: false,
+          message: errorData.message || 'Failed to submit form',
+        }
+      }
+
+      // Return success response
+      const data = await response.json()
+
+      console.log('data register api', data)
 
       // await new Email(userData, registerURL).sendWelcome()
 
