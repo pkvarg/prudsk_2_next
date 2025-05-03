@@ -39,8 +39,44 @@ export async function POST(request) {
             isRegistered: true,
           },
         })
-        // Send welcome email to new Google user
-        // await new Email(createdUser, url).sendWelcomeGoogle();
+
+        const url = 'https://proudzivota.cz'
+
+        // Send welcome email with website link
+        const userData = {
+          name: createdUser.name,
+          email: createdUser.email,
+          url,
+          origin: 'PROUD2NEXT',
+          isGoogle: true,
+        }
+
+        //const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/register-google'
+        const apiUrl = 'http://localhost:3013/api/proud2next/register-google'
+
+        // Make the API request
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        })
+
+        // Check if request was successful
+        if (!response.ok) {
+          const errorData = await response.json()
+          return {
+            success: false,
+            message: errorData.message || 'Failed to submit form',
+          }
+        }
+
+        // Return success response
+        const data = await response.json()
+
+        console.log('data register api', data)
+
         // Return created user
 
         return NextResponse.json({
