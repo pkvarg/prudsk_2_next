@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
-//import Email from '@/utils/email'
 import { headers } from 'next/headers'
 
 const prisma = new PrismaClient()
@@ -14,7 +13,7 @@ async function createRegisterToken(email, url) {
 
   const encodedEmail = encodeURIComponent(email)
 
-  const registerURL = `${url}/registerLink/${encodedEmail}/${registerToken}`
+  const registerURL = `${url}/register/${encodedEmail}/${registerToken}`
 
   const data = {
     registerToken,

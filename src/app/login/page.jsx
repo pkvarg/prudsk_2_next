@@ -12,6 +12,7 @@ export default function LoginPage() {
   //const callbackUrl = searchParams.get('callbackUrl') || '/'
   //const callbackUrl = 'http://localhost:3015/auth/github/callback'
   const callbackUrl = 'http://localhost:3015'
+  const googleCallbackUrl = 'http://localhost:3015/login'
 
   //console.log('callburl', callbackUrl)
 
@@ -88,11 +89,44 @@ export default function LoginPage() {
   }
 
   const handleGoogleLogin = async () => {
+    // get email first
     try {
-      await signIn('google', { callbackUrl })
+      console.log('here signing in goole')
+      //await signIn('google', { googleCallbackUrl })
+      await signIn('google', { redirect: true })
+
+      console.log('login session', session)
     } catch (err) {
       setError('Přihlášení přes Google selhalo. Zkuste to znovu.')
     }
+
+    setLoading(true)
+    setError('')
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/google`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session }),
+    })
+
+    const data = await res.json()
+
+    console.log('data', data)
+
+    // if (!res.ok) {
+    //   // Show custom error message from backend
+    //   setError(data.message || 'Přihlášení selhalo')
+    //   return
+    // }
+
+    // setUserInfo({
+    //   email: data.email,
+    //   id: data.id,
+    //   name: data.name,
+    //   role: data.isAdmin ? 'admin' : 'user',
+    // })
+
+    // router.push(callbackUrl)
   }
 
   // useEffect(() => {
@@ -103,7 +137,7 @@ export default function LoginPage() {
   // }, [session])
 
   return (
-    <div className="flex justify-center items-center min-h-[80vh] px-4">
+    <div className="flex justify-center items-center min-h-[80vh] px-4 mt-8">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">Přihlášení</h1>

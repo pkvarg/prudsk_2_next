@@ -21,6 +21,8 @@ const CompleteRegistration = () => {
       try {
         const res = await axios.get(`/api/users/register/${email}/${token}`)
 
+        console.log('res', res)
+
         if (res.data === 'ok') {
           setMessage('Registrace byla úspěšně dokončena! Můžete se přihlásit.')
           setTimeout(goToLogin, 3000)
@@ -34,7 +36,7 @@ const CompleteRegistration = () => {
     checkToken()
   }, [email, token])
   return (
-    <div>
+    <div className="mx-[20%] mt-[10%]">
       {message && <Message variant="success">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}
     </div>
