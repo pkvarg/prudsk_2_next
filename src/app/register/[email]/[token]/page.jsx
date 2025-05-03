@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const CompleteRegistration = () => {
   const { email, token } = useParams()
-  const decodedEmail = decodeURIComponent(email)
+  //const decodedEmail = decodeURIComponent(email)
   const router = useRouter()
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')

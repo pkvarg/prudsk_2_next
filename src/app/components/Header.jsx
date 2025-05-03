@@ -15,7 +15,10 @@ const Header = () => {
   const { userInfo, setUserInfo, clearUserState } = useUserStore()
   const { cartItems } = useCartStore()
 
-  console.log('header session', session)
+  if (session) {
+    console.log('header session', session)
+  }
+
   //console.log('userInfo header', userInfo)
 
   const [isOpen, setIsOpen] = useState(false)

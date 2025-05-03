@@ -8,9 +8,6 @@ import { PersonFill, LockFill, ExclamationCircleFill } from 'react-bootstrap-ico
 
 export default function LoginPage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  //const callbackUrl = searchParams.get('callbackUrl') || '/'
-  //const callbackUrl = 'http://localhost:3015/auth/github/callback'
   const callbackUrl = 'http://localhost:3015'
   const googleCallbackUrl = 'http://localhost:3015/login'
 
@@ -24,7 +21,45 @@ export default function LoginPage() {
   // Get the setUserInfo function from your Zustand store
   const setUserInfo = useUserStore((state) => state.setUserInfo)
 
+  const googleApi = async (user) => {
+    console.log('session user', user)
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/google`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user }),
+      })
+
+      const data = await res.json()
+
+      console.log('data', data)
+      setLoading(false)
+      setUserInfo({
+        name: data.name,
+        email: data.email,
+        isAdmin: data.isAdmin,
+        isAssistant: data.isAssistant,
+      })
+      router.push(callbackUrl)
+    } catch (err) {
+      //setError(err)
+      console.log('goggle login error', err)
+    }
+  }
+
   const { data: session } = useSession()
+
+  useEffect(() => {
+    if (session?.user?.email) {
+      console.log('login session', session.user.email)
+      const user = {
+        name: session.user.name,
+        email: session.user.email,
+        id: session.user.id,
+      }
+      googleApi(user)
+    }
+  }, [session?.user?.email])
 
   // Handle credentials login
   const handleCredentialsLogin = async (e) => {
@@ -92,10 +127,7 @@ export default function LoginPage() {
     // get email first
     try {
       console.log('here signing in goole')
-      //await signIn('google', { googleCallbackUrl })
-      await signIn('google', { redirect: true })
-
-      console.log('login session', session)
+      await signIn('google')
     } catch (err) {
       setError('Přihlášení přes Google selhalo. Zkuste to znovu.')
     }
@@ -103,15 +135,8 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/google`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ session }),
-    })
-
-    const data = await res.json()
-
-    console.log('data', data)
+    if (email) {
+    }
 
     // if (!res.ok) {
     //   // Show custom error message from backend

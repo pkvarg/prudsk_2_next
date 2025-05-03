@@ -3,16 +3,8 @@
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 
 const prisma = new PrismaClient()
-
-// Generate JWT token
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '30d',
-  })
-}
 
 // @desc Auth user & get token
 // @desc POST /api/users/login
