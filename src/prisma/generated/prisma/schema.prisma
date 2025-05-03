@@ -21,21 +21,22 @@ datasource db {
 }
 
 model User {
-  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
-  name               String? // Made optional in case some users don't have names
-  email              String    @unique
-  password           String?
-  isRegistered       Boolean?  @default(false) // Made optional
-  registerToken      String?
-  isAdmin            Boolean?  @default(false) // Made optional
-  isAssistant        Boolean?  @default(false) // Made optional
-  isSubscribed       Boolean?  @default(false) // Made optional
-  isUnsubscribed     Boolean?  @default(false) // Made optional
-  googleId           String?
-  passwordChangedAt  DateTime?
-  passwordResetToken String?
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  id                   String    @id @default(auto()) @map("_id") @db.ObjectId
+  name                 String? // Made optional in case some users don't have names
+  email                String    @unique
+  password             String?
+  isRegistered         Boolean?  @default(false) // Made optional
+  registerToken        String?
+  isAdmin              Boolean?  @default(false) // Made optional
+  isAssistant          Boolean?  @default(false) // Made optional
+  isSubscribed         Boolean?  @default(false) // Made optional
+  isUnsubscribed       Boolean?  @default(false) // Made optional
+  googleId             String?
+  passwordChangedAt    DateTime?
+  passwordResetToken   String?
+  passwordResetExpires DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
   // Relations
   products Product[]

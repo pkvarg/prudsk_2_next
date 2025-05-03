@@ -1,6 +1,6 @@
 // app/api/users/[email]/[token]/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 
 const prisma = new PrismaClient()
 

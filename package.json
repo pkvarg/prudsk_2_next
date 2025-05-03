@@ -13,14 +13,12 @@
     "schema": "src/prisma/schema.prisma"
   },
   "dependencies": {
-    "@prisma/client": "^6.6.0",
     "axios": "^1.9.0",
     "bcryptjs": "^3.0.2",
     "jsonwebtoken": "^9.0.2",
     "next": "15.3.1",
     "next-auth": "^5.0.0-beta.27",
     "pdfkit": "^0.17.0",
-    "prisma": "^6.6.0",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-bootstrap-icons": "^1.11.5",
@@ -30,10 +28,12 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@prisma/client": "^6.7.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "22.15.3",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "prisma": "^6.7.0",
     "tailwindcss": "^4",
     "typescript": "5.8.3"
   }

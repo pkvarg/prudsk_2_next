@@ -298,8 +298,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
     client: string
@@ -1690,6 +1690,7 @@ export namespace Prisma {
     googleId: string | null
     passwordChangedAt: Date | null
     passwordResetToken: string | null
+    passwordResetExpires: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1708,6 +1709,7 @@ export namespace Prisma {
     googleId: string | null
     passwordChangedAt: Date | null
     passwordResetToken: string | null
+    passwordResetExpires: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1726,6 +1728,7 @@ export namespace Prisma {
     googleId: number
     passwordChangedAt: number
     passwordResetToken: number
+    passwordResetExpires: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1746,6 +1749,7 @@ export namespace Prisma {
     googleId?: true
     passwordChangedAt?: true
     passwordResetToken?: true
+    passwordResetExpires?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1764,6 +1768,7 @@ export namespace Prisma {
     googleId?: true
     passwordChangedAt?: true
     passwordResetToken?: true
+    passwordResetExpires?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1782,6 +1787,7 @@ export namespace Prisma {
     googleId?: true
     passwordChangedAt?: true
     passwordResetToken?: true
+    passwordResetExpires?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1873,6 +1879,7 @@ export namespace Prisma {
     googleId: string | null
     passwordChangedAt: Date | null
     passwordResetToken: string | null
+    passwordResetExpires: Date | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1908,6 +1915,7 @@ export namespace Prisma {
     googleId?: boolean
     passwordChangedAt?: boolean
     passwordResetToken?: boolean
+    passwordResetExpires?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     products?: boolean | User$productsArgs<ExtArgs>
@@ -1935,11 +1943,12 @@ export namespace Prisma {
     googleId?: boolean
     passwordChangedAt?: boolean
     passwordResetToken?: boolean
+    passwordResetExpires?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "isRegistered" | "registerToken" | "isAdmin" | "isAssistant" | "isSubscribed" | "isUnsubscribed" | "googleId" | "passwordChangedAt" | "passwordResetToken" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "isRegistered" | "registerToken" | "isAdmin" | "isAssistant" | "isSubscribed" | "isUnsubscribed" | "googleId" | "passwordChangedAt" | "passwordResetToken" | "passwordResetExpires" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | User$productsArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
@@ -1974,6 +1983,7 @@ export namespace Prisma {
       googleId: string | null
       passwordChangedAt: Date | null
       passwordResetToken: string | null
+      passwordResetExpires: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2387,6 +2397,7 @@ export namespace Prisma {
     readonly googleId: FieldRef<"User", 'String'>
     readonly passwordChangedAt: FieldRef<"User", 'DateTime'>
     readonly passwordResetToken: FieldRef<"User", 'String'>
+    readonly passwordResetExpires: FieldRef<"User", 'DateTime'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -11643,6 +11654,7 @@ export namespace Prisma {
     googleId: 'googleId',
     passwordChangedAt: 'passwordChangedAt',
     passwordResetToken: 'passwordResetToken',
+    passwordResetExpires: 'passwordResetExpires',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -11898,6 +11910,7 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     passwordChangedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     passwordResetToken?: StringNullableFilter<"User"> | string | null
+    passwordResetExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     products?: ProductListRelationFilter
@@ -11922,6 +11935,7 @@ export namespace Prisma {
     googleId?: SortOrder
     passwordChangedAt?: SortOrder
     passwordResetToken?: SortOrder
+    passwordResetExpires?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     products?: ProductOrderByRelationAggregateInput
@@ -11949,6 +11963,7 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     passwordChangedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     passwordResetToken?: StringNullableFilter<"User"> | string | null
+    passwordResetExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     products?: ProductListRelationFilter
@@ -11973,6 +11988,7 @@ export namespace Prisma {
     googleId?: SortOrder
     passwordChangedAt?: SortOrder
     passwordResetToken?: SortOrder
+    passwordResetExpires?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -11997,6 +12013,7 @@ export namespace Prisma {
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     passwordChangedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     passwordResetToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    passwordResetExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -12716,6 +12733,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutUserInput
@@ -12740,6 +12758,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
@@ -12763,6 +12782,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutUserNestedInput
@@ -12786,6 +12806,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput
@@ -12810,6 +12831,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12827,6 +12849,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12844,6 +12867,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13741,6 +13765,7 @@ export namespace Prisma {
     googleId?: SortOrder
     passwordChangedAt?: SortOrder
     passwordResetToken?: SortOrder
+    passwordResetExpires?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13759,6 +13784,7 @@ export namespace Prisma {
     googleId?: SortOrder
     passwordChangedAt?: SortOrder
     passwordResetToken?: SortOrder
+    passwordResetExpires?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13777,6 +13803,7 @@ export namespace Prisma {
     googleId?: SortOrder
     passwordChangedAt?: SortOrder
     passwordResetToken?: SortOrder
+    passwordResetExpires?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -15523,6 +15550,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutUserInput
@@ -15546,6 +15574,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
@@ -15584,6 +15613,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutUserNestedInput
@@ -15606,6 +15636,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput
@@ -15629,6 +15660,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutUserInput
@@ -15652,6 +15684,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
@@ -15690,6 +15723,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutUserNestedInput
@@ -15712,6 +15746,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput
@@ -15735,6 +15770,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutUserInput
@@ -15758,6 +15794,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
@@ -15796,6 +15833,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutUserNestedInput
@@ -15818,6 +15856,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput
@@ -15841,6 +15880,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: OrderCreateNestedManyWithoutUserInput
@@ -15864,6 +15904,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
@@ -15956,6 +15997,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUpdateManyWithoutUserNestedInput
@@ -15978,6 +16020,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -16044,6 +16087,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutUserInput
@@ -16067,6 +16111,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
@@ -16174,6 +16219,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutUserNestedInput
@@ -16196,6 +16242,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput
@@ -16434,6 +16481,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutUserInput
@@ -16457,6 +16505,7 @@ export namespace Prisma {
     googleId?: string | null
     passwordChangedAt?: Date | string | null
     passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
@@ -16495,6 +16544,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutUserNestedInput
@@ -16517,6 +16567,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput

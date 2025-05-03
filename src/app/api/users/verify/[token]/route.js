@@ -5,7 +5,7 @@
 // @access Public
 
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 import crypto from 'crypto'
 import { redirect } from 'next/navigation'
 

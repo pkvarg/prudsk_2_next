@@ -1,6 +1,6 @@
 // src/app/api/users/google/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 
 export async function POST(request) {
   const prisma = new PrismaClient()
@@ -51,8 +51,8 @@ export async function POST(request) {
           isGoogle: true,
         }
 
-        //const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/register-google'
-        const apiUrl = 'http://localhost:3013/api/proud2next/register-google'
+        //const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/register'
+        const apiUrl = 'http://localhost:3013/api/proud2next/register'
 
         // Make the API request
         const response = await fetch(apiUrl, {

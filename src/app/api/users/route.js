@@ -1,6 +1,6 @@
 // app/api/users/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import { headers } from 'next/headers'
@@ -63,14 +63,10 @@ export async function POST(request) {
         isRegistered: false,
         registerToken,
         isAdmin: false, // Default values
+        passwordResetToken: undefined,
+        passwordResetExpires: undefined,
       },
     })
-
-    // TEMP
-    // const user = {
-    //   name,
-    //   email,
-    // }
 
     if (user) {
       // Send welcome email with verification link

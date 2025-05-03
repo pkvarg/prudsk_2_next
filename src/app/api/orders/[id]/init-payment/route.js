@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 import crypto from 'crypto'
 
 const prisma = new PrismaClient()

@@ -1,4 +1,4 @@
-// components/FormContainer.js
+// components/FormContainer.jsx
 const FormContainer = ({ children }) => {
   return (
     <div className="flex justify-center">

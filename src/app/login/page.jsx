@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import useUserStore from './../../store/userStore'
@@ -9,9 +9,6 @@ import { PersonFill, LockFill, ExclamationCircleFill } from 'react-bootstrap-ico
 export default function LoginPage() {
   const router = useRouter()
   const callbackUrl = 'http://localhost:3015'
-  const googleCallbackUrl = 'http://localhost:3015/login'
-
-  //console.log('callburl', callbackUrl)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -51,7 +48,6 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (session?.user?.email) {
-      console.log('login session', session.user.email)
       const user = {
         name: session.user.name,
         email: session.user.email,
@@ -115,51 +111,21 @@ export default function LoginPage() {
     }
   }
 
-  const handleGitHubLogin = async () => {
-    try {
-      await signIn('github', { callbackUrl }) // or your dashboard URL
-    } catch (err) {
-      setError('Přihlášení přes GitHub selhalo. Zkuste to znovu.')
-    }
-  }
+  // const handleGitHubLogin = async () => {
+  //   try {
+  //     await signIn('github', { callbackUrl }) // or your dashboard URL
+  //   } catch (err) {
+  //     setError('Přihlášení přes GitHub selhalo. Zkuste to znovu.')
+  //   }
+  // }
 
   const handleGoogleLogin = async () => {
-    // get email first
     try {
-      console.log('here signing in goole')
       await signIn('google')
     } catch (err) {
       setError('Přihlášení přes Google selhalo. Zkuste to znovu.')
     }
-
-    setLoading(true)
-    setError('')
-
-    if (email) {
-    }
-
-    // if (!res.ok) {
-    //   // Show custom error message from backend
-    //   setError(data.message || 'Přihlášení selhalo')
-    //   return
-    // }
-
-    // setUserInfo({
-    //   email: data.email,
-    //   id: data.id,
-    //   name: data.name,
-    //   role: data.isAdmin ? 'admin' : 'user',
-    // })
-
-    // router.push(callbackUrl)
   }
-
-  // useEffect(() => {
-  //   if (session?.user?.email) {
-  //     console.log('User email:', session.user.email)
-  //     setUserInfo({ name: session.user.email }) // Or whatever state you want to update
-  //   }
-  // }, [session])
 
   return (
     <div className="flex justify-center items-center min-h-[80vh] px-4 mt-8">
@@ -219,19 +185,7 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                Zapamatovat
-              </label>
-            </div>
-
+          <div className="flex items-center justify-center">
             <Link
               href="/forgot-password"
               className="text-sm font-medium text-blue-600 hover:text-blue-500"
@@ -295,7 +249,7 @@ export default function LoginPage() {
             </svg>
             Přihlásit se přes Google
           </button>
-          <button
+          {/* <button
             type="button"
             onClick={handleGitHubLogin}
             className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -311,7 +265,7 @@ export default function LoginPage() {
               <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
             </svg>
             <span className="ml-1">Přihlásit se přes GitHub</span>
-          </button>
+          </button> */}
         </div>
 
         {/* Registration link */}

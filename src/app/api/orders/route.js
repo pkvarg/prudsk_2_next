@@ -1,8 +1,8 @@
 // app/api/orders/route.js
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import { PrismaClient } from '@prisma/client'
+import { authOptions } from '@/app/api/auth/[...nextauth]'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 import niceInvoice from '@/utils/invoiceGenerator'
 import Email from '@/utils/email'
 import { join } from 'path'

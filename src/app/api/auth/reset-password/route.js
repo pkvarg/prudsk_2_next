@@ -1,6 +1,6 @@
 // app/api/auth/reset-password/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 import crypto from 'crypto'
 import bcrypt from 'bcryptjs'
 
