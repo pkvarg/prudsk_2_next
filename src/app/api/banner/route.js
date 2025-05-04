@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/db/db'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import { auth } from '../../../../lib/auth'
+
+const prisma = new PrismaClient()
 
 // @desc Fetch all banners
 // @desc GET /api/banner
@@ -55,13 +58,11 @@ export async function GET(request) {
 // @access Private/Admin
 export async function POST(request) {
   try {
-    // Get the authenticated user from the session
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    if (!session || !session.user) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
-
     // Assuming you store the MongoDB user ID in the session
     const userId = session.user.id
 

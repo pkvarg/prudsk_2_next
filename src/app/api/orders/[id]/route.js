@@ -1,7 +1,6 @@
 // app/api/orders/[id]/route.js
 import { NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]'
+import { auth } from '../../../../lib/auth'
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 
 const prisma = new PrismaClient()
@@ -11,10 +10,10 @@ const prisma = new PrismaClient()
 // @access Private
 export async function GET(request, { params }) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
     if (!session) {
-      return NextResponse.json({ message: 'Not authorized' }, { status: 401 })
+      return new Response('Unauthorized', { status: 401 })
     }
 
     const { id } = params
@@ -49,14 +48,10 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated and is an admin
-    if (!session || !session.user.isAdmin) {
-      return NextResponse.json(
-        { message: 'Not authorized - admin access required' },
-        { status: 401 },
-      )
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
     const { id } = params

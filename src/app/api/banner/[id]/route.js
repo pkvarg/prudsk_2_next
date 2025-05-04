@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/db/db'
+import { auth } from '../../../../lib/auth'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+
+const prisma = new PrismaClient()
 
 // @desc Fetch single banner
 // @desc GET /api/banner/:id
@@ -33,9 +36,6 @@ export async function GET(request, { params }) {
     )
   }
 }
-
-import { NextResponse } from 'next/server'
-import prisma from '@/db/db'
 
 // @desc Delete a banner
 // @desc DELETE /api/banner/:id
@@ -75,21 +75,15 @@ export async function DELETE(request, { params }) {
   }
 }
 
-import { NextResponse } from 'next/server'
-import prisma from '@/db/db'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-
 // @desc    Update a banner
 // @route   PUT /api/banner/:id
 // @access  Private/Admin
 export async function PUT(request, { params }) {
   try {
-    // Get the authenticated user from the session
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    if (!session || !session.user) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
     // Get user ID from session

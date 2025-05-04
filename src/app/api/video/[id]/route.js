@@ -33,14 +33,10 @@ export async function GET(request, { params }) {
 // @access Private/Admin
 export async function DELETE(request, { params }) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated and is an admin
-    if (!session || !session.user.isAdmin) {
-      return NextResponse.json(
-        { message: 'Not authorized - admin access required' },
-        { status: 401 },
-      )
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
     const { id } = params
@@ -71,14 +67,10 @@ export async function DELETE(request, { params }) {
 // @access Private/Admin
 export async function PUT(request, { params }) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated and is an admin
-    if (!session || !session.user.isAdmin) {
-      return NextResponse.json(
-        { message: 'Not authorized - admin access required' },
-        { status: 401 },
-      )
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
     const { id } = params

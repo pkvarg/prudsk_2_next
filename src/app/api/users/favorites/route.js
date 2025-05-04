@@ -1,18 +1,17 @@
 // app/api/user/favorites/route.js
 import { NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]'
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import { auth } from '../../../../lib/auth'
 
 const prisma = new PrismaClient()
 
 // Add to favorites
 export async function POST(request) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
     if (!session) {
-      return NextResponse.json({ message: 'Not authorized' }, { status: 401 })
+      return new Response('Unauthorized', { status: 401 })
     }
 
     const { productId } = await request.json()
@@ -61,10 +60,10 @@ export async function POST(request) {
 // Get all favorites
 export async function GET() {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
     if (!session) {
-      return NextResponse.json({ message: 'Not authorized' }, { status: 401 })
+      return new Response('Unauthorized', { status: 401 })
     }
 
     const userId = session.user.id

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import useUserStore from '../../store/userStore'
 import Message from './../components/Message'
 import Loader from './../components/Loader'
+import Link from 'next/link'
 
 const ProfilePage = () => {
   const router = useRouter()
@@ -197,7 +198,7 @@ const ProfilePage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {orders?.map((order) => (
+                  {orders?.map((order) => (
                     <tr key={order._id} className="hover:bg-gray-50">
                       <td className="border border-gray-200 px-4 py-2">{order.orderNumber}</td>
                       <td className="border border-gray-200 px-4 py-2">
@@ -220,14 +221,14 @@ const ProfilePage = () => {
                       </td>
                       <td className="border border-gray-200 px-4 py-2">
                         <Link
-                          href={`/order/${order._id}`}
+                          href={`/order/${order.id}`}
                           className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1 rounded text-sm"
                         >
                           Detaily
                         </Link>
                       </td>
                     </tr>
-                  ))} */}
+                  ))}
                 </tbody>
               </table>
             </div>

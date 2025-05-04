@@ -1,18 +1,18 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/db/db'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import { auth } from '../../../../lib/auth'
+
+const prisma = new PrismaClient()
 
 // @desc    Create new review
 // @route   POST /api/products/:id/reviews
 // @access  Private
 export async function POST(request, { params }) {
   try {
-    // Get the authenticated user from the session
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    if (!session || !session.user) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
     // In Next.js 15, we need to await the id

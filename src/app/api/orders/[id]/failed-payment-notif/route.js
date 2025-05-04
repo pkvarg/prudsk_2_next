@@ -3,25 +3,21 @@
 // @desc Send failed payment notification
 // @desc POST /api/orders/:id/failed-payment-notif
 // @access Private
-
 import { NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]'
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-import Email from '@/utils/email'
+import { auth } from '../../../../lib/auth'
 
 const prisma = new PrismaClient()
 
 export async function POST(request, { params }) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated
     if (!session) {
-      return NextResponse.json({ message: 'Not authorized' }, { status: 401 })
+      return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
 
     // Find the order with all necessary related data
     const order = await prisma.order.findUnique({

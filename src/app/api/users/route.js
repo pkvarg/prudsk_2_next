@@ -124,14 +124,10 @@ export async function POST(request) {
 // @access Private/Admin
 export async function GET(request) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated and is an admin
-    if (!session || !session.user.isAdmin) {
-      return NextResponse.json(
-        { message: 'Not authorized - admin access required' },
-        { status: 401 },
-      )
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
     // Get all users

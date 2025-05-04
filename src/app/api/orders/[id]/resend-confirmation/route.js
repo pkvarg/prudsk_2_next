@@ -5,25 +5,19 @@
 // @access Private/Admin
 
 import { NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]'
+import { auth } from '../../../../lib/auth'
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 import niceInvoice from '@/utils/invoiceGenerator'
-import Email from '@/utils/email'
 import path from 'path'
 
 const prisma = new PrismaClient()
 
 export async function PUT(request, { params }) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated and is an admin
-    if (!session || !session.user.isAdmin) {
-      return NextResponse.json(
-        { message: 'Not authorized - admin access required' },
-        { status: 401 },
-      )
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
     const { id } = params

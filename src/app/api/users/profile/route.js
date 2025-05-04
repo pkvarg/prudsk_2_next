@@ -2,7 +2,6 @@
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 import { auth } from '../../../../lib/auth'
-//import crypto from 'crypto'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
