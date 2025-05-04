@@ -16,7 +16,7 @@ export async function PUT(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
 
     // Find the order first
     const order = await prisma.order.findUnique({

@@ -1,1 +1,224 @@
 @import 'tailwindcss';
+
+/* Bootstrap Icons */
+.header-heart {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #e11d48;
+}
+
+.favorites-add {
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.favorites-add:hover {
+  text-decoration: underline;
+}
+
+/* Custom classes based on the original CSS */
+@layer components {
+  .btn {
+    @apply inline-block px-4 py-2 rounded text-center transition-colors duration-300;
+  }
+
+  .btn-blue {
+    @apply bg-blue-600 hover:bg-blue-700 text-white;
+  }
+
+  .btn-red {
+    @apply bg-red-600 hover:bg-red-700 text-white;
+  }
+
+  .btn-success {
+    @apply bg-green-600 hover:bg-green-700 text-white;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white;
+  }
+
+  .btn-back {
+    @apply inline-block px-4 py-2 text-blue-600 hover:text-blue-800 mb-4;
+  }
+
+  .w-100 {
+    @apply w-full;
+  }
+
+  .cart-box-right {
+    @apply flex justify-between items-center w-full;
+  }
+
+  .ml-auto {
+    @apply ml-auto;
+  }
+
+  .prod-img-width {
+    @apply w-full rounded-lg;
+  }
+
+  .product-name {
+    @apply text-2xl font-bold;
+  }
+
+  .product-author {
+    @apply text-xl text-gray-700;
+  }
+
+  .product-price {
+    @apply text-lg font-semibold;
+  }
+
+  .product-description {
+    @apply text-gray-700;
+  }
+
+  .discounted-price {
+    @apply text-green-600 font-semibold;
+  }
+
+  .discounted-price-span {
+    @apply block text-sm;
+  }
+
+  .price-box {
+    @apply text-xl font-bold;
+  }
+
+  .related-link {
+    @apply text-blue-600 hover:underline cursor-pointer;
+  }
+
+  .prod-to-library {
+    @apply text-blue-600 hover:underline;
+  }
+
+  .review {
+    @apply text-2xl font-bold mb-4;
+  }
+
+  .review-items {
+    @apply py-4 border-b last:border-b-0;
+  }
+
+  .review-write {
+    @apply my-6;
+  }
+
+  .review-comment {
+    @apply font-semibold mb-2;
+  }
+
+  .review-stop {
+    @apply border rounded px-3 py-2 w-full;
+  }
+
+  .no-mobile {
+    @apply hidden md:block;
+  }
+
+  .mobile-only {
+    @apply block md:hidden;
+  }
+
+  .product-title-and-favorites {
+    @apply flex justify-between items-start;
+  }
+
+  .favorites-button-class {
+    @apply ml-4 flex items-center;
+  }
+}
+
+/* Base styles */
+body {
+  @apply bg-gray-50 text-gray-900;
+}
+
+a {
+  @apply text-blue-600 hover:text-blue-800;
+}
+
+h1 {
+  @apply text-3xl font-bold mb-6;
+}
+
+h2 {
+  @apply text-2xl font-semibold mb-4;
+}
+
+h3 {
+  @apply text-xl font-semibold mb-3;
+}
+
+h4 {
+  @apply text-lg font-semibold mb-2;
+}
+
+h5 {
+  @apply text-base font-medium mb-2;
+}
+
+h6 {
+  @apply text-sm font-medium mb-1;
+}
+
+/* Custom message components */
+.message {
+  @apply px-4 py-3 rounded border-l-4 mb-4;
+}
+
+.message-success {
+  @apply border-green-500 bg-green-100 text-green-700;
+}
+
+.message-danger {
+  @apply border-red-500 bg-red-100 text-red-700;
+}
+
+.message-warning {
+  @apply border-yellow-500 bg-yellow-100 text-yellow-700;
+}
+
+.message-info {
+  @apply border-blue-500 bg-blue-100 text-blue-700;
+}
+
+/* Loading spinner */
+.loader {
+  @apply inline-block w-8 h-8 border-4 border-solid border-t-transparent border-blue-600 rounded-full animate-spin;
+}
+
+/* Container */
+.container {
+  @apply mx-auto px-4;
+  max-width: 1200px;
+}
+
+/* Form elements */
+.form-control {
+  @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+}
+
+/* Cards */
+.card {
+  @apply bg-white shadow-lg rounded-lg overflow-hidden;
+}
+
+.card-body {
+  @apply p-6;
+}
+
+.card-header {
+  @apply px-6 py-4 bg-gray-50 border-b border-gray-200;
+}
+
+/* List groups */
+.list-group {
+  @apply divide-y divide-gray-200;
+}
+
+.list-group-item {
+  @apply py-4 first:pt-0 last:pb-0;
+}

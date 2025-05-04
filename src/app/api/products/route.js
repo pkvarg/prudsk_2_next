@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-import { auth } from '../../../../lib/auth'
+import { NextResponse } from 'next/server'
+import { PrismaClient } from '../../../../src/prisma/generated/prisma'
+import { auth } from './../../../lib/auth'
 
 const prisma = new PrismaClient()
 

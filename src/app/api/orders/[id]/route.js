@@ -16,22 +16,12 @@ export async function GET(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
 
     // Fetch order by ID with related user information
     const order = await prisma.order.findUnique({
       where: {
         id: id,
-      },
-      include: {
-        user: {
-          select: {
-            name: true,
-            email: true,
-          },
-        },
-        orderItems: true,
-        shippingAddress: true,
       },
     })
 
@@ -54,7 +44,7 @@ export async function DELETE(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
 
     // Find the order first to verify it exists
     const order = await prisma.order.findUnique({

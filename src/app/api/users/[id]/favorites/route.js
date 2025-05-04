@@ -16,7 +16,7 @@ export async function POST(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
     const { productId } = await request.json()
 
     // Verify if the requesting user is the same as the target user or is an admin

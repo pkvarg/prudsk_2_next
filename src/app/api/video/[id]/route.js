@@ -10,7 +10,7 @@ const prisma = new PrismaClient()
 // @access Public
 export async function GET(request, { params }) {
   try {
-    const { id } = params
+    const { id } = await params
 
     // Find video by ID
     const video = await prisma.video.findUnique({
@@ -39,7 +39,7 @@ export async function DELETE(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
 
     // Find the video first to verify it exists
     const video = await prisma.video.findUnique({
@@ -73,7 +73,7 @@ export async function PUT(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
     const { videoTitle, code } = await request.json()
     const userId = session.user.id
 

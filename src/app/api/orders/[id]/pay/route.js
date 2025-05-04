@@ -17,7 +17,7 @@ export async function PUT(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
     const paymentData = await request.json()
 
     // Find the order

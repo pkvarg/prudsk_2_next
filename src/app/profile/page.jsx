@@ -199,7 +199,7 @@ const ProfilePage = () => {
                 </thead>
                 <tbody>
                   {orders?.map((order) => (
-                    <tr key={order._id} className="hover:bg-gray-50">
+                    <tr key={order.id} className="hover:bg-gray-50">
                       <td className="border border-gray-200 px-4 py-2">{order.orderNumber}</td>
                       <td className="border border-gray-200 px-4 py-2">
                         {order.createdAt.substring(0, 10)}

@@ -111,7 +111,7 @@ export const payOrderStripe = createAsyncThunk(
         return rejectWithValue('Not authenticated')
       }
 
-      const response = await fetch(`/api/orders/${order._id}/pay-stripe`, {
+      const response = await fetch(`/api/orders/${order.id}/pay-stripe`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ export const deliverOrder = createAsyncThunk(
         return rejectWithValue('Not authenticated')
       }
 
-      const response = await fetch(`/api/orders/${order._id}/deliver`, {
+      const response = await fetch(`/api/orders/${order.id}/deliver`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -177,7 +177,7 @@ export const paidOrder = createAsyncThunk(
         return rejectWithValue('Not authenticated')
       }
 
-      const response = await fetch(`/api/orders/${order._id}/paid`, {
+      const response = await fetch(`/api/orders/${order.id}/paid`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -209,7 +209,7 @@ export const resendConfirmationEmailWithInvoice = createAsyncThunk(
         return rejectWithValue('Not authenticated')
       }
 
-      const response = await fetch(`/api/orders/${order._id}/resend-confirmation`, {
+      const response = await fetch(`/api/orders/${order.id}/resend-confirmation`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -241,7 +241,7 @@ export const cancelOrder = createAsyncThunk(
         return rejectWithValue('Not authenticated')
       }
 
-      const response = await fetch(`/api/orders/${order._id}/cancell`, {
+      const response = await fetch(`/api/orders/${order.id}/cancell`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
