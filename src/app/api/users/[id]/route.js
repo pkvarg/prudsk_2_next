@@ -1,8 +1,7 @@
 // app/api/users/[id]/route.js
 
 import { NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]'
+import { auth } from '../../../../lib/auth'
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 
 const prisma = new PrismaClient()
@@ -12,17 +11,17 @@ const prisma = new PrismaClient()
 // @access Private/Admin
 export async function GET(request, { params }) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated and is an admin
-    if (!session || !session.user.isAdmin) {
-      return NextResponse.json(
-        { message: 'Not authorized - admin access required' },
-        { status: 401 },
-      )
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    console.log('/*/*/ here in GET')
+
+    const { id } = await params
+
+    console.log('id in user id', id)
 
     // Find user by ID, excluding password
     const user = await prisma.user.findUnique({
@@ -38,9 +37,12 @@ export async function GET(request, { params }) {
         isUnsubscribed: true,
         createdAt: true,
         updatedAt: true,
+        googleId: true,
         // password is excluded
       },
     })
+
+    console.log('**************user in user by id', user)
 
     if (!user) {
       return NextResponse.json({ message: 'User not found' }, { status: 404 })
@@ -58,17 +60,13 @@ export async function GET(request, { params }) {
 // @access Private/Admin
 export async function DELETE(request, { params }) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated and is an admin
-    if (!session || !session.user.isAdmin) {
-      return NextResponse.json(
-        { message: 'Not authorized - admin access required' },
-        { status: 401 },
-      )
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
 
     // Find the user first to verify it exists
     const user = await prisma.user.findUnique({
@@ -101,17 +99,13 @@ export async function DELETE(request, { params }) {
 // @access Private/Admin
 export async function PUT(request, { params }) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated and is an admin
-    if (!session || !session.user.isAdmin) {
-      return NextResponse.json(
-        { message: 'Not authorized - admin access required' },
-        { status: 401 },
-      )
+    if (!session) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
     const userData = await request.json()
 
     // Find user first to verify existence

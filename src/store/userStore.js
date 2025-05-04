@@ -9,6 +9,17 @@ const useUserStore = create(
     (set, get) => ({
       // Initial state
       userInfo: null,
+      userDetails: {
+        loading: false,
+        error: null,
+        user: null,
+        success: false,
+      },
+      orderListMy: {
+        loading: false,
+        error: null,
+        orders: [],
+      },
       loading: false,
       error: null,
       successMessage: null,
@@ -113,6 +124,100 @@ const useUserStore = create(
           registerLoading: false,
           registerError: null,
         }),
+
+      getUserDetails: async (id) => {
+        set((state) => ({
+          userDetails: { ...state.userDetails, loading: true },
+        }))
+
+        try {
+          console.log('what id in user store', id)
+
+          // fetches from api/users/profile
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`)
+          const data = await response.json()
+
+          set({
+            userDetails: {
+              loading: false,
+              error: null,
+              user: data,
+              success: false,
+            },
+          })
+        } catch (error) {
+          set((state) => ({
+            userDetails: {
+              ...state.userDetails,
+              loading: false,
+              error: error.message,
+            },
+          }))
+        }
+      },
+
+      updateUserProfile: async (userData) => {
+        try {
+          const response = await fetch('/api/users/profile', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData),
+          })
+          const data = await response.json()
+
+          set({
+            userDetails: {
+              loading: false,
+              error: null,
+              user: data,
+              success: true,
+            },
+          })
+        } catch (error) {
+          set((state) => ({
+            userDetails: {
+              ...state.userDetails,
+              error: error.message,
+            },
+          }))
+        }
+      },
+
+      listMyOrders: async () => {
+        set((state) => ({
+          orderListMy: { ...state.orderListMy, loading: true },
+        }))
+
+        try {
+          const response = await fetch('/api/orders/myorders')
+          const data = await response.json()
+
+          set({
+            orderListMy: {
+              loading: false,
+              error: null,
+              orders: data,
+            },
+          })
+        } catch (error) {
+          set((state) => ({
+            orderListMy: {
+              ...state.orderListMy,
+              loading: false,
+              error: error.message,
+            },
+          }))
+        }
+      },
+
+      resetUserProfile: () => {
+        set((state) => ({
+          userDetails: {
+            ...state.userDetails,
+            success: false,
+          },
+        }))
+      },
     }),
     {
       name: 'user-storage',

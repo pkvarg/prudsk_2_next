@@ -106,8 +106,6 @@ export async function POST(request) {
 
       console.log('data register api', data)
 
-      // await new Email(userData, registerURL).sendWelcome()
-
       return NextResponse.json('OK', { status: 201 })
     } else {
       return NextResponse.json({ message: 'Neplatná data uživatele' }, { status: 400 })

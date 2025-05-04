@@ -15,9 +15,9 @@ const Header = () => {
   const { userInfo, setUserInfo, clearUserState } = useUserStore()
   const { cartItems } = useCartStore()
 
-  if (session) {
-    console.log('header session', session)
-  }
+  // if (session) {
+  //   console.log('header session', session)
+  // }
 
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)

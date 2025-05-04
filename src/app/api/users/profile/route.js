@@ -1,28 +1,29 @@
 // app/api/users/profile/route.js
 import { NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]'
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import { auth } from '../../../../lib/auth'
+//import crypto from 'crypto'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 const prisma = new PrismaClient()
 
 // @desc Get user profile
 // @desc GET /api/users/profile
 // @access Private
-export async function GET(request) {
+export async function GET(request, response) {
+  const session = await auth()
+
+  if (!session) {
+    return new Response('Unauthorized', { status: 401 })
+  }
+
   try {
-    const session = await getServerSession(authOptions)
+    const email = session.user.email
 
-    // Check if user is authenticated
-    if (!session) {
-      return NextResponse.json({ message: 'Not authorized' }, { status: 401 })
-    }
-
-    const userId = session.user.id
-
-    // Find user by ID
+    // Find user by email from session (cause Google has a different id in session)
     const user = await prisma.user.findUnique({
-      where: { id: userId },
+      where: { email: email },
     })
 
     if (user) {
@@ -33,6 +34,7 @@ export async function GET(request) {
         isAdmin: user.isAdmin,
         isAssistant: user.isAssistant || false,
         isSubscribed: user.isSubscribed || false,
+        googleId: user.googleId || null,
       })
     } else {
       return NextResponse.json({ message: 'User not found' }, { status: 404 })
@@ -52,11 +54,10 @@ const generateToken = (id) => {
 
 export async function PUT(request) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated
     if (!session) {
-      return NextResponse.json({ message: 'Not authorized' }, { status: 401 })
+      return new Response('Unauthorized', { status: 401 })
     }
 
     const userId = session.user.id
@@ -76,6 +77,7 @@ export async function PUT(request) {
       name: userData.name || user.name,
       email: userData.email || user.email,
       isSubscribed: userData.isSubscribed !== undefined ? userData.isSubscribed : user.isSubscribed,
+      updatedAt: new Date(),
     }
 
     // Handle unsubscribe status

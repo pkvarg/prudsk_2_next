@@ -1,8 +1,8 @@
 // app/api/orders/myorders/route.js
 import { NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]'
+
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import { auth } from '../../../../lib/auth'
 
 const prisma = new PrismaClient()
 
@@ -11,23 +11,18 @@ const prisma = new PrismaClient()
 // @access Private
 export async function GET(request) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
-    // Check if user is authenticated
     if (!session) {
-      return NextResponse.json({ message: 'Not authorized' }, { status: 401 })
+      return new Response('Unauthorized', { status: 401 })
     }
 
-    const userId = session.user.id
+    const email = session.user.email
 
     // Find all orders for the logged-in user
     const orders = await prisma.order.findMany({
       where: {
-        userId: userId,
-      },
-      include: {
-        orderItems: true,
-        shippingAddress: true,
+        email: email,
       },
       orderBy: {
         createdAt: 'desc', // Most recent orders first

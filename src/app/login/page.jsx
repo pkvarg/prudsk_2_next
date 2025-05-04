@@ -19,7 +19,6 @@ export default function LoginPage() {
   const setUserInfo = useUserStore((state) => state.setUserInfo)
 
   const googleApi = async (user) => {
-    console.log('session user', user)
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/google`, {
         method: 'POST',
@@ -29,7 +28,7 @@ export default function LoginPage() {
 
       const data = await res.json()
 
-      console.log('data', data)
+      console.log('data in google api', data)
       setLoading(false)
       setUserInfo({
         name: data.name,
