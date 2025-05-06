@@ -2,7 +2,7 @@ import { auth } from './lib/auth'
 import { NextResponse } from 'next/server'
 
 // List of routes that require authentication
-const protectedRoutes = ['/dashboard', '/suggestions']
+const protectedRoutes = ['/admin']
 
 console.log(protectedRoutes)
 

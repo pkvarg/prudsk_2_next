@@ -75,8 +75,6 @@ export async function POST(request) {
         // Return success response
         const data = await response.json()
 
-        console.log('data register api', data)
-
         // Return created user
 
         return NextResponse.json({

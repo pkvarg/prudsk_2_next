@@ -22,7 +22,7 @@ export default function ProductList() {
         }
 
         const data = await response.json()
-        console.log('data', data)
+
         setProducts(data)
         setLoading(false)
       } catch (err) {

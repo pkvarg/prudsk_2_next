@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/db/db'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+
+const prisma = new PrismaClient()
 
 // @desc    Get all unsubscribed users
 // @route   GET /api/subscribers/unsubscribed

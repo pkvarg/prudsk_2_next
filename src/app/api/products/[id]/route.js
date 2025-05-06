@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/db/db'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import { auth } from '../../../../lib/auth'
+
+const prisma = new PrismaClient()
 
 // @desc Fetch single product
 // @desc GET /api/products/:id
@@ -7,8 +10,7 @@ import prisma from '@/db/db'
 
 export async function GET(request, { params }) {
   try {
-    // In Next.js 15, we need to await the id
-    const id = await params.id
+    const { id } = await params
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {

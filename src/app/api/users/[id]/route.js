@@ -17,11 +17,7 @@ export async function GET(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    console.log('/*/*/ here in GET')
-
     const { id } = await params
-
-    console.log('id in user id', id)
 
     // Find user by ID, excluding password
     const user = await prisma.user.findUnique({
@@ -41,8 +37,6 @@ export async function GET(request, { params }) {
         // password is excluded
       },
     })
-
-    console.log('**************user in user by id', user)
 
     if (!user) {
       return NextResponse.json({ message: 'User not found' }, { status: 404 })
@@ -111,9 +105,6 @@ export async function PUT(request, { params }) {
     // Find user first to verify existence
     const user = await prisma.user.findUnique({
       where: { id },
-      include: {
-        favorites: true,
-      },
     })
 
     if (!user) {
@@ -132,9 +123,6 @@ export async function PUT(request, { params }) {
           favorites: {
             connect: { id: userData.favorites },
           },
-        },
-        include: {
-          favorites: true,
         },
       })
 
@@ -171,12 +159,7 @@ export async function PUT(request, { params }) {
       const updatedUser = await prisma.user.update({
         where: { id },
         data: updateData,
-        include: {
-          favorites: true,
-        },
       })
-
-      console.log('UU:', updatedUser)
 
       return NextResponse.json({
         id: updatedUser.id,

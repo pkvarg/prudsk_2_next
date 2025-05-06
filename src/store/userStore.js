@@ -14,6 +14,7 @@ const useUserStore = create(
         error: null,
         user: null,
         success: false,
+        visitorsCount: 0,
       },
       orderListMy: {
         loading: false,
@@ -32,6 +33,8 @@ const useUserStore = create(
       setLoading: (loading) => set({ loading }),
       setError: (error) => set({ error }),
       setSuccessMessage: (message) => set({ successMessage: message }),
+      // Set visitors count
+      setVisitorsCount: (count) => set({ visitorsCount: count }),
 
       // Register function
       register: async (name, email, password) => {
@@ -131,11 +134,13 @@ const useUserStore = create(
         }))
 
         try {
-          console.log('what id in user store', id)
-
           // fetches from api/users/profile
           const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`)
           const data = await response.json()
+
+          set({
+            user: data,
+          })
 
           set({
             userDetails: {
@@ -217,6 +222,110 @@ const useUserStore = create(
             success: false,
           },
         }))
+      },
+
+      listUsers: async () => {
+        try {
+          set({ loading: true })
+
+          const { userInfo } = get()
+
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo.token}`,
+            },
+          }
+
+          const { data } = await axios.get('/api/users', config)
+
+          set({
+            loading: false,
+            users: data,
+          })
+        } catch (error) {
+          set({
+            loading: false,
+            error:
+              error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+          })
+        }
+      },
+
+      // Delete user (admin only)
+      deleteUser: async (id) => {
+        try {
+          const { userInfo } = get()
+
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo.token}`,
+            },
+          }
+
+          await axios.delete(`/api/users/${id}`, config)
+
+          set({ successDelete: true })
+
+          // Reset success flag after a short delay
+          setTimeout(() => {
+            set({ successDelete: false })
+          }, 2000)
+
+          // Refresh the user list
+          get().listUsers()
+        } catch (error) {
+          set({
+            error:
+              error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+          })
+        }
+      },
+
+      updateUser: async (userData) => {
+        try {
+          set({
+            loadingUpdate: true,
+            errorUpdate: null,
+          })
+
+          const { userInfo } = get()
+
+          const config = {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${userInfo.token}`,
+            },
+          }
+
+          const { data } = await axios.put(`/api/users/${userData.id}`, userData, config)
+
+          set({
+            loadingUpdate: false,
+            successUpdate: true,
+            user: data,
+          })
+        } catch (error) {
+          set({
+            loadingUpdate: false,
+            errorUpdate:
+              error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+          })
+        }
+      },
+
+      // Reset update state
+      resetUserUpdate: () => {
+        set({
+          loadingUpdate: false,
+          errorUpdate: null,
+          successUpdate: false,
+        })
       },
     }),
     {

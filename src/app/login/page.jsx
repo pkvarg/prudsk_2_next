@@ -28,13 +28,13 @@ export default function LoginPage() {
 
       const data = await res.json()
 
-      console.log('data in google api', data)
       setLoading(false)
       setUserInfo({
         name: data.name,
         email: data.email,
         isAdmin: data.isAdmin,
         isAssistant: data.isAssistant,
+        id: data.id,
       })
       router.push(callbackUrl)
     } catch (err) {
@@ -82,8 +82,6 @@ export default function LoginPage() {
         setError(data.message || 'Přihlášení selhalo')
         return
       }
-
-      //console.log('data', data)
 
       setUserInfo({
         email: data.email,

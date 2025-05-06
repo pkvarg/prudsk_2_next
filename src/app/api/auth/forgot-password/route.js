@@ -1,6 +1,5 @@
 // app/api/auth/forgot-password/route.js
 import { NextResponse } from 'next/server'
-
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 import crypto from 'crypto'
 
@@ -81,8 +80,6 @@ export async function POST(request) {
 
     // Return success response
     const data = await response.json()
-
-    console.log('data register api', data)
 
     return NextResponse.json({
       message: 'Email s instrukcemi pro obnovu hesla byl odeslán, pokud účet existuje.',

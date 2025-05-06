@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/db/db'
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+
+const prisma = new PrismaClient()
 
 // Hard-coded ID as in the original code
 const id = '65fed9947585f070bd06e836'

@@ -1,9 +1,10 @@
 // app/api/users/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import { PrismaClient } from '../../../prisma/generated/prisma'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import { headers } from 'next/headers'
+import { auth } from '../../../lib/auth'
 
 const prisma = new PrismaClient()
 
@@ -103,8 +104,6 @@ export async function POST(request) {
 
       // Return success response
       const data = await response.json()
-
-      console.log('data register api', data)
 
       return NextResponse.json('OK', { status: 201 })
     } else {

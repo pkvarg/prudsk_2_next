@@ -148,8 +148,6 @@ const OrderPage = () => {
     return <div>Order not found</div>
   }
 
-  console.log('order in order id page', order)
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Objednávka {order.orderNumber}</h1>

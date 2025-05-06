@@ -1,3 +1,7 @@
+import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+
+const prisma = new PrismaClient()
+
 // @desc POST /api/products/discount
 // @access Admin
 
