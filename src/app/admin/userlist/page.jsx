@@ -101,14 +101,14 @@ const UserListPage = () => {
                         {user.email}
                       </a>
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-200">
+                    <td className="py-2 px-4 border-b border-gray-200 text-2xl">
                       {user.isRegistered ? (
                         <Check className="text-green-500" />
                       ) : (
                         <X className="text-red-500" />
                       )}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-200">
+                    <td className="py-2 px-4 border-b border-gray-200 text-2xl">
                       {user.isAdmin ? (
                         <Check className="text-green-500" />
                       ) : (
