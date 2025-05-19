@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
@@ -11,6 +11,11 @@ import useUserStore from '../../../store/userStore'
 
 const UserListPage = () => {
   const router = useRouter()
+  const [countVisitors, setCountVisitors] = useState(0)
+  const [countBots, setCountBots] = useState(0)
+  const [countEmails, setCountEmails] = useState(0)
+  const [lastVisit, setLastVisit] = useState('')
+
   const {
     users,
     loading,
@@ -24,25 +29,39 @@ const UserListPage = () => {
     setVisitorsCount,
   } = useUserStore()
 
-  const getVisitors = async () => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const apiUrl = 'https://hono-api.pictusweb.com/api/stats/proud2next'
+  //const apiUrl = 'http://localhost:3013/api/stats/proud2next'
+
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+
+        const data = await response.json()
+
+        const date = data.lastVisitor_at.split('T')[0]
+
+        setCountBots(data.bots)
+        setCountVisitors(data.visitors)
+        setCountEmails(data.emails)
+        setLastVisit(date)
+      } catch (err) {
+        console.error('Error fetching bots:', err)
+      }
     }
 
-    try {
-      const { data } = await axios.get('/api/counter/count', config)
-      setVisitorsCount(data)
-    } catch (error) {
-      console.error('Failed to fetch visitors count:', error)
-    }
-  }
+    getStats()
+  }, [])
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       listUsers()
-      getVisitors()
+
       getUserDetails(userInfo.id)
     } else {
       router.push('/login')
@@ -59,7 +78,13 @@ const UserListPage = () => {
     <main className="mx-8">
       <div className="flex items-center justify-between mb-4 mx-8 mt-12">
         <h1 className="text-2xl font-bold">Uživatelé</h1>
-        <h2 className="text-xl">Počet návštěv: {visitorsCount}</h2>
+
+        <div className="mb-4 text-[15px]">
+          <p className="font-bold mt-2">Počet návštev: {countVisitors}</p>
+          <p className="font-bold mt-2">Roboti: {countBots}</p>
+          <p className="font-bold mt-2">Emaily : {countEmails}</p>
+          <p className="font-bold mt-2">Posledná návšteva: {lastVisit}</p>
+        </div>
       </div>
 
       {loading ? (
