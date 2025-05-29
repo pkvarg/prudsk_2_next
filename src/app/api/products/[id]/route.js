@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
 import { auth } from '../../../../lib/auth'
+import isAdmin from '../../../../lib/isAdmin'
 
 const prisma = new PrismaClient()
 
@@ -42,8 +43,13 @@ export async function GET(request, { params }) {
 // @access Private/Admin
 export async function DELETE(request, { params }) {
   try {
-    // In Next.js 15, we need to await the id
-    const id = await params.id
+    const user = await isAdmin()
+
+    if (!user.isAdmin) {
+      return new Response('Unauthorized', { status: 401 })
+    }
+
+    const { id } = await params
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -79,9 +85,14 @@ export async function DELETE(request, { params }) {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 export async function PUT(request, { params }) {
+  const user = await isAdmin()
+
+  if (!user.isAdmin) {
+    return new Response('Unauthorized', { status: 401 })
+  }
+
   try {
-    // In Next.js 15, we need to await the id
-    const id = await params.id
+    const { id } = await params
 
     // Parse request body
     const body = await request.json()

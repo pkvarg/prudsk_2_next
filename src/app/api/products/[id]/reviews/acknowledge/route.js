@@ -9,7 +9,7 @@ const prisma = new PrismaClient()
 export async function PUT(request, { params }) {
   try {
     // In Next.js 15, we need to await the id
-    const id = await params.id
+    const { id } = await params
 
     // Parse request body
     const body = await request.json()

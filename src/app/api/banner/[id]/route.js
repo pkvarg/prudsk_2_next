@@ -10,7 +10,7 @@ const prisma = new PrismaClient()
 export async function GET(request, { params }) {
   try {
     // In Next.js 15, we need to await the id
-    const id = await params.id
+    const { id } = await params
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -43,7 +43,7 @@ export async function GET(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     // In Next.js 15, we need to await the id
-    const id = await params.id
+    const { id } = await params
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -90,7 +90,7 @@ export async function PUT(request, { params }) {
     const userId = session.user.id
 
     // In Next.js 15, we need to await the id
-    const id = await params.id
+    const { id } = await params
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {

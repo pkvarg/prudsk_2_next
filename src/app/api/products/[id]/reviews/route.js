@@ -16,7 +16,7 @@ export async function POST(request, { params }) {
     }
 
     // In Next.js 15, we need to await the id
-    const id = await params.id
+    const { id } = await params
 
     // Parse request body
     const body = await request.json()
@@ -107,7 +107,7 @@ export async function POST(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     // In Next.js 15, we need to await the id
-    const id = await params.id
+    const { id } = await params
 
     // Parse URL parameters and request body
     const { searchParams } = new URL(request.url)

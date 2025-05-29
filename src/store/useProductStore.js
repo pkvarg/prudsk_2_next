@@ -1,6 +1,7 @@
 // store/productStore.js
 import { create } from 'zustand'
 import axios from 'axios'
+import useUserStore from './userStore'
 
 const useProductStore = create((set, get) => ({
   // Product list state
@@ -22,9 +23,15 @@ const useProductStore = create((set, get) => ({
   createdProduct: null,
 
   // Product detail state
-  product: { reviews: [] },
+  //product: { reviews: [] },
+  product: {},
   loadingDetail: false,
   errorDetail: null,
+
+  // Product update state (ADD THESE)
+  loadingUpdate: false,
+  errorUpdate: null,
+  successUpdate: false,
 
   // List products with pagination
   listProducts: async (keyword = '', pageNumber = 1, pageSize = 10) => {
@@ -52,20 +59,33 @@ const useProductStore = create((set, get) => ({
     }
   },
 
+  getAllProducts: async () => {
+    try {
+      set({ loading: true })
+
+      const { data } = await axios.get(`/api/products/all`)
+
+      set({
+        loading: false,
+        products: data.products,
+      })
+    } catch (error) {
+      set({
+        loading: false,
+        error:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  },
+
   // Delete product (admin only)
   deleteProduct: async (id) => {
     try {
       set({ loadingDelete: true })
 
-      const { userInfo } = get()
-
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-
-      await axios.delete(`/api/products/${id}`, config)
+      await axios.delete(`/api/products/${id}`)
 
       set({
         loadingDelete: false,
@@ -99,16 +119,7 @@ const useProductStore = create((set, get) => ({
         errorCreate: null,
       })
 
-      const { userInfo } = get()
-
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-
-      const { data } = await axios.post('/api/products', {}, config)
+      const { data } = await axios.post('/api/products')
 
       set({
         loadingCreate: false,
@@ -141,7 +152,8 @@ const useProductStore = create((set, get) => ({
     try {
       set({
         loadingDetail: true,
-        product: { reviews: [] },
+        //product: { reviews: [] },
+        product: {},
       })
 
       const { data } = await axios.get(`/api/products/${id}`)
@@ -163,22 +175,22 @@ const useProductStore = create((set, get) => ({
 
   // Update product (admin only)
   updateProduct: async (product) => {
+    const userInfo = useUserStore.getState().userInfo
+
+    // Check if user is admin
+    if (!userInfo || !userInfo.isAdmin) {
+      throw new Error('Unauthorized: Admin access required')
+    }
+
     try {
       set({
         loadingUpdate: true,
         errorUpdate: null,
       })
 
-      const { userInfo } = get()
+      const { data } = await axios.put(`/api/products/${product.id}`, product)
 
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-
-      const { data } = await axios.put(`/api/products/${product._id}`, product, config)
+      console.log('data', data)
 
       set({
         loadingUpdate: false,
@@ -199,6 +211,26 @@ const useProductStore = create((set, get) => ({
             : error.message,
       })
     }
+  },
+
+  // Reset update state (ADD THIS)
+  resetUpdate: () => {
+    set({
+      loadingUpdate: false,
+      errorUpdate: null,
+      successUpdate: false,
+    })
+  },
+
+  // Clear errors (ADD THIS - OPTIONAL)
+  clearErrors: () => {
+    set({
+      error: null,
+      errorDelete: null,
+      errorCreate: null,
+      errorDetail: null,
+      errorUpdate: null,
+    })
   },
 }))
 

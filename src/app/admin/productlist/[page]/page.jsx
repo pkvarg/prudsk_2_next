@@ -63,8 +63,8 @@ const ProductListPageWithPagination = () => {
       return
     }
 
-    if (successCreate && createdProduct?._id) {
-      router.push(`/admin/product/${createdProduct._id}/edit`)
+    if (successCreate && createdProduct?.id) {
+      router.push(`/admin/product/${createdProduct.id}/edit`)
     } else {
       listProducts('', pageNumber, pageSize)
     }
