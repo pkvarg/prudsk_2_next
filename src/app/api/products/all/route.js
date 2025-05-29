@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
 
 export async function GET() {
   // @desc Fetch all NO LIMIT products

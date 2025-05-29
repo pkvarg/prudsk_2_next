@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState, useLayoutEffect } from 'react'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import FormContainer from '../components/FormContainer'
+import Message from '@/app/components/Message'
+import Loader from '@/app/components/Loader'
+import FormContainer from '@/app/components/FormContainer'
 
 const Contact = () => {
   const x = process.env.NEXT_PUBLIC_PASSWORD_GROUP_ONE
@@ -74,8 +74,8 @@ const Contact = () => {
 
       console.log('sendData', sendData)
 
-      const apiUrl = 'http://localhost:3013/api/proud2next/contact'
-      //const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/contact'
+      //const apiUrl = 'http://localhost:3013/api/proud2next/contact'
+      const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/contact'
 
       // Make the API request
       const response = await fetch(apiUrl, {

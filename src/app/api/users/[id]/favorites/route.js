@@ -1,9 +1,7 @@
 // app/api/users/[id]/favorites/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-import { auth } from '../../../../lib/auth'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
+import { auth } from '@/lib/auth'
 
 // @desc Add a product to user favorites
 // @desc POST /api/users/:id/favorites

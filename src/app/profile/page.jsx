@@ -3,9 +3,9 @@
 
 import { useState, useEffect, useLayoutEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import useUserStore from '../../store/userStore'
-import Message from './../components/Message'
-import Loader from './../components/Loader'
+import useUserStore from '@/store/userStore'
+import Message from '@/app/components/Message'
+import Loader from '@/app/components/Loader'
 import Link from 'next/link'
 
 const ProfilePage = () => {

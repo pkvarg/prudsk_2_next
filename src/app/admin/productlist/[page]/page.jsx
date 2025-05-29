@@ -4,11 +4,11 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { Plus, Pencil, Trash } from 'react-bootstrap-icons'
-import Message from '../../../components/Message'
-import Loader from '../../../components/Loader'
-import Paginate from '../../../components/Paginate'
-import useProductStore from '../../../../store/useProductStore'
-import useUserStore from '../../../../store/userStore'
+import Message from '@/app/components/Message'
+import Loader from '@/app/components/Loader'
+import Paginate from '@/app/components/Paginate'
+import useProductStore from '@/store/useProductStore'
+import useUserStore from '@/store/userStore'
 
 const ProductListPageWithPagination = () => {
   const params = useParams()

@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
 
 // @desc    Remove from favorites
 // @route   PUT /api/products/:id/remove/favorites

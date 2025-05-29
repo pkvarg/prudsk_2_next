@@ -1,9 +1,7 @@
 // app/api/orders/[id]/cancel/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-import { auth } from '../../../../lib/auth'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
+import { auth } from '@/lib/auth'
 
 // @desc Update order to Cancelled
 // @desc PUT /api/orders/:id/cancel

@@ -1,6 +1,4 @@
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
 
 // @desc POST /api/products/discount
 // @access Admin

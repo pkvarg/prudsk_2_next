@@ -1,10 +1,9 @@
 // app/api/auth/forgot-password/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import prisma from '@/db/db'
 import crypto from 'crypto'
 
 export async function POST(request) {
-  const prisma = new PrismaClient()
   console.log('PU', prisma.user)
   try {
     const body = await request.json()

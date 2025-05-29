@@ -1,10 +1,8 @@
 // app/api/orders/[id]/pay/route.js
 import { NextResponse } from 'next/server'
-import { auth } from '../../../../lib/auth'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import { auth } from '@/lib/auth'
+import prisma from '@/db/db'
 import Email from '@/utils/email'
-
-const prisma = new PrismaClient()
 
 // @desc Update order to Paid
 // @desc PUT /api/orders/:id/pay

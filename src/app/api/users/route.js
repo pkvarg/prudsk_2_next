@@ -1,12 +1,10 @@
 // app/api/users/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../prisma/generated/prisma'
+import prisma from '@/db/db'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import { headers } from 'next/headers'
-import { auth } from '../../../lib/auth'
-
-const prisma = new PrismaClient()
+import { auth } from '@/lib/auth'
 
 async function createRegisterToken(email, url) {
   const token = crypto.randomBytes(32).toString('hex')

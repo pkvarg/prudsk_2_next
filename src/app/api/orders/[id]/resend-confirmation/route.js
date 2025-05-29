@@ -5,12 +5,10 @@
 // @access Private/Admin
 
 import { NextResponse } from 'next/server'
-import { auth } from '../../../../lib/auth'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import { auth } from '@/lib/auth'
+import prisma from '@/db/db'
 import niceInvoice from '@/utils/invoiceGenerator'
 import path from 'path'
-
-const prisma = new PrismaClient()
 
 export async function PUT(request, { params }) {
   try {

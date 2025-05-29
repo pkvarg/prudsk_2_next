@@ -1,11 +1,9 @@
 // app/api/users/profile/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-import { auth } from '../../../../lib/auth'
+import prisma from '@/db/db'
+import { auth } from '@/lib/auth'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-
-const prisma = new PrismaClient()
 
 // @desc Get user profile
 // @desc GET /api/users/profile

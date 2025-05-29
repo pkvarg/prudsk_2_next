@@ -5,10 +5,8 @@
 // @access Public
 
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import prisma from '@/db/db'
 import crypto from 'crypto'
-
-const prisma = new PrismaClient()
 
 export async function GET(request, { params }) {
   try {

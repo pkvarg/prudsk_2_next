@@ -4,10 +4,8 @@
 // @desc POST /api/orders/:id/failed-payment-notif
 // @access Private
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-import { auth } from '../../../../lib/auth'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
+import { auth } from '@/lib/auth'
 
 export async function POST(request, { params }) {
   try {

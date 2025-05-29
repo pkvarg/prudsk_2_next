@@ -1,9 +1,7 @@
 // app/api/orders/[id]/route.js
 import { NextResponse } from 'next/server'
-import { auth } from '../../../../lib/auth'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-
-const prisma = new PrismaClient()
+import { auth } from '@/lib/auth'
+import prisma from '@/db/db'
 
 // @desc Get order by ID
 // @desc GET /api/orders/:id

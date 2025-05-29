@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../src/prisma/generated/prisma'
-import isAdmin from './../../../lib/isAdmin'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc Fetch all products
 // @desc GET /api/products
@@ -78,10 +76,7 @@ export async function POST(request) {
     if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
-
-    // Assuming you store the MongoDB user ID in the session
     const userId = user.id
-
     // Create the product with default values
     const createdProduct = await prisma.product.create({
       data: {
@@ -89,7 +84,9 @@ export async function POST(request) {
         price: 0,
         discount: 0,
         discountedPrice: 0,
-        userId: userId, // Link to the authenticated user
+        user: {
+          connect: { id: userId }, // Connect to existing user
+        },
         image: '/images/sample.jpg',
         author: '',
         category: '',

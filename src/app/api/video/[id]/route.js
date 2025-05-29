@@ -1,9 +1,7 @@
 // app/api/video/[id]/route.js
 
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
 
 // @desc Fetch single video
 // @desc GET /api/video/:id

@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
-import { auth } from '../../../../lib/auth'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-
-const prisma = new PrismaClient()
+import { auth } from '@/lib/auth'
+import prisma from '@/db/db'
 
 // @desc Fetch single banner
 // @desc GET /api/banner/:id

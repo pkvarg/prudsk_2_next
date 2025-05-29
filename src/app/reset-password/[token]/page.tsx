@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import FormContainer from '../../components/FormContainer'
-import Loader from '../../components/Loader'
-import Message from '../../components/Message'
+import FormContainer from '@/app/components/FormContainer'
+import Loader from '@/app/components/Loader'
+import Message from '@/app/components/Message'
 
 const ResetPasswordPage = () => {
   const router = useRouter()

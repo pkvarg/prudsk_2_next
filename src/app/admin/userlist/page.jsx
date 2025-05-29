@@ -3,11 +3,10 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import axios from 'axios'
 import { Check, X, Pencil, Trash } from 'react-bootstrap-icons'
-import Message from '../../components/Message'
-import Loader from '../../components/Loader'
-import useUserStore from '../../../store/userStore'
+import Message from '@/app/components/Message'
+import Loader from '@/app/components/Loader'
+import useUserStore from '@/store/userStore'
 
 const UserListPage = () => {
   const router = useRouter()

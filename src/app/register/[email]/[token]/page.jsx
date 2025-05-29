@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import Message from '../../../components/Message'
+import Message from '@/app/components/Message'
 import axios from 'axios'
 
 const CompleteRegistration = () => {

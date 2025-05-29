@@ -1,12 +1,10 @@
 // app/api/orders/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import prisma from '@/db/db'
 import niceInvoice from '@/utils/invoiceGenerator'
 import Email from '@/utils/email'
 import { join } from 'path'
-import { auth } from '../../../../lib/auth'
-
-const prisma = new PrismaClient()
+import { auth } from '@/lib/auth'
 
 // @desc Create new Order
 // @desc POST /api/orders

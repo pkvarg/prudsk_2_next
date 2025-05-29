@@ -1,7 +1,5 @@
 import { auth } from './auth'
-import { PrismaClient } from '../../src/prisma/generated/prisma'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
 
 export default async function isAdmin() {
   const session = await auth()

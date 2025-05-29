@@ -1,10 +1,8 @@
 // app/api/auth/reset-password/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import prisma from '@/db/db'
 import crypto from 'crypto'
 import bcrypt from 'bcryptjs'
-
-const prisma = new PrismaClient()
 
 export async function POST(request) {
   try {

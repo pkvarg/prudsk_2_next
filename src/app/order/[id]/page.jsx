@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import axios from 'axios'
-import useUserStore from '../../../store/userStore'
-import useCartStore from '../../../store/cartStore'
-import Message from '../../components/Message'
-import Loader from '../../components/Loader'
+import useUserStore from '@/store/userStore'
+import useCartStore from '@/store/cartStore'
+import Message from '@/app/components/Message'
+import Loader from '@/app/components/Loader'
 
 const OrderPage = () => {
   const params = useParams()

@@ -1,9 +1,8 @@
 // src/app/api/users/google/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import prisma from '@/db/db'
 
 export async function POST(request) {
-  const prisma = new PrismaClient()
   try {
     try {
       // Parse request body to get sessionEmail

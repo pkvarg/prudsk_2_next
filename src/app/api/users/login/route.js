@@ -1,10 +1,8 @@
 // app/api/users/login/route.js
 
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import prisma from '@/db/db'
 import bcrypt from 'bcryptjs'
-
-const prisma = new PrismaClient()
 
 // @desc Auth user & get token
 // @desc POST /api/users/login

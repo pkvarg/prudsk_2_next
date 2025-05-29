@@ -1,9 +1,7 @@
 // app/api/user/favorites/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-import { auth } from '../../../../lib/auth'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
+import { auth } from '@/lib/auth'
 
 // Add to favorites
 export async function POST(request) {

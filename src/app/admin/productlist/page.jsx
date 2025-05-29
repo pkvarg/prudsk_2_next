@@ -2,9 +2,9 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import useProductStore from '../../../store/useProductStore'
-import useUserStore from '../../../store/userStore'
-import Loader from '../../components/Loader'
+import useProductStore from '@//store/useProductStore'
+import useUserStore from '@/store/userStore'
+import Loader from '@/app/components/Loader'
 
 // This is a redirect page that simply redirects to page 1
 const ProductListDefaultPage = () => {

@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import useUserStore from '../../../../../store/userStore'
-import Message from '../../../../components/Message'
-import Loader from '../../../../components/Loader'
-import FormContainer from '../../../../components/FormContainer'
+import useUserStore from '@/store/userStore'
+import Message from '@/app/components/Message'
+import Loader from '@/app/components/Loader'
+import FormContainer from '@/app/components/FormContainer'
 
 const UserEditPage = () => {
   const params = useParams()

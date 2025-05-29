@@ -1,9 +1,7 @@
 // app/api/orders/[id]/paid/route.js
 import { NextResponse } from 'next/server'
-import { auth } from '../../../../lib/auth'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-
-const prisma = new PrismaClient()
+import { auth } from '@/lib/auth'
+import prisma from '@/db/db'
 
 // @desc Update order to Paid No Card (from Admin menu)
 // @desc PUT /api/orders/:id/paid

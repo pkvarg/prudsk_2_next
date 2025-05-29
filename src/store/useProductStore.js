@@ -190,7 +190,7 @@ const useProductStore = create((set, get) => ({
 
       const { data } = await axios.put(`/api/products/${product.id}`, product)
 
-      console.log('data', data)
+      console.log('data put', data)
 
       set({
         loadingUpdate: false,

@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-import { auth } from '../../../../lib/auth'
+import prisma from '@/db/db'
+import { auth } from '@/lib/auth'
 import isAdmin from '../../../../lib/isAdmin'
-
-const prisma = new PrismaClient()
 
 // @desc Fetch single product
 // @desc GET /api/products/:id

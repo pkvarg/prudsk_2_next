@@ -1,5 +1,5 @@
 // app/products/page.js
-import ProductList from './../components/ProductList'
+import ProductList from '@/app/components/ProductList'
 
 export const metadata = {
   title: 'Our Products',

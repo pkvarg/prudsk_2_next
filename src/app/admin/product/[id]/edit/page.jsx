@@ -1,10 +1,8 @@
 'use client'
-
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import useProductStore from '../../../../../store/useProductStore'
-import axios from 'axios'
+import useProductStore from '@/store/useProductStore'
 
 const ProductEditScreen = () => {
   const router = useRouter()
@@ -107,7 +105,6 @@ const ProductEditScreen = () => {
       const getRelatedValue = (related) => {
         if (!related) return ''
         if (typeof related === 'object' && related.id) return related.id
-        if (typeof related === 'object' && related.id) return related.id
         return related
       }
 
@@ -146,8 +143,6 @@ const ProductEditScreen = () => {
       router.push('/admin/productlist')
     }
   }, [successUpdate, resetUpdate, router])
-
-  //console.log('products All', products)
 
   // Filter products based on search terms
   const getFilteredProducts = (searchTerm, excludeIds = []) => {
@@ -220,23 +215,29 @@ const ProductEditScreen = () => {
     const file = e.target.files[0]
     if (!file) return
 
-    const formDataUpload = new FormData()
-    formDataUpload.append('upload', file)
+    const formData = new FormData()
+    formData.append('file', file)
     setUploading(true)
 
     try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      const apiUrl = 'http://localhost:3013/api/upload/proud2next'
+      // const apiUrl = 'https://hono-api.pictusweb.com/api/upload/proud2next'
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error('Nepodarilo sa nahrať súbor')
       }
 
-      const { data } = await axios.post('/api/upload', formDataUpload, config)
+      const data = await response.json()
+      console.log('data', data)
 
-      if (data.includes('ukazka')) {
-        setFormData((prev) => ({ ...prev, excerptImage: data }))
+      if (data.imageUrl.includes('ukazka')) {
+        setFormData((prev) => ({ ...prev, excerptImage: data.imageUrl }))
       } else {
-        setFormData((prev) => ({ ...prev, image: data }))
+        setFormData((prev) => ({ ...prev, image: data.imageUrl }))
       }
 
       setUploading(false)
@@ -256,6 +257,8 @@ const ProductEditScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault()
 
+    console.log('ex', formData.excerptImage)
+
     const excerptObject = {
       image: formData.excerptImage,
       part: formData.excerptPart,
@@ -270,10 +273,9 @@ const ProductEditScreen = () => {
       discount: parseFloat(formData.discount) || 0,
       discountedPrice: parseFloat(formData.discountedPrice) || 0,
       countInStock: parseInt(formData.countInStock) || 0,
-      weight: formData.weight ? parseFloat(formData.weight) : undefined,
+      weight: formData.weight ? formData.weight : '',
       pages: formData.pages ? formData.pages : '',
-      //pages: formData.pages ? parseInt(formData.pages) : undefined,
-      year: formData.year ? parseInt(formData.year) : undefined,
+      year: formData.year ? formData.year : '',
       excerpt: excerptObject,
     }
 

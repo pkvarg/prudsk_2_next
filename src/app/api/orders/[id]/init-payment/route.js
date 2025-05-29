@@ -1,8 +1,7 @@
 // app/api/orders/[id]/init-payment/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
+import prisma from '@/db/db'
 import crypto from 'crypto'
-const prisma = new PrismaClient()
 
 // @desc Create init payment Id in db
 // @desc PUT /api/orders/:id/init-payment

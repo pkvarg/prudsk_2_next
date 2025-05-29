@@ -1,8 +1,6 @@
 // app/api/users/[email]/[token]/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
 
 // @desc Check registration token and activate user
 // @desc GET /api/users/:email/:token/

@@ -1,9 +1,7 @@
 // app/api/user/favorites/[productId]/route.js
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '../../../../../src/prisma/generated/prisma'
-import { auth } from '../../../../lib/auth'
-
-const prisma = new PrismaClient()
+import prisma from '@/db/db'
+import { auth } from '@/lib/auth'
 
 // Remove from favorites
 export async function DELETE(request, { params }) {
