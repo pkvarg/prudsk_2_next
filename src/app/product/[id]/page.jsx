@@ -94,8 +94,11 @@ const ProductPage = () => {
         body: JSON.stringify({ rating, comment }),
       })
 
+      console.log('rew res', response)
+
       if (!response.ok) {
-        throw new Error('Failed to submit review')
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to submit review')
       }
 
       setSuccessProductReview(true)

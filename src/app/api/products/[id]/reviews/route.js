@@ -1,19 +1,13 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
 import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc    Create new review
 // @route   POST /api/products/:id/reviews
 // @access  Private
 export async function POST(request, { params }) {
   try {
-    const session = await auth()
-
-    if (!session) {
-      return new Response('Unauthorized', { status: 401 })
-    }
-
-    // In Next.js 15, we need to await the id
     const { id } = await params
 
     // Parse request body
@@ -21,13 +15,22 @@ export async function POST(request, { params }) {
     const { rating, comment } = body
 
     // Validate input
-    if (!rating || !comment) {
+    if (typeof rating !== 'number' || rating < 0 || !comment) {
       return NextResponse.json({ error: 'Rating and comment are required' }, { status: 400 })
     }
 
-    // Get user information from session
-    const userId = session.user.id
-    const userName = session.user.name
+    const user = await isAdmin()
+    if (!user) {
+      return NextResponse.json({ error: 'User not authenticated' }, { status: 401 })
+    }
+
+    if (!user.id || !user.name) {
+      return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
+    }
+
+    const { name: userName, id: userId } = user
+
+    console.log('user in rew', userName, userId)
 
     // Check if product exists
     const product = await prisma.product.findUnique({
@@ -47,7 +50,10 @@ export async function POST(request, { params }) {
       },
     })
 
+    console.log('existing?', existingReview)
+
     if (existingReview) {
+      console.log('exist')
       return NextResponse.json({ error: 'Recenzia už existuje' }, { status: 400 })
     }
 
@@ -109,7 +115,7 @@ export async function DELETE(request, { params }) {
 
     // Parse URL parameters and request body
     const { searchParams } = new URL(request.url)
-    const comment = searchParams.get('comment')
+    let comment = searchParams.get('comment')
 
     if (!comment) {
       // If not in URL, try to get from request body

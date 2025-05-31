@@ -10,6 +10,7 @@ export default async function isAdmin() {
     select: {
       isAdmin: true,
       id: true,
+      name: true,
     },
   })
 

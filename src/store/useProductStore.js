@@ -6,6 +6,8 @@ import useUserStore from './userStore'
 const useProductStore = create((set, get) => ({
   // Product list state
   products: [],
+  allProducts: [],
+  reviews: [],
   loading: false,
   error: null,
   page: 1,
@@ -65,9 +67,34 @@ const useProductStore = create((set, get) => ({
 
       const { data } = await axios.get(`/api/products/all`)
 
+      console.log('p store, got all prods', data)
+
       set({
         loading: false,
-        products: data.products,
+        allProducts: data.products,
+      })
+    } catch (error) {
+      set({
+        loading: false,
+        error:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  },
+
+  getAllReviews: async () => {
+    try {
+      set({ loading: true })
+
+      const { data } = await axios.get(`/api/reviews`)
+
+      console.log('pstore, got all rews by prod', data)
+
+      set({
+        loading: false,
+        reviews: data,
       })
     } catch (error) {
       set({
