@@ -2,9 +2,10 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
 import niceInvoice from '@/utils/invoiceGenerator'
-import Email from '@/utils/email'
+//import Email from '@/utils/email'
 import { join } from 'path'
 import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc Create new Order
 // @desc POST /api/orders
@@ -344,28 +345,13 @@ export async function POST(request) {
 
 export async function GET(request) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
-
     // Find all orders with user information
-    const orders = await prisma.order.findMany({
-      include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
-        orderItems: true,
-        shippingAddress: true,
-      },
-      orderBy: {
-        createdAt: 'desc', // Most recent orders first
-      },
-    })
+    const orders = await prisma.order.findMany({})
 
     return NextResponse.json(orders)
   } catch (error) {

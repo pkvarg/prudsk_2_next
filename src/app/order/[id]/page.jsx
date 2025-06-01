@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import axios from 'axios'
+import useOrderStore from '@/store/orderStore'
 import useUserStore from '@/store/userStore'
 import useCartStore from '@/store/cartStore'
 import Message from '@/app/components/Message'
@@ -16,79 +17,34 @@ const OrderPage = () => {
 
   const userInfo = useUserStore((state) => state.userInfo)
   const clearCart = useCartStore((state) => state.clearCart)
+  const {
+    getOrderDetails,
+    orderDetails: order,
+    loadingDetails,
+    deliverOrder,
+    loadingDeliver,
+    paidOrder,
+    loadingPaid,
+    resendConfirmationEmailWithInvoice,
+    loadingConfirmationEmail,
+  } = useOrderStore()
 
-  const [order, setOrder] = useState(null)
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [loadingDeliver, setLoadingDeliver] = useState(false)
-  const [loadingPaid, setLoadingPaid] = useState(false)
-  const [loadingConfirmationEmail, setLoadingConfirmationEmail] = useState(false)
-  const [successDeliver, setSuccessDeliver] = useState(false)
-  const [successPaid, setSuccessPaid] = useState(false)
-  const [successCancell, setSuccessCancell] = useState(false)
+
   const [successConfirmationEmail, setSuccessConfirmationEmail] = useState(false)
 
   useEffect(() => {
-    if (!userInfo) {
-      router.push('/login')
-    }
-  }, [userInfo, router])
-
-  useEffect(() => {
-    const fetchOrderDetails = async () => {
-      try {
-        setLoading(true)
-        const config = {
-          headers: {
-            Authorization: `Bearer ${userInfo?.token}`,
-          },
-        }
-        const { data } = await axios.get(`/api/orders/${orderId}`, config)
-        setOrder(data)
-        setLoading(false)
-      } catch (err) {
-        setError(err.response?.data?.message || err.message)
-        setLoading(false)
-      }
-    }
-
-    if (userInfo && orderId) {
-      fetchOrderDetails()
-    }
-  }, [orderId, userInfo, successPaid, successDeliver, successCancell, successConfirmationEmail])
+    if (orderId) getOrderDetails(orderId)
+  }, [orderId])
 
   const deliverHandler = async () => {
-    try {
-      setLoadingDeliver(true)
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-      await axios.put(`/api/orders/${order.id}/deliver`, {}, config)
-      setSuccessDeliver(true)
-      setLoadingDeliver(false)
-    } catch (err) {
-      setError(err.response?.data?.message || err.message)
-      setLoadingDeliver(false)
-    }
+    await deliverOrder(orderId)
+    getOrderDetails(orderId)
   }
 
   const paidHandler = async () => {
-    try {
-      setLoadingPaid(true)
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-      await axios.put(`/api/orders/${order.id}/paid`, {}, config)
-      setSuccessPaid(true)
-      setLoadingPaid(false)
-    } catch (err) {
-      setError(err.response?.data?.message || err.message)
-      setLoadingPaid(false)
-    }
+    await paidOrder(orderId)
+    getOrderDetails(orderId)
   }
 
   const cancellHandler = async () => {
@@ -113,20 +69,8 @@ const OrderPage = () => {
   }
 
   const resendConfirmationEmail = async () => {
-    try {
-      setLoadingConfirmationEmail(true)
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-      await axios.post(`/api/orders/${order.id}/confirmation-email`, {}, config)
-      setSuccessConfirmationEmail(true)
-      setLoadingConfirmationEmail(false)
-    } catch (err) {
-      setError(err.response?.data?.message || err.message)
-      setLoadingConfirmationEmail(false)
-    }
+    await resendConfirmationEmailWithInvoice(orderId)
+    getOrderDetails(orderId)
   }
 
   const calculateItemsPrice = () => {
@@ -136,7 +80,7 @@ const OrderPage = () => {
 
   const isAbroad = order?.shippingAddress?.country !== 'Česká republika'
 
-  if (loading) {
+  if (loadingDetails || loadingDeliver || loadingPaid || loadingConfirmationEmail) {
     return <Loader />
   }
 

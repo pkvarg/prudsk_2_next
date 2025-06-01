@@ -1,6 +1,6 @@
 // app/api/orders/[id]/route.js
 import { NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 import prisma from '@/db/db'
 
 // @desc Get order by ID
@@ -8,12 +8,11 @@ import prisma from '@/db/db'
 // @access Private
 export async function GET(request, { params }) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user) {
       return new Response('Unauthorized', { status: 401 })
     }
-
     const { id } = await params
 
     // Fetch order by ID with related user information

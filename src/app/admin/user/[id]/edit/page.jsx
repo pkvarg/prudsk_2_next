@@ -67,7 +67,7 @@ const UserEditPage = () => {
     <main className="mx-8 mt-8">
       <Link
         href="/admin/userlist"
-        className="inline-block py-2 px-4 bg-gray-200 hover:bg-gray-300 rounded mb-3"
+        className="inline-block py-2 px-4 bg-gray-200 hover:bg-gray-300 rounded mb-3 !text-white"
       >
         Zpět
       </Link>

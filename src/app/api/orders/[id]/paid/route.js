@@ -1,6 +1,6 @@
 // app/api/orders/[id]/paid/route.js
 import { NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 import prisma from '@/db/db'
 
 // @desc Update order to Paid No Card (from Admin menu)
@@ -8,13 +8,13 @@ import prisma from '@/db/db'
 // @access Private (Admin only)
 export async function PUT(request, { params }) {
   try {
-    const session = await auth()
+    const { id } = await params
 
-    if (!session) {
+    const user = await isAdmin()
+
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
-
-    const { id } = await params
 
     // Find the order first
     const order = await prisma.order.findUnique({
@@ -26,25 +26,15 @@ export async function PUT(request, { params }) {
     }
 
     // Update the order payment status
-    const updatedOrder = await prisma.order.update({
+    await prisma.order.update({
       where: { id },
       data: {
         isPaid: true,
         paidAt: new Date(),
       },
-      include: {
-        orderItems: true,
-        shippingAddress: true,
-        user: {
-          select: {
-            name: true,
-            email: true,
-          },
-        },
-      },
     })
 
-    return NextResponse.json(updatedOrder)
+    return NextResponse.json({ message: 'Update order success' }, { status: 200 })
   } catch (error) {
     console.error('Error updating order payment status:', error)
     return NextResponse.json({ message: error.message }, { status: 500 })

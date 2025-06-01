@@ -296,7 +296,7 @@ const ProductEditScreen = () => {
       <div className="max-w-4xl mx-auto px-4 py-8">
         <Link
           href="/admin/productlist"
-          className="inline-flex items-center px-4 py-2 mb-6 text-white bg-[#2cb3e6] border border-[#2cb3e6] rounded-lg hover:bg-white hover:text-[#2cb3e6] transition-colors duration-200"
+          className="inline-flex items-center px-4 py-2 mb-6 !text-white bg-[#2cb3e6] border border-[#2cb3e6] rounded-lg  hover:text-[#2cb3e6] transition-colors duration-200"
         >
           ← Zpět
         </Link>
@@ -315,7 +315,7 @@ const ProductEditScreen = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           href="/admin/productlist"
-          className="inline-flex items-center px-4 py-2 mb-6 text-white bg-[#2cb3e6] border border-[#2cb3e6] rounded-lg hover:bg-white hover:text-[#2cb3e6] transition-colors duration-200"
+          className="inline-flex items-center px-4 py-2 mb-6 !text-white bg-[#2cb3e6] border border-[#2cb3e6] rounded-lg hover:text-[#2cb3e6] transition-colors duration-200"
         >
           ← Zpět
         </Link>

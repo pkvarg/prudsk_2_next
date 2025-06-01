@@ -144,7 +144,7 @@ const ProductPage = () => {
           e.preventDefault()
           router.back()
         }}
-        className="inline-block px-4 py-2 mb-6 text-blue-600 hover:text-blue-800"
+        className="inline-block px-4 py-2 mb-6 !text-white hover:text-blue-800"
       >
         Zpět
       </Link>

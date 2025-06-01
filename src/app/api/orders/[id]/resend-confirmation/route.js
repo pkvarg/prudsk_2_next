@@ -5,35 +5,26 @@
 // @access Private/Admin
 
 import { NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 import prisma from '@/db/db'
 import niceInvoice from '@/utils/invoiceGenerator'
 import path from 'path'
+import { ClockHistory } from 'react-bootstrap-icons'
 
 export async function PUT(request, { params }) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
-
     const { id } = await params
+
+    console.log('here in resedn', id)
 
     // Find the order with all related data
     const order = await prisma.order.findUnique({
       where: { id },
-      include: {
-        orderItems: true,
-        shippingAddress: true,
-        user: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-          },
-        },
-      },
     })
 
     if (!order) {
@@ -180,6 +171,10 @@ export async function PUT(request, { params }) {
     const cloneDate = new Date(date)
     cloneDate.setHours(cloneDate.getHours() + 1) // Increase the hour by 1
     const formattedDate = cloneDate.toISOString().replace(/:/g, '-').substring(0, 19) // Format as YYYY-MM-DDTHH-MM-SS
+
+    return console.log('inv', invoiceDetails)
+
+    // TODO INVOICE, EMAIL
 
     // Create invoice path
     const invoiceDir = path.join(projectRoot, 'invoices')

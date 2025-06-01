@@ -1,34 +1,26 @@
 // app/api/orders/[id]/deliver/route.js
 import { NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 import prisma from '@/db/db'
-import Email from '@/utils/email'
 
 // @desc Update order to Delivered
 // @desc PUT /api/orders/:id/deliver
 // @access Private/Admin
 export async function PUT(request, { params }) {
   try {
-    const session = await auth()
+    const { id } = await params
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const { id } = await params
+    console.log('id', id)
 
     // Find the order first
     const order = await prisma.order.findUnique({
-      where: { id },
-      include: {
-        orderItems: true,
-        shippingAddress: true,
-        user: {
-          select: {
-            name: true,
-            email: true,
-          },
-        },
+      where: {
+        id: id,
       },
     })
 
@@ -37,45 +29,37 @@ export async function PUT(request, { params }) {
     }
 
     // Update the order to delivered status
-    const updatedOrder = await prisma.order.update({
+    await prisma.order.update({
       where: { id },
       data: {
         isDelivered: true,
         deliveredAt: new Date(),
       },
-      include: {
-        orderItems: true,
-        shippingAddress: true,
-        user: {
-          select: {
-            name: true,
-            email: true,
-          },
-        },
-      },
     })
 
-    // Prepare order data for email
-    const emailData = {
-      email: updatedOrder.email || updatedOrder.user?.email,
-      name: updatedOrder.name || updatedOrder.user?.name,
-      orderNumber: updatedOrder.orderNumber,
-      orderItems: updatedOrder.orderItems,
-      addressinfo: updatedOrder.shippingAddress
-        ? `${updatedOrder.shippingAddress.address}, ${updatedOrder.shippingAddress.city}, ${updatedOrder.shippingAddress.postalCode}, ${updatedOrder.shippingAddress.country}`
-        : '',
-      totalPrice: updatedOrder.totalPrice,
-    }
+    // TODO EMAIL
 
-    // Send delivery notification email
-    try {
-      await new Email(emailData, '', '').sendDeliveredNotificationEmail()
-    } catch (error) {
-      console.error('Failed to send delivery notification email:', error)
-      // Continue even if email fails
-    }
+    // // Prepare order data for email
+    // const emailData = {
+    //   email: updatedOrder.email || updatedOrder.user?.email,
+    //   name: updatedOrder.name || updatedOrder.user?.name,
+    //   orderNumber: updatedOrder.orderNumber,
+    //   orderItems: updatedOrder.orderItems,
+    //   addressinfo: updatedOrder.shippingAddress
+    //     ? `${updatedOrder.shippingAddress.address}, ${updatedOrder.shippingAddress.city}, ${updatedOrder.shippingAddress.postalCode}, ${updatedOrder.shippingAddress.country}`
+    //     : '',
+    //   totalPrice: updatedOrder.totalPrice,
+    // }
 
-    return NextResponse.json(updatedOrder)
+    // // Send delivery notification email
+    // try {
+    //   await new Email(emailData, '', '').sendDeliveredNotificationEmail()
+    // } catch (error) {
+    //   console.error('Failed to send delivery notification email:', error)
+    //   // Continue even if email fails
+    // }
+
+    return NextResponse.json({ message: 'Update order success' }, { status: 200 })
   } catch (error) {
     console.error('Error updating order to delivered status:', error)
     return NextResponse.json({ message: error.message }, { status: 500 })
