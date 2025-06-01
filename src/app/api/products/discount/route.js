@@ -1,12 +1,21 @@
 import prisma from '@/db/db'
+import isAdmin from '@/lib/isAdmin'
+import { NextResponse } from 'next/server'
 
 // @desc POST /api/products/discount
 // @access Admin
 
-export async function POST(request) {
+export async function POST(request, { params }) {
+  const user = await isAdmin()
+
+  if (!user.isAdmin) {
+    return new Response('Unauthorized', { status: 401 })
+  }
+
   try {
     // Parse the request body
     const body = await request.json()
+
     const discount = body.discount
 
     if (discount === undefined || discount === null) {
@@ -27,7 +36,7 @@ export async function POST(request) {
         await prisma.product.update({
           where: { id: product.id },
           data: {
-            discount: discount,
+            discount: Number(discount),
             discountedPrice: roundedPriceToFiveCents,
           },
         })

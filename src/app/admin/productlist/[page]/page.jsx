@@ -48,7 +48,7 @@ const ProductListPageWithPagination = () => {
   }
 
   const linkToCreateDiscount = () => {
-    router.push('/create-discount')
+    router.push('/admin/discount')
   }
 
   const linkToReviews = () => {

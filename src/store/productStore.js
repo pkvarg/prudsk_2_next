@@ -24,6 +24,9 @@ const useProductStore = create((set, get) => ({
   errorCreate: null,
   successCreate: false,
   createdProduct: null,
+  successDiscount: false,
+  errorDiscount: '',
+  loadingDiscount: false,
 
   // Product detail state
   //product: { reviews: [] },
@@ -305,6 +308,35 @@ const useProductStore = create((set, get) => ({
       set({
         loadingUpdate: false,
         errorUpdate:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  },
+
+  createDiscount: async (discountData) => {
+    try {
+      set({
+        loadingDiscount: true,
+        //errorCreate: null,
+      })
+
+      // Extract discount from the parameter
+      const { discount } = discountData
+
+      const { data } = await axios.post(`/api/products/discount`, { discount })
+
+      console.log('pstore create discount', data)
+
+      set({
+        loadingDiscount: false,
+        successDiscount: true,
+      })
+    } catch (error) {
+      set({
+        loadingCreate: false,
+        errorDiscount:
           error.response && error.response.data.message
             ? error.response.data.message
             : error.message,
