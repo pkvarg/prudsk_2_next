@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import useProductStore from '@/store/useProductStore'
+import useProductStore from '@/store/productStore'
 
 const Reviews = () => {
   const params = useParams()
@@ -12,7 +12,8 @@ const Reviews = () => {
   // Zustand stores
   // const { products, page, pages, getAllProducts, acknowledgeProductReview, deleteProductReview } =
   //   useProductStore()
-  const { getAllProducts, allProducts, getAllReviews, reviews } = useProductStore()
+  const { getAllProducts, acknowledgeProductReview, getAllReviews, reviews, deleteProductReview } =
+    useProductStore()
 
   useEffect(() => {
     getAllProducts()
@@ -20,18 +21,16 @@ const Reviews = () => {
   }, [])
 
   const deleteHandler = async (product, comment) => {
-    if (window.confirm('Odstrániť recenziu? Ste si istý?')) {
+    if (window.confirm('Odstránit recenzi?')) {
       await deleteProductReview(product, comment)
-      router.push('/admin/reviews')
-      router.refresh()
     }
+    getAllReviews()
   }
 
   const acknowledgeHandler = async (productId, comment) => {
-    await acknowledgeProductReview(productId, comment)
+    acknowledgeProductReview(productId, comment)
     alert('Recenzia schválená')
-    router.push('/admin/reviews')
-    router.refresh()
+    getAllReviews()
   }
 
   return (

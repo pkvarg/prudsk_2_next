@@ -6,16 +6,10 @@ import prisma from '@/db/db'
 // @access  Private
 export async function PUT(request, { params }) {
   try {
-    // In Next.js 15, we need to await the id
     const { id } = await params
 
-    // Parse request body
     const body = await request.json()
     const { comment } = body
-
-    if (!comment) {
-      return NextResponse.json({ error: 'Comment is required' }, { status: 400 })
-    }
 
     // Check if product exists
     const product = await prisma.product.findUnique({
@@ -27,7 +21,6 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     }
 
-    // Find the review by comment text
     const review = await prisma.review.findFirst({
       where: {
         productId: id,
@@ -45,13 +38,7 @@ export async function PUT(request, { params }) {
       data: { isAcknowledged: true },
     })
 
-    // Get the updated product with all its reviews
-    const updatedProduct = await prisma.product.findUnique({
-      where: { id },
-      include: { reviews: true },
-    })
-
-    return NextResponse.json(updatedProduct)
+    return NextResponse.json({ message: 'Review acknowledged' }, { status: 200 })
   } catch (error) {
     console.error('Error acknowledging review:', error)
 

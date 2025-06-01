@@ -1,7 +1,37 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
-import { auth } from '@/lib/auth'
 import isAdmin from '@/lib/isAdmin'
+
+// @desc    Get review
+// @route   GET /api/products/:id/reviews
+// @access  Public
+export async function GET(request, { params }) {
+  try {
+    const { id } = await params
+
+    console.log('id in GET', id)
+
+    // Find the review by comment
+    const reviews = await prisma.review.findMany({
+      where: {
+        productId: id,
+      },
+    })
+
+    if (!reviews) {
+      return NextResponse.json({ error: 'Reviews not found' }, { status: 404 })
+    }
+
+    return NextResponse.json(reviews)
+  } catch (error) {
+    console.error('Error deleting review:', error)
+
+    return NextResponse.json(
+      { error: 'Failed to delete review', details: error.message },
+      { status: 500 },
+    )
+  }
+}
 
 // @desc    Create new review
 // @route   POST /api/products/:id/reviews
@@ -109,25 +139,17 @@ export async function POST(request, { params }) {
 // @route   DELETE /api/products/:id/reviews
 // @access  Private
 export async function DELETE(request, { params }) {
+  const user = await isAdmin()
+
+  if (!user.isAdmin) {
+    return new Response('Unauthorized', { status: 401 })
+  }
+
   try {
-    // In Next.js 15, we need to await the id
     const { id } = await params
 
-    // Parse URL parameters and request body
-    const { searchParams } = new URL(request.url)
-    let comment = searchParams.get('comment')
-
-    if (!comment) {
-      // If not in URL, try to get from request body
-      try {
-        const body = await request.json()
-        if (body.comment) {
-          comment = body.comment
-        }
-      } catch (e) {
-        // If we can't parse JSON, continue with null comment
-      }
-    }
+    const body = await request.json() // Parse JSON object
+    const { comment } = body // Extract comment from object
 
     if (!comment) {
       return NextResponse.json(
@@ -181,13 +203,7 @@ export async function DELETE(request, { params }) {
       },
     })
 
-    // Get the updated product with all remaining reviews
-    const updatedProduct = await prisma.product.findUnique({
-      where: { id },
-      include: { reviews: true },
-    })
-
-    return NextResponse.json(updatedProduct)
+    return NextResponse.json({ message: 'Review Deleted Successfully' }, { status: 200 })
   } catch (error) {
     console.error('Error deleting review:', error)
 

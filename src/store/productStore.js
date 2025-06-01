@@ -8,6 +8,7 @@ const useProductStore = create((set, get) => ({
   products: [],
   allProducts: [],
   reviews: [],
+  singleProdReviews: [],
   loading: false,
   error: null,
   page: 1,
@@ -67,8 +68,6 @@ const useProductStore = create((set, get) => ({
 
       const { data } = await axios.get(`/api/products/all`)
 
-      console.log('p store, got all prods', data)
-
       set({
         loading: false,
         allProducts: data.products,
@@ -90,11 +89,82 @@ const useProductStore = create((set, get) => ({
 
       const { data } = await axios.get(`/api/reviews`)
 
-      console.log('pstore, got all rews by prod', data)
-
       set({
         loading: false,
         reviews: data,
+      })
+    } catch (error) {
+      set({
+        loading: false,
+        error:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  },
+
+  acknowledgeProductReview: async (id, comment) => {
+    try {
+      set({ loading: true })
+
+      const { data } = await axios.put(`/api/products/${id}/reviews/acknowledge`, { comment })
+
+      console.log('pstore, ack rew by prod', data)
+
+      set({
+        loading: false,
+        //reviews: data,
+      })
+    } catch (error) {
+      set({
+        loading: false,
+        error:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  },
+
+  deleteProductReview: async (id, comment) => {
+    try {
+      set({ loading: true })
+
+      const { data } = await axios.delete(`/api/products/${id}/reviews`, {
+        data: { comment },
+      })
+
+      console.log('pstore, DELETE rew by prod', data)
+
+      set({
+        loading: false,
+        //reviews: data,
+      })
+    } catch (error) {
+      set({
+        loading: false,
+        error:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  },
+
+  getSingleProdutReviews: async (id) => {
+    try {
+      set({ loading: true })
+
+      console.log('id in p str', id)
+
+      const { data } = await axios.get(`/api/products/${id}/reviews`)
+
+      console.log('pstore, single prod rew', data)
+
+      set({
+        loading: false,
+        singleProdReviews: data,
       })
     } catch (error) {
       set({
@@ -184,6 +254,8 @@ const useProductStore = create((set, get) => ({
       })
 
       const { data } = await axios.get(`/api/products/${id}`)
+
+      console.log('pstore get p det', data)
 
       set({
         loadingDetail: false,

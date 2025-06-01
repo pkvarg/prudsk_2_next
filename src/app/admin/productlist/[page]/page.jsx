@@ -7,7 +7,7 @@ import { Plus, Pencil, Trash } from 'react-bootstrap-icons'
 import Message from '@/app/components/Message'
 import Loader from '@/app/components/Loader'
 import Paginate from '@/app/components/Paginate'
-import useProductStore from '@/store/useProductStore'
+import useProductStore from '@/store/productStore'
 import useUserStore from '@/store/userStore'
 
 const ProductListPageWithPagination = () => {

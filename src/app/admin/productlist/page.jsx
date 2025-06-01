@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import useProductStore from '@//store/useProductStore'
+import useProductStore from '@//store/productStore'
 import useUserStore from '@/store/userStore'
 import Loader from '@/app/components/Loader'
 

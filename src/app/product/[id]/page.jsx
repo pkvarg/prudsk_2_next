@@ -6,6 +6,7 @@ import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import useUserStore from '@/store/userStore'
 import useCartStore from '@/store/cartStore'
+import useProductStore from '@/store/productStore'
 import Message from '@/app/components/Message'
 import Loader from '@/app/components/Loader'
 import Meta from '@/app/components/Meta'
@@ -16,9 +17,9 @@ const ProductPage = () => {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
   const [message, setMessage] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [product, setProduct] = useState([])
+  //const [product, setProduct] = useState([])
   const [successProductReview, setSuccessProductReview] = useState(false)
   const [errorProductReview, setErrorProductReview] = useState(null)
 
@@ -26,10 +27,13 @@ const ProductPage = () => {
   const router = useRouter()
   const id = params.id
 
-  console.log('id', id)
+  console.log('id in prod', id)
 
   const userInfo = useUserStore((state) => state.userInfo)
   const addToCart = useCartStore((state) => state.addToCart)
+
+  const { getProductDetails, product, getSingleProdutReviews, singleProdReviews } =
+    useProductStore()
 
   useLayoutEffect(() => {
     if (successProductReview) {
@@ -42,28 +46,11 @@ const ProductPage = () => {
   }, [successProductReview])
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true)
-        const config = {
-          headers: {
-            Authorization: `Bearer ${userInfo?.token}`,
-          },
-        }
-
-        const response = await fetch(`/api/products/${id}`, config)
-        const data = await response.json()
-
-        setProduct(data || [])
-        setLoading(false)
-      } catch (err) {
-        setError(err.message)
-        setLoading(false)
-      }
+    if (id) {
+      getProductDetails(id)
+      getSingleProdutReviews(id)
     }
-
-    fetchProducts()
-  }, [userInfo])
+  }, [id])
 
   const addToCartHandler = () => {
     if (product) {
@@ -168,7 +155,7 @@ const ProductPage = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          {product && (
+          {product && Object.keys(product).length > 0 && (
             <div key={product.id}>
               <Meta title={product.name} />
               <div className="flex flex-wrap -mx-4">
@@ -435,52 +422,49 @@ const ProductPage = () => {
           </div>
 
           <div className="flex flex-wrap mx-4 mt-8">
-            {product && (
-              <div className="w-full md:w-1/2 px-4" key={product.id}>
-                <h2 className="text-2xl font-bold mb-4">Recenze</h2>
-                {product.reviews?.length === 0 && <Message>Žádné recenze</Message>}
+            <div className="w-full md:w-1/2 px-4" key={product.id}>
+              <h2 className="text-2xl font-bold mb-4">Recenze</h2>
+              {singleProdReviews.length === 0 && <Message>Žádné recenze</Message>}
+              <div className="space-y-4">
+                {singleProdReviews.map(
+                  (review) =>
+                    review.isAcknowledged === true && (
+                      <div key={review.id} className="bg-white p-4 rounded-lg shadow">
+                        <strong>{review.name}</strong>
+                        <p>{review.comment}</p>
+                      </div>
+                    ),
+                )}
 
-                <div className="space-y-4">
-                  {product.reviews?.map(
-                    (review) =>
-                      review.isAcknowledged === true && (
-                        <div key={review.id} className="bg-white p-4 rounded-lg shadow">
-                          <strong>{review.name}</strong>
-                          <p>{review.comment}</p>
-                        </div>
-                      ),
+                <div className="bg-white p-4 rounded-lg shadow">
+                  <h2 className="text-2xl font-bold mb-4">Napište recenzi</h2>
+                  {errorProductReview && <Message variant="danger">{errorProductReview}</Message>}
+
+                  {userInfo ? (
+                    <form onSubmit={submitHandler}>
+                      <div className="mb-4">
+                        <textarea
+                          className="w-full border rounded px-3 py-2"
+                          rows="3"
+                          value={comment}
+                          onChange={(e) => commentHandler(e.target.value)}
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                      >
+                        Odeslat
+                      </button>
+                    </form>
+                  ) : (
+                    <Message>
+                      Prosím <Link href="/login">Přihlašte se</Link> pro napsání recenze
+                    </Message>
                   )}
-
-                  <div className="bg-white p-4 rounded-lg shadow">
-                    <h2 className="text-2xl font-bold mb-4">Napište recenzi</h2>
-                    {errorProductReview && <Message variant="danger">{errorProductReview}</Message>}
-
-                    {userInfo ? (
-                      <form onSubmit={submitHandler}>
-                        <div className="mb-4">
-                          <textarea
-                            className="w-full border rounded px-3 py-2"
-                            rows="3"
-                            value={comment}
-                            onChange={(e) => commentHandler(e.target.value)}
-                          />
-                        </div>
-                        <button
-                          type="submit"
-                          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                        >
-                          Odeslat
-                        </button>
-                      </form>
-                    ) : (
-                      <Message>
-                        Prosím <Link href="/login">Přihlašte se</Link> pro napsání recenze
-                      </Message>
-                    )}
-                  </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </>
       )}
