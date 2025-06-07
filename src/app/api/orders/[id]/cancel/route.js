@@ -1,20 +1,20 @@
 // app/api/orders/[id]/cancel/route.js
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
-// @desc Update order to Cancelled
+// @desc Update order to Canceled
 // @desc PUT /api/orders/:id/cancel
 // @access Private/Admin
 export async function PUT(request, { params }) {
   try {
-    const session = await auth()
+    const { id } = await params
 
-    if (!session) {
+    const user = await isAdmin()
+
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
-
-    const { id } = await params
 
     // Find the order first
     const order = await prisma.order.findUnique({
@@ -30,17 +30,7 @@ export async function PUT(request, { params }) {
       where: { id },
       data: {
         isCancelled: true,
-        cancelledAt: new Date(), // Optional: add this field to your schema if you want to track when it was cancelled
-      },
-      include: {
-        orderItems: true,
-        shippingAddress: true,
-        user: {
-          select: {
-            name: true,
-            email: true,
-          },
-        },
+        updatedAt: new Date(),
       },
     })
 

@@ -29,7 +29,7 @@ export async function PUT(request, { params }) {
     }
 
     // Update the order to delivered status
-    await prisma.order.update({
+    const updatedOrder = await prisma.order.update({
       where: { id },
       data: {
         isDelivered: true,
@@ -37,27 +37,18 @@ export async function PUT(request, { params }) {
       },
     })
 
-    // TODO EMAIL
+    // SEND HONO EMAIL
+    //const apiUrl = 'http://localhost:3013/api/proud2next/order-admin-delivered'
 
-    // // Prepare order data for email
-    // const emailData = {
-    //   email: updatedOrder.email || updatedOrder.user?.email,
-    //   name: updatedOrder.name || updatedOrder.user?.name,
-    //   orderNumber: updatedOrder.orderNumber,
-    //   orderItems: updatedOrder.orderItems,
-    //   addressinfo: updatedOrder.shippingAddress
-    //     ? `${updatedOrder.shippingAddress.address}, ${updatedOrder.shippingAddress.city}, ${updatedOrder.shippingAddress.postalCode}, ${updatedOrder.shippingAddress.country}`
-    //     : '',
-    //   totalPrice: updatedOrder.totalPrice,
-    // }
+    const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/order-admin-delivered'
 
-    // // Send delivery notification email
-    // try {
-    //   await new Email(emailData, '', '').sendDeliveredNotificationEmail()
-    // } catch (error) {
-    //   console.error('Failed to send delivery notification email:', error)
-    //   // Continue even if email fails
-    // }
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      body: JSON.stringify(updatedOrder),
+    })
+
+    const data = await response.json()
+    console.log('data admin order delivered', data.success)
 
     return NextResponse.json({ message: 'Update order success' }, { status: 200 })
   } catch (error) {

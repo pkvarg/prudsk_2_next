@@ -40,10 +40,10 @@ const useOrderStore = create((set, get) => ({
   errorConfirmationEmail: null,
   successConfirmationEmail: false,
 
-  // State for order cancellation
-  loadingCancell: false,
-  errorCancell: null,
-  successCancell: false,
+  // State for order cancelation
+  loadingCancel: false,
+  errorCancel: null,
+  successCancel: false,
 
   // State for user's orders
   myOrders: [],
@@ -105,11 +105,11 @@ const useOrderStore = create((set, get) => ({
       successConfirmationEmail: false,
     }),
 
-  resetCancell: () =>
+  resetCancel: () =>
     set({
-      loadingCancell: false,
-      errorCancell: null,
-      successCancell: false,
+      loadingCancel: false,
+      errorCancel: null,
+      successCancel: false,
     }),
 
   resetDelete: () =>
@@ -209,7 +209,7 @@ const useOrderStore = create((set, get) => ({
     }
   },
 
-  // Deliver Order OK
+  // Deliver Order OK w email notif hono
   deliverOrder: async (id) => {
     try {
       set({ loadingDeliver: true, errorDeliver: null })
@@ -231,7 +231,7 @@ const useOrderStore = create((set, get) => ({
     }
   },
 
-  // Mark Order as Paid OK
+  // Mark Order as Paid OK w email notif hono
   paidOrder: async (id) => {
     try {
       set({ loadingPaid: true, errorPaid: null })
@@ -272,23 +272,20 @@ const useOrderStore = create((set, get) => ({
   },
 
   // Cancel Order
-  cancellOrder: async (order) => {
+  cancelOrder: async (id) => {
     try {
-      set({ loadingCancell: true, errorCancell: null })
+      set({ loadingCancel: true, errorCancel: null })
 
-      const config = get().getAuthConfig()
-      const { data } = await axios.put(`/api/orders/${order._id}/cancell`, {}, config)
+      await axios.put(`/api/orders/${id}/cancel`)
 
       set({
-        loadingCancell: false,
-        successCancell: true,
+        loadingCancel: false,
+        successCancel: true,
       })
-
-      return data
     } catch (error) {
       set({
-        loadingCancell: false,
-        errorCancell: error.response?.data?.message || error.message,
+        loadingCancel: false,
+        errorCancel: error.response?.data?.message || error.message,
       })
       throw error
     }

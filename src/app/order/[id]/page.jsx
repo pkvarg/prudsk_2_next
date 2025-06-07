@@ -24,6 +24,8 @@ const OrderPage = () => {
     deliverOrder,
     loadingDeliver,
     paidOrder,
+    cancelOrder,
+    loadingCancel,
     loadingPaid,
     resendConfirmationEmailWithInvoice,
     loadingConfirmationEmail,
@@ -48,17 +50,8 @@ const OrderPage = () => {
   }
 
   const cancellHandler = async () => {
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-      await axios.put(`/api/orders/${order.id}/cancel`, {}, config)
-      setSuccessCancell(true)
-    } catch (err) {
-      setError(err.response?.data?.message || err.message)
-    }
+    await cancelOrder(orderId)
+    getOrderDetails(orderId)
   }
 
   const newOrderHandler = () => {
@@ -257,7 +250,7 @@ const OrderPage = () => {
                       onClick={cancellHandler}
                       className="w-full py-2 px-4 rounded text-white bg-red-600 hover:bg-red-700"
                     >
-                      Zrušit objednávku
+                      {loadingCancel ? 'Loading...' : 'Zrušit objednávku'}
                     </button>
                   )}
                 </div>

@@ -26,13 +26,30 @@ export async function PUT(request, { params }) {
     }
 
     // Update the order payment status
-    await prisma.order.update({
+    const updatedOrder = await prisma.order.update({
       where: { id },
       data: {
         isPaid: true,
         paidAt: new Date(),
       },
     })
+
+    // SEND HONO EMAIL
+    // const apiUrl = 'http://localhost:3013/api/proud2next/order-admin-paid'
+
+    const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/order-admin-paid'
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      body: JSON.stringify(updatedOrder),
+    })
+
+    const data = await response.json()
+    console.log('data admin order paid', data.success)
+
+    if (!data.success) {
+      throw new Error('Nepodarilo sa odoslať admin order paid email')
+    }
 
     return NextResponse.json({ message: 'Update order success' }, { status: 200 })
   } catch (error) {
