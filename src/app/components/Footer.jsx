@@ -114,8 +114,8 @@ const Footer = () => {
               <div>
                 <div className="flex flex-col items-start md:items-start mx-3 md:mx-0 w-[90vw] md:w-auto">
                   <h2 className="text-[#071e46] font-bold hidden md:block">Kontakt</h2>
-                  <a href="mailto:admin@prud.sk" className="no-underline">
-                    <p className="text-[#9b7d57] text-[17px]">proud@proudnihy.cz</p>
+                  <a href="mailto:eshop@proudzivota.cz" className="no-underline">
+                    <p className="text-[#9b7d57] text-[17px]">eshop@proudzivota.cz</p>
                   </a>
                   <a href="tel:+421904060262" className="no-underline">
                     <p className="text-[#9b7d57] text-[17px]">+420 724 526 926</p>
