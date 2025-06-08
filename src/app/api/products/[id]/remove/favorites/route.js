@@ -7,7 +7,8 @@ import prisma from '@/db/db'
 
 export async function PUT(request, { params }) {
   try {
-    // In Next.js 15, we need to await the id
+    const user = await isAdmin()
+
     const { id } = await params
 
     // Parse request body
@@ -16,6 +17,10 @@ export async function PUT(request, { params }) {
 
     if (!userId) {
       return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+    }
+
+    if (user.id !== userId) {
+      return new Response('Unauthorized', { status: 401 })
     }
 
     // Check if product exists

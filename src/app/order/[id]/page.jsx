@@ -62,10 +62,14 @@ const OrderPage = () => {
   }
 
   const resendConfirmationEmail = async () => {
-    await resendConfirmationEmailWithInvoice(orderId)
+    await resendConfirmationEmailWithInvoice(orderId, false)
     getOrderDetails(orderId)
   }
 
+  const resendConfirmationEmailAdminOnly = async () => {
+    await resendConfirmationEmailWithInvoice(orderId, true)
+    getOrderDetails(orderId)
+  }
   const calculateItemsPrice = () => {
     if (!order?.orderItems) return 0
     return order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
@@ -276,6 +280,24 @@ const OrderPage = () => {
               {successConfirmationEmail && (
                 <Message variant="success" className="mt-2">
                   Potvrzovací email s fakturou odeslán
+                </Message>
+              )}
+
+              <button
+                onClick={resendConfirmationEmailAdminOnly}
+                className={`w-full py-2 px-4 rounded text-white mt-2 ${
+                  loadingConfirmationEmail ? 'bg-gray-500' : 'bg-red-600 hover:bg-red-700'
+                }`}
+                disabled={loadingConfirmationEmail}
+              >
+                {loadingConfirmationEmail
+                  ? 'Loading...'
+                  : 'Poslat potvrzovací email s fakturou jenom Adminovi'}
+              </button>
+
+              {successConfirmationEmail && (
+                <Message variant="success" className="mt-2">
+                  Potvrzovací email s fakturou odeslán jenom Adminovi
                 </Message>
               )}
             </div>

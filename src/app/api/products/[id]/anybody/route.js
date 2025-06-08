@@ -6,7 +6,12 @@ import prisma from '@/db/db'
 // @access  Private/Admin
 export async function PUT(request, { params }) {
   try {
-    // In Next.js 15, we need to await the id
+    const user = await isAdmin()
+
+    if (!user.isAdmin) {
+      return new Response('Unauthorized', { status: 401 })
+    }
+
     const { id } = await params
 
     // Parse request body

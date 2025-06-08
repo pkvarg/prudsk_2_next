@@ -1,14 +1,15 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc Fetch single audio
 // @desc GET /api/audio/:id
 // @access Public
 export async function GET(request, { params }) {
   try {
-    // In Next.js 15, we need to await the id
     const { id } = await params
+
+    console.log('id', id)
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -19,6 +20,8 @@ export async function GET(request, { params }) {
     const audio = await prisma.audio.findUnique({
       where: { id },
     })
+
+    console.log('got audio>', audio)
 
     if (audio) {
       return NextResponse.json(audio)
@@ -40,7 +43,12 @@ export async function GET(request, { params }) {
 // @access Private/Admin
 export async function DELETE(request, { params }) {
   try {
-    // In Next.js 15, we need to await the id
+    const user = await isAdmin()
+
+    if (!user.isAdmin) {
+      return new Response('Unauthorized', { status: 401 })
+    }
+
     const { id } = await params
 
     // Validate the ID format (MongoDB ObjectID)
@@ -78,17 +86,14 @@ export async function DELETE(request, { params }) {
 // @access  Private/Admin
 export async function PUT(request, { params }) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    // Get user ID from session
-    const userId = session.user.id
-
-    // In Next.js 15, we need to await the id
     const { id } = await params
+    const userId = user.id
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {

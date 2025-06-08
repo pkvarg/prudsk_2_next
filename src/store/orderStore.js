@@ -252,11 +252,19 @@ const useOrderStore = create((set, get) => ({
   },
 
   // Resend Confirmation Email
-  resendConfirmationEmailWithInvoice: async (id) => {
+  resendConfirmationEmailWithInvoice: async (id, adminOnly) => {
     try {
       set({ loadingConfirmationEmail: true, errorConfirmationEmail: null })
 
-      await axios.put(`/api/orders/${id}/resend-confirmation`)
+      if (adminOnly) {
+        await axios.put(`/api/orders/${id}/resend-confirmation`, {
+          adminOnly: true,
+        })
+      } else {
+        await axios.put(`/api/orders/${id}/resend-confirmation`, {
+          adminOnly: false,
+        })
+      }
 
       set({
         loadingConfirmationEmail: false,

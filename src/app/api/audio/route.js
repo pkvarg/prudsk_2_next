@@ -1,46 +1,55 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc Fetch all audios
 // @desc GET /api/audio
 // @access Public
 export async function GET(request) {
   try {
+    const audios = await prisma.audio.findMany({})
+
+    return NextResponse.json(
+      {
+        audios,
+      },
+      { status: 200 },
+    )
+
     // Get the URL object from the request
-    const { searchParams } = new URL(request.url)
+    // const { searchParams } = new URL(request.url)
 
-    // Extract query parameters
-    const pageSize = 1000 // Fixed page size as in original
-    const page = parseInt(searchParams.get('pageNumber') || '1')
-    const keyword = searchParams.get('keyword')
+    // // Extract query parameters
+    // const pageSize = 1000 // Fixed page size as in original
+    // const page = parseInt(searchParams.get('pageNumber') || '1')
+    // const keyword = searchParams.get('keyword')
 
-    // Set up the where clause for search functionality
-    let where = {}
-    if (keyword) {
-      where = {
-        OR: [{ audioTitle: { contains: keyword, mode: 'insensitive' } }],
-      }
-    }
+    // // Set up the where clause for search functionality
+    // let where = {}
+    // if (keyword) {
+    //   where = {
+    //     OR: [{ audioTitle: { contains: keyword, mode: 'insensitive' } }],
+    //   }
+    // }
 
-    // Count total documents for pagination
-    const count = await prisma.audio.count({
-      where,
-    })
+    // // Count total documents for pagination
+    // const count = await prisma.audio.count({
+    //   where,
+    // })
 
-    // Fetch audios with pagination and filtering
-    const audios = await prisma.audio.findMany({
-      where,
-      take: pageSize,
-      skip: pageSize * (page - 1),
-    })
+    // // Fetch audios with pagination and filtering
+    // const audios = await prisma.audio.findMany({
+    //   where,
+    //   take: pageSize,
+    //   skip: pageSize * (page - 1),
+    // })
 
-    // Return successful response with pagination info
-    return NextResponse.json({
-      audios,
-      page,
-      pages: Math.ceil(count / pageSize),
-    })
+    // // Return successful response with pagination info
+    // return NextResponse.json({
+    //   audios,
+    //   page,
+    //   pages: Math.ceil(count / pageSize),
+    // })
   } catch (error) {
     console.error('Error fetching audios:', error)
 
@@ -56,14 +65,15 @@ export async function GET(request) {
 // @access Private/Admin
 export async function POST(request) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
-
     // Assuming you store the MongoDB user ID in the session
-    const userId = session.user.id
+    const userId = user.id
+
+    console.log('userId', userId)
 
     // Create the audio with default values
     const createdAudio = await prisma.audio.create({
@@ -75,6 +85,8 @@ export async function POST(request) {
         subcategory: '',
       },
     })
+
+    console.log('created audio', createdAudio)
 
     return NextResponse.json(createdAudio, { status: 201 })
   } catch (error) {

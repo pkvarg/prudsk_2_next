@@ -7,7 +7,6 @@ import prisma from '@/db/db'
 // @access Public
 export async function GET(request, { params }) {
   try {
-    // In Next.js 15, we need to await the id
     const { id } = await params
 
     // Validate the ID format (MongoDB ObjectID)
@@ -40,7 +39,11 @@ export async function GET(request, { params }) {
 // @access Private/Admin
 export async function DELETE(request, { params }) {
   try {
-    // In Next.js 15, we need to await the id
+    const user = await isAdmin()
+
+    if (!user.isAdmin) {
+      return new Response('Unauthorized', { status: 401 })
+    }
     const { id } = await params
 
     // Validate the ID format (MongoDB ObjectID)
@@ -78,16 +81,13 @@ export async function DELETE(request, { params }) {
 // @access  Private/Admin
 export async function PUT(request, { params }) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
+    const userId = user.id
 
-    // Get user ID from session
-    const userId = session.user.id
-
-    // In Next.js 15, we need to await the id
     const { id } = await params
 
     // Validate the ID format (MongoDB ObjectID)

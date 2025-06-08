@@ -142,7 +142,7 @@ const Header = () => {
                       Objednávky
                     </Link>
                     <Link
-                      href="/admin/audio"
+                      href="/admin/audiolist"
                       className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
                     >
                       Audio
@@ -182,7 +182,7 @@ const Header = () => {
                 {isAssistantOpen && (
                   <div className="absolute right-0 bg-white shadow-md mt-1 min-w-[150px] z-10">
                     <Link
-                      href="/admin/audio"
+                      href="/admin/audiolist"
                       className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
                     >
                       Audio
@@ -390,7 +390,7 @@ const Header = () => {
                     Objednávky
                   </Link>
                   <Link
-                    href="/admin/audio"
+                    href="/admin/audiolist"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block pl-4 text-[#313131] text-[15px] py-2"
                   >
@@ -424,7 +424,7 @@ const Header = () => {
                 <div className="space-y-2">
                   <div className="text-[#313131] text-[17px] font-normal py-2">Asistent</div>
                   <Link
-                    href="/admin/audio"
+                    href="/admin/audiolist"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block pl-4 text-[#313131] text-[15px] py-2"
                   >
