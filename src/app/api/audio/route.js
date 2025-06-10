@@ -15,41 +15,6 @@ export async function GET(request) {
       },
       { status: 200 },
     )
-
-    // Get the URL object from the request
-    // const { searchParams } = new URL(request.url)
-
-    // // Extract query parameters
-    // const pageSize = 1000 // Fixed page size as in original
-    // const page = parseInt(searchParams.get('pageNumber') || '1')
-    // const keyword = searchParams.get('keyword')
-
-    // // Set up the where clause for search functionality
-    // let where = {}
-    // if (keyword) {
-    //   where = {
-    //     OR: [{ audioTitle: { contains: keyword, mode: 'insensitive' } }],
-    //   }
-    // }
-
-    // // Count total documents for pagination
-    // const count = await prisma.audio.count({
-    //   where,
-    // })
-
-    // // Fetch audios with pagination and filtering
-    // const audios = await prisma.audio.findMany({
-    //   where,
-    //   take: pageSize,
-    //   skip: pageSize * (page - 1),
-    // })
-
-    // // Return successful response with pagination info
-    // return NextResponse.json({
-    //   audios,
-    //   page,
-    //   pages: Math.ceil(count / pageSize),
-    // })
   } catch (error) {
     console.error('Error fetching audios:', error)
 
@@ -70,10 +35,8 @@ export async function POST(request) {
     if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
-    // Assuming you store the MongoDB user ID in the session
-    const userId = user.id
 
-    console.log('userId', userId)
+    const userId = user.id
 
     // Create the audio with default values
     const createdAudio = await prisma.audio.create({
@@ -91,9 +54,8 @@ export async function POST(request) {
     return NextResponse.json(createdAudio, { status: 201 })
   } catch (error) {
     console.error('Error creating audio:', error)
-
     return NextResponse.json(
-      { error: 'Failed to create audio', details: error.message },
+      { error: 'Failed to update audio', details: error.message },
       { status: 500 },
     )
   }

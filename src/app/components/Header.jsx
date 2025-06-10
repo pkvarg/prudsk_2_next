@@ -148,7 +148,7 @@ const Header = () => {
                       Audio
                     </Link>
                     <Link
-                      href="/admin/video"
+                      href="/admin/videolist"
                       className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
                     >
                       Video
@@ -188,7 +188,7 @@ const Header = () => {
                       Audio
                     </Link>
                     <Link
-                      href="/admin/video"
+                      href="/admin/videolist"
                       className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
                     >
                       Video
@@ -397,7 +397,7 @@ const Header = () => {
                     Audio
                   </Link>
                   <Link
-                    href="/admin/video"
+                    href="/admin/videolist"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block pl-4 text-[#313131] text-[15px] py-2"
                   >
@@ -431,7 +431,7 @@ const Header = () => {
                     Audio
                   </Link>
                   <Link
-                    href="/admin/video"
+                    href="/admin/videolist"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block pl-4 text-[#313131] text-[15px] py-2"
                   >

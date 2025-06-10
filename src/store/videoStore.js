@@ -1,65 +1,65 @@
-// audioStore.js
+// videoStore.js
 import { create } from 'zustand'
 import axios from 'axios'
 
-const useAudioStore = create((set, get) => ({
-  // Audio list state
-  audioList: {
+const useVideoStore = create((set, get) => ({
+  // Video list state
+  videoList: {
     loading: false,
-    audios: [],
+    videos: [],
     pages: 0,
     page: 0,
     error: null,
   },
 
-  // Audio details state
-  audioDetails: {
+  // Video details state
+  videoDetails: {
     loading: false,
-    audio: null,
+    video: null,
     error: null,
   },
 
-  // Audio delete state
-  audioDelete: {
+  // Video delete state
+  videoDelete: {
     loading: false,
     success: false,
     error: null,
   },
 
-  // Audio create state
-  audioCreate: {
+  // Video create state
+  videoCreate: {
     loading: false,
-    audio: null,
+    video: null,
     success: false,
     error: null,
   },
 
-  // Audio update state
-  audioUpdate: {
+  // Video update state
+  videoUpdate: {
     loading: false,
-    audio: null,
+    video: null,
     success: false,
     error: null,
   },
 
   // Actions
-  listAudio: async (keyword = '', pageNumber = '') => {
+  listVideo: async (keyword = '', pageNumber = '') => {
     try {
       set((state) => ({
-        audioList: {
-          ...state.audioList,
+        videoList: {
+          ...state.videoList,
           loading: true,
           error: null,
         },
       }))
 
-      const { data } = await axios.get(`/api/audio?keyword=${keyword}&pageNumber=${pageNumber}`)
+      const { data } = await axios.get(`/api/video?keyword=${keyword}&pageNumber=${pageNumber}`)
 
       set((state) => ({
-        audioList: {
-          ...state.audioList,
+        videoList: {
+          ...state.videoList,
           loading: false,
-          audios: data.audios || data,
+          videos: data.videos || data,
           pages: data.pages || 1,
           page: data.page || 1,
           error: null,
@@ -69,8 +69,8 @@ const useAudioStore = create((set, get) => ({
       const errorMessage = error.response?.data?.message || error.message
 
       set((state) => ({
-        audioList: {
-          ...state.audioList,
+        videoList: {
+          ...state.videoList,
           loading: false,
           error: errorMessage,
         },
@@ -78,35 +78,37 @@ const useAudioStore = create((set, get) => ({
     }
   },
 
-  listAudioDetails: async (id) => {
+  listVideoDetails: async (id) => {
     try {
       set((state) => ({
-        audioDetails: {
-          ...state.audioDetails,
+        videoDetails: {
+          ...state.videoDetails,
           loading: true,
           error: null,
         },
       }))
 
-      console.log('list audio det id', id)
-
-      const { data } = await axios.get(`/api/audio/${id}`)
+      const { data } = await axios.get(`/api/video/${id}`, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'cache-control': 'no-cache',
+        },
+      })
 
       set((state) => ({
-        audioDetails: {
-          ...state.audioDetails,
+        videoDetails: {
+          ...state.videoDetails,
           loading: false,
-          audio: data,
+          video: data,
           error: null,
         },
       }))
     } catch (error) {
-      console.log('err', error)
       const errorMessage = error.response?.data?.message || error.message
 
       set((state) => ({
-        audioDetails: {
-          ...state.audioDetails,
+        videoDetails: {
+          ...state.videoDetails,
           loading: false,
           error: errorMessage,
         },
@@ -114,22 +116,22 @@ const useAudioStore = create((set, get) => ({
     }
   },
 
-  deleteAudio: async (id) => {
+  deleteVideo: async (id) => {
     try {
       set((state) => ({
-        audioDelete: {
-          ...state.audioDelete,
+        videoDelete: {
+          ...state.videoDelete,
           loading: true,
           error: null,
           success: false,
         },
       }))
 
-      await axios.delete(`/api/audio/${id}`)
+      await axios.delete(`/api/video/${id}`)
 
       set((state) => ({
-        audioDelete: {
-          ...state.audioDelete,
+        videoDelete: {
+          ...state.videoDelete,
           loading: false,
           success: true,
           error: null,
@@ -139,8 +141,8 @@ const useAudioStore = create((set, get) => ({
       const errorMessage = error.response?.data?.message || error.message
 
       set((state) => ({
-        audioDelete: {
-          ...state.audioDelete,
+        videoDelete: {
+          ...state.videoDelete,
           loading: false,
           success: false,
           error: errorMessage,
@@ -149,37 +151,34 @@ const useAudioStore = create((set, get) => ({
     }
   },
 
-  createAudio: async () => {
+  createVideo: async () => {
     try {
       set((state) => ({
-        audioCreate: {
-          ...state.audioCreate,
+        videoCreate: {
+          ...state.videoCreate,
           loading: true,
           error: null,
           success: false,
         },
       }))
 
-      const { data } = await axios.post(`/api/audio`)
-
-      console.log('create audio', data)
+      const { data } = await axios.post(`/api/video`, {})
 
       set((state) => ({
-        audioCreate: {
-          ...state.audioCreate,
+        videoCreate: {
+          ...state.videoCreate,
           loading: false,
-          audio: data,
+          video: data,
           success: true,
           error: null,
         },
       }))
     } catch (error) {
-      console.log('this is err', error)
       const errorMessage = error.response?.data?.message || error.message
 
       set((state) => ({
-        audioCreate: {
-          ...state.audioCreate,
+        videoCreate: {
+          ...state.videoCreate,
           loading: false,
           success: false,
           error: errorMessage,
@@ -188,11 +187,11 @@ const useAudioStore = create((set, get) => ({
     }
   },
 
-  updateAudio: async (audio) => {
+  updateVideo: async (video) => {
     try {
       set((state) => ({
-        audioUpdate: {
-          ...state.audioUpdate,
+        videoUpdate: {
+          ...state.videoUpdate,
           loading: true,
           error: null,
           success: false,
@@ -205,13 +204,13 @@ const useAudioStore = create((set, get) => ({
         },
       }
 
-      const { data } = await axios.put(`/api/audio/${audio.id}`, audio, config)
+      const { data } = await axios.put(`/api/video/${video.id || video.id}`, video, config)
 
       set((state) => ({
-        audioUpdate: {
-          ...state.audioUpdate,
+        videoUpdate: {
+          ...state.videoUpdate,
           loading: false,
-          audio: data,
+          video: data,
           success: true,
           error: null,
         },
@@ -220,8 +219,8 @@ const useAudioStore = create((set, get) => ({
       const errorMessage = error.response?.data?.message || error.message
 
       set((state) => ({
-        audioUpdate: {
-          ...state.audioUpdate,
+        videoUpdate: {
+          ...state.videoUpdate,
           loading: false,
           success: false,
           error: errorMessage,
@@ -231,9 +230,9 @@ const useAudioStore = create((set, get) => ({
   },
 
   // Reset functions
-  resetAudioDelete: () => {
+  resetVideoDelete: () => {
     set((state) => ({
-      audioDelete: {
+      videoDelete: {
         loading: false,
         success: false,
         error: null,
@@ -241,37 +240,37 @@ const useAudioStore = create((set, get) => ({
     }))
   },
 
-  resetAudioCreate: () => {
+  resetVideoCreate: () => {
     set((state) => ({
-      audioCreate: {
+      videoCreate: {
         loading: false,
-        audio: null,
+        video: null,
         success: false,
         error: null,
       },
     }))
   },
 
-  resetAudioUpdate: () => {
+  resetVideoUpdate: () => {
     set((state) => ({
-      audioUpdate: {
+      videoUpdate: {
         loading: false,
-        audio: null,
+        video: null,
         success: false,
         error: null,
       },
     }))
   },
 
-  resetAudioDetails: () => {
+  resetVideoDetails: () => {
     set((state) => ({
-      audioDetails: {
+      videoDetails: {
         loading: false,
-        audio: null,
+        video: null,
         error: null,
       },
     }))
   },
 }))
 
-export default useAudioStore
+export default useVideoStore

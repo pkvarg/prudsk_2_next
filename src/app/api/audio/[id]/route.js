@@ -9,8 +9,6 @@ export async function GET(request, { params }) {
   try {
     const { id } = await params
 
-    console.log('id', id)
-
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
       return NextResponse.json({ error: 'Invalid audio ID format' }, { status: 400 })
@@ -20,8 +18,6 @@ export async function GET(request, { params }) {
     const audio = await prisma.audio.findUnique({
       where: { id },
     })
-
-    console.log('got audio>', audio)
 
     if (audio) {
       return NextResponse.json(audio)
@@ -128,7 +124,6 @@ export async function PUT(request, { params }) {
     return NextResponse.json(updatedAudio)
   } catch (error) {
     console.error('Error updating audio:', error)
-
     return NextResponse.json(
       { error: 'Failed to update audio', details: error.message },
       { status: 500 },

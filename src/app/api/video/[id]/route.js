@@ -2,6 +2,7 @@
 
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc Fetch single video
 // @desc GET /api/video/:id
@@ -31,9 +32,9 @@ export async function GET(request, { params }) {
 // @access Private/Admin
 export async function DELETE(request, { params }) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
@@ -65,15 +66,16 @@ export async function DELETE(request, { params }) {
 // @access Private/Admin
 export async function PUT(request, { params }) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
     const { id } = await params
-    const { videoTitle, code } = await request.json()
-    const userId = session.user.id
+    const userId = user.id
+    const body = await request.json()
+    const { videoTitle, code } = body
 
     // Find the video first to verify it exists
     const video = await prisma.video.findUnique({
@@ -88,9 +90,7 @@ export async function PUT(request, { params }) {
     const updatedVideo = await prisma.video.update({
       where: { id },
       data: {
-        user: {
-          connect: { id: userId },
-        },
+        userId: userId,
         videoTitle,
         code,
       },
