@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 import prisma from '@/db/db'
 
 // @desc Fetch single banner

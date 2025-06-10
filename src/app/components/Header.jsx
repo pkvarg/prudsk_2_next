@@ -154,7 +154,7 @@ const Header = () => {
                       Video
                     </Link>
                     <Link
-                      href="/admin/banner"
+                      href="/admin/bannerlist"
                       className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
                     >
                       Bannery
@@ -194,7 +194,7 @@ const Header = () => {
                       Video
                     </Link>
                     <Link
-                      href="/admin/banner"
+                      href="/admin/bannerlist"
                       className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
                     >
                       Bannery
@@ -404,7 +404,7 @@ const Header = () => {
                     Video
                   </Link>
                   <Link
-                    href="/admin/banner"
+                    href="/admin/bannerlist"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block pl-4 text-[#313131] text-[15px] py-2"
                   >
@@ -438,7 +438,7 @@ const Header = () => {
                     Video
                   </Link>
                   <Link
-                    href="/admin/banner"
+                    href="/admin/bannerlist"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block pl-4 text-[#313131] text-[15px] py-2"
                   >

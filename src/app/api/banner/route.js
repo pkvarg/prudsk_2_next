@@ -1,46 +1,16 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc Fetch all banners
 // @desc GET /api/banner
 // @access Public
 export async function GET(request) {
   try {
-    // Get the URL object from the request
-    const { searchParams } = new URL(request.url)
-
-    // Extract query parameters
-    const pageSize = 10
-    const page = parseInt(searchParams.get('pageNumber') || '1')
-    const keyword = searchParams.get('keyword')
-
-    // Set up the where clause for search functionality
-    let where = {}
-    if (keyword) {
-      where = {
-        OR: [{ bannerTitle: { contains: keyword, mode: 'insensitive' } }],
-      }
-    }
-
-    // Count total documents for pagination
-    const count = await prisma.banner.count({
-      where,
-    })
-
-    // Fetch banners with pagination and filtering
-    const banners = await prisma.banner.findMany({
-      where,
-      take: pageSize,
-      skip: pageSize * (page - 1),
-    })
+    const banners = await prisma.banner.findMany({})
 
     // Return successful response with pagination info
-    return NextResponse.json({
-      banners,
-      page,
-      pages: Math.ceil(count / pageSize),
-    })
+    return NextResponse.json({ banners }, { status: 200 })
   } catch (error) {
     console.error('Error fetching banners:', error)
 
@@ -56,13 +26,13 @@ export async function GET(request) {
 // @access Private/Admin
 export async function POST(request) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
-    // Assuming you store the MongoDB user ID in the session
-    const userId = session.user.id
+
+    const userId = user.id
 
     // Create the banner with default values
     const createdBanner = await prisma.banner.create({
