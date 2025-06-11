@@ -46,24 +46,28 @@ const BannerEditPage = () => {
     }
   }, [banner, bannerId])
 
-  // TODO HONO API ROUTE
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
     if (!file) return
 
     const formData = new FormData()
-    formData.append('upload', file)
+    formData.append('file', file)
     setUploading(true)
-
     try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      //const apiUrl = 'http://localhost:3013/api/upload/proud2next'
+      const apiUrl = 'https://hono-api.pictusweb.com/api/upload/proud2next'
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error('Nepodarilo sa nahrať súbor')
       }
 
-      const { data } = await axios.post('/api/upload', formData, config)
-      setImage(data)
+      const data = await response.json()
+      console.log('data', data)
+      setImage(data.imageUrl)
       setUploading(false)
     } catch (error) {
       console.error('Upload error:', error)
@@ -186,7 +190,8 @@ const BannerEditPage = () => {
               {image && !uploading && (
                 <div className="mt-4 border border-gray-200 rounded-lg overflow-hidden">
                   <img
-                    src={image.startsWith('/') ? image : `/${image}`}
+                    // src={image.startsWith('/') ? image : `/${image}`}
+                    src={image}
                     alt="Banner preview"
                     className="w-full h-auto max-h-48 object-contain bg-gray-50"
                   />

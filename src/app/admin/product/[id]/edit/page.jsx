@@ -220,8 +220,8 @@ const ProductEditScreen = () => {
     setUploading(true)
 
     try {
-      const apiUrl = 'http://localhost:3013/api/upload/proud2next'
-      // const apiUrl = 'https://hono-api.pictusweb.com/api/upload/proud2next'
+      // const apiUrl = 'http://localhost:3013/api/upload/proud2next'
+      const apiUrl = 'https://hono-api.pictusweb.com/api/upload/proud2next'
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
