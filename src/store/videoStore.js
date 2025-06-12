@@ -61,13 +61,10 @@ const useVideoStore = create((set, get) => ({
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message
 
-      set((state) => ({
-        videoList: {
-          ...state.videoList,
-          loading: false,
-          error: errorMessage,
-        },
-      }))
+      set({
+        loading: false,
+        error: errorMessage,
+      })
     }
   },
 

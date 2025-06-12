@@ -15,10 +15,6 @@ const Header = () => {
   const { userInfo, setUserInfo, clearUserState } = useUserStore()
   const { cartItems } = useCartStore()
 
-  // if (session) {
-  //   console.log('header session', session)
-  // }
-
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
   const [isAdminOpen, setIsAdminOpen] = useState(false)
@@ -252,7 +248,7 @@ const Header = () => {
                     <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 border">
                       <Link
                         href="/profile"
-                        className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                        className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       >
                         Můj profil
                       </Link>
@@ -320,10 +316,11 @@ const Header = () => {
                   <Icon.ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 {activeDropdown === 'news' && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 border">
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg z-50 border">
                     <Link
                       href="/new-books/2025"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Knihy 2025
                     </Link>
@@ -341,16 +338,18 @@ const Header = () => {
                   <Icon.ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 {activeDropdown === 'podcast' && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 border">
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg z-50 border">
                     <Link
                       href="/words-of-life"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Slova života
                     </Link>
                     <Link
                       href="/life-study"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Studium života
                     </Link>
@@ -373,94 +372,109 @@ const Header = () => {
                   <Icon.ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 {activeDropdown === 'eshop' && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-md shadow-lg z-50 border max-h-96 overflow-y-auto">
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg z-50 border max-h-96 overflow-y-auto">
                     <Link
-                      href="/eshop/abecedný-zoznam-kníh"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      href="/eshop/abecední-seznam-kníh"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Abecední seznam knih
                     </Link>
                     <Link
                       href="/eshop/Boží-ekonomie"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Boží ekonomie
                     </Link>
                     <Link
                       href="/eshop/brožury"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Brožury
                     </Link>
                     <Link
                       href="/eshop/církev"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Církev
                     </Link>
                     <Link
                       href="/eshop/duch"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Duch
                     </Link>
                     <Link
                       href="/eshop/evangelium"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Evangelium
                     </Link>
                     <Link
                       href="/eshop/kristus"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Kristus
                     </Link>
                     <Link
                       href="/eshop/křesťanská-praxe"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Křesťanská praxe
                     </Link>
                     <Link
                       href="/eshop/křesťanská-služba"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Křesťanská služba
                     </Link>
                     <Link
                       href="/eshop/letáky"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Letáky
                     </Link>
                     <Link
                       href="/eshop/mládež"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Mládež
                     </Link>
                     <Link
                       href="/eshop/studium-a-výklad-bible"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Studium a výklad Bible
                     </Link>
                     <Link
                       href="/eshop/Trojjediný-Bůh"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Trojjediný Bůh
                     </Link>
                     <Link
                       href="/eshop/život"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Život
                     </Link>
                     <Link
                       href="/eshop/životopisné"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Životopisné
                     </Link>
@@ -483,25 +497,32 @@ const Header = () => {
                   <Icon.ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 {activeDropdown === 'info' && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 border">
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg z-50 border">
                     <Link
                       href="/watchman-nee"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Watchman Nee
                     </Link>
                     <Link
                       href="/witness-lee"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Witness Lee
                     </Link>
-                    <Link href="/about" className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50">
+                    <Link
+                      href="/about"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-50"
+                      onClick={closeAllDropdowns}
+                    >
                       O nás
                     </Link>
                     <Link
                       href="/safety-privacy"
-                      className="block px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                      className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                      onClick={closeAllDropdowns}
                     >
                       Bezpečnost a soukromí
                     </Link>
@@ -536,7 +557,11 @@ const Header = () => {
                   </button>
                   {activeDropdown === 'mobile-news' && (
                     <div className="bg-red-600 px-8 py-2">
-                      <Link href="/new-books/2025" className="block py-1 text-white text-sm">
+                      <Link
+                        href="/new-books/2025"
+                        className="block py-1 text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
                         Knihy 2025
                       </Link>
                     </div>
@@ -578,7 +603,7 @@ const Header = () => {
                   {activeDropdown === 'mobile-eshop' && (
                     <div className="bg-red-600 px-8 py-2 space-y-1 max-h-64 overflow-y-auto">
                       <Link
-                        href="/eshop/abecedný-zoznam-kníh"
+                        href="/eshop/abecední-seznam-kníh"
                         className="block py-1 text-white text-sm"
                       >
                         Abecední seznam knih

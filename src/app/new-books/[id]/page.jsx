@@ -132,7 +132,7 @@ const NewBooks = () => {
             </p>
             <div className="mt-6">
               <Link
-                href="/eshop/abecedný-zoznam-kníh"
+                href="/eshop/abecední-seznam-kníh"
                 className="inline-flex items-center px-4 py-2 bg-[#071e46] text-white rounded hover:bg-[#9b7d57] transition-colors duration-200"
               >
                 Procházet všechny knihy

@@ -1,17 +1,15 @@
 'use client'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useMemo, useRef } from 'react'
 import Link from 'next/link'
 import useAudioStore from '@/store/audioStore'
 
 const WordsOfLife = () => {
   const [subcategory, setSubcategory] = useState('Boží evangelium')
-  const [wordsOfLife, setWordsOfLife] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+
   const myRef = useRef(null)
 
   // Zustand store (if you have audio-related state there)
-  const { listAudio } = useAudioStore()
+  const { audios, error, loading, getAllAudios } = useAudioStore()
 
   const subHandler = (sub) => {
     setSubcategory(sub)
@@ -60,31 +58,18 @@ const WordsOfLife = () => {
   ]
 
   useEffect(() => {
-    const getAudio = async () => {
-      try {
-        setLoading(true)
-        setError(null)
-
-        const response = await fetch('/api/audio')
-        if (!response.ok) {
-          throw new Error('Chyba při načítání audio souborů')
-        }
-
-        const data = await response.json()
-        const audios = data.audios || []
-        const wolAudios = audios.filter((audio) => audio.category === category)
-        setWordsOfLife(wolAudios)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    getAudio()
+    getAllAudios()
   }, [])
 
-  // Filter audio files by selected subcategory
+  // Filter audios from store directly with safety check
+  const wordsOfLife = useMemo(() => {
+    // Ensure audios is an array before filtering
+    if (!Array.isArray(audios)) {
+      return []
+    }
+    return audios.filter((audio) => audio.category === category)
+  }, [audios, category])
+
   const filteredAudios = wordsOfLife.filter((audio) => audio.subcategory === subcategory)
 
   if (loading) {

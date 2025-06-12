@@ -10,7 +10,7 @@ const Video = () => {
   const [sortBy, setSortBy] = useState('title') // 'title', 'date', 'duration'
   const [viewMode, setViewMode] = useState('grid') // 'grid', 'list'
 
-  const { videos: links, getAllVideos } = useVideoStore()
+  const { videos: links = [], getAllVideos } = useVideoStore() // Default to empty array
 
   useEffect(() => {
     getAllVideos()
@@ -18,6 +18,11 @@ const Video = () => {
 
   // Sort and filter videos
   const processedVideos = useMemo(() => {
+    // Ensure links is an array before processing
+    if (!Array.isArray(links)) {
+      return []
+    }
+
     let filteredLinks = [...links]
 
     // Filter by search term
@@ -34,18 +39,66 @@ const Video = () => {
     filteredLinks.sort((a, b) => {
       switch (sortBy) {
         case 'title':
-          return a.videoTitle.localeCompare(b.videoTitle)
+          return (a.videoTitle || '').localeCompare(b.videoTitle || '')
         case 'date':
           return new Date(b.uploadDate || 0) - new Date(a.uploadDate || 0)
         case 'duration':
           return (b.duration || 0) - (a.duration || 0)
         default:
-          return a.videoTitle.localeCompare(b.videoTitle)
+          return (a.videoTitle || '').localeCompare(b.videoTitle || '')
       }
     })
 
     return filteredLinks
-  }, [searchTerm, sortBy])
+  }, [links, searchTerm, sortBy]) // Add 'links' to dependency array
+
+  // Get unique categories for filtering (with safety check)
+  const categories = useMemo(() => {
+    if (!Array.isArray(links)) {
+      return []
+    }
+    const uniqueCategories = [...new Set(links.map((link) => link.category).filter(Boolean))]
+    return uniqueCategories.sort()
+  }, [links])
+
+  // const { videos: links, getAllVideos } = useVideoStore()
+
+  // console.log('videos', links)
+
+  // useEffect(() => {
+  //   getAllVideos()
+  // }, [])
+
+  // // Sort and filter videos
+  // const processedVideos = useMemo(() => {
+  //   let filteredLinks = [...links]
+
+  //   // Filter by search term
+  //   if (searchTerm) {
+  //     filteredLinks = filteredLinks.filter(
+  //       (link) =>
+  //         link.videoTitle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //         link.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //         link.category?.toLowerCase().includes(searchTerm.toLowerCase()),
+  //     )
+  //   }
+
+  //   // Sort videos
+  //   filteredLinks.sort((a, b) => {
+  //     switch (sortBy) {
+  //       case 'title':
+  //         return a.videoTitle.localeCompare(b.videoTitle)
+  //       case 'date':
+  //         return new Date(b.uploadDate || 0) - new Date(a.uploadDate || 0)
+  //       case 'duration':
+  //         return (b.duration || 0) - (a.duration || 0)
+  //       default:
+  //         return a.videoTitle.localeCompare(b.videoTitle)
+  //     }
+  //   })
+
+  //   return filteredLinks
+  // }, [searchTerm, sortBy])
 
   return (
     <div className="container mx-auto px-4 py-8">

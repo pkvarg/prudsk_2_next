@@ -20,7 +20,7 @@ const Product = ({ product }) => {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               />
               {/* Discount badge */}
-              {product.discount && (
+              {product.discount > 0 && (
                 <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm font-semibold">
                   -{product.discount}%
                 </div>

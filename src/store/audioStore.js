@@ -3,6 +3,10 @@ import { create } from 'zustand'
 import axios from 'axios'
 
 const useAudioStore = create((set, get) => ({
+  audios: [],
+  loading: false,
+  error: null,
+
   // Audio list state
   audioList: {
     loading: false,
@@ -40,6 +44,27 @@ const useAudioStore = create((set, get) => ({
     audio: null,
     success: false,
     error: null,
+  },
+  getAllAudios: async () => {
+    try {
+      set({
+        loading: true,
+      })
+
+      const { data } = await axios.get(`/api/audio`)
+
+      set((state) => ({
+        audios: data.audios || [],
+        loading: false,
+      }))
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message
+
+      set({
+        loading: false,
+        error: errorMessage,
+      })
+    }
   },
 
   // Actions
