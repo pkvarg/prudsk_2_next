@@ -3,6 +3,9 @@ import { create } from 'zustand'
 import axios from 'axios'
 
 const useVideoStore = create((set, get) => ({
+  videos: [],
+  loading: false,
+
   // Video list state
   videoList: {
     loading: false,
@@ -43,6 +46,31 @@ const useVideoStore = create((set, get) => ({
   },
 
   // Actions
+  getAllVideos: async () => {
+    try {
+      set({
+        loading: true,
+      })
+
+      const { data } = await axios.get(`/api/video`)
+
+      set((state) => ({
+        videos: data.videos,
+        loading: false,
+      }))
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message
+
+      set((state) => ({
+        videoList: {
+          ...state.videoList,
+          loading: false,
+          error: errorMessage,
+        },
+      }))
+    }
+  },
+
   listVideo: async (keyword = '', pageNumber = '') => {
     try {
       set((state) => ({

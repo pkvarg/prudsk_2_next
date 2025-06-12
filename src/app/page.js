@@ -1,6 +1,9 @@
 import Image from 'next/image'
-import AudioListScreen from './components/screens/AudioListScreen'
 
 export default function Home() {
-  return <div className="">{/* <AudioListScreen /> */}</div>
+  return (
+    <div className="">
+      <h1>Home</h1>
+    </div>
+  )
 }

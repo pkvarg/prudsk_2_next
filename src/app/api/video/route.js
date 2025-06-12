@@ -11,6 +11,8 @@ export async function GET(request) {
     // Get paginated videos
     const videos = await prisma.video.findMany({})
 
+    console.log('videos get', videos)
+
     return NextResponse.json({ videos }, { status: 200 })
   } catch (error) {
     console.error('Error fetching videos:', error)
