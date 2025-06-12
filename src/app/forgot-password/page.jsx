@@ -6,7 +6,7 @@ import Link from 'next/link'
 import FormContainer from '@/app/components/FormContainer'
 import Loader from '@/app/components/Loader'
 import Message from '@/app/components/Message'
-import useUserStore from '@/app/store/userStore'
+import useUserStore from '@/store/userStore'
 
 const ForgotPasswordPage = () => {
   const router = useRouter()

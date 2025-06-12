@@ -142,7 +142,7 @@ const Contact = () => {
 
   return (
     <>
-      <div className="container mx-auto px-4">
+      <div className="mx-auto lg:mx-[20%] px-4">
         <div className="py-3">
           <h1 className="text-[18px] font-medium py-4 text-[#313131]">Napište nám zprávu</h1>
           {message && (

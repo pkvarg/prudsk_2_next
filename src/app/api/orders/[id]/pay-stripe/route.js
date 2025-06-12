@@ -39,7 +39,7 @@ export async function PUT(request, { params }) {
         paidAt: new Date(),
         paymentResult: {
           create: {
-            paymentId: paymentData._id,
+            paymentId: paymentData.id,
             status: 'Paid by Stripe',
             updateTime: new Date().toISOString(),
             emailAddress: paymentData.email,

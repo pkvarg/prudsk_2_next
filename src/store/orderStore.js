@@ -192,7 +192,7 @@ const useOrderStore = create((set, get) => ({
       set({ loadingPay: true, errorPay: null })
 
       const config = get().getAuthConfig()
-      const { data } = await axios.put(`/api/orders/${order._id}/pay-stripe`, order, config)
+      const { data } = await axios.put(`/api/orders/${order.id}/pay-stripe`, order, config)
 
       set({
         loadingPay: false,
@@ -357,7 +357,7 @@ const useOrderStore = create((set, get) => ({
         loadingDelete: false,
         successDelete: true,
         // Remove the deleted order from the orders array
-        orders: get().orders.filter((order) => order._id !== id),
+        orders: get().orders.filter((order) => order.id !== id),
       })
 
       return true

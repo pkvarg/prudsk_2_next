@@ -47,8 +47,8 @@ const ProfilePage = () => {
         resetUserProfile()
         getUserDetails('profile')
         listMyOrders()
-      } else if (user._id !== userInfo._id) {
-        getUserDetails(userInfo._id)
+      } else if (user.id !== userInfo.id) {
+        getUserDetails(userInfo.id)
       } else {
         setName(user.name)
         setEmail(user.email)
@@ -68,7 +68,7 @@ const ProfilePage = () => {
       setMessage('Hesla nesouhlasí')
     } else {
       updateUserProfile({
-        id: user._id,
+        id: user.id,
         name,
         email,
         password,
@@ -121,10 +121,9 @@ const ProfilePage = () => {
               />
             </div>
 
-            <h3 className="text-left">Zmenit moje heslo</h3>
-
             {!isGoogleUser && (
               <>
+                <h3 className="text-left">Zmenit moje heslo</h3>
                 <div className="mb-4">
                   <label htmlFor="password" className="block text-gray-700 text-sm mb-2">
                     Heslo
