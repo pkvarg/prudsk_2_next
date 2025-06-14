@@ -262,7 +262,7 @@ const OrderPage = () => {
 
               <button
                 onClick={newOrderHandler}
-                className="w-full py-2 px-4 rounded text-white bg-blue-600 hover:bg-blue-700 mt-2"
+                className="w-full py-2 px-4 rounded text-white bg-[#2bb2e6] hover:bg-blue-700 mt-2"
               >
                 Vytvořit novou objednávku
               </button>

@@ -137,7 +137,7 @@ const VideoEditPage = () => {
             <button
               type="submit"
               disabled={loadingUpdate}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center"
+              className="w-full bg-[#2bb2e6] hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center"
             >
               {loadingUpdate ? (
                 <>

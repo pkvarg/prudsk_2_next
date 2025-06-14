@@ -23,7 +23,7 @@
   }
 
   .btn-blue {
-    @apply bg-blue-600 hover:bg-blue-700 text-white;
+    @apply bg-[#2bb2e6] hover:bg-blue-700 text-white;
   }
 
   .btn-red {

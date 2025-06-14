@@ -163,7 +163,7 @@ const UserEditPage = () => {
 
             <button
               type="submit"
-              className="mt-5 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              className="mt-5 bg-[#2bb2e6] hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
               Upravit
             </button>

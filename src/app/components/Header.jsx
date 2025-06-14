@@ -77,10 +77,10 @@ const Header = () => {
           <div className="flex items-center">
             <Link href="/cart" className="text-[#313131] mr-9 relative">
               <div>
-                <p className="absolute -right-[7px] -top-[1px] inline-block rounded-full w-5 h-[17.5px] leading-[19px] bg-red-500 text-white">
-                  <span className="text-md ml-[25%] ">{cartItems?.length}</span>
+                <p className="absolute -right-[7px] -top-[0.5px] inline-block rounded-full w-5 h-[17.5px] leading-[19px] bg-red-500 text-white">
+                  <span className="text-md ml-[30%] ">{cartItems?.length}</span>
                 </p>
-                <Icon.Cart2 className="text-[25px] font-thin mb-[7.5px]">Košík</Icon.Cart2>
+                <Icon.Cart2 className="text-[27.5px] font-thin mb-[0px]">Košík</Icon.Cart2>
               </div>
             </Link>
             {userInfo ? (

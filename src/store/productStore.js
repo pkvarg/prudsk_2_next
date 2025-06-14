@@ -141,8 +141,6 @@ const useProductStore = create((set, get) => ({
         data: { comment },
       })
 
-      console.log('pstore, DELETE rew by prod', data)
-
       set({
         loading: false,
         //reviews: data,
@@ -162,11 +160,7 @@ const useProductStore = create((set, get) => ({
     try {
       set({ loading: true })
 
-      console.log('id in p str', id)
-
       const { data } = await axios.get(`/api/products/${id}/reviews`)
-
-      console.log('pstore, single prod rew', data)
 
       set({
         loading: false,
@@ -260,8 +254,6 @@ const useProductStore = create((set, get) => ({
       })
 
       const { data } = await axios.get(`/api/products/${id}`)
-
-      console.log('pstore get p det', data)
 
       set({
         loadingDetail: false,
@@ -371,9 +363,7 @@ const useProductStore = create((set, get) => ({
     try {
       set({ loadingRemoveFromFavorites: true })
 
-      const { data } = await axios.put(`/api/products/${productId}/favorites/remove`, { userId })
-
-      console.log('remove from favs data', data)
+      await axios.put(`/api/products/${productId}/favorites/remove`, { userId })
 
       set({
         loadingRemoveFromFavorites: false,

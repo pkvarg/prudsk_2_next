@@ -30,7 +30,7 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
                 aria-current={pageNum === currentPage ? 'page' : undefined}
                 className={`block px-3 py-2 border ${
                   pageNum === currentPage
-                    ? 'bg-blue-600 !text-white border-blue-600'
+                    ? 'bg-[#2bb2e6] !text-white border-blue-600'
                     : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                 } rounded`}
               >

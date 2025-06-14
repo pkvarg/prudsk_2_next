@@ -116,7 +116,7 @@ const ResetPasswordPage = () => {
 
           <button
             type="submit"
-            className="w-full my-5 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors duration-200"
+            className="w-full my-5 bg-[#2bb2e6] hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors duration-200"
             disabled={loading}
           >
             Změnit heslo

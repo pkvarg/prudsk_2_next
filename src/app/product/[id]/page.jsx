@@ -27,10 +27,11 @@ const ProductPage = () => {
   const router = useRouter()
   const id = params.id
 
-  console.log('id in prod', id)
+  const { addToCart } = useCartStore()
+  const { userInfo } = useUserStore()
 
-  const userInfo = useUserStore((state) => state.userInfo)
-  const addToCart = useCartStore((state) => state.addToCart)
+  // const userInfo = useUserStore((state) => state.userInfo)
+  // const addToCart = useCartStore((state) => state.addToCart)
 
   const { getProductDetails, product, getSingleProdutReviews, singleProdReviews } =
     useProductStore()
@@ -54,14 +55,8 @@ const ProductPage = () => {
 
   const addToCartHandler = () => {
     if (product) {
-      addToCart({
-        product: product.id,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        countInStock: product.countInStock,
-        qty: Number(qty),
-      })
+      addToCart(product.id, Number(qty))
+
       router.push(`/cart`)
     }
   }
@@ -137,7 +132,7 @@ const ProductPage = () => {
   }
 
   return (
-    <main className="mx-4">
+    <main className="mx-4 lg:mx-[10%]">
       <Link
         href="#"
         onClick={(e) => {
@@ -334,7 +329,7 @@ const ProductPage = () => {
 
                       <button
                         onClick={continueShopping}
-                        className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        className="w-full py-2 px-4 bg-[#2bb2e6] text-white rounded hover:bg-blue-700"
                       >
                         Pokračovat v nákupu
                       </button>
@@ -452,7 +447,7 @@ const ProductPage = () => {
                       </div>
                       <button
                         type="submit"
-                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        className="px-4 py-2 bg-[#2bb2e6] text-white rounded hover:bg-blue-700"
                       >
                         Odeslat
                       </button>

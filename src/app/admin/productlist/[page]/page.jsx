@@ -88,7 +88,7 @@ const ProductListPageWithPagination = () => {
         </div>
         <div className="flex gap-2">
           <button
-            className="py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded"
+            className="py-2 px-4 bg-[#2bb2e6] hover:bg-blue-700 text-white rounded"
             onClick={linkToReviews}
           >
             Recenze
@@ -100,7 +100,7 @@ const ProductListPageWithPagination = () => {
             <Plus size={20} /> Vytvořit akci
           </button>
           <button
-            className="py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded flex items-center gap-1"
+            className="py-2 px-4 bg-[#2bb2e6] hover:bg-blue-700 text-white rounded flex items-center gap-1"
             onClick={createProductHandler}
           >
             <Plus size={20} /> Vytvořit produkt
@@ -115,7 +115,7 @@ const ProductListPageWithPagination = () => {
         </div>
         <div className="flex flex-wrap gap-2">
           <button
-            className="py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded"
+            className="py-2 px-4 bg-[#2bb2e6] hover:bg-blue-700 text-white rounded"
             onClick={linkToReviews}
           >
             Recenze
@@ -127,7 +127,7 @@ const ProductListPageWithPagination = () => {
             <Plus size={20} /> Vytvorit akci
           </button>
           <button
-            className="py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded flex items-center gap-1"
+            className="py-2 px-4 bg-[#2bb2e6] hover:bg-blue-700 text-white rounded flex items-center gap-1"
             onClick={createProductHandler}
           >
             <Plus size={20} /> Vytvorit produkt
