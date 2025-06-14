@@ -2,55 +2,20 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
 import niceInvoice from '@/utils/invoiceGenerator'
-//import Email from '@/utils/email'
 import { join } from 'path'
-import { auth } from '@/lib/auth'
+
 import isAdmin from '@/lib/isAdmin'
+import { getOrderNumber } from '@/utils/orderHelpers'
 
 // @desc Create new Order
 // @desc POST /api/orders
 // @access Private
 
-// Helper function to generate order number
-async function getOrderNumber() {
-  const date = new Date()
-  const year = date.getFullYear().toString().slice(-2)
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-
-  const datePrefix = `${year}${month}${day}`
-
-  // Find the latest order from today
-  const latestOrder = await prisma.order.findFirst({
-    where: {
-      orderNumber: {
-        startsWith: datePrefix,
-      },
-    },
-    orderBy: {
-      orderNumber: 'desc',
-    },
-  })
-
-  let sequenceNumber = 1
-
-  if (latestOrder) {
-    // Extract sequence number from the latest order number
-    const latestSequence = parseInt(latestOrder.orderNumber.slice(-4))
-    sequenceNumber = latestSequence + 1
-  }
-
-  // Format the sequence number to 4 digits
-  const formattedSequence = String(sequenceNumber).padStart(4, '0')
-
-  return `${datePrefix}${formattedSequence}`
-}
-
 export async function POST(request) {
   try {
-    const session = await auth()
+    const userLoggedIn = await isAdmin()
 
-    if (!session) {
+    if (!userLoggedIn) {
       return new Response('Unauthorized', { status: 401 })
     }
 
@@ -78,6 +43,8 @@ export async function POST(request) {
 
     const orderNumber = await getOrderNumber()
 
+    console.log('orderNumber', orderNumber)
+
     /* Update Count in stock on purchased products */
     if (qtys) {
       for (const key of Object.keys(qtys)) {
@@ -98,11 +65,13 @@ export async function POST(request) {
               data: { countInStock: updatedCountInStockToDb },
             })
 
-            try {
-              await new Email(product, '', '').sendLowStoragePiecesWarningEmail()
-            } catch (error) {
-              console.log(error)
-            }
+            // TODO LOW STORAGE NOTIF TO ADMIN
+
+            // try {
+            //   await new Email(product, '', '').sendLowStoragePiecesWarningEmail()
+            // } catch (error) {
+            //   console.log(error)
+            // }
           } else {
             await prisma.product.update({
               where: { id: product.id },
@@ -113,60 +82,52 @@ export async function POST(request) {
       }
     }
 
+    console.log('user', userLoggedIn)
+
     // Create new order with Prisma
     const createdOrder = await prisma.order.create({
       data: {
-        orderItems: {
-          create: orderItems.map((item) => ({
-            name: item.name,
-            qty: item.qty,
-            image: item.image,
-            price: item.price,
-            product: {
-              connect: { id: item.product },
-            },
-          })),
-        },
-        user: {
-          connect: { id: session.user.id },
-        },
+        userId: userLoggedIn.id,
+        name,
+        email,
+        orderNumber,
+        // Store as JSON instead of creating relations
+        orderItems: orderItems.map((item) => ({
+          name: item.name,
+          qty: item.qty,
+          image: item.image,
+          price: item.price,
+          product: item.product, // Just store the ID as string
+        })),
         shippingAddress: {
-          create: {
-            address: shippingAddress.address,
-            city: shippingAddress.city,
-            postalCode: shippingAddress.postalCode,
-            country: shippingAddress.country,
-            phone: shippingAddress.phone,
-            note: shippingAddress.note || '',
-            billingName: shippingAddress.billingName,
-            billingAddress: shippingAddress.billingAddress,
-            billingCity: shippingAddress.billingCity,
-            billingPostalCode: shippingAddress.billingPostalCode,
-            billingCountry: shippingAddress.billingCountry,
-            billingICO: shippingAddress.billingICO || '',
-          },
+          address: shippingAddress.address,
+          city: shippingAddress.city,
+          postalCode: shippingAddress.postalCode,
+          country: shippingAddress.country,
+          phone: shippingAddress.phone,
+          note: shippingAddress.note || '',
+          billingName: shippingAddress.billingName,
+          billingAddress: shippingAddress.billingAddress,
+          billingCity: shippingAddress.billingCity,
+          billingPostalCode: shippingAddress.billingPostalCode,
+          billingCountry: shippingAddress.billingCountry,
+          billingICO: shippingAddress.billingICO || '',
         },
         paymentMethod,
-        itemsPrice,
+        discounts: discounts || [],
         taxPrice,
         shippingPrice,
         totalPrice,
-        name,
-        email,
-        discounts: discounts || [],
-        orderNumber,
         isPaid: false,
         isDelivered: false,
-      },
-      include: {
-        orderItems: true,
-        shippingAddress: true,
       },
     })
 
     // Process order items for email
     const productsCount = createdOrder.orderItems.length
     let productsObject = {}
+
+    console.log('created order', createdOrder)
 
     createdOrder.orderItems.forEach((item, i) => {
       if (discounts[i] && discounts[i].discount > 0) {
@@ -228,115 +189,57 @@ export async function POST(request) {
     productsObject.productsOnlyPrice = productsOnly
     productsObject.note = createdOrder.shippingAddress.note
 
-    // Invoice date handling
-    const date = createdOrder.createdAt
-    let dateFromJson = new Date(date)
-    let day = dateFromJson.getDate()
-    let month = dateFromJson.getMonth() + 1
-    let year = dateFromJson.getFullYear()
-    let billingDate = `${day}/${month}/${year}`
+    // SEND HONO EMAIL
+    const apiUrl = 'http://localhost:3013/api/proud2next/order-resend-confirmation'
 
-    // Function to create Billing due date
-    function addMonths(numOfMonths, date) {
-      date.setMonth(date.getMonth() + numOfMonths)
-      // return Real DMY
-      let increasedDay = date.getDate()
-      let increasedMonth = date.getMonth() + 1
-      let increasedYear = date.getFullYear()
-      let increasedDMY = `${increasedDay}/${increasedMonth}/${increasedYear}`
-      return increasedDMY
+    //const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/order-resend-confirmation'
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      body: JSON.stringify(createdOrder),
+    })
+
+    const resData = await response.json()
+    console.log('data order resend confirmation', resData.success)
+
+    if (!resData.success) {
+      throw new Error('Nepodarilo sa odoslať send order')
     }
 
-    // Add months to current Date
-    const dueDate = addMonths(1, dateFromJson)
+    return NextResponse.json(createdOrder, { status: 201 })
 
-    // In Next.js, we need to handle path differently
-    const projectRoot = process.cwd()
+    // try {
+    //   await niceInvoice(invoiceDetails, invoicePath)
+    //   const fileTosend = invoicePath
 
-    const invoiceDetails = {
-      shipping: {
-        name: name,
-        address: createdOrder.shippingAddress.address,
-        city: createdOrder.shippingAddress.city,
-        country: createdOrder.shippingAddress.country,
-        phone: createdOrder.shippingAddress.phone,
-        postalCode: createdOrder.shippingAddress.postalCode,
-      },
-      billing: {
-        name: createdOrder.shippingAddress.billingName,
-        address: createdOrder.shippingAddress.billingAddress,
-        city: createdOrder.shippingAddress.billingCity,
-        country: createdOrder.shippingAddress.billingCountry,
-        postalCode: createdOrder.shippingAddress.billingPostalCode,
-        ICO: createdOrder.shippingAddress.billingICO,
-      },
-      items: createdOrder.orderItems,
-      discounts: discounts,
-      paymentMethod:
-        createdOrder.paymentMethod === 'Platba bankovním převodem předem'
-          ? 'Bankovním převodem'
-          : createdOrder.paymentMethod,
-      total: createdOrder.totalPrice,
-      taxPrice: createdOrder.taxPrice,
-      shippingPrice: createdOrder.shippingPrice,
-      orderNumber: createdOrder.orderNumber,
-      header: {
-        company_name: 'Adam Surjomartono – Distribuce Proud',
-        company_logo: join(projectRoot, 'public', 'assets', 'wwwproudbanner.png'),
-        company_address: 'Hnězdenská 586/16, 18100 Praha 8, Česká republika',
-      },
-      ico: 'IČO: 68368844',
-      note: productsObject.note,
-      invoice_produced_by: 'Vyhotovil: AS',
-      footer: {
-        text: 'Faktura zároveň slouží jako dodací list',
-      },
-      currency_symbol: 'Kč',
-      date: {
-        billing_date: billingDate,
-        due_date: dueDate,
-      },
-    }
+    //   if (
+    //     createdOrder.shippingAddress.country !== 'Česká republika' &&
+    //     createdOrder.paymentMethod === 'Platba bankovním převodem předem'
+    //   ) {
+    //     await new Email(productsObject, '', '').sendOrderNotCzToEmail()
+    //     await new Email(productsObject, '', fileTosend).sendOrderNotCzAdminOnlyToEmail()
+    //   } else if (
+    //     createdOrder.shippingAddress.country === 'Česká republika' &&
+    //     createdOrder.paymentMethod === 'Platba bankovním převodem předem'
+    //   ) {
+    //     await new Email(productsObject, '', fileTosend).sendOrderCzBankTransferToEmail()
+    //   } else {
+    //     await new Email(productsObject, '', fileTosend).sendOrderToEmail()
+    //   }
 
-    date.setHours(date.getHours() + 1) // Increase the hour by 1
-    const formattedDate = date.toISOString().replace(/:/g, '-').substring(0, 19) // Format the date as YYYY-MM-DDTHH-MM-SS
-
-    // Create invoices directory
-    const invoiceDir = join(projectRoot, 'invoices')
-    const invoicePath = join(invoiceDir, `${orderNumber}_${formattedDate}.pdf`)
-
-    try {
-      await niceInvoice(invoiceDetails, invoicePath)
-      const fileTosend = invoicePath
-
-      if (
-        createdOrder.shippingAddress.country !== 'Česká republika' &&
-        createdOrder.paymentMethod === 'Platba bankovním převodem předem'
-      ) {
-        await new Email(productsObject, '', '').sendOrderNotCzToEmail()
-        await new Email(productsObject, '', fileTosend).sendOrderNotCzAdminOnlyToEmail()
-      } else if (
-        createdOrder.shippingAddress.country === 'Česká republika' &&
-        createdOrder.paymentMethod === 'Platba bankovním převodem předem'
-      ) {
-        await new Email(productsObject, '', fileTosend).sendOrderCzBankTransferToEmail()
-      } else {
-        await new Email(productsObject, '', fileTosend).sendOrderToEmail()
-      }
-
-      return NextResponse.json(createdOrder, { status: 201 })
-    } catch (err) {
-      console.error('Error with invoice or email:', err)
-      // Notify about the email issue but return successful order creation
-      return NextResponse.json(
-        {
-          message:
-            'Objednávka byla vytvořena, ale potvrzovací e-mail obdržíte později. Brzy Vás budeme informovat.',
-          order: createdOrder,
-        },
-        { status: 201 },
-      )
-    }
+    //   return NextResponse.json(createdOrder, { status: 201 })
+    // } catch (err) {
+    //   console.error('Error with invoice or email:', err)
+    //   // Notify about the email issue but return successful order creation
+    //   return NextResponse.json(
+    //     {
+    //       message:
+    //         'Objednávka byla vytvořena, ale potvrzovací e-mail obdržíte později. Brzy Vás budeme informovat.',
+    //       order: createdOrder,
+    //     },
+    //     { status: 201 },
+    //   )
+    // }
   } catch (error) {
     console.error('Order creation error:', error)
     return NextResponse.json({ message: error.message }, { status: 500 })

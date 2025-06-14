@@ -13,7 +13,14 @@ import CheckoutSteps from '@/app/components/CheckoutSteps'
 const PlaceOrderScreen = () => {
   const router = useRouter()
   const { cartItems: cart, removeFromAll, shippingAddress, paymentMethod } = useCartStore()
-  const { createOrder, order, loading, error, success } = useOrderStore()
+  const {
+    createOrder,
+    order,
+    loading,
+    error,
+    successCreate: success,
+    createdOrder,
+  } = useOrderStore()
   const { userInfo, updateUserProfile } = useUserStore()
 
   // Calculate Prices
@@ -28,9 +35,9 @@ const PlaceOrderScreen = () => {
       if (cart.paymentMethod === 'Hotovost') {
         removeFromAll()
       }
-      router.push(`/order/${order._id}`)
+      router.push(`/order/${createdOrder.id}`)
     }
-  }, [router, success, cart.paymentMethod, order?._id, removeFromAll])
+  }, [router, success, cart.paymentMethod, createdOrder?.id, removeFromAll])
 
   const [message, setMessage] = useState(null)
 
