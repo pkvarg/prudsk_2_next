@@ -55,19 +55,6 @@ const useOrderStore = create((set, get) => ({
   errorDelete: null,
   successDelete: false,
 
-  // Helper function to get auth header
-  getAuthConfig: () => {
-    // You'll need to get userInfo from your auth store
-    // This assumes you have access to userInfo somehow
-    const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}')
-    return {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-  },
-
   // Reset functions
   resetCreate: () =>
     set({
@@ -124,8 +111,9 @@ const useOrderStore = create((set, get) => ({
     try {
       set({ loadingCreate: true, errorCreate: null })
 
-      const config = get().getAuthConfig()
-      const { data } = await axios.post(`/api/orders/`, order, config)
+      const { data } = await axios.post(`/api/orders/`, order)
+
+      console.log('order store create order', data)
 
       set({
         loadingCreate: false,

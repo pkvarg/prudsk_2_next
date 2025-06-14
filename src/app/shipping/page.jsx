@@ -11,6 +11,8 @@ const ShippingScreen = () => {
   const router = useRouter()
   const { shippingAddress, saveShippingAddress, _hasHydrated } = useCartStore()
 
+  console.log('shipping address', shippingAddress)
+
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
   const [city, setCity] = useState('')
@@ -134,7 +136,7 @@ const ShippingScreen = () => {
   // }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="mx-auto lg:mx-[15%] px-4">
       <Link
         href="/cart"
         className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
@@ -143,7 +145,7 @@ const ShippingScreen = () => {
       </Link>
       <CheckoutSteps step1 step2 />
 
-      <div className="mx-4 lg:mx-[10%] py-8">
+      <div className="py-8">
         <h1 className="text-3xl font-bold text-[#071e46] mb-6">Doručení</h1>
         <h2 className="text-xl font-semibold text-[#071e46] mb-6">Doručovací adresa:</h2>
 
@@ -293,7 +295,7 @@ const ShippingScreen = () => {
                 onChange={handleChange}
                 className="mt-1 text-[#2bb2e6] focus:ring-[#2bb2e6] rounded"
               />
-              <h2 className="text-lg font-semibold text-[#071e46]">
+              <h2 className="!text-[15px] font-semibold text-[#071e46]">
                 Fakturační adresa se liší od doručovací
               </h2>
             </label>
@@ -301,8 +303,8 @@ const ShippingScreen = () => {
 
           {/* Billing Address Fields */}
           {checked && (
-            <div className="space-y-6 bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-lg font-semibold text-[#071e46] mb-4">Fakturační adresa</h3>
+            <div className="space-y-6 bg-gray-50 py-6 rounded-lg">
+              <h3 className="font-semibold text-[#071e46] mb-4">Fakturační adresa</h3>
 
               <div>
                 <label
@@ -397,7 +399,7 @@ const ShippingScreen = () => {
                     onChange={handleChangeICO}
                     className="mt-1 text-[#2bb2e6] focus:ring-[#2bb2e6] rounded"
                   />
-                  <h3 className="text-lg font-semibold text-[#071e46]">IČO</h3>
+                  <h3 className="!text-[15px] font-semibold text-[#071e46]">IČO</h3>
                 </label>
               </div>
 

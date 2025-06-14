@@ -1,93 +1,100 @@
 // app/api/users/profile/route.js
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
-import { auth } from '@/lib/auth'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc Get user profile
 // @desc GET /api/users/profile
 // @access Private
-export async function GET(request, response) {
-  const session = await auth()
+// export async function GET(request, response) {
+//   const user = await isAdmin()
 
-  if (!session) {
-    return new Response('Unauthorized', { status: 401 })
-  }
+//   if (!user) {
+//     return new Response('Unauthorized', { status: 401 })
+//   }
 
-  try {
-    const email = session.user.email
+//   const body = request.json()
+//   console.log(' GET body in profile', body)
 
-    // Find user by email from session (cause Google has a different id in session)
-    const user = await prisma.user.findUnique({
-      where: { email: email },
-    })
+//   try {
+//     const email = session.user.email
 
-    if (user) {
-      return NextResponse.json({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        isAssistant: user.isAssistant || false,
-        isSubscribed: user.isSubscribed || false,
-        googleId: user.googleId || null,
-      })
-    } else {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 })
-    }
-  } catch (error) {
-    console.error('Error fetching user profile:', error)
-    return NextResponse.json({ message: error.message }, { status: 500 })
-  }
-}
+//     // Find user by email from session (cause Google has a different id in session)
+//     const user = await prisma.user.findUnique({
+//       where: { email: email },
+//     })
 
-// Generate JWT token
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '30d',
-  })
-}
+//     if (user) {
+//       return NextResponse.json({
+//         id: user.id,
+//         name: user.name,
+//         email: user.email,
+//         isAdmin: user.isAdmin,
+//         isAssistant: user.isAssistant || false,
+//         isSubscribed: user.isSubscribed || false,
+//         googleId: user.googleId || null,
+//       })
+//     } else {
+//       return NextResponse.json({ message: 'User not found' }, { status: 404 })
+//     }
+//   } catch (error) {
+//     console.error('Error fetching user profile:', error)
+//     return NextResponse.json({ message: error.message }, { status: 500 })
+//   }
+// }
 
 export async function PUT(request) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const userId = session.user.id
+    const userId = user.id
     const userData = await request.json()
 
+    if (userId !== userData.id) {
+      return new Response('Unauthorized', { status: 401 })
+    }
+
     // Find user by ID
-    const user = await prisma.user.findUnique({
+    const existingUser = await prisma.user.findUnique({
       where: { id: userId },
     })
 
-    if (!user) {
+    if (!existingUser) {
       return NextResponse.json({ message: 'User not found' }, { status: 404 })
     }
 
+    const wantsToSubscribe = userData.isSubscribed
+    const currentlySubscribed = existingUser.isSubscribed && !existingUser.isUnsubscribed
+
     // Prepare update data
-    const updateData = {
-      name: userData.name || user.name,
-      email: userData.email || user.email,
-      isSubscribed: userData.isSubscribed !== undefined ? userData.isSubscribed : user.isSubscribed,
-      updatedAt: new Date(),
-    }
+    const updateData = {}
 
-    // Handle unsubscribe status
-    if (userData.isSubscribed === false) {
-      updateData.isUnsubscribed = true
-    } else if (userData.isSubscribed === true) {
+    // Handle subscription logic with both fields
+    if (wantsToSubscribe) {
+      // User wants to subscribe
+      updateData.isSubscribed = true
       updateData.isUnsubscribed = false
-    }
 
-    // Handle password update
-    if (userData.password) {
-      const salt = await bcrypt.genSalt(10)
-      updateData.password = await bcrypt.hash(userData.password, salt)
+      if (!currentlySubscribed) {
+        console.log('User subscribed/resubscribed to newsletter')
+      }
+    } else {
+      // User doesn't want newsletter (or wants to unsubscribe)
+      if (currentlySubscribed) {
+        // They were subscribed, now they're unsubscribing
+        updateData.isSubscribed = false
+        updateData.isUnsubscribed = true
+
+        console.log('User unsubscribed from newsletter')
+      } else {
+        // They weren't subscribed anyway, just ensure clean state
+        updateData.isSubscribed = false
+        updateData.isUnsubscribed = false
+      }
     }
 
     // Update user
@@ -96,16 +103,26 @@ export async function PUT(request) {
       data: updateData,
     })
 
+    // Log the newsletter subscription change for analytics
+    const subscriptionChanged = wantsToSubscribe !== currentlySubscribed
+    if (subscriptionChanged) {
+      console.log(
+        `Newsletter subscription changed for user ${userId}: ${currentlySubscribed} -> ${wantsToSubscribe}`,
+      )
+    }
+
     // Return updated user data
-    return NextResponse.json({
-      id: updatedUser.id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
-      isAssistant: updatedUser.isAssistant || false,
-      isSubscribed: updatedUser.isSubscribed || false,
-      token: generateToken(updatedUser.id),
-    })
+    return NextResponse.json(
+      {
+        message: 'User updated successfully',
+        subscriptionChanged,
+        newsletterStatus: {
+          isSubscribed: updateData.isSubscribed,
+          isUnsubscribed: updateData.isUnsubscribed,
+        },
+      },
+      { status: 200 },
+    )
   } catch (error) {
     console.error('Error updating user profile:', error)
     return NextResponse.json({ message: error.message }, { status: 500 })
