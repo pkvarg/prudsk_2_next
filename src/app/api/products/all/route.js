@@ -31,6 +31,11 @@ export async function GET() {
       orderBy: {
         name: 'asc',
       },
+      include: {
+        favoriteOf: true, // This is what's missing!
+        reviews: true,
+        user: true,
+      },
     })
 
     return NextResponse.json({ products })

@@ -124,7 +124,10 @@ const ResetPasswordPage = () => {
         </form>
 
         <div className="mt-4 text-center">
-          <Link href="/login" className="text-blue-600 hover:text-blue-800 hover:underline text-sm">
+          <Link
+            href="/login"
+            className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
+          >
             Zpět na přihlášení
           </Link>
         </div>

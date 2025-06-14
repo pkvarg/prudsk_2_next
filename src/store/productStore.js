@@ -39,6 +39,9 @@ const useProductStore = create((set, get) => ({
   errorUpdate: null,
   successUpdate: false,
 
+  loadingRemoveFromFavorites: false,
+  errorRemoveFromFavorites: null,
+
   // List products with pagination
   listProducts: async (keyword = '', pageNumber = 1, pageSize = 10) => {
     try {
@@ -362,6 +365,28 @@ const useProductStore = create((set, get) => ({
       errorDetail: null,
       errorUpdate: null,
     })
+  },
+
+  removeFromFavorites: async (productId, userId) => {
+    try {
+      set({ loadingRemoveFromFavorites: true })
+
+      const { data } = await axios.put(`/api/products/${productId}/favorites/remove`, { userId })
+
+      console.log('remove from favs data', data)
+
+      set({
+        loadingRemoveFromFavorites: false,
+      })
+    } catch (error) {
+      set({
+        loadingRemoveFromFavorites: false,
+        errorRemoveFromFavorites:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
   },
 }))
 

@@ -104,7 +104,7 @@ const Eshop = () => {
       <div className="mb-6">
         <Link
           href="/"
-          className="inline-flex items-center px-4 py-2 bg-[#9b7d57] text-white rounded hover:bg-[#071e46] transition-colors duration-200"
+          className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
         >
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path

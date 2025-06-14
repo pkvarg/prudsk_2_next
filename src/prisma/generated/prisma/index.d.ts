@@ -1557,6 +1557,7 @@ export namespace Prisma {
     videos: number
     banners: number
     reviews: number
+    favorites: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1566,6 +1567,7 @@ export namespace Prisma {
     videos?: boolean | UserCountOutputTypeCountVideosArgs
     banners?: boolean | UserCountOutputTypeCountBannersArgs
     reviews?: boolean | UserCountOutputTypeCountReviewsArgs
+    favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
   }
 
   // Custom InputTypes
@@ -1619,6 +1621,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReviewWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFavoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoriteWhereInput
   }
 
 
@@ -1924,6 +1933,7 @@ export namespace Prisma {
     videos?: boolean | User$videosArgs<ExtArgs>
     banners?: boolean | User$bannersArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
+    favorites?: boolean | User$favoritesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1956,6 +1966,7 @@ export namespace Prisma {
     videos?: boolean | User$videosArgs<ExtArgs>
     banners?: boolean | User$bannersArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
+    favorites?: boolean | User$favoritesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1968,6 +1979,7 @@ export namespace Prisma {
       videos: Prisma.$VideoPayload<ExtArgs>[]
       banners: Prisma.$BannerPayload<ExtArgs>[]
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
+      favorites: Prisma.$FavoritePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2355,6 +2367,7 @@ export namespace Prisma {
     videos<T extends User$videosArgs<ExtArgs> = {}>(args?: Subset<T, User$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     banners<T extends User$bannersArgs<ExtArgs> = {}>(args?: Subset<T, User$bannersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favorites<T extends User$favoritesArgs<ExtArgs> = {}>(args?: Subset<T, User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2911,6 +2924,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
+  }
+
+  /**
+   * User.favorites
+   */
+  export type User$favoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favorite
+     */
+    omit?: FavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    where?: FavoriteWhereInput
+    orderBy?: FavoriteOrderByWithRelationInput | FavoriteOrderByWithRelationInput[]
+    cursor?: FavoriteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FavoriteScalarFieldEnum | FavoriteScalarFieldEnum[]
   }
 
   /**
@@ -9601,23 +9638,13 @@ export namespace Prisma {
 
   export type AggregateFavorite = {
     _count: FavoriteCountAggregateOutputType | null
-    _avg: FavoriteAvgAggregateOutputType | null
-    _sum: FavoriteSumAggregateOutputType | null
     _min: FavoriteMinAggregateOutputType | null
     _max: FavoriteMaxAggregateOutputType | null
   }
 
-  export type FavoriteAvgAggregateOutputType = {
-    favoriteOf: number | null
-  }
-
-  export type FavoriteSumAggregateOutputType = {
-    favoriteOf: number | null
-  }
-
   export type FavoriteMinAggregateOutputType = {
     id: string | null
-    favoriteOf: number | null
+    favoriteOf: string | null
     createdAt: Date | null
     updatedAt: Date | null
     productId: string | null
@@ -9625,7 +9652,7 @@ export namespace Prisma {
 
   export type FavoriteMaxAggregateOutputType = {
     id: string | null
-    favoriteOf: number | null
+    favoriteOf: string | null
     createdAt: Date | null
     updatedAt: Date | null
     productId: string | null
@@ -9640,14 +9667,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type FavoriteAvgAggregateInputType = {
-    favoriteOf?: true
-  }
-
-  export type FavoriteSumAggregateInputType = {
-    favoriteOf?: true
-  }
 
   export type FavoriteMinAggregateInputType = {
     id?: true
@@ -9712,18 +9731,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: FavoriteAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: FavoriteSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: FavoriteMinAggregateInputType
@@ -9754,21 +9761,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: FavoriteCountAggregateInputType | true
-    _avg?: FavoriteAvgAggregateInputType
-    _sum?: FavoriteSumAggregateInputType
     _min?: FavoriteMinAggregateInputType
     _max?: FavoriteMaxAggregateInputType
   }
 
   export type FavoriteGroupByOutputType = {
     id: string
-    favoriteOf: number | null
+    favoriteOf: string
     createdAt: Date
     updatedAt: Date
     productId: string | null
     _count: FavoriteCountAggregateOutputType | null
-    _avg: FavoriteAvgAggregateOutputType | null
-    _sum: FavoriteSumAggregateOutputType | null
     _min: FavoriteMinAggregateOutputType | null
     _max: FavoriteMaxAggregateOutputType | null
   }
@@ -9794,6 +9797,7 @@ export namespace Prisma {
     updatedAt?: boolean
     productId?: boolean
     product?: boolean | Favorite$productArgs<ExtArgs>
+    user?: boolean | Favorite$userArgs<ExtArgs>
   }, ExtArgs["result"]["favorite"]>
 
 
@@ -9809,16 +9813,18 @@ export namespace Prisma {
   export type FavoriteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "favoriteOf" | "createdAt" | "updatedAt" | "productId", ExtArgs["result"]["favorite"]>
   export type FavoriteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | Favorite$productArgs<ExtArgs>
+    user?: boolean | Favorite$userArgs<ExtArgs>
   }
 
   export type $FavoritePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Favorite"
     objects: {
       product: Prisma.$ProductPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      favoriteOf: number | null
+      favoriteOf: string
       createdAt: Date
       updatedAt: Date
       productId: string | null
@@ -10186,6 +10192,7 @@ export namespace Prisma {
   export interface Prisma__FavoriteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     product<T extends Favorite$productArgs<ExtArgs> = {}>(args?: Subset<T, Favorite$productArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends Favorite$userArgs<ExtArgs> = {}>(args?: Subset<T, Favorite$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10216,7 +10223,7 @@ export namespace Prisma {
    */
   interface FavoriteFieldRefs {
     readonly id: FieldRef<"Favorite", 'String'>
-    readonly favoriteOf: FieldRef<"Favorite", 'Int'>
+    readonly favoriteOf: FieldRef<"Favorite", 'String'>
     readonly createdAt: FieldRef<"Favorite", 'DateTime'>
     readonly updatedAt: FieldRef<"Favorite", 'DateTime'>
     readonly productId: FieldRef<"Favorite", 'String'>
@@ -10606,6 +10613,25 @@ export namespace Prisma {
      */
     include?: ProductInclude<ExtArgs> | null
     where?: ProductWhereInput
+  }
+
+  /**
+   * Favorite.user
+   */
+  export type Favorite$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -11919,6 +11945,7 @@ export namespace Prisma {
     videos?: VideoListRelationFilter
     banners?: BannerListRelationFilter
     reviews?: ReviewListRelationFilter
+    favorites?: FavoriteListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11944,6 +11971,7 @@ export namespace Prisma {
     videos?: VideoOrderByRelationAggregateInput
     banners?: BannerOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
+    favorites?: FavoriteOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11972,6 +12000,7 @@ export namespace Prisma {
     videos?: VideoListRelationFilter
     banners?: BannerListRelationFilter
     reviews?: ReviewListRelationFilter
+    favorites?: FavoriteListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -12607,11 +12636,12 @@ export namespace Prisma {
     OR?: FavoriteWhereInput[]
     NOT?: FavoriteWhereInput | FavoriteWhereInput[]
     id?: StringFilter<"Favorite"> | string
-    favoriteOf?: IntNullableFilter<"Favorite"> | number | null
+    favoriteOf?: StringFilter<"Favorite"> | string
     createdAt?: DateTimeFilter<"Favorite"> | Date | string
     updatedAt?: DateTimeFilter<"Favorite"> | Date | string
     productId?: StringNullableFilter<"Favorite"> | string | null
     product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type FavoriteOrderByWithRelationInput = {
@@ -12621,6 +12651,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     productId?: SortOrder
     product?: ProductOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type FavoriteWhereUniqueInput = Prisma.AtLeast<{
@@ -12628,11 +12659,12 @@ export namespace Prisma {
     AND?: FavoriteWhereInput | FavoriteWhereInput[]
     OR?: FavoriteWhereInput[]
     NOT?: FavoriteWhereInput | FavoriteWhereInput[]
-    favoriteOf?: IntNullableFilter<"Favorite"> | number | null
+    favoriteOf?: StringFilter<"Favorite"> | string
     createdAt?: DateTimeFilter<"Favorite"> | Date | string
     updatedAt?: DateTimeFilter<"Favorite"> | Date | string
     productId?: StringNullableFilter<"Favorite"> | string | null
     product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type FavoriteOrderByWithAggregationInput = {
@@ -12642,10 +12674,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     productId?: SortOrder
     _count?: FavoriteCountOrderByAggregateInput
-    _avg?: FavoriteAvgOrderByAggregateInput
     _max?: FavoriteMaxOrderByAggregateInput
     _min?: FavoriteMinOrderByAggregateInput
-    _sum?: FavoriteSumOrderByAggregateInput
   }
 
   export type FavoriteScalarWhereWithAggregatesInput = {
@@ -12653,7 +12683,7 @@ export namespace Prisma {
     OR?: FavoriteScalarWhereWithAggregatesInput[]
     NOT?: FavoriteScalarWhereWithAggregatesInput | FavoriteScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Favorite"> | string
-    favoriteOf?: IntNullableWithAggregatesFilter<"Favorite"> | number | null
+    favoriteOf?: StringWithAggregatesFilter<"Favorite"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Favorite"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Favorite"> | Date | string
     productId?: StringNullableWithAggregatesFilter<"Favorite"> | string | null
@@ -12742,6 +12772,7 @@ export namespace Prisma {
     videos?: VideoCreateNestedManyWithoutUserInput
     banners?: BannerCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12767,6 +12798,7 @@ export namespace Prisma {
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     banners?: BannerUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -12791,6 +12823,7 @@ export namespace Prisma {
     videos?: VideoUpdateManyWithoutUserNestedInput
     banners?: BannerUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12815,6 +12848,7 @@ export namespace Prisma {
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     banners?: BannerUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -13524,29 +13558,29 @@ export namespace Prisma {
 
   export type FavoriteCreateInput = {
     id?: string
-    favoriteOf?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product?: ProductCreateNestedOneWithoutFavoriteOfInput
+    user?: UserCreateNestedOneWithoutFavoritesInput
   }
 
   export type FavoriteUncheckedCreateInput = {
     id?: string
-    favoriteOf?: number | null
+    favoriteOf: string
     createdAt?: Date | string
     updatedAt?: Date | string
     productId?: string | null
   }
 
   export type FavoriteUpdateInput = {
-    favoriteOf?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneWithoutFavoriteOfNestedInput
+    user?: UserUpdateOneWithoutFavoritesNestedInput
   }
 
   export type FavoriteUncheckedUpdateInput = {
-    favoriteOf?: NullableIntFieldUpdateOperationsInput | number | null
+    favoriteOf?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13554,20 +13588,19 @@ export namespace Prisma {
 
   export type FavoriteCreateManyInput = {
     id?: string
-    favoriteOf?: number | null
+    favoriteOf: string
     createdAt?: Date | string
     updatedAt?: Date | string
     productId?: string | null
   }
 
   export type FavoriteUpdateManyMutationInput = {
-    favoriteOf?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriteUncheckedUpdateManyInput = {
-    favoriteOf?: NullableIntFieldUpdateOperationsInput | number | null
+    favoriteOf?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13727,6 +13760,12 @@ export namespace Prisma {
     none?: ReviewWhereInput
   }
 
+  export type FavoriteListRelationFilter = {
+    every?: FavoriteWhereInput
+    some?: FavoriteWhereInput
+    none?: FavoriteWhereInput
+  }
+
   export type ProductOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -13748,6 +13787,10 @@ export namespace Prisma {
   }
 
   export type ReviewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FavoriteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14144,16 +14187,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type FavoriteListRelationFilter = {
-    every?: FavoriteWhereInput
-    some?: FavoriteWhereInput
-    none?: FavoriteWhereInput
-  }
-
-  export type FavoriteOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type ProductCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -14314,10 +14347,6 @@ export namespace Prisma {
     productId?: SortOrder
   }
 
-  export type FavoriteAvgOrderByAggregateInput = {
-    favoriteOf?: SortOrder
-  }
-
   export type FavoriteMaxOrderByAggregateInput = {
     id?: SortOrder
     favoriteOf?: SortOrder
@@ -14332,10 +14361,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     productId?: SortOrder
-  }
-
-  export type FavoriteSumOrderByAggregateInput = {
-    favoriteOf?: SortOrder
   }
 
   export type VideoCountOrderByAggregateInput = {
@@ -14407,6 +14432,13 @@ export namespace Prisma {
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
+  export type FavoriteCreateNestedManyWithoutUserInput = {
+    create?: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput> | FavoriteCreateWithoutUserInput[] | FavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutUserInput | FavoriteCreateOrConnectWithoutUserInput[]
+    createMany?: FavoriteCreateManyUserInputEnvelope
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+  }
+
   export type ProductUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ProductCreateWithoutUserInput, ProductUncheckedCreateWithoutUserInput> | ProductCreateWithoutUserInput[] | ProductUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutUserInput | ProductCreateOrConnectWithoutUserInput[]
@@ -14447,6 +14479,13 @@ export namespace Prisma {
     connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
     createMany?: ReviewCreateManyUserInputEnvelope
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+  }
+
+  export type FavoriteUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput> | FavoriteCreateWithoutUserInput[] | FavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutUserInput | FavoriteCreateOrConnectWithoutUserInput[]
+    createMany?: FavoriteCreateManyUserInputEnvelope
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -14556,6 +14595,20 @@ export namespace Prisma {
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
+  export type FavoriteUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput> | FavoriteCreateWithoutUserInput[] | FavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutUserInput | FavoriteCreateOrConnectWithoutUserInput[]
+    upsert?: FavoriteUpsertWithWhereUniqueWithoutUserInput | FavoriteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FavoriteCreateManyUserInputEnvelope
+    set?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    disconnect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    delete?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    update?: FavoriteUpdateWithWhereUniqueWithoutUserInput | FavoriteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FavoriteUpdateManyWithWhereWithoutUserInput | FavoriteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
+  }
+
   export type ProductUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProductCreateWithoutUserInput, ProductUncheckedCreateWithoutUserInput> | ProductCreateWithoutUserInput[] | ProductUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutUserInput | ProductCreateOrConnectWithoutUserInput[]
@@ -14638,6 +14691,20 @@ export namespace Prisma {
     update?: ReviewUpdateWithWhereUniqueWithoutUserInput | ReviewUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ReviewUpdateManyWithWhereWithoutUserInput | ReviewUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+  }
+
+  export type FavoriteUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput> | FavoriteCreateWithoutUserInput[] | FavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutUserInput | FavoriteCreateOrConnectWithoutUserInput[]
+    upsert?: FavoriteUpsertWithWhereUniqueWithoutUserInput | FavoriteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FavoriteCreateManyUserInputEnvelope
+    set?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    disconnect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    delete?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    update?: FavoriteUpdateWithWhereUniqueWithoutUserInput | FavoriteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FavoriteUpdateManyWithWhereWithoutUserInput | FavoriteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAudiosInput = {
@@ -14844,6 +14911,12 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutFavoritesInput = {
+    create?: XOR<UserCreateWithoutFavoritesInput, UserUncheckedCreateWithoutFavoritesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFavoritesInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type ProductUpdateOneWithoutFavoriteOfNestedInput = {
     create?: XOR<ProductCreateWithoutFavoriteOfInput, ProductUncheckedCreateWithoutFavoriteOfInput>
     connectOrCreate?: ProductCreateOrConnectWithoutFavoriteOfInput
@@ -14852,6 +14925,16 @@ export namespace Prisma {
     delete?: ProductWhereInput | boolean
     connect?: ProductWhereUniqueInput
     update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutFavoriteOfInput, ProductUpdateWithoutFavoriteOfInput>, ProductUncheckedUpdateWithoutFavoriteOfInput>
+  }
+
+  export type UserUpdateOneWithoutFavoritesNestedInput = {
+    create?: XOR<UserCreateWithoutFavoritesInput, UserUncheckedCreateWithoutFavoritesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFavoritesInput
+    upsert?: UserUpsertWithoutFavoritesInput
+    disconnect?: boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFavoritesInput, UserUpdateWithoutFavoritesInput>, UserUncheckedUpdateWithoutFavoritesInput>
   }
 
   export type UserCreateNestedOneWithoutVideosInput = {
@@ -15324,6 +15407,29 @@ export namespace Prisma {
     data: ReviewCreateManyUserInput | ReviewCreateManyUserInput[]
   }
 
+  export type FavoriteCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product?: ProductCreateNestedOneWithoutFavoriteOfInput
+  }
+
+  export type FavoriteUncheckedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productId?: string | null
+  }
+
+  export type FavoriteCreateOrConnectWithoutUserInput = {
+    where: FavoriteWhereUniqueInput
+    create: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput>
+  }
+
+  export type FavoriteCreateManyUserInputEnvelope = {
+    data: FavoriteCreateManyUserInput | FavoriteCreateManyUserInput[]
+  }
+
   export type ProductUpsertWithWhereUniqueWithoutUserInput = {
     where: ProductWhereUniqueInput
     update: XOR<ProductUpdateWithoutUserInput, ProductUncheckedUpdateWithoutUserInput>
@@ -15536,6 +15642,33 @@ export namespace Prisma {
     productId?: StringNullableFilter<"Review"> | string | null
   }
 
+  export type FavoriteUpsertWithWhereUniqueWithoutUserInput = {
+    where: FavoriteWhereUniqueInput
+    update: XOR<FavoriteUpdateWithoutUserInput, FavoriteUncheckedUpdateWithoutUserInput>
+    create: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput>
+  }
+
+  export type FavoriteUpdateWithWhereUniqueWithoutUserInput = {
+    where: FavoriteWhereUniqueInput
+    data: XOR<FavoriteUpdateWithoutUserInput, FavoriteUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FavoriteUpdateManyWithWhereWithoutUserInput = {
+    where: FavoriteScalarWhereInput
+    data: XOR<FavoriteUpdateManyMutationInput, FavoriteUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FavoriteScalarWhereInput = {
+    AND?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
+    OR?: FavoriteScalarWhereInput[]
+    NOT?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
+    id?: StringFilter<"Favorite"> | string
+    favoriteOf?: StringFilter<"Favorite"> | string
+    createdAt?: DateTimeFilter<"Favorite"> | Date | string
+    updatedAt?: DateTimeFilter<"Favorite"> | Date | string
+    productId?: StringNullableFilter<"Favorite"> | string | null
+  }
+
   export type UserCreateWithoutAudiosInput = {
     id?: string
     name?: string | null
@@ -15558,6 +15691,7 @@ export namespace Prisma {
     videos?: VideoCreateNestedManyWithoutUserInput
     banners?: BannerCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAudiosInput = {
@@ -15582,6 +15716,7 @@ export namespace Prisma {
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     banners?: BannerUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAudiosInput = {
@@ -15621,6 +15756,7 @@ export namespace Prisma {
     videos?: VideoUpdateManyWithoutUserNestedInput
     banners?: BannerUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAudiosInput = {
@@ -15644,6 +15780,7 @@ export namespace Prisma {
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     banners?: BannerUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBannersInput = {
@@ -15668,6 +15805,7 @@ export namespace Prisma {
     audios?: AudioCreateNestedManyWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBannersInput = {
@@ -15692,6 +15830,7 @@ export namespace Prisma {
     audios?: AudioUncheckedCreateNestedManyWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBannersInput = {
@@ -15731,6 +15870,7 @@ export namespace Prisma {
     audios?: AudioUpdateManyWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBannersInput = {
@@ -15754,6 +15894,7 @@ export namespace Prisma {
     audios?: AudioUncheckedUpdateManyWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutOrdersInput = {
@@ -15778,6 +15919,7 @@ export namespace Prisma {
     videos?: VideoCreateNestedManyWithoutUserInput
     banners?: BannerCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -15802,6 +15944,7 @@ export namespace Prisma {
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     banners?: BannerUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrdersInput = {
@@ -15841,6 +15984,7 @@ export namespace Prisma {
     videos?: VideoUpdateManyWithoutUserNestedInput
     banners?: BannerUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -15864,6 +16008,7 @@ export namespace Prisma {
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     banners?: BannerUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProductsInput = {
@@ -15888,6 +16033,7 @@ export namespace Prisma {
     videos?: VideoCreateNestedManyWithoutUserInput
     banners?: BannerCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProductsInput = {
@@ -15912,6 +16058,7 @@ export namespace Prisma {
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     banners?: BannerUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProductsInput = {
@@ -15952,14 +16099,14 @@ export namespace Prisma {
 
   export type FavoriteCreateWithoutProductInput = {
     id?: string
-    favoriteOf?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutFavoritesInput
   }
 
   export type FavoriteUncheckedCreateWithoutProductInput = {
     id?: string
-    favoriteOf?: number | null
+    favoriteOf: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16005,6 +16152,7 @@ export namespace Prisma {
     videos?: VideoUpdateManyWithoutUserNestedInput
     banners?: BannerUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProductsInput = {
@@ -16028,6 +16176,7 @@ export namespace Prisma {
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     banners?: BannerUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReviewUpsertWithWhereUniqueWithoutProductInput = {
@@ -16062,17 +16211,6 @@ export namespace Prisma {
     data: XOR<FavoriteUpdateManyMutationInput, FavoriteUncheckedUpdateManyWithoutProductInput>
   }
 
-  export type FavoriteScalarWhereInput = {
-    AND?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
-    OR?: FavoriteScalarWhereInput[]
-    NOT?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
-    id?: StringFilter<"Favorite"> | string
-    favoriteOf?: IntNullableFilter<"Favorite"> | number | null
-    createdAt?: DateTimeFilter<"Favorite"> | Date | string
-    updatedAt?: DateTimeFilter<"Favorite"> | Date | string
-    productId?: StringNullableFilter<"Favorite"> | string | null
-  }
-
   export type UserCreateWithoutReviewsInput = {
     id?: string
     name?: string | null
@@ -16095,6 +16233,7 @@ export namespace Prisma {
     audios?: AudioCreateNestedManyWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     banners?: BannerCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -16119,6 +16258,7 @@ export namespace Prisma {
     audios?: AudioUncheckedCreateNestedManyWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     banners?: BannerUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewsInput = {
@@ -16227,6 +16367,7 @@ export namespace Prisma {
     audios?: AudioUpdateManyWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     banners?: BannerUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -16250,6 +16391,7 @@ export namespace Prisma {
     audios?: AudioUncheckedUpdateManyWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     banners?: BannerUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProductUpsertWithoutReviewsInput = {
@@ -16394,6 +16536,61 @@ export namespace Prisma {
     create: XOR<ProductCreateWithoutFavoriteOfInput, ProductUncheckedCreateWithoutFavoriteOfInput>
   }
 
+  export type UserCreateWithoutFavoritesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    password?: string | null
+    isRegistered?: boolean | null
+    registerToken?: string | null
+    isAdmin?: boolean | null
+    isAssistant?: boolean | null
+    isSubscribed?: boolean | null
+    isUnsubscribed?: boolean | null
+    googleId?: string | null
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products?: ProductCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    audios?: AudioCreateNestedManyWithoutUserInput
+    videos?: VideoCreateNestedManyWithoutUserInput
+    banners?: BannerCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFavoritesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    password?: string | null
+    isRegistered?: boolean | null
+    registerToken?: string | null
+    isAdmin?: boolean | null
+    isAssistant?: boolean | null
+    isSubscribed?: boolean | null
+    isUnsubscribed?: boolean | null
+    googleId?: string | null
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products?: ProductUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    audios?: AudioUncheckedCreateNestedManyWithoutUserInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    banners?: BannerUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFavoritesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFavoritesInput, UserUncheckedCreateWithoutFavoritesInput>
+  }
+
   export type ProductUpsertWithoutFavoriteOfInput = {
     update: XOR<ProductUpdateWithoutFavoriteOfInput, ProductUncheckedUpdateWithoutFavoriteOfInput>
     create: XOR<ProductCreateWithoutFavoriteOfInput, ProductUncheckedCreateWithoutFavoriteOfInput>
@@ -16467,6 +16664,65 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput
   }
 
+  export type UserUpsertWithoutFavoritesInput = {
+    update: XOR<UserUpdateWithoutFavoritesInput, UserUncheckedUpdateWithoutFavoritesInput>
+    create: XOR<UserCreateWithoutFavoritesInput, UserUncheckedCreateWithoutFavoritesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFavoritesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFavoritesInput, UserUncheckedUpdateWithoutFavoritesInput>
+  }
+
+  export type UserUpdateWithoutFavoritesInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    isRegistered?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    registerToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isAssistant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isSubscribed?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isUnsubscribed?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    audios?: AudioUpdateManyWithoutUserNestedInput
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    banners?: BannerUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFavoritesInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    isRegistered?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    registerToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isAssistant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isSubscribed?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isUnsubscribed?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    audios?: AudioUncheckedUpdateManyWithoutUserNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutVideosInput = {
     id?: string
     name?: string | null
@@ -16489,6 +16745,7 @@ export namespace Prisma {
     audios?: AudioCreateNestedManyWithoutUserInput
     banners?: BannerCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVideosInput = {
@@ -16513,6 +16770,7 @@ export namespace Prisma {
     audios?: AudioUncheckedCreateNestedManyWithoutUserInput
     banners?: BannerUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVideosInput = {
@@ -16552,6 +16810,7 @@ export namespace Prisma {
     audios?: AudioUpdateManyWithoutUserNestedInput
     banners?: BannerUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVideosInput = {
@@ -16575,6 +16834,7 @@ export namespace Prisma {
     audios?: AudioUncheckedUpdateManyWithoutUserNestedInput
     banners?: BannerUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProductCreateManyUserInput = {
@@ -16664,6 +16924,13 @@ export namespace Prisma {
     rating?: number | null
     comment?: string | null
     isAcknowledged?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productId?: string | null
+  }
+
+  export type FavoriteCreateManyUserInput = {
+    id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     productId?: string | null
@@ -16931,6 +17198,24 @@ export namespace Prisma {
     productId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type FavoriteUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneWithoutFavoriteOfNestedInput
+  }
+
+  export type FavoriteUncheckedUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FavoriteUncheckedUpdateManyWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type ReviewCreateManyProductInput = {
     id?: string
     name?: string | null
@@ -16944,7 +17229,7 @@ export namespace Prisma {
 
   export type FavoriteCreateManyProductInput = {
     id?: string
-    favoriteOf?: number | null
+    favoriteOf: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16980,19 +17265,19 @@ export namespace Prisma {
   }
 
   export type FavoriteUpdateWithoutProductInput = {
-    favoriteOf?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutFavoritesNestedInput
   }
 
   export type FavoriteUncheckedUpdateWithoutProductInput = {
-    favoriteOf?: NullableIntFieldUpdateOperationsInput | number | null
+    favoriteOf?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriteUncheckedUpdateManyWithoutProductInput = {
-    favoriteOf?: NullableIntFieldUpdateOperationsInput | number | null
+    favoriteOf?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

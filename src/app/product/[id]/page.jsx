@@ -114,7 +114,7 @@ const ProductPage = () => {
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
-      await fetch(`/api/products/${productId}/favorite`, {
+      await fetch(`/api/products/${productId}/favorites`, {
         method: 'PUT',
         headers: config.headers,
         body: JSON.stringify({ favoriteOf: userInfo.id }),
@@ -144,7 +144,7 @@ const ProductPage = () => {
           e.preventDefault()
           router.back()
         }}
-        className="inline-block px-4 py-2 mb-6 !text-white hover:text-blue-800"
+        className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
       >
         Zpět
       </Link>

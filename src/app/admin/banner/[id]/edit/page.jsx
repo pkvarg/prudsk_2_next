@@ -111,7 +111,7 @@ const BannerEditPage = () => {
     <div className="w-full px-4 py-8">
       <Link
         href="/admin/bannerlist"
-        className="inline-flex items-center px-4 py-2 mb-6 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+        className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
       >
         ← Zpět
       </Link>

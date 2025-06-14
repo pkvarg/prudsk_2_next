@@ -90,7 +90,7 @@ const ForgotPasswordPage = () => {
         <div className="mt-4 flex justify-between items-center">
           <Link
             href={redirect ? `/login?redirect=${redirect}` : '/login'}
-            className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
+            className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
           >
             Zpět na přihlášení
           </Link>

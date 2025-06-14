@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc    Remove from favorites
-// @route   PUT /api/products/:id/remove/favorites
+// @route   PUT /api/products/:id/favorites/remove
 // @access  Private
 
 export async function PUT(request, { params }) {
@@ -14,6 +15,8 @@ export async function PUT(request, { params }) {
     // Parse request body
     const body = await request.json()
     const { userId } = body
+
+    console.log('remove back', id, userId)
 
     if (!userId) {
       return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
@@ -38,7 +41,7 @@ export async function PUT(request, { params }) {
     await prisma.favorite.deleteMany({
       where: {
         productId: id,
-        favoriteOf: parseInt(userId), // Ensure it's the right type (assuming favoriteOf is an integer)
+        favoriteOf: userId,
       },
     })
 

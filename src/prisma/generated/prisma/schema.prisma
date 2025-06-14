@@ -39,12 +39,13 @@ model User {
   updatedAt            DateTime  @updatedAt
 
   // Relations
-  products Product[]
-  orders   Order[]
-  audios   Audio[]
-  videos   Video[]
-  banners  Banner[]
-  reviews  Review[]
+  products  Product[]
+  orders    Order[]
+  audios    Audio[]
+  videos    Video[]
+  banners   Banner[]
+  reviews   Review[]
+  favorites Favorite[]
 
   @@map("users")
 }
@@ -177,13 +178,16 @@ model Review {
 
 model Favorite {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  favoriteOf Int?
+  favoriteOf String   @db.ObjectId // User ID as ObjectId string
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
   // Relations
-  product   Product? @relation(fields: [productId], references: [id]) // Made optional
-  productId String?  @db.ObjectId // Made optional
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @db.ObjectId
+  user      User?    @relation(fields: [favoriteOf], references: [id]) // ADD THIS LINE
+
+  @@map("favorites")
 }
 
 model Video {
