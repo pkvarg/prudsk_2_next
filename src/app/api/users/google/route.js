@@ -50,8 +50,8 @@ export async function POST(request) {
           isGoogle: true,
         }
 
-        //const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/register'
-        const apiUrl = 'http://localhost:3013/api/proud2next/register'
+        const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/register'
+        // const apiUrl = 'http://localhost:3013/api/proud2next/register'
 
         // Make the API request
         const response = await fetch(apiUrl, {

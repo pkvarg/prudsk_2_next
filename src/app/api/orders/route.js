@@ -190,9 +190,9 @@ export async function POST(request) {
     productsObject.note = createdOrder.shippingAddress.note
 
     // SEND HONO EMAIL
-    const apiUrl = 'http://localhost:3013/api/proud2next/order-resend-confirmation'
+    // const apiUrl = 'http://localhost:3013/api/proud2next/order-send-confirmation'
 
-    //const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/order-resend-confirmation'
+    const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/order-send-confirmation'
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -200,7 +200,8 @@ export async function POST(request) {
     })
 
     const resData = await response.json()
-    console.log('data order resend confirmation', resData.success)
+    console.log('data order send confirmation', resData)
+    console.log('data order send confirmation', resData.success)
 
     if (!resData.success) {
       throw new Error('Nepodarilo sa odoslať send order')
