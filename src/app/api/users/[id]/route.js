@@ -1,7 +1,7 @@
 // app/api/users/[id]/route.js
 
 import { NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 import prisma from '@/db/db'
 
 // @desc Get user by ID
@@ -9,16 +9,16 @@ import prisma from '@/db/db'
 // @access Private/Admin
 export async function GET(request, { params }) {
   try {
-    const session = await auth()
+    const userLoggedIn = await isAdmin()
 
-    if (!session) {
+    if (!userLoggedIn.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
     const { id } = await params
 
     // Find user by ID, excluding password
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: { id },
       select: {
         id: true,
@@ -52,16 +52,16 @@ export async function GET(request, { params }) {
 // @access Private/Admin
 export async function DELETE(request, { params }) {
   try {
-    const session = await auth()
+    const userLoggedIn = await isAdmin()
 
-    if (!session) {
+    if (!userLoggedIn.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
     const { id } = await params
 
     // Find the user first to verify it exists
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: { id },
     })
 
@@ -70,7 +70,7 @@ export async function DELETE(request, { params }) {
     }
 
     // Check if trying to delete self
-    if (user.id === session.user.id) {
+    if (user.id === userLoggedIn.id) {
       return NextResponse.json({ message: 'Cannot delete your own account' }, { status: 400 })
     }
 
@@ -91,9 +91,9 @@ export async function DELETE(request, { params }) {
 // @access Private/Admin
 export async function PUT(request, { params }) {
   try {
-    const session = await auth()
+    const userLoggedIn = await isAdmin()
 
-    if (!session) {
+    if (!userLoggedIn.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 

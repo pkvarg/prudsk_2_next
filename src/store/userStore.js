@@ -129,13 +129,14 @@ const useUserStore = create(
         }),
 
       getUserDetails: async (id) => {
+        console.log('in getuserDetails')
         set((state) => ({
           userDetails: { ...state.userDetails, loading: true },
         }))
 
         try {
           // fetches from api/users/profile
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`)
+          const response = await fetch(`/api/users/${id}`)
           const data = await response.json()
 
           set({
@@ -162,6 +163,7 @@ const useUserStore = create(
       },
 
       updateUserProfile: async (userData) => {
+        console.log('in update userDetails')
         try {
           const response = await fetch('/api/users/profile', {
             method: 'PUT',
@@ -228,15 +230,7 @@ const useUserStore = create(
         try {
           set({ loading: true })
 
-          const { userInfo } = get()
-
-          const config = {
-            headers: {
-              Authorization: `Bearer ${userInfo.token}`,
-            },
-          }
-
-          const { data } = await axios.get('/api/users', config)
+          const { data } = await axios.get('/api/users')
 
           set({
             loading: false,
