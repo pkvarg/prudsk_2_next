@@ -4,14 +4,20 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import useCartStore from '@/store/cartStore'
-import FormContainer from '@/app/components/FormContainer'
+import useUserStore from '@/store/userStore'
 import CheckoutSteps from '@/app/components/CheckoutSteps'
 
 const ShippingScreen = () => {
   const router = useRouter()
   const { shippingAddress, saveShippingAddress, _hasHydrated } = useCartStore()
 
-  console.log('shipping address', shippingAddress)
+  const { userInfo } = useUserStore()
+
+  useEffect(() => {
+    if (!userInfo) {
+      router.push('/login')
+    }
+  }, [userInfo])
 
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
