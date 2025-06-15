@@ -316,8 +316,7 @@ const useOrderStore = create((set, get) => ({
     try {
       set({ loading: true, error: null })
 
-      const config = get().getAuthConfig()
-      const { data } = await axios.get(`/api/orders`, config)
+      const { data } = await axios.get(`/api/orders`)
 
       set({
         loading: false,

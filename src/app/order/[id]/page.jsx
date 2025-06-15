@@ -16,7 +16,7 @@ const OrderPage = () => {
   const orderId = params.id
 
   const userInfo = useUserStore((state) => state.userInfo)
-  const clearCart = useCartStore((state) => state.clearCart)
+  const { clearCart } = useCartStore()
   const {
     getOrderDetails,
     orderDetails: order,
@@ -28,12 +28,12 @@ const OrderPage = () => {
     loadingCancel,
     loadingPaid,
     resendConfirmationEmailWithInvoice,
+    successConfirmationEmail,
     loadingConfirmationEmail,
+    resetCreate,
   } = useOrderStore()
 
   const [error, setError] = useState(null)
-
-  const [successConfirmationEmail, setSuccessConfirmationEmail] = useState(false)
 
   useEffect(() => {
     if (orderId) getOrderDetails(orderId)
@@ -54,10 +54,12 @@ const OrderPage = () => {
     getOrderDetails(orderId)
   }
 
-  const newOrderHandler = () => {
-    clearCart()
+  const newOrderHandler = async () => {
+    await clearCart()
     localStorage.removeItem('shippingAddress')
     localStorage.removeItem('paymentMethod')
+    localStorage.removeItem('cart-storage')
+    await resetCreate()
     router.push('/')
   }
 
@@ -92,6 +94,12 @@ const OrderPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Objednávka {order.orderNumber}</h1>
+
+      {successConfirmationEmail && (
+        <Message variant="success" className="mt-2">
+          Potvrzovací email s fakturou odeslán
+        </Message>
+      )}
 
       <div className="flex flex-wrap -mx-4">
         <div className="w-full md:w-2/3 px-4">
@@ -226,27 +234,37 @@ const OrderPage = () => {
               {userInfo?.isAdmin && (
                 <div className="space-y-2">
                   {!order.isDelivered && (
-                    <button
-                      onClick={deliverHandler}
-                      className={`w-full py-2 px-4 rounded text-white ${
-                        loadingDeliver ? 'bg-gray-500' : 'bg-red-600 hover:bg-red-700'
-                      }`}
-                      disabled={loadingDeliver}
-                    >
-                      {loadingDeliver ? 'Loading...' : 'Označit jako odeslané'}
-                    </button>
+                    <>
+                      <button
+                        onClick={deliverHandler}
+                        className={`w-full py-2 px-4 rounded text-white ${
+                          loadingDeliver ? 'bg-gray-500' : 'bg-green-500 hover:bg-blue-500'
+                        }`}
+                        disabled={loadingDeliver}
+                      >
+                        {loadingDeliver ? 'Loading...' : 'Označit jako odeslané*'}
+                      </button>
+                      <p className="text-left text-[15px] leading-4 mx-2 mt-1">
+                        * Odesílá se potvrzení zákazníkovi i adminovi.
+                      </p>
+                    </>
                   )}
 
                   {!order.isPaid && (
-                    <button
-                      onClick={paidHandler}
-                      className={`w-full py-2 px-4 rounded text-white ${
-                        loadingPaid ? 'bg-gray-500' : 'bg-green-600 hover:bg-green-700'
-                      }`}
-                      disabled={loadingPaid}
-                    >
-                      {loadingPaid ? 'Loading...' : 'Označit jako zaplacené'}
-                    </button>
+                    <>
+                      <button
+                        onClick={paidHandler}
+                        className={`w-full py-2 px-4 rounded text-white ${
+                          loadingPaid ? 'bg-gray-500' : 'bg-green-600 hover:bg-green-700'
+                        }`}
+                        disabled={loadingPaid}
+                      >
+                        {loadingPaid ? 'Loading...' : 'Označit jako zaplacené*'}
+                      </button>
+                      <p className="text-left text-[15px] leading-4 mx-2 mt-1">
+                        * Odesílá se potvrzení zákazníkovi i adminovi.
+                      </p>
+                    </>
                   )}
 
                   {!order.isCancelled && !order.isDelivered && (
@@ -274,19 +292,20 @@ const OrderPage = () => {
                 }`}
                 disabled={loadingConfirmationEmail}
               >
-                {loadingConfirmationEmail ? 'Loading...' : 'Poslat potvrzovací email s fakturou'}
+                {loadingConfirmationEmail ? 'Loading...' : 'Doposlat potvrzovací email s fakturou*'}
               </button>
-
-              {successConfirmationEmail && (
-                <Message variant="success" className="mt-2">
-                  Potvrzovací email s fakturou odeslán
-                </Message>
-              )}
+              <p className="text-justify text-[15px] mx-2 my-2">
+                * Při objednávce do zahraničí se faktura ze systému neodešle, odešle se jenom
+                notifikace. Je nutné poslat si fakturu žlutým tlačítkem, upravit poštovné a celkovou
+                sumu a odeslat zákazníkovi mailem manuálně. Stejně to funguje zde při doposílání.
+              </p>
 
               <button
                 onClick={resendConfirmationEmailAdminOnly}
                 className={`w-full py-2 px-4 rounded text-white mt-2 ${
-                  loadingConfirmationEmail ? 'bg-gray-500' : 'bg-red-600 hover:bg-red-700'
+                  loadingConfirmationEmail
+                    ? 'bg-gray-500'
+                    : 'bg-yellow-400 !text-black hover:bg-green-400'
                 }`}
                 disabled={loadingConfirmationEmail}
               >
@@ -294,12 +313,6 @@ const OrderPage = () => {
                   ? 'Loading...'
                   : 'Poslat potvrzovací email s fakturou jenom Adminovi'}
               </button>
-
-              {successConfirmationEmail && (
-                <Message variant="success" className="mt-2">
-                  Potvrzovací email s fakturou odeslán jenom Adminovi
-                </Message>
-              )}
             </div>
           </div>
         </div>
