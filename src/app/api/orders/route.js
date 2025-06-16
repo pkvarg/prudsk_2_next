@@ -65,13 +65,27 @@ export async function POST(request) {
               data: { countInStock: updatedCountInStockToDb },
             })
 
-            // TODO LOW STORAGE NOTIF TO ADMIN
+            const productToAdminNotif = {
+              id: product.id,
+              name: product.name,
+              author: product.author,
+              countInStock: updatedCountInStockToDb,
+            }
 
-            // try {
-            //   await new Email(product, '', '').sendLowStoragePiecesWarningEmail()
-            // } catch (error) {
-            //   console.log(error)
-            // }
+            //const apiUrl = 'http://localhost:3013/api/proud2next/low-storage-count'
+
+            const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/low-storage-count'
+
+            const response = await fetch(apiUrl, {
+              method: 'POST',
+              body: JSON.stringify(productToAdminNotif),
+            })
+
+            const data = await response.json()
+
+            if (!data.success) {
+              throw new Error('Nepodarilo sa odoslať Product low storage notification confirmation')
+            }
           } else {
             await prisma.product.update({
               where: { id: product.id },
@@ -81,8 +95,6 @@ export async function POST(request) {
         }
       }
     }
-
-    console.log('user', userLoggedIn)
 
     // Create new order with Prisma
     const createdOrder = await prisma.order.create({
