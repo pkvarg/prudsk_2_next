@@ -145,7 +145,7 @@ const ProductCarousel = () => {
   }
 
   return (
-    <div className="my-8 -z-10 mx-4 lg:mx-[10%]">
+    <div className="my-8 -z-10">
       {/* Simple slider container */}
       <div className="relative h-96 w-full overflow-hidden">
         {images.map((image, index) => {
