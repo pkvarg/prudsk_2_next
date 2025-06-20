@@ -231,27 +231,6 @@ const WordsOfLife = () => {
           </div>
         )}
       </div>
-
-      {/* Navigation back to podcast categories */}
-      <div className="mt-12 pt-8 border-t border-gray-200">
-        <div className="text-center">
-          <h3 className="text-lg font-medium text-[#071e46] mb-4">Prohlédněte si také</h3>
-          <div className="flex flex-wrap justify-center gap-2">
-            <Link
-              href="/life-study"
-              className="px-4 py-2 bg-[#edeae4] text-[#071e46] rounded hover:bg-[#9b7d57] hover:text-white transition-colors duration-200"
-            >
-              Studium života
-            </Link>
-            <Link
-              href="/video"
-              className="px-4 py-2 bg-[#edeae4] text-[#071e46] rounded hover:bg-[#9b7d57] hover:text-white transition-colors duration-200"
-            >
-              Video obsah
-            </Link>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
