@@ -42,6 +42,32 @@ const useProductStore = create((set, get) => ({
   loadingRemoveFromFavorites: false,
   errorRemoveFromFavorites: null,
 
+  searchKeyword: '',
+  isSearchActive: false,
+
+  // Current page state
+  currentPage: 1,
+  pageSize: 8,
+
+  setSearchKeyword: (keyword) =>
+    set((state) => ({
+      searchKeyword: keyword,
+      isSearchActive: !!keyword.trim(),
+    })),
+
+  clearSearch: () =>
+    set((state) => ({
+      searchKeyword: '',
+      isSearchActive: false,
+    })),
+
+  setCurrentPage: (pageNum) => {
+    set({ currentPage: pageNum })
+    // Automatically fetch products for the new page
+    const { searchKeyword, pageSize } = get()
+    get().listLibraryProducts(searchKeyword, pageNum, pageSize)
+  },
+
   // List products with pagination
   listProducts: async (keyword = '', pageNumber = 1, pageSize = 10) => {
     try {
@@ -375,6 +401,31 @@ const useProductStore = create((set, get) => ({
           error.response && error.response.data.message
             ? error.response.data.message
             : error.message,
+      })
+    }
+  },
+
+  // List library products with pagination
+  listLibraryProducts: async (keyword = '', pageNumber = 1, pageSize = 2) => {
+    try {
+      set({ loading: true, error: null })
+
+      // Use the correct API endpoint
+      const { data } = await axios.get(
+        `/api/products/library?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
+      )
+
+      set({
+        loading: false,
+        products: data.products,
+        page: data.page,
+        pages: data.pages,
+      })
+    } catch (error) {
+      set({
+        loading: false,
+        error:
+          error.response && error.response.data.error ? error.response.data.error : error.message,
       })
     }
   },

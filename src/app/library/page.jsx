@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import PaginateLibrary from '@/app/components/PaginateLibrary'
@@ -9,17 +9,25 @@ import useProductStore from '@/store/productStore'
 
 const Library = () => {
   const params = useParams()
-  const router = useRouter()
+  const [currentPage, setCurrentPage] = useState(1)
 
   const keyword = params.keyword
-  const pageNumber = params.pageNumber || 1
-  const pageSize = 6
+  const pageSize = 2 // Set to 2 products per page as requested
 
-  const { products, page, pages, listProducts } = useProductStore()
+  const { products, page, pages, listLibraryProducts, loading, error } = useProductStore()
 
   useEffect(() => {
-    listProducts(keyword, pageNumber, pageSize)
-  }, [keyword, pageNumber, listProducts])
+    listLibraryProducts(keyword, currentPage, pageSize)
+  }, [keyword, currentPage, listLibraryProducts])
+
+  const handlePageChange = (pageNum) => {
+    setCurrentPage(pageNum)
+  }
+
+  // Reset to page 1 when keyword changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [keyword])
 
   return (
     <div className="container mx-auto px-4">
@@ -33,21 +41,31 @@ const Library = () => {
       <div className="my-3">
         <h1 className="text-3xl font-bold text-[#071e46] mb-6">Čítárna</h1>
 
-        <div className="space-y-8">
-          {products.map(
-            (product) =>
-              product.excerpt.excerpt && (
+        {loading ? (
+          <div className="text-center py-8">Loading...</div>
+        ) : error ? (
+          <div className="text-center py-8 text-red-600">{error}</div>
+        ) : (
+          <>
+            <div className="space-y-8">
+              {products.map((product) => (
                 <div key={product.id} className="mb-8">
                   <h2 className="text-2xl font-semibold text-[#071e46] mb-4">{product.name}</h2>
 
                   <div className="flex flex-col md:flex-row gap-6">
                     <Link href={`/product/${product.id}`} className="flex-shrink-0">
                       <Image
-                        src={product.excerpt.image}
+                        src={product.excerpt.image || '/images/default-book.jpg'}
                         alt={product.name}
                         width={300}
                         height={225}
-                        className="w-full md:w-[300px] h-auto object-cover rounded shadow-md hover:shadow-lg transition-shadow duration-200"
+                        sizes="(max-width: 768px) 100vw, 300px"
+                        style={{
+                          width: 'auto',
+                          height: 'auto',
+                          maxWidth: '100%',
+                        }}
+                        className="md:w-[300px] object-cover rounded shadow-md hover:shadow-lg transition-shadow duration-200"
                       />
                     </Link>
 
@@ -65,12 +83,21 @@ const Library = () => {
                     </div>
                   </div>
                 </div>
-              ),
-          )}
-        </div>
+              ))}
+            </div>
+
+            {/* Show message if no products found */}
+            {products.length === 0 && !loading && (
+              <div className="text-center py-8">
+                <p className="text-gray-600">Žádné publikace s úryvky nebyly nalezeny.</p>
+              </div>
+            )}
+          </>
+        )}
       </div>
 
-      <PaginateLibrary pages={pages} page={page} keyword={'library'} />
+      {/* Only show pagination if there are multiple pages */}
+      <PaginateLibrary pages={pages} page={currentPage} onPageChange={handlePageChange} />
     </div>
   )
 }

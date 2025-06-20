@@ -12,15 +12,15 @@ const LibraryExcerpt = () => {
   const productId = params.id
   const router = useRouter()
 
-  const { products, listProducts } = useProductStore()
+  const { allProducts: products, getAllProducts } = useProductStore()
 
   useLayoutEffect(() => {
     window.scrollTo(0, 250)
   })
 
   useEffect(() => {
-    listProducts()
-  }, [listProducts])
+    getAllProducts()
+  }, [getAllProducts])
 
   // Find the specific product
   const product = products.find((p) => p.id === productId)

@@ -3,17 +3,34 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Search } from 'react-bootstrap-icons'
+import useProductStore from '@/store/productStore'
 
 const SearchBox = () => {
   const [keyword, setKeyword] = useState('')
   const router = useRouter()
+  const { setSearchKeyword, clearSearch } = useProductStore()
 
   const submitHandler = (e) => {
     e.preventDefault()
-    if (keyword.trim()) {
-      router.push(`/search/${keyword}`)
+    const trimmedKeyword = keyword.trim()
+
+    if (trimmedKeyword) {
+      setSearchKeyword(trimmedKeyword)
     } else {
-      router.push('/')
+      clearSearch()
+    }
+
+    // Navigate to home page
+    router.push('/')
+  }
+
+  const handleInputChange = (e) => {
+    const value = e.target.value
+    setKeyword(value)
+
+    // If user clears the input completely, clear the search
+    if (value === '') {
+      clearSearch()
     }
   }
 
@@ -22,9 +39,10 @@ const SearchBox = () => {
       <input
         type="text"
         name="q"
-        onChange={(e) => setKeyword(e.target.value)}
+        value={keyword}
+        onChange={handleInputChange}
         placeholder="Zadejte text..."
-        className="text-lg rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
+        className="text-lg pl-3 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
       />
       <button
         type="submit"

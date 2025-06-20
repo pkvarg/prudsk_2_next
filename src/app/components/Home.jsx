@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import useProductStore from '@/store/productStore'
 import Product from '../components/Product'
@@ -14,10 +13,22 @@ import { useParams } from 'next/navigation'
 const HomeScreen = () => {
   const { keyword } = useParams()
 
+  console.log('keyword', keyword)
+
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 8
 
-  const { products, loading, error, page, pages, listProducts } = useProductStore()
+  const {
+    products,
+    loading,
+    error,
+    page,
+    pages,
+    listProducts,
+    searchKeyword,
+    isSearchActive,
+    clearSearch,
+  } = useProductStore()
 
   // Reset to page 1 when keyword changes
   useEffect(() => {
@@ -25,8 +36,8 @@ const HomeScreen = () => {
   }, [keyword])
 
   useEffect(() => {
-    listProducts(keyword || '', currentPage, pageSize)
-  }, [listProducts, keyword, currentPage])
+    listProducts(searchKeyword || '', currentPage, pageSize)
+  }, [listProducts, searchKeyword, currentPage])
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage)

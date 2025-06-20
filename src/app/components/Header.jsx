@@ -69,7 +69,7 @@ const Header = () => {
           <div>
             <Link
               href="/contact"
-              className="text-[#313131] text-[17px] font-normal cursor-pointer no-underline"
+              className="!text-[#313131] text-[17px] font-normal cursor-pointer no-underline"
             >
               <p className="m-0 hover:text-[#24b9d6]">Kontakt</p>
             </Link>
@@ -80,7 +80,9 @@ const Header = () => {
                 <p className="absolute -right-[7px] -top-[0.5px] inline-block rounded-full w-5 h-[17.5px] leading-[19px] bg-red-500 text-white">
                   <span className="text-md ml-[30%] ">{cartItems?.length}</span>
                 </p>
-                <Icon.Cart2 className="text-[27.5px] font-thin mb-[0px]">Košík</Icon.Cart2>
+                <Icon.Cart2 className="text-[27.5px] text-black font-thin mb-[0px]">
+                  Košík
+                </Icon.Cart2>
               </div>
             </Link>
             {userInfo ? (
@@ -220,7 +222,7 @@ const Header = () => {
               <Link href="/" className="no-underline">
                 <img src="/images/wwwproudbanner.png" className="h-16" alt="prud-zivota" />
               </Link>
-              <h3 className="text-[#071e46] text-lg mt-2">
+              <h3 className="text-[#A07C54] italic text-lg mt-2">
                 Přinášet bohatství Božího slova všemu Božímu lidu
               </h3>
             </div>
