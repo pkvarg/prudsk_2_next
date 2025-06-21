@@ -13,8 +13,6 @@ import { useParams } from 'next/navigation'
 const HomeScreen = () => {
   const { keyword } = useParams()
 
-  console.log('keyword', keyword)
-
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 8
 

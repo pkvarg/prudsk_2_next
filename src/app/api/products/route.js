@@ -18,8 +18,6 @@ export async function GET(request) {
     const page = parseInt(searchParams.get('pageNumber') || '1')
     const keyword = searchParams.get('keyword')
 
-    console.log('keyword', keyword)
-
     // Set up the where clause for search functionality
     let where = {}
     if (keyword) {

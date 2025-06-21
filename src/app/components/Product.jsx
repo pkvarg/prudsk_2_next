@@ -9,7 +9,7 @@ const Product = ({ product }) => {
       {/* Product Card */}
       <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col h-full group">
         {/* Product Image */}
-        <div className="relative overflow-hidden rounded-t-lg">
+        <div className="relative overflow-hidden rounded-t-lg m-6 lg:m-0">
           <Link href={`/product/${product.id}`}>
             <div className="relative w-full h-96 bg-gray-100">
               <Image
@@ -17,7 +17,7 @@ const Product = ({ product }) => {
                 alt={product.name}
                 fill
                 priority
-                className="object-fit group-hover:scale-105 transition-transform duration-300"
+                className="object-scale-down lg:object-fit group-hover:scale-105 transition-transform duration-300"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               />
               {/* Discount badge */}

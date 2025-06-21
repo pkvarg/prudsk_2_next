@@ -18,8 +18,6 @@ export async function GET(request) {
     const page = parseInt(searchParams.get('pageNumber') || '1')
     const keyword = searchParams.get('keyword')
 
-    console.log('keyword', keyword)
-
     // For MongoDB with Prisma, we might need to use raw queries
     // or fetch and filter in JavaScript due to embedded object limitations
 

@@ -153,26 +153,25 @@ const Footer = () => {
             </div>
 
             {/* Mobile copyright */}
-            <div className="md:hidden flex flex-col justify-center gap-3 text-left mx-3">
+            <div className="md:hidden flex flex-col justify-center gap-1 text-left mx-3">
               <p className="text-[16px] text-[#828282] mb-0">
                 Copyright &copy; {Date().substring(11, 15)} Distribuce Proud,
               </p>
-              <p className="text-[16px] text-[#828282] mb-0">
-                všechna práva vyhrazena, se svolením
-              </p>
+              <p className="text-[16px] text-[#828282] mb-0">všechna práva vyhrazena,</p>
               <a
                 href="https://www.lsm.org"
                 target="_blank"
                 rel="noreferrer"
-                className="text-[16px] text-[#828282] ml-0"
+                className="text-[16px] !text-[#828282] ml-0 cursor-pointer"
               >
-                LIVING STREAM MINISTRY
+                se svolením
+                <span className="ml-2 underline">LIVING STREAM MINISTRY</span>
               </a>
               <a
                 href="https://www.pictusweb.sk"
                 target="_blank"
                 rel="noreferrer"
-                className="text-[16px] text-[#828282] ml-0"
+                className="text-[12.5px] !text-[#828282] ml-0"
               >
                 &#60;&#47;&#62; PICTUSWEB Development
               </a>

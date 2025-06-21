@@ -2,17 +2,18 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react'
 import SearchBox from './SearchBox'
+import MobileSearchBox from './MobileSearchBox'
 import { signOut } from 'next-auth/react'
 import useUserStore from '../../store/userStore'
 import useCartStore from '../../store/cartStore'
 import * as Icon from 'react-bootstrap-icons'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { usePathname } from 'next/navigation'
 
 const Header = () => {
   // Get state and actions directly from Zustand stores
-  const { data: session, status } = useSession()
-  const { userInfo, setUserInfo, clearUserState } = useUserStore()
+  //const { data: session, status } = useSession()
+  const { userInfo, clearUserState } = useUserStore()
   const { cartItems } = useCartStore()
 
   const [isOpen, setIsOpen] = useState(false)
@@ -22,9 +23,11 @@ const Header = () => {
   const adminDropdownRef = useRef(null)
   const assistantDropdownRef = useRef(null)
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
 
   // Update your useEffect to handle clicks outside for all dropdowns
   useEffect(() => {
@@ -56,7 +59,17 @@ const Header = () => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
   }
 
+  const toggleIsMenuOpen = () => {
+    setIsMenuOpen(!isMenuOpen)
+    setActiveDropdown(null)
+  }
+
   const closeAllDropdowns = () => {
+    setActiveDropdown(null)
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const closeUserDropdown = () => {
     setActiveDropdown(null)
   }
 
@@ -226,7 +239,7 @@ const Header = () => {
                 Přinášet bohatství Božího slova všemu Božímu lidu
               </h3>
             </div>
-            <div className="w-80">
+            <div>
               <SearchBox />
             </div>
           </div>
@@ -239,24 +252,26 @@ const Header = () => {
             <div className="lg:hidden flex items-center space-x-4 py-3">
               {/* Mobile user */}
               {userInfo ? (
-                <div className="relative">
-                  <button
-                    onClick={() => toggleDropdown('mobile-user')}
-                    className="text-white flex items-center"
-                  >
+                <div
+                  className="relative flex flex-row gap-4 text-white"
+                  onClick={() => toggleDropdown('mobile-user')}
+                >
+                  <p>{userInfo.name}</p>
+                  <button className=" flex items-center">
                     <Icon.Person className="h-5 w-5" />
                   </button>
                   {activeDropdown === 'mobile-user' && (
-                    <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 border">
+                    <div className="absolute left-0 mt-10 w-48 bg-white rounded-md shadow-lg z-50 border">
                       <Link
                         href="/profile"
                         className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                        onClick={closeUserDropdown}
                       >
                         Můj profil
                       </Link>
                       <button
                         onClick={logoutHandler}
-                        className="w-full text-left px-4 py-2 text-[#9b7d57] hover:bg-gray-50"
+                        className="w-full text-left px-4 py-2 !text-[#352106] hover:bg-gray-50"
                       >
                         Odhlásit se
                       </button>
@@ -264,29 +279,37 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <Link href="/login" className="text-white">
+                <Link href="/login" className="!text-white">
                   <Icon.Person className="h-5 w-5" />
                 </Link>
               )}
 
               {/* Mobile cart */}
-              <Link href="/cart" className="text-white relative">
+              <Link
+                href="/cart"
+                className="text-white relative"
+                // onClick={closeAllDropdowns}
+              >
                 {cartItems.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-yellow-400 text-red-700 text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                     {cartItems.length}
                   </span>
                 )}
-                <Icon.Cart className="h-5 w-5" />
+                <Icon.Cart className="h-5 w-5 !text-white" />
               </Link>
 
               {/* Mobile favorites */}
-              <Link href="/favorites" className="text-white">
+              <Link href="/favorites" className="!text-white">
                 <Icon.HeartFill className="h-5 w-5" />
               </Link>
             </div>
 
-            {/* Mobile menu button */}
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden text-white p-2">
+            {/* Red Mobile menu button */}
+            <button
+              //onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={toggleIsMenuOpen}
+              className="lg:hidden text-white p-2"
+            >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <span
                   className={`block h-0.5 w-6 bg-white transform transition-transform ${
@@ -300,7 +323,7 @@ const Header = () => {
                 ></span>
                 <span
                   className={`block h-0.5 w-6 bg-white mt-1 transform transition-transform ${
-                    isMenuOpen ? '-rotate-45 -translate-y-1' : ''
+                    isMenuOpen ? '-rotate-45 -translate-y-1 !mt-0' : ''
                   }`}
                 ></span>
               </div>
@@ -549,19 +572,19 @@ const Header = () => {
             <div className="lg:hidden bg-red-700 pb-4">
               <div className="space-y-2">
                 {/* Mobile navigation items */}
-                <div className="border-t border-red-600 pt-2">
+                <div className="border-t border-red-600 pt-2 ">
                   <button
                     onClick={() => toggleDropdown('mobile-news')}
-                    className="w-full text-left px-4 py-2 text-white hover:bg-red-600 flex justify-between items-center"
+                    className="w-full text-left px-4 py-2 text-white flex justify-between items-center"
                   >
                     Novinky
                     <Icon.ChevronDown className="h-4 w-4" />
                   </button>
                   {activeDropdown === 'mobile-news' && (
-                    <div className="bg-red-600 px-8 py-2">
+                    <div className="px-8 py-2">
                       <Link
                         href="/new-books/2025"
-                        className="block py-1 text-white text-sm"
+                        className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
                         Knihy 2025
@@ -573,85 +596,205 @@ const Header = () => {
                 <div>
                   <button
                     onClick={() => toggleDropdown('mobile-podcast')}
-                    className="w-full text-left px-4 py-2 text-white hover:bg-red-600 flex justify-between items-center"
+                    className="w-full text-left px-4 py-2 text-white flex justify-between items-center"
                   >
                     Podcast
                     <Icon.ChevronDown className="h-4 w-4" />
                   </button>
                   {activeDropdown === 'mobile-podcast' && (
-                    <div className="bg-red-600 px-8 py-2 space-y-1">
-                      <Link href="/words-of-life" className="block py-1 text-white text-sm">
+                    <div className="px-8 py-2 space-y-1">
+                      <Link
+                        href="/words-of-life"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
                         Slova života
                       </Link>
-                      <Link href="/life-study" className="block py-1 text-white text-sm">
+                      <Link
+                        href="/life-study"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
                         Studium života
                       </Link>
                     </div>
                   )}
                 </div>
 
-                <Link href="/video" className="block px-4 py-2 text-white hover:bg-red-600">
+                <Link
+                  href="/video"
+                  className="block px-4 py-2 !text-white"
+                  onClick={closeAllDropdowns}
+                >
                   Video
                 </Link>
 
                 <div>
                   <button
                     onClick={() => toggleDropdown('mobile-eshop')}
-                    className="w-full text-left px-4 py-2 text-white hover:bg-red-600 flex justify-between items-center"
+                    className="w-full text-left px-4 py-2 text-white flex justify-between items-center"
                   >
                     E-shop
                     <Icon.ChevronDown className="h-4 w-4" />
                   </button>
                   {activeDropdown === 'mobile-eshop' && (
-                    <div className="bg-red-600 px-8 py-2 space-y-1 max-h-64 overflow-y-auto">
+                    <div className="px-8 py-2 space-y-1 max-h-64 overflow-y-auto">
                       <Link
                         href="/eshop/abecední-seznam-kníh"
-                        className="block py-1 text-white text-sm"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
                       >
                         Abecední seznam knih
                       </Link>
-                      <Link href="/eshop/Boží-ekonomie" className="block py-1 text-white text-sm">
+                      <Link href="/eshop/Boží-ekonomie" className="block py-1 !text-white text-sm">
                         Boží ekonomie
                       </Link>
-                      <Link href="/eshop/brožury" className="block py-1 text-white text-sm">
+                      <Link href="/eshop/brožury" className="block py-1 !text-white text-sm">
                         Brožury
                       </Link>
-                      {/* Add other eshop links as needed */}
+                      <Link
+                        href="/eshop/církev"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Církev
+                      </Link>
+                      <Link
+                        href="/eshop/duch"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Duch
+                      </Link>
+                      <Link
+                        href="/eshop/evangelium"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Evangelium
+                      </Link>
+                      <Link
+                        href="/eshop/kristus"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Kristus
+                      </Link>
+                      <Link
+                        href="/eshop/křesťanská-praxe"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Křesťanská praxe
+                      </Link>
+                      <Link
+                        href="/eshop/křesťanská-služba"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Křesťanská služba
+                      </Link>
+                      <Link
+                        href="/eshop/letáky"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Letáky
+                      </Link>
+                      <Link
+                        href="/eshop/mládež"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Mládež
+                      </Link>
+                      <Link
+                        href="/eshop/studium-a-výklad-bible"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Studium a výklad Bible
+                      </Link>
+                      <Link
+                        href="/eshop/Trojjediný-Bůh"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Trojjediný Bůh
+                      </Link>
+                      <Link
+                        href="/eshop/život"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Život
+                      </Link>
+                      <Link
+                        href="/eshop/životopisné"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
+                        Životopisné
+                      </Link>
                     </div>
                   )}
                 </div>
 
-                <Link href="/library" className="block px-4 py-2 text-white hover:bg-red-600">
+                <Link
+                  href="/library"
+                  className="block px-4 py-2 !text-white"
+                  onClick={closeAllDropdowns}
+                >
                   Čítárna
                 </Link>
 
                 <div>
                   <button
                     onClick={() => toggleDropdown('mobile-info')}
-                    className="w-full text-left px-4 py-2 text-white hover:bg-red-600 flex justify-between items-center"
+                    className="w-full text-left px-4 py-2 !text-white flex justify-between items-center"
                   >
                     Info
                     <Icon.ChevronDown className="h-4 w-4" />
                   </button>
                   {activeDropdown === 'mobile-info' && (
-                    <div className="bg-red-600 px-8 py-2 space-y-1">
-                      <Link href="/watchman-nee" className="block py-1 text-white text-sm">
+                    <div className="px-8 py-2 space-y-1">
+                      <Link
+                        href="/watchman-nee"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
                         Watchman Nee
                       </Link>
-                      <Link href="/witness-lee" className="block py-1 text-white text-sm">
+                      <Link
+                        href="/witness-lee"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
                         Witness Lee
                       </Link>
-                      <Link href="/about" className="block py-1 text-white text-sm">
+                      <Link
+                        href="/about"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
                         O nás
                       </Link>
-                      <Link href="/safety-privacy" className="block py-1 text-white text-sm">
+                      <Link
+                        href="/safety-privacy"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
                         Bezpečnost a soukromí
                       </Link>
                     </div>
                   )}
                 </div>
 
-                <Link href="/contact" className="block px-4 py-2 text-white hover:bg-red-600">
+                <Link
+                  href="/contact"
+                  className="block px-4 py-2 !text-white"
+                  onClick={closeAllDropdowns}
+                >
                   Kontakt
                 </Link>
               </div>
@@ -659,170 +802,27 @@ const Header = () => {
           )}
         </div>
       </nav>
-
-      {/* Mobile hamburger menu */}
-      <div className="lg:hidden">
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 focus:outline-none"
-        >
-          {mobileMenuOpen ? (
-            <Icon.X className="text-[25px]" />
-          ) : (
-            <Icon.List className="text-[25px]" />
-          )}
-        </button>
-      </div>
-
-      {/* Mobile menu overlay */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 bg-white z-50 pt-4">
-          <div className="flex justify-between items-center px-4 pb-4 border-b">
-            <h2 className="text-xl font-semibold">Menu</h2>
-            <button onClick={() => setMobileMenuOpen(false)} className="p-2 focus:outline-none">
-              <Icon.X className="text-[25px]" />
-            </button>
-          </div>
-
-          <div className="p-4">
-            <div className="space-y-4">
-              <Link
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-[#313131] text-[17px] font-normal py-2"
-              >
-                Kontakt
+      {/* Mobile Logo routing to -> Home.  */}
+      <div className="block lg:hidden bg-white py-6">
+        <div className="px-4">
+          <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center">
+              <Link href="/" className="no-underline">
+                <img src="/images/wwwproudbanner.png" className="h-16" alt="prud-zivota" />
               </Link>
-
-              <Link
-                href="/cart"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-[#313131] text-[17px] font-normal py-2 relative"
-              >
-                <div className="flex items-center">
-                  <Icon.Cart2 className="text-[25px] mr-2" />
-                  <span>Košík ({cartItems?.length})</span>
-                </div>
-              </Link>
-
-              {userInfo ? (
-                <div className="space-y-2">
-                  <div className="text-[#313131] text-[17px] font-normal py-2">{userInfo.name}</div>
-                  <Link
-                    href="/profile"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Můj profil
-                  </Link>
-                  <button
-                    onClick={() => {
-                      logoutHandler()
-                      setMobileMenuOpen(false)
-                    }}
-                    className="block pl-4 text-[#313131] text-[15px] py-2 w-full text-left"
-                  >
-                    Odhlásit se
-                  </button>
-                </div>
-              ) : (
-                <Link
-                  href="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-[#313131] text-[17px] font-normal py-2"
-                >
-                  <div className="flex items-center">
-                    <Icon.Person className="text-[25px] mr-2" />
-                    <span>Přihlášení</span>
-                  </div>
-                </Link>
-              )}
-
-              {userInfo && userInfo.isAdmin && !userInfo.isAssistant && (
-                <div className="space-y-2">
-                  <div className="text-[#313131] text-[17px] font-normal py-2">Admin</div>
-                  <Link
-                    href="/admin/userlist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Uživatelé
-                  </Link>
-                  <Link
-                    href="/admin/productlist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Produkty
-                  </Link>
-                  <Link
-                    href="/admin/orderlist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Objednávky
-                  </Link>
-                  <Link
-                    href="/admin/audiolist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Audio
-                  </Link>
-                  <Link
-                    href="/admin/videolist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Video
-                  </Link>
-                  <Link
-                    href="/admin/bannerlist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Bannery
-                  </Link>
-                  <Link
-                    href="/admin/subscriberslist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Odběratelé novinek
-                  </Link>
-                </div>
-              )}
-
-              {userInfo && userInfo.isAssistant && (
-                <div className="space-y-2">
-                  <div className="text-[#313131] text-[17px] font-normal py-2">Asistent</div>
-                  <Link
-                    href="/admin/audiolist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Audio
-                  </Link>
-                  <Link
-                    href="/admin/videolist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Video
-                  </Link>
-                  <Link
-                    href="/admin/bannerlist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pl-4 text-[#313131] text-[15px] py-2"
-                  >
-                    Bannery
-                  </Link>
-                </div>
-              )}
+              <h3 className="text-[#A07C54] text-center italic !text-[15px] mt-2">
+                Přinášet bohatství Božího slova všemu Božímu lidu
+              </h3>
             </div>
+            {/* Display on '/' only  */}
+            {isHomePage && (
+              <div className="mt-8">
+                <MobileSearchBox />
+              </div>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </header>
   )
 }
