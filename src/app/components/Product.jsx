@@ -34,7 +34,7 @@ const Product = ({ product }) => {
         <div className="p-4 flex flex-col">
           {/* Product Name */}
           <Link href={`/product/${product.id}`} className="no-underline">
-            <h3 className="text-[#071e46] font-bold text-lg mb-0 hover:text-[#9b7d57] transition-colors duration-200 line-clamp-2">
+            <h3 className="!font-normal text-[#9E7B54] !text-[17.5px] mb-0 hover:text-[#9b7d57]">
               {product.name}
             </h3>
           </Link>
@@ -70,9 +70,7 @@ const Product = ({ product }) => {
                 </div>
               </div>
             ) : (
-              <div className="text-xl font-semibold text-[#071e46] capitalize">
-                {product.price} Kč
-              </div>
+              <div className="font-normal text-[#9E7B54]">{product.price} Kč</div>
             )}
           </div>
         </div>

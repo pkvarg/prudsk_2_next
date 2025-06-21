@@ -74,7 +74,7 @@ const Footer = () => {
             <div className="grid grid-cols-1 md:grid-cols-4">
               <div>
                 <div className="flex flex-col items-start md:items-start mx-3 md:mx-0 w-[90vw] md:w-auto">
-                  <h2 className="text-[#071e46] font-bold hidden md:block">Informace</h2>
+                  <h2 className="text-[#071e46] !font-normal hidden md:block">Informace</h2>
                   <Link href="/about" className="no-underline">
                     <p className="text-[#9b7d57] text-[17px]">O nás</p>
                   </Link>
@@ -87,7 +87,7 @@ const Footer = () => {
               </div>
               <div>
                 <div className="flex flex-col items-start md:items-start mx-3 md:mx-0 w-[90vw] md:w-auto">
-                  <h2 className="text-[#071e46] font-bold hidden md:block">Podmínky</h2>
+                  <h2 className="text-[#071e46] !font-normal hidden md:block">Podmínky</h2>
                   <Link href="/safety-privacy" className="no-underline">
                     <p className="text-[#9b7d57] text-[17px]">GDPR</p>
                   </Link>
@@ -100,7 +100,7 @@ const Footer = () => {
               </div>
               <div>
                 <div className="flex flex-col items-start md:items-start mx-3 md:mx-0 w-[90vw] md:w-auto">
-                  <h2 className="text-[#071e46] font-bold hidden md:block">Váš účet</h2>
+                  <h2 className="text-[#071e46] !font-normal hidden md:block">Váš účet</h2>
                   <Link href="/login?redirect=/profile" className="no-underline">
                     <p className="text-[#9b7d57] text-[17px]">Objednávky</p>
                   </Link>
@@ -113,7 +113,7 @@ const Footer = () => {
               </div>
               <div>
                 <div className="flex flex-col items-start md:items-start mx-3 md:mx-0 w-[90vw] md:w-auto">
-                  <h2 className="text-[#071e46] font-bold hidden md:block">Kontakt</h2>
+                  <h2 className="text-[#071e46] !font-normal hidden md:block">Kontakt</h2>
                   <a href="mailto:eshop@proudzivota.cz" className="no-underline">
                     <p className="text-[#9b7d57] text-[17px]">eshop@proudzivota.cz</p>
                   </a>
@@ -137,15 +137,16 @@ const Footer = () => {
                 href="https://www.lsm.org"
                 target="_blank"
                 rel="noreferrer"
-                className="text-[16px] text-[#828282] ml-0.5"
+                className="text-[16px] !text-[#828282] ml-0.5"
               >
-                se svolením Living Stream Ministry
+                se svolením
+                <span className="ml-2 underline">Living Stream Ministry</span>
               </a>
               <a
                 href="https://www.pictusweb.sk"
                 target="_blank"
                 rel="noreferrer"
-                className="text-[16px] text-[#828282] ml-2.5"
+                className="text-[16px] !text-[#828282] ml-2.5"
               >
                 &#60;&#47;&#62; PICTUSWEB Development
               </a>

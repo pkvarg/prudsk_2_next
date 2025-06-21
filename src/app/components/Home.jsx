@@ -18,17 +18,7 @@ const HomeScreen = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 8
 
-  const {
-    products,
-    loading,
-    error,
-    page,
-    pages,
-    listProducts,
-    searchKeyword,
-    isSearchActive,
-    clearSearch,
-  } = useProductStore()
+  const { products, loading, error, pages, listProducts, searchKeyword } = useProductStore()
 
   // Reset to page 1 when keyword changes
   useEffect(() => {
@@ -41,8 +31,6 @@ const HomeScreen = () => {
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage)
-    // Scroll to top when page changes
-    //window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
@@ -59,7 +47,7 @@ const HomeScreen = () => {
         </Link>
       )}
 
-      <h1 className="text-3xl font-bold text-[#071e46] mb-4">Naše publikace</h1>
+      <h1 className="!text-3xl !font-normal text-[#9E7B54] mb-4">Naše publikace</h1>
       <hr className="border-gray-300 mb-6" />
 
       {loading ? (

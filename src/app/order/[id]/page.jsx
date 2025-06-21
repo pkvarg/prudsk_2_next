@@ -295,9 +295,10 @@ const OrderPage = () => {
                 {loadingConfirmationEmail ? 'Loading...' : 'Doposlat potvrzovací email s fakturou*'}
               </button>
               <p className="text-justify text-[15px] mx-2 my-2">
-                * Při objednávce do zahraničí se faktura ze systému neodešle, odešle se jenom
-                notifikace. Je nutné poslat si fakturu žlutým tlačítkem, upravit poštovné a celkovou
-                sumu a odeslat zákazníkovi mailem manuálně. Stejně to funguje zde při doposílání.
+                * Info pouze pro zahraničí: Při objednávce do zahraničí se faktura ze systému
+                neodešle, odešle se jenom notifikace. Je nutné poslat si fakturu žlutým tlačítkem,
+                upravit poštovné a celkovou sumu a odeslat fakturu zákazníkovi mailem manuálně.
+                <br />* Pro CZ: posílá se email s fakturou.
               </p>
 
               <button
