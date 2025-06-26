@@ -35,7 +35,7 @@ export async function PUT(request, { params }) {
     })
 
     if (existingFavorite) {
-      return NextResponse.json({ message: 'Product already in favorites' }, { status: 400 })
+      return NextResponse.json({ message: 'Produkt je již v oblíbených' }, { status: 400 })
     }
 
     const newFavorite = await prisma.favorite.create({

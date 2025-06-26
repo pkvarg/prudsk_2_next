@@ -42,7 +42,7 @@ const MobileSearchBox = () => {
         value={keyword}
         onChange={handleInputChange}
         placeholder="Zadejte text..."
-        className="w-[375px] lg:w-auto text-lg pl-3 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
+        className="w-auto lg:w-auto text-lg pl-3 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
       />
       <button
         type="submit"

@@ -109,14 +109,18 @@ const ProductPage = () => {
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
-      await fetch(`/api/products/${productId}/favorites`, {
+      const reposonse = await fetch(`/api/products/${productId}/favorites`, {
         method: 'PUT',
         headers: config.headers,
         body: JSON.stringify({ favoriteOf: userInfo.id }),
       })
+      const res = await reposonse.json()
+      if (res.message) setMessage(res.message)
+      console.log('res', res)
+      console.log('')
       router.push(`/product/${id}`)
     } catch (err) {
-      console.error('Error adding to favorites:', err)
+      console.log('Error adding to favorites:', err)
     }
   }
 
@@ -346,7 +350,7 @@ const ProductPage = () => {
             </div>
           )}
 
-          <div className="container mx-12 px-4">
+          <div className="">
             {product && (
               <div key={product.id} className="md:hidden mt-6 p-4 bg-white rounded-lg shadow">
                 <h5 className="text-lg font-semibold mb-2">Katalog</h5>
@@ -416,8 +420,8 @@ const ProductPage = () => {
             )}
           </div>
 
-          <div className="flex flex-wrap mx-4 mt-8">
-            <div className="w-full md:w-1/2 px-4" key={product.id}>
+          <div className="flex flex-wrap lg:mx-4 mt-8">
+            <div className="w-full md:w-1/2 lg:px-4" key={product.id}>
               <h2 className="text-2xl font-bold mb-4">Recenze</h2>
               {singleProdReviews.length === 0 && <Message>Žádné recenze</Message>}
               <div className="space-y-4">

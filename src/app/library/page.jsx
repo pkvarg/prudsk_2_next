@@ -52,7 +52,7 @@ const Library = () => {
                 <div key={product.id} className="mb-8">
                   <h2 className="text-2xl font-semibold text-[#071e46] mb-4">{product.name}</h2>
 
-                  <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex flex-col md:flex-row gap-6 items-center">
                     <Link href={`/product/${product.id}`} className="flex-shrink-0">
                       <Image
                         src={product.excerpt.image || '/images/default-book.jpg'}

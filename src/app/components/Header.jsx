@@ -66,11 +66,12 @@ const Header = () => {
 
   const closeAllDropdowns = () => {
     setActiveDropdown(null)
-    setIsMenuOpen(!isMenuOpen)
+    setIsMenuOpen(false)
   }
 
   const closeUserDropdown = () => {
     setActiveDropdown(null)
+    setIsMenuOpen(false)
   }
 
   return (
@@ -646,7 +647,11 @@ const Header = () => {
                       >
                         Abecední seznam knih
                       </Link>
-                      <Link href="/eshop/Boží-ekonomie" className="block py-1 !text-white text-sm">
+                      <Link
+                        href="/eshop/Boží-ekonomie"
+                        className="block py-1 !text-white text-sm"
+                        onClick={closeAllDropdowns}
+                      >
                         Boží ekonomie
                       </Link>
                       <Link href="/eshop/brožury" className="block py-1 !text-white text-sm">
