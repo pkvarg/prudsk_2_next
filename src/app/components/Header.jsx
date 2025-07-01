@@ -560,6 +560,13 @@ const Header = () => {
               <Link href="/contact" className="!text-white hover:text-gray-200 transition-colors">
                 Kontakt
               </Link>
+              <Link
+                href="/download"
+                className="!text-white hover:text-gray-200 transition-colors"
+                onClick={closeAllDropdowns}
+              >
+                Ke stažení
+              </Link>
 
               {/* Favorites - desktop */}
               <Link href="/favorites" className="!text-white hover:text-gray-200 transition-colors">
@@ -801,6 +808,13 @@ const Header = () => {
                   onClick={closeAllDropdowns}
                 >
                   Kontakt
+                </Link>
+                <Link
+                  href="/download"
+                  className="block px-4 py-2 !text-white"
+                  onClick={closeAllDropdowns}
+                >
+                  Ke stažení
                 </Link>
               </div>
             </div>
