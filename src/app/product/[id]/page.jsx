@@ -19,7 +19,6 @@ const ProductPage = () => {
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  //const [product, setProduct] = useState([])
   const [successProductReview, setSuccessProductReview] = useState(false)
   const [errorProductReview, setErrorProductReview] = useState(null)
 
@@ -29,9 +28,6 @@ const ProductPage = () => {
 
   const { addToCart } = useCartStore()
   const { userInfo } = useUserStore()
-
-  // const userInfo = useUserStore((state) => state.userInfo)
-  // const addToCart = useCartStore((state) => state.addToCart)
 
   const { getProductDetails, product, getSingleProdutReviews, singleProdReviews } =
     useProductStore()

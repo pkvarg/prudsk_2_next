@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { Download, FileText, AlertCircle } from 'lucide-react'
+import Link from 'next/link'
 
 const DownloadPage = () => {
   const [pdfUrl, setPdfUrl] = useState('')
@@ -8,8 +9,8 @@ const DownloadPage = () => {
   const [error, setError] = useState(null)
 
   // Configuration - change these values as needed
-  const PDF_FILENAME = 'tajomstvo.pdf' // Change to your PDF filename
-  const PDF_TITLE = 'Tajomstvo ľudského života'
+  const PDF_FILENAME = 'tajemstvi.pdf' // Change to your PDF filename
+  const PDF_TITLE = 'Tajemství lidského života'
   const PDF_DESCRIPTION = `Leták ${PDF_TITLE} ke stažení.`
 
   useEffect(() => {
@@ -133,9 +134,9 @@ const DownloadPage = () => {
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">
             Máte problémy se stažením?{' '}
-            <a href="mailto:support@example.com" className="text-blue-600 hover:underline">
+            <Link href="/contact" className="text-blue-600 hover:underline">
               Kontaktujte nás
-            </a>
+            </Link>
           </p>
         </div>
       </div>
