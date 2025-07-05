@@ -1,13 +1,23 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import useCartStore from '@/store/cartStore'
 import { Trash } from 'lucide-react'
 
-const CartScreen = () => {
+// Loading component
+const PageLoader = () => (
+  <div className="container mx-auto px-4">
+    <div className="flex justify-center items-center py-8">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+  </div>
+)
+
+// Main cart component
+const Cart = () => {
   const params = useParams()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -228,6 +238,15 @@ const CartScreen = () => {
         </div>
       </div>
     </div>
+  )
+}
+
+// Main component with Suspense boundary
+const CartScreen = () => {
+  return (
+    <Suspense fallback={<PageLoader />}>
+      <Cart />
+    </Suspense>
   )
 }
 

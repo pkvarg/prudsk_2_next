@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import useUserStore from '../../store/userStore'
@@ -12,7 +12,21 @@ import {
   CheckCircleFill,
 } from 'react-bootstrap-icons'
 
-export default function RegisterPage() {
+// Loading component
+function PageLoader() {
+  return (
+    <div className="flex justify-center items-center min-h-[80vh] px-4">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <div className="flex justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Main register form component
+function RegisterForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
@@ -211,5 +225,14 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+// Main component with Suspense boundary
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<PageLoader />}>
+      <RegisterForm />
+    </Suspense>
   )
 }

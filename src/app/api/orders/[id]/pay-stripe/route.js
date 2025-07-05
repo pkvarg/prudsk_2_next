@@ -2,7 +2,6 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import prisma from '@/db/db'
-import Email from '@/utils/email'
 
 // @desc Update order to Paid by Stripe
 // @desc PUT /api/orders/:id/pay-stripe
@@ -107,12 +106,12 @@ export async function PUT(request, { params }) {
     updatedOrderProductsObject.note = updatedOrder.shippingAddress.note || ''
 
     // Send payment success email
-    try {
-      await new Email(updatedOrderProductsObject, '', '').sendPaymentSuccessfullToEmail()
-    } catch (emailError) {
-      console.error('Failed to send Stripe payment success email:', emailError)
-      // Continue even if email fails
-    }
+    // try {
+    //   await new Email(updatedOrderProductsObject, '', '').sendPaymentSuccessfullToEmail()
+    // } catch (emailError) {
+    //   console.error('Failed to send Stripe payment success email:', emailError)
+    //   // Continue even if email fails
+    // }
 
     return NextResponse.json(updatedOrder)
   } catch (error) {

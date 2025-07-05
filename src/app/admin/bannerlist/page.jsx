@@ -1,12 +1,22 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import useBannerStore from '@/store/bannerStore'
 import * as Icon from 'react-bootstrap-icons'
 
-const BannerListPage = () => {
+// Loading component
+const PageLoader = () => (
+  <div className="w-full px-4 py-8">
+    <div className="flex justify-center items-center py-8">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+    </div>
+  </div>
+)
+
+// Main banner list component
+const BannerList = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const pageNumber = searchParams.get('page') || 1
@@ -252,6 +262,15 @@ const BannerListPage = () => {
         </>
       )}
     </div>
+  )
+}
+
+// Main component with Suspense boundary
+const BannerListPage = () => {
+  return (
+    <Suspense fallback={<PageLoader />}>
+      <BannerList />
+    </Suspense>
   )
 }
 

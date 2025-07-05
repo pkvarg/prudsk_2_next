@@ -1,12 +1,22 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import useAudioStore from '@/store/audioStore'
 import * as Icon from 'react-bootstrap-icons'
 
-const AudioListPage = () => {
+// Loading component
+const PageLoader = () => (
+  <div className="container px-4 py-8">
+    <div className="flex justify-center items-center py-8">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+    </div>
+  </div>
+)
+
+// Main audio list component
+const AudioList = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const pageNumber = searchParams.get('page') || 1
@@ -244,6 +254,15 @@ const AudioListPage = () => {
         </>
       )}
     </div>
+  )
+}
+
+// Main component with Suspense boundary
+const AudioListPage = () => {
+  return (
+    <Suspense fallback={<PageLoader />}>
+      <AudioList />
+    </Suspense>
   )
 }
 

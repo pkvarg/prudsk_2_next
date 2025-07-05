@@ -6,8 +6,11 @@
 //   )
 // }
 
+// app/page.js
+import { Suspense } from 'react'
 import ProductsClient from './components/ProductsClient'
 import ProductCarousel from './components/ProductCarousel'
+import Loader from './components/Loader'
 
 // This generates the metadata on the server
 export const metadata = {
@@ -61,15 +64,25 @@ async function getBannerImages() {
   }
 }
 
+// Simple loading fallback
+function ProductsLoader() {
+  return (
+    <div className="mx-[7%]">
+      <div className="flex justify-center items-center py-8">
+        <Loader />
+      </div>
+    </div>
+  )
+}
+
 // Main server component
 export default async function HomePage({ searchParams }) {
   const resolvedSearchParams = await searchParams
   const keyword = resolvedSearchParams?.keyword || ''
-  const page = parseInt(resolvedSearchParams?.page) || 1
 
-  // Fetch data on the server
+  // Fetch initial data on the server (always page 1 for SSR)
   const [initialProductData, bannerImages] = await Promise.all([
-    getInitialProducts(keyword, page, 8),
+    getInitialProducts(keyword, 1, 8),
     getBannerImages(),
   ])
 
@@ -81,14 +94,45 @@ export default async function HomePage({ searchParams }) {
       <h1 className="!text-3xl !font-normal text-[#9E7B54] mb-4">Naše publikace</h1>
       <hr className="border-gray-300 mb-6" />
 
-      {/* Client component for interactive functionality */}
-      <ProductsClient
-        initialProducts={initialProductData.products}
-        initialPages={initialProductData.pages}
-        initialError={initialProductData.error}
-        initialKeyword={keyword}
-        initialPage={page}
-      />
+      {/* Client component with Suspense boundary */}
+      <Suspense fallback={<ProductsLoader />}>
+        <ProductsClient
+          initialProducts={initialProductData.products}
+          initialPages={initialProductData.pages}
+          initialError={initialProductData.error}
+          initialKeyword={keyword}
+        />
+      </Suspense>
     </main>
   )
 }
+
+// // Main server component
+// export default async function HomePage({ searchParams }) {
+//   const resolvedSearchParams = await searchParams
+//   const keyword = resolvedSearchParams?.keyword || ''
+
+//   // Fetch initial data on the server (always page 1 for SSR)
+//   const [initialProductData, bannerImages] = await Promise.all([
+//     getInitialProducts(keyword, 1, 8), // Always start with page 1
+//     getBannerImages(),
+//   ])
+
+//   return (
+//     <main className="mx-[7%]">
+//       {/* Server-rendered carousel */}
+//       <ProductCarousel images={bannerImages} />
+
+//       <h1 className="!text-3xl !font-normal text-[#9E7B54] mb-4">Naše publikace</h1>
+//       <hr className="border-gray-300 mb-6" />
+
+//       {/* Client component for interactive functionality */}
+//       <ProductsClient
+//         initialProducts={initialProductData.products}
+//         initialPages={initialProductData.pages}
+//         initialError={initialProductData.error}
+//         initialKeyword={keyword}
+//       />
+//     </main>
+//   )
+// }

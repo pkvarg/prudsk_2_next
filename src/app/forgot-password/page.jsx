@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useLayoutEffect } from 'react'
+import { useState, useLayoutEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import FormContainer from '@/app/components/FormContainer'
@@ -8,7 +8,8 @@ import Loader from '@/app/components/Loader'
 import Message from '@/app/components/Message'
 import useUserStore from '@/store/userStore'
 
-const ForgotPasswordPage = () => {
+// Extract the component that uses useSearchParams
+function ForgotPasswordForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirect = searchParams.get('redirect') || '/'
@@ -104,6 +105,15 @@ const ForgotPasswordPage = () => {
         </div>
       </FormContainer>
     </section>
+  )
+}
+
+// Main component with Suspense boundary
+const ForgotPasswordPage = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <ForgotPasswordForm />
+    </Suspense>
   )
 }
 

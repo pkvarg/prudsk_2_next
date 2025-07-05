@@ -78,36 +78,37 @@ export async function POST(request) {
       }
 
       // call API
-
       const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/register'
       // const apiUrl = 'http://localhost:3013/api/proud2next/register'
 
-      // Make the API request
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      })
+      try {
+        // Make the API request
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        })
 
-      console.log('response', response)
+        console.log('response', response)
 
-      // Check if request was successful
-      if (!response.ok) {
-        const errorData = await response.json()
-        return {
-          success: false,
-          message: errorData.message || 'Failed to submit form',
+        // Check if request was successful
+        if (!response.ok) {
+          const errorData = await response.json()
+          console.error('Email service error:', errorData.message || 'Failed to send email')
+          // Don't fail registration if email fails - just log it
+        } else {
+          const data = await response.json()
+          console.log('data', data)
         }
+      } catch (emailError) {
+        console.error('Failed to send registration email:', emailError)
+        // Continue with registration even if email fails
       }
 
-      // Return success response
-      const data = await response.json()
-
-      console.log('data', data)
-
-      return NextResponse.json('OK', { status: 201 })
+      // Return success response (regardless of email status)
+      return NextResponse.json({ message: 'Registration successful' }, { status: 201 })
     } else {
       return NextResponse.json({ message: 'Neplatná data uživatele' }, { status: 400 })
     }

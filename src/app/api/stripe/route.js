@@ -2,7 +2,6 @@
 
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
-import Email from '@/utils/email'
 
 // @desc Create Stripe checkout session
 // @desc POST /api/stripe

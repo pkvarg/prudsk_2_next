@@ -4,7 +4,6 @@ import prisma from '@/db/db'
 import crypto from 'crypto'
 
 export async function POST(request) {
-  console.log('PU', prisma.user)
   try {
     const body = await request.json()
 
@@ -30,7 +29,6 @@ export async function POST(request) {
     const passwordResetExpires = new Date(Date.now() + 60 * 60 * 1000)
 
     console.log('user in fp', user)
-
     console.log('Token Expiry:', new Date(Date.now() + 60 * 60 * 1000)) // Should be valid
 
     // Save token to database
@@ -71,10 +69,14 @@ export async function POST(request) {
     // Check if request was successful
     if (!response.ok) {
       const errorData = await response.json()
-      return {
-        success: false,
-        message: errorData.message || 'Failed to submit form',
-      }
+      return NextResponse.json(
+        {
+          // ✅ Fixed: Return NextResponse instead of plain object
+          success: false,
+          message: errorData.message || 'Failed to submit form',
+        },
+        { status: 400 },
+      ) // ✅ Added proper status code
     }
 
     // Return success response

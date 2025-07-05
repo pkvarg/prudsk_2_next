@@ -4,55 +4,55 @@ import prisma from '@/db/db'
 
 export async function POST(request) {
   try {
-    try {
-      // Parse request body to get sessionEmail
-      const body = await request.json()
-      const { name, email, id } = body.user
+    // Parse request body to get sessionEmail
+    const body = await request.json()
+    const { name, email, id } = body.user
 
-      // Find existing user
-      const user = await prisma.user.findUnique({
+    // Find existing user
+    const user = await prisma.user.findUnique({
+      where: { email },
+    })
+
+    if (user) {
+      // Return existing user
+      return NextResponse.json({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        isAssistant: user.isAssistant,
+        isSubscribed: user.isSubscribed,
+      })
+    } else {
+      // Create new user
+      const createdUser = await prisma.user.upsert({
         where: { email },
+        update: {}, // If user exists, don't update anything
+        create: {
+          name,
+          email,
+          googleId: id,
+          isAdmin: false,
+          isAssistant: false,
+          isRegistered: true,
+        },
       })
 
-      if (user) {
-        // Return existing user
-        return NextResponse.json({
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          isAdmin: user.isAdmin,
-          isAssistant: user.isAssistant,
-          isSubscribed: user.isSubscribed,
-        })
-      } else {
-        //    Create new user
-        const createdUser = await prisma.user.upsert({
-          where: { email },
-          update: {}, // If user exists, don't update anything
-          create: {
-            name,
-            email,
-            googleId: id,
-            isAdmin: false,
-            isAssistant: false,
-            isRegistered: true,
-          },
-        })
+      const url = 'https://proudzivota.cz'
 
-        const url = 'https://proudzivota.cz'
+      // Send welcome email with website link
+      const userData = {
+        name: createdUser.name,
+        email: createdUser.email,
+        url,
+        origin: 'PROUD2NEXT',
+        isGoogle: true,
+      }
 
-        // Send welcome email with website link
-        const userData = {
-          name: createdUser.name,
-          email: createdUser.email,
-          url,
-          origin: 'PROUD2NEXT',
-          isGoogle: true,
-        }
+      const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/register'
+      // const apiUrl = 'http://localhost:3013/api/proud2next/register'
 
-        const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/register'
-        // const apiUrl = 'http://localhost:3013/api/proud2next/register'
-
+      try {
         // Make the API request
         const response = await fetch(apiUrl, {
           method: 'POST',
@@ -65,27 +65,22 @@ export async function POST(request) {
         // Check if request was successful
         if (!response.ok) {
           const errorData = await response.json()
-          return {
-            success: false,
-            message: errorData.message || 'Failed to submit form',
-          }
+          console.error('Email service error:', errorData.message || 'Failed to send email')
+          // Don't fail the user creation if email fails - just log it
         }
-
-        // Return success response
-        const data = await response.json()
-
-        // Return created user
-
-        return NextResponse.json({
-          id: createdUser.id,
-          name: createdUser.name,
-          email: createdUser.email,
-          isAdmin: createdUser.isAdmin,
-          isAssistant: createdUser.isAssistant,
-        })
+      } catch (emailError) {
+        console.error('Failed to send welcome email:', emailError)
+        // Continue with user creation even if email fails
       }
-    } catch (error) {
-      console.error('Error:', error)
+
+      // Return created user (regardless of email status)
+      return NextResponse.json({
+        id: createdUser.id,
+        name: createdUser.name,
+        email: createdUser.email,
+        isAdmin: createdUser.isAdmin,
+        isAssistant: createdUser.isAssistant,
+      })
     }
   } catch (error) {
     console.error('Error in users google route:', error)
