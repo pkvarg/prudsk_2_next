@@ -77,48 +77,51 @@ const Header = () => {
   return (
     <header>
       {/* Grey navbar (desktop only) */}
-      <div className="hidden lg:block bg-gray-100 border border-gray-300 h-8">
+      <div className="hidden lg:block bg-gray-100 border border-gray-300 h-10">
         {/* Component content... */}
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="container mx-auto flex justify-between items-center mt-1.5">
           <div>
             <Link
               href="/contact"
-              className="!text-[#313131] text-[17px] font-normal cursor-pointer no-underline"
+              className="!text-[#000000] text-[17px] font-normal cursor-pointer no-underline"
             >
               <p className="m-0 hover:text-[#24b9d6]">Kontakt</p>
             </Link>
           </div>
           <div className="flex items-center">
-            <Link href="/cart" className="text-[#313131] mr-9 relative">
-              <div>
-                <p className="absolute -right-[7px] -top-[0.5px] inline-block rounded-full w-5 h-[17.5px] leading-[19px] bg-red-500 text-white">
-                  <span className="text-md ml-[30%] ">{cartItems?.length}</span>
-                </p>
-                <Icon.Cart2 className="text-[27.5px] text-black font-thin mb-[0px]">
-                  Košík
-                </Icon.Cart2>
+            <Link href="/cart" className="mr-9 relative">
+              <div className="relative">
+                {/* Only show badge if there are items */}
+                {cartItems?.length > 0 && (
+                  <div className="absolute -right-2 -top-2 min-w-[20px] h-5 bg-red-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs font-medium px-1">
+                      {cartItems.length > 99 ? '99+' : cartItems.length}
+                    </span>
+                  </div>
+                )}
+                <Icon.Cart2 className="text-[27.5px] text-black font-thin" />
               </div>
             </Link>
             {userInfo ? (
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsOpen((prev) => !prev)}
-                  className="text-[#313131] font-normal text-[17px] focus:outline-none"
+                  className="!text-[#000000] font-normal text-[17px] focus:outline-none"
                 >
                   {userInfo.name}
                 </button>
 
                 {isOpen && (
-                  <div className="absolute right-0 bg-white shadow-md mt-1 min-w-[150px] z-10">
+                  <div className="absolute right-0 bg-white shadow-md mt-1.5 min-w-[150px] z-10">
                     <Link
                       href="/profile"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white"
+                      className="block px-4 py-2 hover:bg-[#24b9d6]  !text-[#000000]"
                     >
                       Můj profil
                     </Link>
                     <button
                       onClick={logoutHandler}
-                      className="w-full text-left px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white"
+                      className="w-full text-left px-4 py-2 hover:bg-[#24b9d6] !text-[#000000]"
                     >
                       Odhlásit se
                     </button>
@@ -133,57 +136,57 @@ const Header = () => {
                 </div>
               </Link>
             )}
-            {/* // Update the admin section */}
+            {/* Admin section */}
             {userInfo && userInfo.isAdmin && !userInfo.isAssistant && (
               <div className="relative" ref={adminDropdownRef}>
                 <button
                   onClick={() => setIsAdminOpen((prev) => !prev)}
-                  className="text-[#313131] font-normal text-[17px] focus:outline-none ml-9"
+                  className="!text-[#000000] font-normal text-[17px] focus:outline-none ml-9"
                 >
                   Admin
                 </button>
 
                 {isAdminOpen && (
-                  <div className="absolute right-0 bg-white shadow-md mt-1 min-w-[150px] z-10">
+                  <div className="absolute right-0 bg-white shadow-md mt-1.5 min-w-[150px] z-10">
                     <Link
                       href="/admin/userlist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Uživatelé
                     </Link>
                     <Link
                       href="/admin/productlist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Produkty
                     </Link>
                     <Link
                       href="/admin/orderlist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Objednávky
                     </Link>
                     <Link
                       href="/admin/audiolist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Audio
                     </Link>
                     <Link
                       href="/admin/videolist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Video
                     </Link>
                     <Link
                       href="/admin/bannerlist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Bannery
                     </Link>
                     <Link
                       href="/admin/subscriberslist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Odběratelé novinek
                     </Link>
@@ -191,12 +194,12 @@ const Header = () => {
                 )}
               </div>
             )}
-            {/* // Update the assistant section */}
+            {/* Assistant section */}
             {userInfo && userInfo.isAssistant && (
               <div className="relative" ref={assistantDropdownRef}>
                 <button
                   onClick={() => setIsAssistantOpen((prev) => !prev)}
-                  className="text-[#313131] font-normal text-[17px] focus:outline-none ml-9"
+                  className="!text-[#000000] font-normal text-[17px] focus:outline-none ml-9"
                 >
                   Asistent
                 </button>
@@ -205,19 +208,19 @@ const Header = () => {
                   <div className="absolute right-0 bg-white shadow-md mt-1 min-w-[150px] z-10">
                     <Link
                       href="/admin/audiolist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Audio
                     </Link>
                     <Link
                       href="/admin/videolist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Video
                     </Link>
                     <Link
                       href="/admin/bannerlist"
-                      className="block px-4 py-2 text-[#313131] hover:bg-[#24b9d6] hover:text-white text-[15px]"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
                       Bannery
                     </Link>
@@ -286,11 +289,7 @@ const Header = () => {
               )}
 
               {/* Mobile cart */}
-              <Link
-                href="/cart"
-                className="text-white relative"
-                // onClick={closeAllDropdowns}
-              >
+              <Link href="/cart" className="text-white relative" onClick={closeAllDropdowns}>
                 {cartItems.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-yellow-400 text-red-700 text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                     {cartItems.length}
