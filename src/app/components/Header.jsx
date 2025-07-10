@@ -341,7 +341,7 @@ const Header = () => {
                   <Icon.ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 {activeDropdown === 'news' && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg z-50 border">
+                  <div className="absolute top-full left-0 mt-3 w-48 bg-white shadow-lg z-50 border">
                     <Link
                       href="/new-books/2025"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
@@ -363,7 +363,7 @@ const Header = () => {
                   <Icon.ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 {activeDropdown === 'podcast' && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg z-50 border">
+                  <div className="absolute top-full left-0 mt-3 w-48 bg-white shadow-lg z-50 border">
                     <Link
                       href="/words-of-life"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
@@ -397,7 +397,7 @@ const Header = () => {
                   <Icon.ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 {activeDropdown === 'eshop' && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg z-50 border max-h-96 overflow-y-auto">
+                  <div className="absolute top-full left-0 mt-3 w-64 bg-white shadow-lg z-50 border max-h-96 overflow-y-auto">
                     <Link
                       href="/eshop/abecední-seznam-kníh"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
@@ -522,7 +522,7 @@ const Header = () => {
                   <Icon.ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 {activeDropdown === 'info' && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg z-50 border">
+                  <div className="absolute top-full left-0 mt-3 w-48 bg-white shadow-lg z-50 border">
                     <Link
                       href="/watchman-nee"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"

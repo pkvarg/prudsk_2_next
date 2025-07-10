@@ -1,46 +1,28 @@
+// app/eshop/[category]/CategoryClient.js
 'use client'
-import React, { useEffect, useMemo, useState } from 'react'
-import { useParams } from 'next/navigation'
+import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
-import useProductStore from '@/store/productStore'
 import Product from '@/app/components/Product'
 
-const Eshop = () => {
-  const params = useParams()
+const CategoryClient = ({ initialProducts, category }) => {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [sortBy, setSortBy] = useState('name') // 'name', 'price', 'newest'
 
-  const category = params.category ? decodeURIComponent(params.category) : null
-
-  // Format category name for display
+  // Format category name for display (moved to client component)
   const formatCategoryName = (cat) => {
     if (!cat) return 'Eshop'
+    if (cat === 'abecední-seznam-kníh') return 'Abecední seznam knih'
     const formatted = cat.replace(/-/g, ' ')
     return formatted.charAt(0).toUpperCase() + formatted.slice(1).toLowerCase()
   }
 
-  const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState('name') // 'name', 'price', 'newest'
-
-  // Zustand store
-  const { allProducts = [], loading, error, getAllProducts } = useProductStore()
-
-  useEffect(() => {
-    getAllProducts()
-  }, [getAllProducts])
-
-  // Filter products by category and search term
+  // Filter and sort products
   const filteredProducts = useMemo(() => {
-    if (!Array.isArray(allProducts)) {
+    if (!Array.isArray(initialProducts)) {
       return []
     }
 
-    let filtered = allProducts
-
-    // Filter by category (unless it's alphabetical list)
-    if (category && category !== 'abecední-seznam-kníh') {
-      filtered = allProducts.filter(
-        (product) => product.category === category || product.category2 === category,
-      )
-    }
+    let filtered = [...initialProducts]
 
     // Filter by search term
     if (searchTerm) {
@@ -67,75 +49,28 @@ const Eshop = () => {
     })
 
     return filtered
-  }, [allProducts, category, searchTerm, sortBy])
-
-  // Loading state
-  if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-center items-center min-h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#071e46]"></div>
-        </div>
-      </div>
-    )
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          <h3 className="font-bold mb-2">Chyba při načítání produktů</h3>
-          <p>{error}</p>
-          <button
-            onClick={() => fetchProducts()}
-            className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
-          >
-            Zkusit znovu
-          </button>
-        </div>
-      </div>
-    )
-  }
+  }, [initialProducts, searchTerm, sortBy])
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Back button */}
-      <div className="mb-6">
-        <Link
-          href="/"
-          className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
-        >
-          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          Zpět
-        </Link>
-      </div>
-
-      {/* Page Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-[#071e46] mb-2">
-          {category ? formatCategoryName(category) : 'Eshop'}
-        </h1>
-        <p className="text-[#9b7d57] text-lg">
-          {filteredProducts.length}{' '}
-          {filteredProducts.length === 1
-            ? 'produkt'
-            : filteredProducts.length < 5
-            ? 'produkty'
-            : 'produktů'}
-        </p>
-      </div>
-
+    <>
       {/* Products Display */}
       {filteredProducts.length > 0 ? (
         <>
+          {/* Show filtered count if search is active */}
+          {searchTerm && (
+            <div className="mb-4">
+              <p className="text-[#9b7d57]">
+                Nalezeno {filteredProducts.length}{' '}
+                {filteredProducts.length === 1
+                  ? 'produkt'
+                  : filteredProducts.length < 5
+                  ? 'produkty'
+                  : 'produktů'}{' '}
+                pro &quot;{searchTerm}&quot;
+              </p>
+            </div>
+          )}
+
           {/* Alphabetical list view */}
           {category === 'abecední-seznam-kníh' ? (
             <div className="space-y-2">
@@ -223,8 +158,8 @@ const Eshop = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }
 
-export default Eshop
+export default CategoryClient

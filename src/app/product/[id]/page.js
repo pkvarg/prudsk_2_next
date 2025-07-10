@@ -7,12 +7,72 @@ import FavoriteButton from '../../components/FavoriteButton'
 import CartSection from '../../components/CartSection'
 import ProductReviews from '../../components/ProductReviews'
 
+// CRITICAL: Add this to enable ISR (revalidate every hour)
+export const revalidate = 3600 // 1 hour in seconds
+
+// Generate static params for all products at build time
+export async function generateStaticParams() {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const response = await fetch(`${baseUrl}/api/products/all`, {
+      cache: 'force-cache',
+    })
+
+    if (!response.ok) {
+      console.error('Failed to fetch products for static generation')
+      return []
+    }
+
+    const data = await response.json()
+
+    // Handle the known response structure
+    const products = data.products || data
+
+    if (!Array.isArray(products) || products.length === 0) {
+      console.warn('No products found for static generation')
+      return []
+    }
+
+    console.log(`Found ${products.length} products for static generation`)
+
+    // Return array of params for each product
+    const params = products
+      .map((product) => {
+        // Handle both _id and id fields (MongoDB compatibility)
+        const productId = product.id || product._id
+        if (!productId) {
+          console.warn('Product missing ID:', product)
+          return null
+        }
+        return {
+          id: productId.toString(),
+        }
+      })
+      .filter(Boolean) // Remove any null entries
+
+    console.log('Final static params:', params.length, 'products')
+    return params
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    return []
+  }
+}
+
 // Server function to fetch product data
 async function getProduct(id) {
+  // Skip API calls during build if server isn't available
+  if (
+    process.env.NODE_ENV === 'production' &&
+    process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
+  ) {
+    return null
+  }
+
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
     const response = await fetch(`${baseUrl}/api/products/${id}`, {
-      cache: 'no-store', // Use 'force-cache' if products don't change often
+      cache: 'force-cache', // Changed from 'no-store' to enable static generation
+      next: { revalidate: 3600 }, // Alternative way to set revalidation
     })
 
     if (!response.ok) {
@@ -21,6 +81,13 @@ async function getProduct(id) {
 
     return await response.json()
   } catch (error) {
+    // Add source identification
+    //console.error(`🔍 [PRODUCT PAGE] getProduct(${id}) failed:`, error.message)
+
+    // Silently fail during build - pages will be hydrated at runtime
+    if (process.env.NODE_ENV !== 'development') {
+      return null
+    }
     console.error('Error fetching product:', error)
     return null
   }
@@ -28,10 +95,19 @@ async function getProduct(id) {
 
 // Server function to fetch product reviews
 async function getProductReviews(id) {
+  // Skip API calls during build if server isn't available
+  if (
+    process.env.NODE_ENV === 'production' &&
+    process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
+  ) {
+    return []
+  }
+
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
     const response = await fetch(`${baseUrl}/api/products/${id}/reviews`, {
-      cache: 'no-store',
+      cache: 'force-cache', // Changed from 'no-store'
+      next: { revalidate: 3600 },
     })
 
     if (!response.ok) {
@@ -41,6 +117,10 @@ async function getProductReviews(id) {
     const data = await response.json()
     return data.reviews || []
   } catch (error) {
+    // Silently fail during build - pages will be hydrated at runtime
+    if (process.env.NODE_ENV !== 'development') {
+      return []
+    }
     console.error('Error fetching reviews:', error)
     return []
   }
@@ -82,12 +162,24 @@ export async function generateMetadata({ params }) {
           ]
         : [],
       type: 'website',
+      url: `https://proudzivota.cz/product/${resolvedParams.id}`, // Add canonical URL
     },
     twitter: {
       card: 'summary_large_image',
       title: `${product.name} - Proud života`,
       description: product.description || `Křesťanská literatura - ${product.name}`,
       images: product.image ? [product.image] : [],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   }
 }
@@ -111,6 +203,7 @@ export default async function ProductPage({ params }) {
     name: product.name,
     description: product.description,
     image: product.image,
+    url: `https://proudzivota.cz/product/${product.id}`,
     brand: {
       '@type': 'Brand',
       name: 'Proud života',
@@ -121,6 +214,10 @@ export default async function ProductPage({ params }) {
       priceCurrency: 'CZK',
       availability:
         product.countInStock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'Proud života',
+      },
     },
     ...(product.author && {
       author: {
@@ -135,6 +232,8 @@ export default async function ProductPage({ params }) {
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingCount: reviews.length,
+        ratingValue:
+          reviews.reduce((sum, review) => sum + (review.rating || 5), 0) / reviews.length,
       },
     }),
   }
