@@ -99,7 +99,7 @@ const Header = () => {
                     </span>
                   </div>
                 )}
-                <Icon.Cart2 className="text-[27.5px] text-black font-thin" />
+                <Icon.Cart2 className="text-[22.5px] text-black font-thin" />
               </div>
             </Link>
             {userInfo ? (

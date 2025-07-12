@@ -9,7 +9,7 @@ export const revalidate = 14400 // 4 hours in seconds
 // Generate static params for all years at build time
 export async function generateStaticParams() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/all`, {
       cache: 'force-cache',
     })
@@ -62,7 +62,7 @@ async function getAllProducts() {
   }
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/all`, {
       cache: 'force-cache',
       next: { revalidate: 14400 },

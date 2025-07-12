@@ -18,19 +18,19 @@ const SafetyPrivacy = () => {
             Ochrana osobních údajů na proudzivota.cz
           </h3>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-6">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             Abychom vám mohli poskytnout všechny služby, potřebujeme o vás znát základní informace.
             Některé z nich mají povahu osobních údajů.
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-6">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             Správcem osobních údajů na proudzivota.cz podle čl. 4 bod 7 nařízení Evropského
             parlamentu a Rady (EU) 2016/679 o ochraně fyzických osob v souvislosti se zpracováním
             osobních údajů a o volném pohybu těchto údajů je Distribuce Proud – Adam Surjomartono,
             IČO: 68368844, se sídlem Hnězdenská 586, 18100 Praha 8 (dále jen: „provozovatel").
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-4">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
             Zpracování osobních údajů je nezbytné pro plnění smlouvy a na základě oprávněného zájmu
             zákazníka. Správce tedy zpracovává osobní údaje subjektů údajů za účelem vytvoření
             možnosti uzavřít smlouvy uzavřené na dálku nebo mimo obchodní prostory na základě
@@ -39,7 +39,7 @@ const SafetyPrivacy = () => {
             údaje:
           </p>
 
-          <ul className="text-[#9b7d57] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
+          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
             <li className="list-disc">
               Jméno a příjmení, přesná adresa včetně země (tj. adresa, která bude uvedena na
               faktuře).
@@ -58,7 +58,7 @@ const SafetyPrivacy = () => {
             </li>
           </ul>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-6">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             Tyto údaje jsou uloženy v databázi na našem serveru, takže je nemusíte při každé
             návštěvě znovu zadávat. Vaše údaje zpracováváme za účelem zpracování a doručení vaší
             objednávky. Tyto údaje jsou rovněž nezbytné pro náš účetní a fakturační systém. Své
@@ -67,7 +67,7 @@ const SafetyPrivacy = () => {
             přejete zrušit svou registraci, požádejte nás o to e-mailem. Váš účet bude zrušen.
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-6">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             V našem obchodě nezadáváte žádné informace, které přímo souvisejí s prací s penězi.
             Platba za objednané zboží proběhne až po doručení zboží na vámi uvedenou adresu na
             dobírku prostřednictvím Slovenské pošty, případně kurýrní nebo doručovací společnosti.
@@ -75,18 +75,18 @@ const SafetyPrivacy = () => {
             osobním odběru objednaného zboží.
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-6">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             Během vaší návštěvy se na našem serveru ukládají dočasné informace, které jsou nezbytné
             pro správné fungování obchodu (např. co jste vložili do nákupního košíku, kdy jste na
             stránky přišli, odkud jste na stránky přišli).
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-6">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             Kdykoli po přihlášení na www.proudzivota.cz můžete zkontrolovat své osobní údaje a v
             případě potřeby je změnit v části „Upravit".
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-6">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             Vaše osobní údaje nezveřejňujeme, nesdílíme ani neposkytujeme žádným dalším subjektům, s
             výjimkou organizací, s nimiž je spolupráce nezbytná pro řádné vyřízení vaší objednávky.
             Jedná se zejména o: Českou poštu, doručovací a kurýrní služby nebo některé vydavatele a
@@ -95,7 +95,7 @@ const SafetyPrivacy = () => {
             údajů chráníme před poškozením, zničením, ztrátou a zneužitím.
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-6">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             Registrací nám udělujete souhlas se zpracováním vašich osobních údajů uvedených v
             objednávce za účelem vyřízení objednávky a dodání zboží, a to po dobu nezbytnou k plnění
             smlouvy. Máte právo požadovat informace o zpracování svých osobních údajů a seznam
@@ -105,7 +105,7 @@ const SafetyPrivacy = () => {
             použití vašich osobních údajů pro marketingové účely.
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-6">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             Vaše osobní údaje jsme oprávněni zpracovávat po skončení původního účelu zpracování
             pouze v rozsahu nezbytném pro statistické, účetní a výzkumné účely a pro poskytování
             souhrnných statistických informací o zákaznících, návštěvnosti, obratu a dalších údajů
@@ -113,11 +113,11 @@ const SafetyPrivacy = () => {
             informací nebylo možné naše zákazníky jakkoli identifikovat.
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed mb-4 font-medium">
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-4 font-medium">
             Vaše soukromí je pro nás důležité!
           </p>
 
-          <p className="text-[#9b7d57] text-[17px] leading-relaxed">Distribuce Proud</p>
+          <p className="text-[#191817] text-[17px] leading-relaxed">Distribuce Proud</p>
         </div>
       </div>
     </div>

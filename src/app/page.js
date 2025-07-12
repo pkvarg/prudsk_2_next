@@ -59,7 +59,7 @@ async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
   }
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(
       `${baseUrl}/api/products?keyword=${searchKeyword}&page=${page}&pageSize=${pageSize}`,
       {
@@ -94,7 +94,7 @@ async function getBannerImages() {
   }
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/banner`, {
       cache: 'force-cache', // Banners probably don't change often
       next: { revalidate: 3600 }, // Revalidate every hour
@@ -127,7 +127,7 @@ async function getFeaturedProducts() {
   }
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/top`, {
       cache: 'force-cache',
       next: { revalidate: 1800 },

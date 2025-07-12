@@ -38,10 +38,7 @@ export async function POST(request) {
     })
 
     // Get the base URL from environment variables
-    const baseUrl =
-      process.env.NODE_ENV === 'production'
-        ? process.env.NEXT_PUBLIC_BASE_URL || 'https://proud.pictusweb.site'
-        : process.env.NEXT_PUBLIC_DEV_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({

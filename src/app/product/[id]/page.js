@@ -13,7 +13,7 @@ export const revalidate = 3600 // 1 hour in seconds
 // Generate static params for all products at build time
 export async function generateStaticParams() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/all`, {
       cache: 'force-cache',
     })
@@ -69,7 +69,7 @@ async function getProduct(id) {
   }
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/${id}`, {
       cache: 'force-cache', // Changed from 'no-store' to enable static generation
       next: { revalidate: 3600 }, // Alternative way to set revalidation
@@ -104,7 +104,7 @@ async function getProductReviews(id) {
   }
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/${id}/reviews`, {
       cache: 'force-cache', // Changed from 'no-store'
       next: { revalidate: 3600 },

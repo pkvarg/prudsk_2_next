@@ -10,7 +10,7 @@ export const revalidate = 21600 // 6 hours in seconds
 // Generate static params for all products with excerpts at build time
 export async function generateStaticParams() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/all`, {
       cache: 'force-cache',
     })
@@ -67,7 +67,7 @@ async function getProduct(id) {
   }
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/${id}`, {
       cache: 'force-cache',
       next: { revalidate: 21600 },
@@ -262,7 +262,7 @@ export default async function LibraryPage({ params }) {
         {/* Back button */}
         <div className="mb-6">
           <Link
-            href={`/product/${productId}`}
+            href={`/library`}
             className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -273,7 +273,7 @@ export default async function LibraryPage({ params }) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Zpět na produkt
+            Zpět
           </Link>
         </div>
 
@@ -297,7 +297,7 @@ export default async function LibraryPage({ params }) {
               </Link>
 
               <div className="text-justify">
-                <div className="mb-4 p-4 bg-[#f8f9fa] rounded-lg border-l-4 border-[#2bb2e6]">
+                <div className="mb-4 p-4 bg-[#f8f9fa] rounded-lg">
                   <p className="text-sm text-[#6c757d] font-medium">Ukázka z knihy</p>
                 </div>
                 <div className="prose prose-lg max-w-none">
@@ -308,30 +308,6 @@ export default async function LibraryPage({ params }) {
               </div>
 
               <div className="clear-both"></div>
-            </div>
-
-            {/* Call to action */}
-            <div className="mt-8 p-6 bg-[#edeae4] rounded-lg text-center">
-              <h3 className="text-xl font-semibold text-[#071e46] mb-3">
-                Líbí se vám tato ukázka?
-              </h3>
-              <p className="text-[#9b7d57] mb-4">Přečtěte si celou knihu nebo si ji objednejte</p>
-              <div className="space-x-4">
-                <Link
-                  href={`/product/${product.id}`}
-                  className="inline-flex items-center px-6 py-3 bg-[#071e46] text-white rounded hover:bg-[#9b7d57] transition-colors duration-200"
-                >
-                  Zobrazit celou knihu
-                </Link>
-                {product.countInStock > 0 && (
-                  <Link
-                    href={`/product/${product.id}#objednat`}
-                    className="inline-flex items-center px-6 py-3 bg-[#2bb2e6] text-white rounded hover:bg-[#218334] transition-colors duration-200"
-                  >
-                    Objednat knihu
-                  </Link>
-                )}
-              </div>
             </div>
           </div>
         </div>
