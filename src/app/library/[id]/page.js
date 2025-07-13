@@ -59,12 +59,12 @@ export async function generateStaticParams() {
 // Server function to fetch specific product
 async function getProduct(id) {
   // Skip API calls during build if server isn't available
-  if (
-    process.env.NODE_ENV === 'production' &&
-    process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
-  ) {
-    return null
-  }
+  // if (
+  //   process.env.NODE_ENV === 'production' &&
+  //   process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
+  // ) {
+  //   return null
+  // }
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL

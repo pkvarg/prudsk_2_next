@@ -61,12 +61,12 @@ export async function generateStaticParams() {
 // Server function to fetch product data
 async function getProduct(id) {
   // Skip API calls during build if server isn't available
-  if (
-    process.env.NODE_ENV === 'production' &&
-    process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
-  ) {
-    return null
-  }
+  // if (
+  //   process.env.NODE_ENV === 'production' &&
+  //   process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
+  // ) {
+  //   return null
+  // }
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
@@ -96,12 +96,12 @@ async function getProduct(id) {
 // Server function to fetch product reviews
 async function getProductReviews(id) {
   // Skip API calls during build if server isn't available
-  if (
-    process.env.NODE_ENV === 'production' &&
-    process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
-  ) {
-    return []
-  }
+  // if (
+  //   process.env.NODE_ENV === 'production' &&
+  //   process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
+  // ) {
+  //   return []
+  // }
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
