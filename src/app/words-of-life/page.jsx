@@ -1,15 +1,19 @@
 'use client'
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+
 import useAudioStore from '@/store/audioStore'
+import usePlayerStore from '@/store/playerStore'
 
 const WordsOfLife = () => {
   const [subcategory, setSubcategory] = useState('Boží evangelium')
-
+  const [selectedAudio, setSelectedAudio] = useState(null)
   const myRef = useRef(null)
 
-  // Zustand store (if you have audio-related state there)
+  // Zustand store
   const { audios, error, loading, getAllAudios } = useAudioStore()
+  const { setCurrentAudio } = usePlayerStore()
 
   const subHandler = (sub) => {
     setSubcategory(sub)
@@ -59,18 +63,31 @@ const WordsOfLife = () => {
 
   useEffect(() => {
     getAllAudios()
+  }, [getAllAudios])
+
+  const searchParams = useSearchParams()
+
+  // Handle subcategory from URL parameter
+  useEffect(() => {
+    const urlSubcategory = searchParams.get('subcategory')
+    if (urlSubcategory && subcategories.includes(urlSubcategory)) {
+      setSubcategory(urlSubcategory)
+      // Scroll to content after a short delay to ensure page is loaded
+      setTimeout(() => {
+        if (myRef.current) {
+          myRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 500)
+    }
   }, [])
 
   // Filter audios from store directly with safety check
   const wordsOfLife = useMemo(() => {
-    // Ensure audios is an array before filtering
     if (!Array.isArray(audios)) {
       return []
     }
     return audios.filter((audio) => audio.category === category)
   }, [audios, category])
-
-  const filteredAudios = wordsOfLife.filter((audio) => audio.subcategory === subcategory)
 
   if (loading) {
     return (
@@ -105,9 +122,9 @@ const WordsOfLife = () => {
       {/* Header section */}
       <div className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-[#071e46] mb-4">Posluchárna</h1>
-        <h3 className="text-xl md:text-2xl font-semibold text-[#9b7d57] mb-4">
+        <h2 className="text-xl md:text-2xl font-semibold text-[#9b7d57] mb-4">
           SLOVA ŽIVOTA A PRAVDY
-        </h3>
+        </h2>
         <p className="text-gray-700 leading-relaxed max-w-4xl">
           Pořad Slova života a pravdy, který odvysílalo Rádio 7, je založen na krátkých úryvcích z
           knih Watchmana Neeho a Witnesse Leeho. Jednotlivé, zhruba patnáctiminutové nahrávky
@@ -126,9 +143,9 @@ const WordsOfLife = () => {
       {/* Subcategories section */}
       <div className="mb-8">
         <div className="hidden md:block mb-4">
-          <h4 className="text-lg font-semibold text-[#071e46] bg-[#edeae4] px-4 py-2 rounded">
+          <h3 className="text-lg font-semibold text-[#071e46] bg-[#edeae4] px-4 py-2 rounded">
             Předmět
-          </h4>
+          </h3>
         </div>
 
         {/* Subcategory buttons */}
@@ -154,81 +171,51 @@ const WordsOfLife = () => {
 
       {/* Audio content section */}
       <div className="mt-8">
-        <h5 className="text-xl font-semibold text-[#071e46] mb-6">
-          {subcategory} ({filteredAudios.length} nahrávek)
-        </h5>
+        <h4 className="text-xl font-semibold text-[#071e46] mb-6">
+          {subcategory} ({wordsOfLife.filter((audio) => audio.subcategory === subcategory).length}{' '}
+          nahrávek)
+        </h4>
 
-        {filteredAudios.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredAudios.map((audio) => (
-              <div
-                key={audio.id}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
-              >
-                {/* Audio info header */}
-                <div className="p-4 bg-[#edeae4]">
-                  <p className="text-sm text-[#9b7d57] font-medium mb-1">{audio.subcategory}</p>
-                  <h6 className="text-[#071e46] font-semibold mb-2 line-clamp-2">
-                    {audio.audioTitle}
-                  </h6>
-                  {/* <a
-                    href={audio.mp3file}
-                    download
-                    className="inline-flex items-center text-sm text-[#071e46] hover:text-[#9b7d57] transition-colors"
-                  >
-                    <svg
-                      className="w-4 h-4 mr-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+        {wordsOfLife.length > 0 && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {wordsOfLife.map(
+                (audio, index) =>
+                  audio.subcategory === subcategory && (
+                    <div
+                      key={audio.id}
+                      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer border-2 border-transparent hover:border-[#071e46]"
+                      onClick={() => setCurrentAudio(audio)}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                    Stáhnout
-                  </a> */}
-                </div>
-
-                {/* Audio player iframe */}
-                <div className="aspect-video">
-                  <iframe
-                    src={audio.mp3file}
-                    className="w-full h-full"
-                    allow="autoplay"
-                    title={audio.audioTitle}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <div className="max-w-md mx-auto">
-              <div className="mb-4">
-                <svg
-                  className="mx-auto h-16 w-16 text-[#9b7d57]"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-                  />
-                </svg>
-              </div>
+                      <div className="p-6">
+                        <div className="flex items-center justify-center w-16 h-16 bg-[#071e46] rounded-full mx-auto mb-4">
+                          <svg
+                            className="w-8 h-8 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                        <p className="text-sm text-[#9b7d57] font-medium mb-2 text-center">
+                          {audio.subcategory}
+                        </p>
+                        <h5 className="text-[#071e46] font-semibold text-center line-clamp-2 mb-2">
+                          {audio.audioTitle}
+                        </h5>
+                        <p className="text-xs text-gray-500 text-center">Klikněte pro přehrání</p>
+                      </div>
+                    </div>
+                  ),
+              )}
+            </div>
+            <div className="text-center py-12">
               <h3 className="text-lg font-medium text-[#071e46] mb-2">Žádné nahrávky nenalezeny</h3>
               <p className="text-[#9b7d57]">
                 Pro kategorii "{subcategory}" nejsou momentálně k dispozici žádné audio nahrávky.
               </p>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>
