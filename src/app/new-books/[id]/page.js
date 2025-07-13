@@ -53,14 +53,6 @@ export async function generateStaticParams() {
 
 // Server function to fetch all products
 async function getAllProducts() {
-  // Skip API calls during build if server isn't available
-  // if (
-  //   process.env.NODE_ENV === 'production' &&
-  //   process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
-  // ) {
-  //   return []
-  // }
-
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/all`, {

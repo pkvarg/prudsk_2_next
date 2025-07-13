@@ -50,14 +50,6 @@ export const dynamic = 'force-static'
 
 // Server function to fetch initial products with ISR-friendly caching
 async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
-  // Skip API calls during build if server isn't available
-  // if (
-  //   process.env.NODE_ENV === 'production' &&
-  //   process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
-  // ) {
-  //   return { products: [], pages: 0 }
-  // }
-
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(
@@ -85,14 +77,6 @@ async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
 
 // Server function to fetch banner images
 async function getBannerImages() {
-  // Skip API calls during build if server isn't available
-  // if (
-  //   process.env.NODE_ENV === 'production' &&
-  //   process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
-  // ) {
-  //   return []
-  // }
-
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/banner`, {
@@ -118,14 +102,6 @@ async function getBannerImages() {
 
 // Server function to get featured/top products for structured data
 async function getFeaturedProducts() {
-  // Skip API calls during build if server isn't available
-  // if (
-  //   process.env.NODE_ENV === 'production' &&
-  //   process.env.SKIP_BUILD_PRODUCT_VALIDATION === 'true'
-  // ) {
-  //   return []
-  // }
-
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(`${baseUrl}/api/products/top`, {
