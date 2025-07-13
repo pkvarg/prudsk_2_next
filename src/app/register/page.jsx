@@ -59,6 +59,14 @@ function RegisterForm() {
     }
   }, [registerSuccess, router])
 
+  // AVOID REGISTERING HERE WITH GOOGLE EMAIL
+  useEffect(() => {
+    if (email.includes('@gmail.com')) {
+      setMessage(`Pro ${email} prosím použijte možnost Přihlásit se přes Google`)
+      return
+    }
+  }, [email])
+
   const submitHandler = async (e) => {
     e.preventDefault()
 

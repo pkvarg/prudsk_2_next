@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useLayoutEffect, Suspense } from 'react'
+import { useState, useLayoutEffect, Suspense, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import FormContainer from '@/app/components/FormContainer'
@@ -22,6 +22,16 @@ function ForgotPasswordForm() {
   const { forgotPassword } = useUserStore()
   const forgotPasswordState = useUserStore((state) => state.forgotPassword || {})
   const { loading, error } = forgotPasswordState
+
+  // AVOID GOOGLE EMAIL RESET
+  useEffect(() => {
+    if (email.includes('@gmail.com')) {
+      setMessage(
+        `Pro Gmail účty nelze obnovit heslo tímto způsobem. Váš Google účet je spravován na accounts.google.com. Prosím použijte možnost "Přihlásit se přes Google" na přihlašovací stránce.`,
+      )
+      return
+    }
+  }, [email])
 
   const submitHandler = async (e) => {
     e.preventDefault()
