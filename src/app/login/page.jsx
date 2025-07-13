@@ -8,7 +8,7 @@ import { PersonFill, LockFill, ExclamationCircleFill } from 'react-bootstrap-ico
 
 export default function LoginPage() {
   const router = useRouter()
-  const callbackUrl = 'http://localhost:3015'
+  const callbackUrl = process.env.NEXT_PUBLIC_API_URL
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

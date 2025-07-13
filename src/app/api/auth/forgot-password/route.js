@@ -40,8 +40,9 @@ export async function POST(request) {
       },
     })
 
+    console.log('orig url', origURL)
     // Create reset URL
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || origURL || 'http://localhost:3015'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || origURL
     const resetUrl = `${baseUrl}/reset-password/${resetToken}`
 
     console.log('resetUrl in forgot password', resetUrl)
