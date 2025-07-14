@@ -81,9 +81,12 @@ const GlobalAudioPlayer = () => {
   const router = useRouter()
 
   const handleTitleClick = () => {
-    if (currentAudio?.subcategory) {
-      // Navigate to words-of-life page and pass subcategory as URL parameter
-      router.push(`/words-of-life?subcategory=${encodeURIComponent(currentAudio.subcategory)}`)
+    if (currentAudio?.category) {
+      if (currentAudio?.category === 'Studium života') {
+        router.push(`/life-study`)
+      } else {
+        router.push(`/words-of-life`)
+      }
     }
   }
 
@@ -106,14 +109,17 @@ const GlobalAudioPlayer = () => {
               <p className="text-xs opacity-75 mb-1">{currentAudio.subcategory}</p>
               <h4 className="text-sm font-semibold line-clamp-2">{currentAudio.audioTitle}</h4>
             </div>
-            <div className="flex items-center space-x-2 flex-shrink-0">
+            <div className="flex items-center space-x-2 flex-shrink-0 cursor-pointer">
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="text-white hover:text-gray-300 text-lg"
+                className="text-white hover:text-gray-300 text-lg cursor-pointer"
               >
                 {isMinimized ? '↗' : '-'}
               </button>
-              <button onClick={stopAudio} className="text-white hover:text-gray-300 text-xl">
+              <button
+                onClick={stopAudio}
+                className="text-white hover:text-gray-300 text-xl cursor-pointer"
+              >
                 ×
               </button>
             </div>

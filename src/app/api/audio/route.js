@@ -7,7 +7,11 @@ import isAdmin from '@/lib/isAdmin'
 // @access Public
 export async function GET(request) {
   try {
-    const audios = await prisma.audio.findMany({})
+    const audios = await prisma.audio.findMany({
+      orderBy: {
+        audioTitle: 'asc',
+      },
+    })
 
     return NextResponse.json(
       {

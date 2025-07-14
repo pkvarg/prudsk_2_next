@@ -1,14 +1,11 @@
 'use client'
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-
 import useAudioStore from '@/store/audioStore'
 import usePlayerStore from '@/store/playerStore'
 
 const WordsOfLife = () => {
   const [subcategory, setSubcategory] = useState('Boží evangelium')
-  const [selectedAudio, setSelectedAudio] = useState(null)
   const myRef = useRef(null)
 
   // Zustand store
@@ -64,22 +61,6 @@ const WordsOfLife = () => {
   useEffect(() => {
     getAllAudios()
   }, [getAllAudios])
-
-  const searchParams = useSearchParams()
-
-  // Handle subcategory from URL parameter
-  useEffect(() => {
-    const urlSubcategory = searchParams.get('subcategory')
-    if (urlSubcategory && subcategories.includes(urlSubcategory)) {
-      setSubcategory(urlSubcategory)
-      // Scroll to content after a short delay to ensure page is loaded
-      setTimeout(() => {
-        if (myRef.current) {
-          myRef.current.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 500)
-    }
-  }, [])
 
   // Filter audios from store directly with safety check
   const wordsOfLife = useMemo(() => {
