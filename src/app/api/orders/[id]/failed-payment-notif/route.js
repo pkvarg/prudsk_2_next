@@ -5,13 +5,13 @@
 // @access Private
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
 export async function POST(request, { params }) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 

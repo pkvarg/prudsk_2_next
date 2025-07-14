@@ -4,7 +4,7 @@ import prisma from '@/db/db'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import { headers } from 'next/headers'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
 async function createRegisterToken(email, url) {
   const token = crypto.randomBytes(32).toString('hex')
@@ -126,16 +126,17 @@ export async function POST(request) {
 // @access Private/Admin
 export async function GET(request) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
     // Get all users
     const users = await prisma.user.findMany({
       orderBy: {
-        createdAt: 'desc',
+        //createdAt: 'desc',
+        name: 'asc',
       },
       select: {
         id: true,

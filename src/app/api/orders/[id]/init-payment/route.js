@@ -2,15 +2,16 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
 import crypto from 'crypto'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc Create init payment Id in db
 // @desc PUT /api/orders/:id/init-payment
 // @access Private
 export async function PUT(request, { params }) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
@@ -57,9 +58,9 @@ export async function PUT(request, { params }) {
 
 export async function GET(request, { params }) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 

@@ -13,6 +13,7 @@ export default async function isAdmin() {
       isAdmin: true,
       id: true,
       name: true,
+      email: true,
     },
   })
 

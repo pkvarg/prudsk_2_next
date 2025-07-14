@@ -15,18 +15,8 @@ const UserListPage = () => {
   const [countEmails, setCountEmails] = useState(0)
   const [lastVisit, setLastVisit] = useState('')
 
-  const {
-    users,
-    loading,
-    error,
-    userInfo,
-    successDelete,
-    listUsers,
-    deleteUser,
-    getUserDetails,
-    visitorsCount,
-    setVisitorsCount,
-  } = useUserStore()
+  const { users, loading, error, userInfo, successDelete, listUsers, deleteUser, getUserDetails } =
+    useUserStore()
 
   const apiUrl = 'https://hono-api.pictusweb.com/api/stats/proud2next'
   //const apiUrl = 'http://localhost:3013/api/stats/proud2next'

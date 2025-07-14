@@ -1,14 +1,14 @@
 // app/api/user/favorites/[productId]/route.js
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
 // Remove from favorites
 export async function DELETE(request, { params }) {
   try {
-    const session = await auth()
+    const loggedUser = await isAdmin()
 
-    if (!session) {
+    if (!loggedUser) {
       return new Response('Unauthorized', { status: 401 })
     }
 

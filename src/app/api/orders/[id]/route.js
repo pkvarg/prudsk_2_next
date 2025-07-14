@@ -33,56 +33,56 @@ export async function GET(request, { params }) {
   }
 }
 
-export async function DELETE(request, { params }) {
-  try {
-    const session = await auth()
+// export async function DELETE(request, { params }) {
+//   try {
+//     const session = await auth()
 
-    if (!session) {
-      return new Response('Unauthorized', { status: 401 })
-    }
+//     if (!session) {
+//       return new Response('Unauthorized', { status: 401 })
+//     }
 
-    const { id } = await params
+//     const { id } = await params
 
-    // Find the order first to verify it exists
-    const order = await prisma.order.findUnique({
-      where: { id },
-    })
+//     // Find the order first to verify it exists
+//     const order = await prisma.order.findUnique({
+//       where: { id },
+//     })
 
-    if (!order) {
-      return NextResponse.json({ message: 'Order not found' }, { status: 404 })
-    }
+//     if (!order) {
+//       return NextResponse.json({ message: 'Order not found' }, { status: 404 })
+//     }
 
-    // Delete related records first (assuming cascading deletes aren't set up)
-    // This is necessary because Prisma enforces referential integrity
+//     // Delete related records first (assuming cascading deletes aren't set up)
+//     // This is necessary because Prisma enforces referential integrity
 
-    // Delete payment result if exists
-    try {
-      await prisma.paymentResult.deleteMany({
-        where: { orderId: id },
-      })
-    } catch (error) {
-      console.log('No payment results to delete or other error:', error)
-      // Continue with deletion even if this fails
-    }
+//     // Delete payment result if exists
+//     try {
+//       await prisma.paymentResult.deleteMany({
+//         where: { orderId: id },
+//       })
+//     } catch (error) {
+//       console.log('No payment results to delete or other error:', error)
+//       // Continue with deletion even if this fails
+//     }
 
-    // Delete order items
-    await prisma.orderItem.deleteMany({
-      where: { orderId: id },
-    })
+//     // Delete order items
+//     await prisma.orderItem.deleteMany({
+//       where: { orderId: id },
+//     })
 
-    // Delete shipping address
-    await prisma.shippingAddress.deleteMany({
-      where: { orderId: id },
-    })
+//     // Delete shipping address
+//     await prisma.shippingAddress.deleteMany({
+//       where: { orderId: id },
+//     })
 
-    // Finally delete the order
-    await prisma.order.delete({
-      where: { id },
-    })
+//     // Finally delete the order
+//     await prisma.order.delete({
+//       where: { id },
+//     })
 
-    return NextResponse.json({ message: 'Order deleted' })
-  } catch (error) {
-    console.error('Error deleting order:', error)
-    return NextResponse.json({ message: error.message }, { status: 500 })
-  }
-}
+//     return NextResponse.json({ message: 'Order deleted' })
+//   } catch (error) {
+//     console.error('Error deleting order:', error)
+//     return NextResponse.json({ message: error.message }, { status: 500 })
+//   }
+// }

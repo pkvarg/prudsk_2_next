@@ -1,20 +1,20 @@
 // app/api/orders/myorders/route.js
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
-import { auth } from '@/lib/auth'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc Get logged in user orders
 // @desc GET /api/orders/myorders
 // @access Private
 export async function GET(request) {
   try {
-    const session = await auth()
+    const user = await isAdmin()
 
-    if (!session) {
+    if (!user) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    const email = session.user.email
+    const email = user.email
 
     // Find all orders for the logged-in user
     const orders = await prisma.order.findMany({
