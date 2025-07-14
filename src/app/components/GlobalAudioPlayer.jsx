@@ -129,6 +129,7 @@ const GlobalAudioPlayer = () => {
         {/* Always render iframe, just hide it when minimized */}
         <div className={`${isMinimized ? 'hidden' : 'p-4'}`}>
           <div className="bg-gray-100 rounded">
+            <span className="text-red-500 fixed right-24 mt-5">Stáhnout mp3 &rarr;</span>
             <iframe
               ref={iframeRef}
               key={currentAudio.id}
