@@ -49,11 +49,53 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json(
       {
-        message: 'Added to favorites successfully',
+        message: 'Úspěšně přidáno do oblíbených',
         favorite: newFavorite,
       },
       { status: 200 },
     )
+  } catch (error) {
+    console.error('Add to favorites error:', error)
+    return NextResponse.json(
+      { message: 'Internal server error', error: error.message },
+      { status: 500 },
+    )
+  }
+}
+
+export async function GET(request, { params }) {
+  try {
+    const user = await isAdmin()
+
+    if (!user) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+    }
+
+    const userId = user.id
+    const { id: productId } = await params
+
+    const product = await prisma.product.findUnique({
+      where: { id: productId },
+    })
+
+    if (!product) {
+      return NextResponse.json({ message: 'Product not found' }, { status: 404 })
+    }
+
+    // Try to find by the same criteria
+    const foundByCriteria = await prisma.favorite.findFirst({
+      where: {
+        productId: productId,
+        favoriteOf: userId,
+      },
+    })
+    //console.log('Found by criteria:', foundByCriteria)
+
+    if (foundByCriteria) {
+      return NextResponse.json({ message: 'isFavorite' }, { status: 200 })
+    } else {
+      return NextResponse.json({ message: 'notFavorite' }, { status: 200 })
+    }
   } catch (error) {
     console.error('Add to favorites error:', error)
     return NextResponse.json(
