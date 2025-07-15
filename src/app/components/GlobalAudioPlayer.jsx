@@ -107,18 +107,24 @@ const GlobalAudioPlayer = () => {
               title="Přejít na stránku s nahrávkami"
             >
               <p className="text-xs opacity-75 mb-1">{currentAudio.subcategory}</p>
-              <h4 className="text-sm font-semibold line-clamp-2">{currentAudio.audioTitle}</h4>
+              <h4 className="!text-[12.5px] font-semibold line-clamp-2">
+                {currentAudio.audioTitle}
+              </h4>
             </div>
-            <div className="flex items-center space-x-2 flex-shrink-0 cursor-pointer">
+            <div className="cursor-pointer">
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="text-white hover:text-gray-300 text-lg cursor-pointer"
+                className="text-white hover:text-gray-300 cursor-pointer"
               >
-                {isMinimized ? '↗' : '-'}
+                {isMinimized ? (
+                  <span className="text-[22.5px] mr-2">↗</span>
+                ) : (
+                  <span className="text-[35px] mr-1 font-extralight">-</span>
+                )}
               </button>
               <button
                 onClick={stopAudio}
-                className="text-white hover:text-gray-300 text-xl cursor-pointer"
+                className="text-white hover:text-gray-300 text-[30px] cursor-pointer"
               >
                 ×
               </button>
@@ -129,7 +135,9 @@ const GlobalAudioPlayer = () => {
         {/* Always render iframe, just hide it when minimized */}
         <div className={`${isMinimized ? 'hidden' : 'p-4'}`}>
           <div className="bg-gray-100 rounded">
-            <span className="text-red-500 fixed right-24 mt-5">Stáhnout mp3 &rarr;</span>
+            <span className="text-red-500 text-[12.5px] fixed right-24 mt-5">
+              Stáhnout mp3 &rarr;
+            </span>
             <iframe
               ref={iframeRef}
               key={currentAudio.id}
