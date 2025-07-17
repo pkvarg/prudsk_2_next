@@ -120,9 +120,27 @@ export async function POST(request, { params }) {
       },
     })
 
-    // Send email notification
-    // Uncomment when you have the Email utility set up
-    // await new Email({ name: userName, comment }).sendReviewNotification();
+    const newReview = {
+      userName,
+      comment,
+    }
+
+    console.log('before sending', userName, comment)
+
+    // TODO
+
+    // SEND HONO EMAIL
+    //const apiUrl = 'http://localhost:3013/api/proud2next/new-review'
+
+    const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/new-review'
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      body: JSON.stringify(newReview),
+    })
+
+    const data = await response.json()
+    console.log('data admin new review', data.success)
 
     return NextResponse.json({ message: 'Review added' }, { status: 201 })
   } catch (error) {
