@@ -9,8 +9,6 @@ export async function GET(request, { params }) {
   try {
     const { id } = await params
 
-    console.log('id in GET', id)
-
     // Find the review by comment
     const reviews = await prisma.review.findMany({
       where: {
@@ -84,7 +82,7 @@ export async function POST(request, { params }) {
 
     if (existingReview) {
       console.log('exist')
-      return NextResponse.json({ error: 'Recenzia už existuje' }, { status: 400 })
+      return NextResponse.json({ error: 'Recenze už existuje' }, { status: 400 })
     }
 
     // Create the review

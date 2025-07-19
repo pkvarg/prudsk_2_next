@@ -99,7 +99,7 @@ async function getProductReviews(id) {
     }
 
     const data = await response.json()
-    return data.reviews || []
+    return data || []
   } catch (error) {
     // Silently fail during build - pages will be hydrated at runtime
     if (process.env.NODE_ENV !== 'development') {
@@ -179,6 +179,8 @@ export default async function ProductPage({ params }) {
   if (!product) {
     notFound()
   }
+
+  const acknowledgedReviews = reviews.filter((review) => review.isAcknowledged)
 
   // Generate JSON-LD structured data
   const jsonLd = {
@@ -444,7 +446,7 @@ export default async function ProductPage({ params }) {
         )}
 
         {/* Reviews Section */}
-        <ProductReviews product={product} initialReviews={reviews} />
+        <ProductReviews product={product} initialReviews={acknowledgedReviews} />
       </main>
     </>
   )

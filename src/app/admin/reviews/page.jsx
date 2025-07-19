@@ -1,17 +1,11 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import useProductStore from '@/store/productStore'
+import { clearCacheHandler } from '@/app/components/ClearCacheButton'
 
 const Reviews = () => {
-  const params = useParams()
-  const router = useRouter()
-
-  // Zustand stores
-  // const { products, page, pages, getAllProducts, acknowledgeProductReview, deleteProductReview } =
-  //   useProductStore()
   const { getAllProducts, acknowledgeProductReview, getAllReviews, reviews, deleteProductReview } =
     useProductStore()
 
@@ -29,8 +23,9 @@ const Reviews = () => {
 
   const acknowledgeHandler = async (productId, comment) => {
     acknowledgeProductReview(productId, comment)
-    alert('Recenzia schválená')
+    alert('Recenze schválená')
     getAllReviews()
+    clearCacheHandler()
   }
 
   return (

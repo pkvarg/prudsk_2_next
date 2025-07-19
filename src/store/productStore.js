@@ -142,8 +142,6 @@ const useProductStore = create((set, get) => ({
 
       const { data } = await axios.put(`/api/products/${id}/reviews/acknowledge`, { comment })
 
-      console.log('pstore, ack rew by prod', data)
-
       set({
         loading: false,
         //reviews: data,
@@ -347,8 +345,6 @@ const useProductStore = create((set, get) => ({
       const { discount } = discountData
 
       const { data } = await axios.post(`/api/products/discount`, { discount })
-
-      console.log('pstore create discount', data)
 
       set({
         loadingDiscount: false,
