@@ -9,6 +9,7 @@ import Loader from '@/app/components/Loader'
 import Paginate from '@/app/components/Paginate'
 import useProductStore from '@/store/productStore'
 import useUserStore from '@/store/userStore'
+import { ClearCacheButton } from '@/app/components/ClearCacheButton'
 
 const ProductListPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -108,6 +109,7 @@ const ProductListPage = () => {
           >
             <Plus size={20} /> Vytvořit produkt
           </button>
+          <ClearCacheButton />
         </div>
       </div>
 

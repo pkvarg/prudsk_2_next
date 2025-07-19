@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import useProductStore from '@/store/productStore'
+import { clearCacheHandler } from '@/app/components/ClearCacheButton'
 
 const ProductEditScreen = () => {
   const router = useRouter()
@@ -237,6 +238,7 @@ const ProductEditScreen = () => {
       if (data.imageUrl.includes('ukazka')) {
         setFormData((prev) => ({ ...prev, excerptImage: data.imageUrl }))
       } else {
+        alert('Názov súboru musí obsahovať "ukazka"')
         setFormData((prev) => ({ ...prev, image: data.imageUrl }))
       }
 
@@ -281,6 +283,7 @@ const ProductEditScreen = () => {
 
     console.log('Submitting data:', dataToSubmit)
     updateProduct(dataToSubmit)
+    clearCacheHandler()
   }
 
   if (loadingDetail) {
