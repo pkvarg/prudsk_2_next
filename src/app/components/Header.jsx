@@ -815,6 +815,109 @@ const Header = () => {
                 >
                   Ke stažení
                 </Link>
+                {/* Add this ADMIN section for mobile */}
+                {userInfo && userInfo.isAdmin && !userInfo.isAssistant && (
+                  <div>
+                    <button
+                      onClick={() => toggleDropdown('mobile-admin')}
+                      className="w-full text-left px-4 py-2 text-white flex justify-between items-center"
+                    >
+                      Admin
+                      <Icon.ChevronDown className="h-4 w-4" />
+                    </button>
+                    {activeDropdown === 'mobile-admin' && (
+                      <div className="px-8 py-2 space-y-1">
+                        <Link
+                          href="/admin/userlist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Uživatelé
+                        </Link>
+                        <Link
+                          href="/admin/productlist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Produkty
+                        </Link>
+                        <Link
+                          href="/admin/orderlist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Objednávky
+                        </Link>
+                        <Link
+                          href="/admin/audiolist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Audio
+                        </Link>
+                        <Link
+                          href="/admin/videolist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Video
+                        </Link>
+                        <Link
+                          href="/admin/bannerlist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Bannery
+                        </Link>
+                        <Link
+                          href="/admin/subscriberslist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Odběratelé novinek
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Add ASSISTANT section for mobile */}
+                {userInfo && userInfo.isAssistant && (
+                  <div>
+                    <button
+                      onClick={() => toggleDropdown('mobile-assistant')}
+                      className="w-full text-left px-4 py-2 text-white flex justify-between items-center"
+                    >
+                      Asistent
+                      <Icon.ChevronDown className="h-4 w-4" />
+                    </button>
+                    {activeDropdown === 'mobile-assistant' && (
+                      <div className="px-8 py-2 space-y-1">
+                        <Link
+                          href="/admin/audiolist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Audio
+                        </Link>
+                        <Link
+                          href="/admin/videolist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Video
+                        </Link>
+                        <Link
+                          href="/admin/bannerlist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Bannery
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           )}
