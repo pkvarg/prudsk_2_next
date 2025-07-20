@@ -82,6 +82,7 @@ async function getBannerImages() {
     const response = await fetch(`${baseUrl}/api/banner`, {
       cache: 'force-cache', // Banners probably don't change often
       next: { revalidate: 3600 }, // Revalidate every hour
+      tags: ['banners'],
     })
 
     if (!response.ok) {

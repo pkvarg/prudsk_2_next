@@ -11,6 +11,7 @@ export async function POST(request) {
     revalidatePath('/library')
     revalidatePath('/new-books/[id]', 'page')
     revalidatePath('/') // revalidate homepage if it shows products
+    revalidateTag('banners')
 
     return NextResponse.json({
       message: 'Cache cleared successfully',

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import useBannerStore from '@/store/bannerStore'
 import * as Icon from 'react-bootstrap-icons'
+import { clearCacheHandler } from '@/app/components/ClearCacheButton'
 
 // Loading component
 const PageLoader = () => (
@@ -70,6 +71,7 @@ const BannerList = () => {
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
       deleteBanner(id)
+      clearCacheHandler()
     }
   }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, Suspense } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import useAudioStore from '@/store/audioStore'
@@ -20,6 +20,9 @@ const AudioList = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const pageNumber = searchParams.get('page') || 1
+
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filteredAudios, setFilteredAudios] = useState([])
 
   const {
     audioList,
@@ -58,6 +61,27 @@ const AudioList = () => {
       listAudio('', pageNumber) // Refresh the list
     }
   }, [successDelete, resetAudioDelete, listAudio, pageNumber])
+
+  // Filter audios based on search term
+  useEffect(() => {
+    if (!searchTerm.trim()) {
+      setFilteredAudios(audios)
+    } else {
+      const filtered = audios.filter(
+        (audio) =>
+          audio.audioTitle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          audio.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          audio.mp3file?.toLowerCase().includes(searchTerm.toLowerCase()),
+      )
+      setFilteredAudios(filtered)
+    }
+  }, [audios, searchTerm])
+
+  const handleSearch = (value) => {
+    setSearchTerm(value)
+  }
+
+  console.log('filtered audions', filteredAudios)
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
@@ -127,6 +151,31 @@ const AudioList = () => {
         </button>
       </div>
 
+      {/* Search Box */}
+      <div className="mb-6">
+        <div className="relative max-w-md">
+          <input
+            type="text"
+            placeholder="Hledat audio soubory..."
+            value={searchTerm}
+            onChange={(e) => handleSearch(e.target.value)}
+            className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+          />
+          <Icon.Search
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            size={16}
+          />
+          {searchTerm && (
+            <button
+              onClick={() => handleSearch('')}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            >
+              <Icon.X size={16} />
+            </button>
+          )}
+        </div>
+      </div>
+
       {/* Error and Loading Messages */}
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
@@ -161,7 +210,7 @@ const AudioList = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {audios.map((audio) => (
+                  {filteredAudios.map((audio) => (
                     <tr key={audio.id} className="hover:bg-gray-50 transition-colors">
                       <td className="px-6 py-4 whitespace-wrap text-sm font-medium text-gray-900">
                         {audio.audioTitle}
@@ -197,7 +246,7 @@ const AudioList = () => {
 
           {/* Mobile Cards */}
           <div className="md:hidden space-y-4">
-            {audios.map((audio) => (
+            {filteredAudios.map((audio) => (
               <div
                 key={audio.id}
                 className="bg-white shadow-md rounded-lg p-4 border border-gray-200"
@@ -237,7 +286,7 @@ const AudioList = () => {
           </div>
 
           {/* Empty State */}
-          {audios.length === 0 && (
+          {filteredAudios.length === 0 && (
             <div className="text-center py-12">
               <Icon.MusicNote className="mx-auto h-12 w-12 text-gray-400 mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">Žádné audio soubory</h3>

@@ -13,7 +13,7 @@ const ProductEditScreen = () => {
   // Zustand store
   const {
     product,
-    products,
+    allProducts: products,
     getAllProducts,
     loadingDetail,
     errorDetail,
@@ -145,6 +145,8 @@ const ProductEditScreen = () => {
     }
   }, [successUpdate, resetUpdate, router])
 
+  console.log('Total products:', products)
+
   // Filter products based on search terms
   const getFilteredProducts = (searchTerm, excludeIds = []) => {
     if (!products || products.length === 0) return []
@@ -159,7 +161,8 @@ const ProductEditScreen = () => {
       // Search by name or author
       const searchLower = searchTerm.toLowerCase()
       return (
-        p.name?.toLowerCase().includes(searchLower) || p.author?.toLowerCase().includes(searchLower)
+        p.searchName?.toLowerCase().includes(searchLower) ||
+        p.author?.toLowerCase().includes(searchLower)
       )
     })
   }
@@ -238,7 +241,6 @@ const ProductEditScreen = () => {
       if (data.imageUrl.includes('ukazka')) {
         setFormData((prev) => ({ ...prev, excerptImage: data.imageUrl }))
       } else {
-        alert('Názov súboru musí obsahovať "ukazka"')
         setFormData((prev) => ({ ...prev, image: data.imageUrl }))
       }
 
@@ -258,8 +260,6 @@ const ProductEditScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-
-    console.log('ex', formData.excerptImage)
 
     const excerptObject = {
       image: formData.excerptImage,
@@ -812,7 +812,7 @@ const ProductEditScreen = () => {
 
             {/* Excerpt Image */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-red-500 mb-2">
                 Ukázka - Obrázek (názov súboru musí obsahovat "ukazka", napr.
                 dvaja_duchovia_ukazka.png, 250 x 250 pixelů)
               </label>

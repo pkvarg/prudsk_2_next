@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import useProductStore from '@/store/productStore'
 import Loader from '@/app/components/Loader'
+import { clearCacheHandler } from '@/app/components/ClearCacheButton'
 
 const Message = ({ variant, children }) => {
   const baseClasses = 'p-4 rounded-md mb-4'
@@ -44,15 +45,17 @@ const CreateDiscount = () => {
         discount: discount,
       })
 
-      if (!loadingDiscount && discount > 0) {
+      console.log('discount', discount)
+
+      if (discount > 0) {
         setMessageSuccess(`Akce vytvorená`)
-      } else if (!loadingDiscount && discount === 0) {
+      } else if (discount === 0) {
         setMessageSuccess(`Akce zrušená`)
-      } else {
-        setMessageSuccess(errorDiscount)
       }
+      clearCacheHandler()
     } catch (error) {
       console.error('Error creating discount:', error)
+      setMessageSuccess(errorDiscount)
     }
   }
 
