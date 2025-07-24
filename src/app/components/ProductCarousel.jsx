@@ -9,8 +9,8 @@ export default function ProductCarousel({ images }) {
   }
 
   return (
-    <div className="hidden lg:flex my-8 -z-10">
-      <div className="relative h-96 w-full overflow-hidden">
+    <div className="hidden lg:flex my-8 -z-10 lg:mx-[5%]">
+      <div className="relative h-88 w-full overflow-hidden">
         {/* Server-render the first image for SEO */}
         <div className="absolute inset-0">
           <Image
