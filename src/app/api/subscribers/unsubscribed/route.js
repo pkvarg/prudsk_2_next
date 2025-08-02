@@ -27,7 +27,7 @@ export async function GET() {
     console.error('Error fetching unsubscribers:', error)
 
     return NextResponse.json(
-      { error: 'Failed to fetch unsubscribers', details: error.message },
+      { error: 'Nepodařilo se načíst odhlášené uživatele', details: error.message },
       { status: 500 },
     )
   }

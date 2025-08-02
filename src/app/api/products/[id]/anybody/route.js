@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc    Update a product when adding favorite of to a product
 // @route   PUT /api/products/:id/anybody
@@ -49,7 +50,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Produkt nebyl nalezen' }, { status: 404 })
     }
 
     // Handle favoriteOf separately (it's a special case that adds to an array)

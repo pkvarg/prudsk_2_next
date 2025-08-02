@@ -75,7 +75,7 @@ export async function POST(request) {
 
       // Return error to client
       return NextResponse.json(
-        { message: 'Payment session creation failed', error: error.message },
+        { message: 'Vytvoření platební relace selhalo', error: error.message },
         { status: 500 },
       )
     } catch (emailError) {
@@ -83,7 +83,7 @@ export async function POST(request) {
 
       // Return error to client even if email fails
       return NextResponse.json(
-        { message: 'Payment session creation failed', error: error.message },
+        { message: 'Vytvoření platební relace selhalo', error: error.message },
         { status: 500 },
       )
     }

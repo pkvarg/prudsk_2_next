@@ -23,7 +23,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!order) {
-      return NextResponse.json({ message: 'Order not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Objednávka nebyla nalezena' }, { status: 404 })
     }
 
     // Create token using crypto
@@ -75,7 +75,7 @@ export async function GET(request, { params }) {
     })
 
     if (!order) {
-      return NextResponse.json({ message: 'Order not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Objednávka nebyla nalezena' }, { status: 404 })
     }
 
     // Return just the initPaymentId as in the original implementation

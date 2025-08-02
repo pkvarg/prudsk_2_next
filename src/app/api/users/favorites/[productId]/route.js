@@ -22,7 +22,7 @@ export async function DELETE(request, { params }) {
     })
 
     if (!user) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Uživatel nebyl nalezen' }, { status: 404 })
     }
 
     // Remove from favorites
@@ -39,7 +39,7 @@ export async function DELETE(request, { params }) {
     })
 
     return NextResponse.json({
-      message: 'Removed from favorites',
+      message: 'Odstraněno z oblíbených',
       favorites: updatedUser.favorites,
     })
   } catch (error) {

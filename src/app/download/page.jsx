@@ -24,12 +24,12 @@ const DownloadPage = () => {
         if (response.ok) {
           setLoading(false)
         } else {
-          setError('PDF file not found')
+          setError('PDF soubor nebyl nalezen')
           setLoading(false)
         }
       })
       .catch(() => {
-        setError('Error loading PDF file')
+        setError('Chyba při načítání PDF souboru')
         setLoading(false)
       })
   }, [])

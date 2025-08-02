@@ -25,7 +25,7 @@ export async function GET(request, { params }) {
     if (order) {
       return NextResponse.json(order)
     } else {
-      return NextResponse.json({ message: 'Order not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Objednávka nebyla nalezena' }, { status: 404 })
     }
   } catch (error) {
     console.error('Error fetching order:', error)
@@ -49,7 +49,7 @@ export async function GET(request, { params }) {
 //     })
 
 //     if (!order) {
-//       return NextResponse.json({ message: 'Order not found' }, { status: 404 })
+//       return NextResponse.json({ message: 'Objednávka nebyla nalezena' }, { status: 404 })
 //     }
 
 //     // Delete related records first (assuming cascading deletes aren't set up)

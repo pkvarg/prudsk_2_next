@@ -58,7 +58,7 @@ const UserListPage = () => {
   }, [userInfo, router, successDelete, listUsers, getUserDetails, userInfo?.id])
 
   const deleteHandler = (id) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Jste si jisti?')) {
       deleteUser(id)
     }
   }

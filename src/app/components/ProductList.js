@@ -18,7 +18,7 @@ export default function ProductList() {
         console.log('response', response)
 
         if (!response.ok) {
-          throw new Error('Failed to fetch products')
+          throw new Error('Nepodařilo se načíst produkty')
         }
 
         const data = await response.json()
@@ -35,8 +35,8 @@ export default function ProductList() {
     fetchProducts()
   }, [])
 
-  if (loading) return <div>Loading products...</div>
-  if (error) return <div>Error: {error}</div>
+  if (loading) return <div>Načítání produktů...</div>
+  if (error) return <div>Chyba: {error}</div>
 
   return (
     <div>

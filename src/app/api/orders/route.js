@@ -38,7 +38,7 @@ export async function POST(request) {
 
     // Validate request
     if (!orderItems || orderItems.length === 0) {
-      return NextResponse.json({ message: 'No order items' }, { status: 400 })
+      return NextResponse.json({ message: 'Žádné položky objednávky' }, { status: 400 })
     }
 
     const orderNumber = await getOrderNumber()

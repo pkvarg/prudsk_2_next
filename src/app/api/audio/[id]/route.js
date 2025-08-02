@@ -22,7 +22,7 @@ export async function GET(request, { params }) {
     if (audio) {
       return NextResponse.json(audio)
     } else {
-      return NextResponse.json({ error: 'Audio not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Audio nebylo nalezeno' }, { status: 404 })
     }
   } catch (error) {
     console.error('Error fetching audio:', error)
@@ -58,7 +58,7 @@ export async function DELETE(request, { params }) {
     })
 
     if (!audio) {
-      return NextResponse.json({ error: 'Audio not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Audio nebylo nalezeno' }, { status: 404 })
     }
 
     // Delete the audio
@@ -106,7 +106,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!audio) {
-      return NextResponse.json({ error: 'Audio not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Audio nebylo nalezeno' }, { status: 404 })
     }
 
     // Update the audio

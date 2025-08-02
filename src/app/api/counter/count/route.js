@@ -14,7 +14,7 @@ export async function GET(request) {
     })
 
     if (!counter) {
-      return NextResponse.json({ error: 'Counter record not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Záznam počítadla nebyl nalezen' }, { status: 404 })
     }
 
     // Return just the visitor count as in the original function
@@ -23,7 +23,7 @@ export async function GET(request) {
     console.error('Error getting visitor count:', error)
 
     return NextResponse.json(
-      { error: 'Failed to get visitor count', details: error.message },
+      { error: 'Nepodařilo se získat počet návštěvníků', details: error.message },
       { status: 500 },
     )
   }

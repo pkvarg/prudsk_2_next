@@ -71,7 +71,7 @@ async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
       return { products: [], pages: 0 }
     }
     console.error('[HOMEPAGE] Error fetching initial products:', error)
-    return { products: [], pages: 0, error: 'Failed to load products' }
+    return { products: [], pages: 0, error: 'Nepodařilo se načíst produkty' }
   }
 }
 

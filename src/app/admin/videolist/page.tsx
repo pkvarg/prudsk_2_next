@@ -60,7 +60,7 @@ const VideoList = () => {
   }, [successDelete, resetVideoDelete, listVideo, pageNumber])
 
   const deleteHandler = (id) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Jste si jisti?')) {
       deleteVideo(id)
     }
   }

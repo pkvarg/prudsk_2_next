@@ -27,7 +27,7 @@ export async function GET() {
     console.error('Error fetching subscribers:', error)
 
     return NextResponse.json(
-      { error: 'Failed to fetch subscribers', details: error.message },
+      { error: 'Nepodařilo se načíst odběratele', details: error.message },
       { status: 500 },
     )
   }

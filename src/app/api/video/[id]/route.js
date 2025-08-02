@@ -17,7 +17,7 @@ export async function GET(request, { params }) {
     })
 
     if (!video) {
-      return NextResponse.json({ message: 'Video not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Video nebylo nalezeno' }, { status: 404 })
     }
 
     return NextResponse.json(video)
@@ -46,7 +46,7 @@ export async function DELETE(request, { params }) {
     })
 
     if (!video) {
-      return NextResponse.json({ message: 'Video not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Video nebylo nalezeno' }, { status: 404 })
     }
 
     // Delete the video
@@ -54,7 +54,7 @@ export async function DELETE(request, { params }) {
       where: { id },
     })
 
-    return NextResponse.json({ message: 'Video removed' })
+    return NextResponse.json({ message: 'Video bylo odstraněno' })
   } catch (error) {
     console.error('Error deleting video:', error)
     return NextResponse.json({ message: error.message }, { status: 500 })
@@ -83,7 +83,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!video) {
-      return NextResponse.json({ message: 'Video not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Video nebylo nalezeno' }, { status: 404 })
     }
 
     // Update the video

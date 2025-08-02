@@ -37,7 +37,7 @@ export async function GET(request, { params }) {
     })
 
     if (!user) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Uživatel nebyl nalezen' }, { status: 404 })
     }
 
     return NextResponse.json(user)
@@ -66,12 +66,12 @@ export async function DELETE(request, { params }) {
     })
 
     if (!user) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Uživatel nebyl nalezen' }, { status: 404 })
     }
 
     // Check if trying to delete self
     if (user.id === userLoggedIn.id) {
-      return NextResponse.json({ message: 'Cannot delete your own account' }, { status: 400 })
+      return NextResponse.json({ message: 'Nemůžete smazat svůj vlastní účet' }, { status: 400 })
     }
 
     // Delete the user
@@ -79,7 +79,7 @@ export async function DELETE(request, { params }) {
       where: { id },
     })
 
-    return NextResponse.json({ message: 'User removed' })
+    return NextResponse.json({ message: 'Uživatel byl odstraněn' })
   } catch (error) {
     console.error('Error deleting user:', error)
     return NextResponse.json({ message: error.message }, { status: 500 })
@@ -106,7 +106,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!user) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Uživatel nebyl nalezen' }, { status: 404 })
     }
 
     // Handle favorites update

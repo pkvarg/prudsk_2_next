@@ -11,7 +11,7 @@ export async function GET(request, { params }) {
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-      return NextResponse.json({ error: 'Invalid banner ID format' }, { status: 400 })
+      return NextResponse.json({ error: 'Neplatný formát ID banneru' }, { status: 400 })
     }
 
     // Find the banner by ID
@@ -22,13 +22,13 @@ export async function GET(request, { params }) {
     if (banner) {
       return NextResponse.json(banner)
     } else {
-      return NextResponse.json({ error: 'Banner not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Banner nebyl nalezen' }, { status: 404 })
     }
   } catch (error) {
     console.error('Error fetching banner:', error)
 
     return NextResponse.json(
-      { error: 'Failed to fetch banner', details: error.message },
+      { error: 'Nepodařilo se načíst banner', details: error.message },
       { status: 500 },
     )
   }
@@ -48,7 +48,7 @@ export async function DELETE(request, { params }) {
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-      return NextResponse.json({ error: 'Invalid banner ID format' }, { status: 400 })
+      return NextResponse.json({ error: 'Neplatný formát ID banneru' }, { status: 400 })
     }
 
     // Check if banner exists
@@ -57,7 +57,7 @@ export async function DELETE(request, { params }) {
     })
 
     if (!banner) {
-      return NextResponse.json({ error: 'Banner not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Banner nebyl nalezen' }, { status: 404 })
     }
 
     // Delete the banner
@@ -65,12 +65,12 @@ export async function DELETE(request, { params }) {
       where: { id },
     })
 
-    return NextResponse.json({ message: 'Banner removed' })
+    return NextResponse.json({ message: 'Banner byl odstraněn' })
   } catch (error) {
     console.error('Error deleting banner:', error)
 
     return NextResponse.json(
-      { error: 'Failed to delete banner', details: error.message },
+      { error: 'Nepodařilo se smazat banner', details: error.message },
       { status: 500 },
     )
   }
@@ -92,7 +92,7 @@ export async function PUT(request, { params }) {
 
     // Validate the ID format (MongoDB ObjectID)
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-      return NextResponse.json({ error: 'Invalid banner ID format' }, { status: 400 })
+      return NextResponse.json({ error: 'Neplatný formát ID banneru' }, { status: 400 })
     }
 
     // Parse request body
@@ -105,7 +105,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!banner) {
-      return NextResponse.json({ error: 'Banner not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Banner nebyl nalezen' }, { status: 404 })
     }
 
     // Update the banner
@@ -124,7 +124,7 @@ export async function PUT(request, { params }) {
     console.error('Error updating banner:', error)
 
     return NextResponse.json(
-      { error: 'Failed to update banner', details: error.message },
+      { error: 'Nepodařilo se aktualizovat banner', details: error.message },
       { status: 500 },
     )
   }

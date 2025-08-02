@@ -37,7 +37,7 @@ export async function GET(request, response) {
         googleId: user.googleId || null,
       })
     } else {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Uživatel nebyl nalezen' }, { status: 404 })
     }
   } catch (error) {
     console.error('Error fetching user profile:', error)
@@ -72,7 +72,7 @@ const generateToken = (id) => {
 //     })
 
 //     if (!existingUser) {
-//       return NextResponse.json({ message: 'User not found' }, { status: 404 })
+//       return NextResponse.json({ message: 'Uživatel nebyl nalezen' }, { status: 404 })
 //     }
 
 //     const wantsToSubscribe = userData.isSubscribed
@@ -160,7 +160,7 @@ export async function PUT(request) {
     })
 
     if (!existingUser) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Uživatel nebyl nalezen' }, { status: 404 })
     }
 
     const wantsToSubscribe = userData.isSubscribed

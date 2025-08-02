@@ -84,7 +84,7 @@ const AudioList = () => {
   console.log('filtered audions', filteredAudios)
 
   const deleteHandler = (id) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Jste si jisti?')) {
       deleteAudio(id)
     }
   }

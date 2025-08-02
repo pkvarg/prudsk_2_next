@@ -17,7 +17,7 @@ export async function GET(request, { params }) {
     })
 
     if (!reviews) {
-      return NextResponse.json({ error: 'Reviews not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Recenze nebyly nalezeny' }, { status: 404 })
     }
 
     return NextResponse.json(reviews)
@@ -25,7 +25,7 @@ export async function GET(request, { params }) {
     console.error('Error deleting review:', error)
 
     return NextResponse.json(
-      { error: 'Failed to delete review', details: error.message },
+      { error: 'Nepodařilo se smazat recenzi', details: error.message },
       { status: 500 },
     )
   }
@@ -44,16 +44,16 @@ export async function POST(request, { params }) {
 
     // Validate input
     if (typeof rating !== 'number' || rating < 0 || !comment) {
-      return NextResponse.json({ error: 'Rating and comment are required' }, { status: 400 })
+      return NextResponse.json({ error: 'Hodnocení a komentář jsou povinné' }, { status: 400 })
     }
 
     const user = await isAdmin()
     if (!user) {
-      return NextResponse.json({ error: 'User not authenticated' }, { status: 401 })
+      return NextResponse.json({ error: 'Uživatel není ověřen' }, { status: 401 })
     }
 
     if (!user.id || !user.name) {
-      return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
+      return NextResponse.json({ error: 'Neplatná uživatelská data' }, { status: 400 })
     }
 
     const { name: userName, id: userId } = user
@@ -67,7 +67,7 @@ export async function POST(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Produkt nebyl nalezen' }, { status: 404 })
     }
 
     // Check if user already reviewed this product
@@ -140,12 +140,12 @@ export async function POST(request, { params }) {
     const data = await response.json()
     console.log('data admin new review', data.success)
 
-    return NextResponse.json({ message: 'Review added' }, { status: 201 })
+    return NextResponse.json({ message: 'Recenze byla přidána' }, { status: 201 })
   } catch (error) {
     console.error('Error creating review:', error)
 
     return NextResponse.json(
-      { error: 'Failed to create review', details: error.message },
+      { error: 'Nepodařilo se vytvořit recenzi', details: error.message },
       { status: 500 },
     )
   }
@@ -169,7 +169,7 @@ export async function DELETE(request, { params }) {
 
     if (!comment) {
       return NextResponse.json(
-        { error: 'Comment is required to identify the review' },
+        { error: 'Komentář je vyžadován pro identifikaci recenze' },
         { status: 400 },
       )
     }
@@ -181,7 +181,7 @@ export async function DELETE(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Produkt nebyl nalezen' }, { status: 404 })
     }
 
     // Find the review by comment
@@ -193,7 +193,7 @@ export async function DELETE(request, { params }) {
     })
 
     if (!review) {
-      return NextResponse.json({ error: 'Review not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Recenze nebyla nalezena' }, { status: 404 })
     }
 
     // Delete the review
@@ -219,12 +219,12 @@ export async function DELETE(request, { params }) {
       },
     })
 
-    return NextResponse.json({ message: 'Review Deleted Successfully' }, { status: 200 })
+    return NextResponse.json({ message: 'Recenze byla úspěšně smazána' }, { status: 200 })
   } catch (error) {
     console.error('Error deleting review:', error)
 
     return NextResponse.json(
-      { error: 'Failed to delete review', details: error.message },
+      { error: 'Nepodařilo se smazat recenzi', details: error.message },
       { status: 500 },
     )
   }

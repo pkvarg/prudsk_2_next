@@ -24,7 +24,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ message: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Produkt nebyl nalezen' }, { status: 404 })
     }
 
     const existingFavorite = await prisma.favorite.findFirst({
@@ -79,7 +79,7 @@ export async function GET(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ message: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Produkt nebyl nalezen' }, { status: 404 })
     }
 
     // Try to find by the same criteria

@@ -17,11 +17,11 @@ export const clearCacheHandler = async () => {
         'Cache byl úspěšně aktualizován! Pokud se některá část webu neaktualizovala, podržte Shift a klikněte na refresh.',
       )
     } else {
-      alert('Failed to refresh cache: ' + data.error)
+      alert('Nepodařilo se aktualizovat cache: ' + data.error)
     }
   } catch (error) {
     console.error('Error:', error)
-    alert('Error refreshing cache')
+    alert('Chyba při aktualizaci cache')
   }
 }
 
@@ -31,7 +31,7 @@ export const ClearCacheButton = () => {
       className="py-2 px-4 bg-[#f4f019] hover:bg-orange-400 text-black rounded flex items-center gap-1"
       onClick={clearCacheHandler}
     >
-      Clear Cache
+      Vymazat Cache
     </button>
   )
 }

@@ -91,7 +91,7 @@ const Contact = () => {
         const errorData = await response.json()
         return {
           success: false,
-          message: errorData.message || 'Failed to submit form',
+          message: errorData.message || 'Nepodařilo se odeslat formulář',
         }
       }
 
@@ -101,7 +101,7 @@ const Contact = () => {
       //console.log('returned data', data)
       return {
         success: true,
-        message: data.message || 'Message sent successfully',
+        message: data.message || 'Zpráva byla úspěšně odeslána',
       }
     } catch (error) {
       // Handle validation errors
@@ -116,7 +116,7 @@ const Contact = () => {
       console.error('Contact form submission error:', error)
       return {
         success: false,
-        message: 'An unexpected error occurred',
+        message: 'Nastala neočekávaná chyba',
       }
     }
   }

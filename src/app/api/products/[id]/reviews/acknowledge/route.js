@@ -18,7 +18,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Produkt nebyl nalezen' }, { status: 404 })
     }
 
     const review = await prisma.review.findFirst({
@@ -29,7 +29,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!review) {
-      return NextResponse.json({ error: 'Review not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Recenze nebyla nalezena' }, { status: 404 })
     }
 
     // Update the review to acknowledge it
@@ -38,12 +38,12 @@ export async function PUT(request, { params }) {
       data: { isAcknowledged: true },
     })
 
-    return NextResponse.json({ message: 'Review acknowledged' }, { status: 200 })
+    return NextResponse.json({ message: 'Recenze byla potvrzena' }, { status: 200 })
   } catch (error) {
     console.error('Error acknowledging review:', error)
 
     return NextResponse.json(
-      { error: 'Failed to acknowledge review', details: error.message },
+      { error: 'Nepodařilo se potvrdit recenzi', details: error.message },
       { status: 500 },
     )
   }

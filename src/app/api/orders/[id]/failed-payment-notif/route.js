@@ -33,7 +33,7 @@ export async function POST(request, { params }) {
     })
 
     if (!order) {
-      return NextResponse.json({ message: 'Order not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Objednávka nebyla nalezena' }, { status: 404 })
     }
 
     // Prepare data for email

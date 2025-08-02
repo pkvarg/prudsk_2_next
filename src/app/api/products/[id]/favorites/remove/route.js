@@ -33,7 +33,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Produkt nebyl nalezen' }, { status: 404 })
     }
 
     // Find and delete the favorite entry

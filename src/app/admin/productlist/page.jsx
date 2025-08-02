@@ -38,7 +38,7 @@ const ProductListPage = () => {
   const { userInfo } = useUserStore()
 
   const deleteHandler = (id) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Jste si jisti?')) {
       deleteProduct(id)
     }
   }
