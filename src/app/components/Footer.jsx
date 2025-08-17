@@ -23,6 +23,16 @@ const Footer = () => {
     }
   }
 
+  const loadUmamiScript = () => {
+    if (!document.querySelector('[data-website-id="dda1780c-8861-4ad7-a963-0f347d73e476"]')) {
+      const script = document.createElement('script')
+      script.defer = true
+      script.src = 'https://umami-p00gs00gwcwo00s4k4c4kgg8.pictusweb.com/script.js'
+      script.setAttribute('data-website-id', 'dda1780c-8861-4ad7-a963-0f347d73e476')
+      document.head.appendChild(script)
+    }
+  }
+
   return (
     <>
       <CookieConsent
@@ -42,6 +52,7 @@ const Footer = () => {
         expires={365}
         enableDeclineButton
         onAccept={() => {
+          loadUmamiScript()
           incrementCount()
         }}
         declineButtonStyle={{
@@ -54,7 +65,7 @@ const Footer = () => {
           incrementCount()
         }}
       >
-        Tato stránka používá pouze analytické a pro fungování webu nezbytné cookies. Nepoužíváme
+        Tato stránka používá pouze analytické a pro fungování webu nezbytné cookies pro anonymní analytiku návštěvnosti. Nepoužíváme
         funkční ani marketingové soubory cookies.{' '}
         <a
           style={{

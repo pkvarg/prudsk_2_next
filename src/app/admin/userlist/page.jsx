@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Check, X, Pencil, Trash } from 'react-bootstrap-icons'
+import { Check, X, Pencil, Trash, BarChart } from 'react-bootstrap-icons'
 import Message from '@/app/components/Message'
 import Loader from '@/app/components/Loader'
 import useUserStore from '@/store/userStore'
@@ -73,6 +73,15 @@ const UserListPage = () => {
           <p className="font-bold mt-2">Roboti: {countBots}</p>
           <p className="font-bold mt-2">Emaily : {countEmails}</p>
           <p className="font-bold mt-2">Posledná návšteva: {lastVisit}</p>
+          <Link
+            href="https://umami-p00gs00gwcwo00s4k4c4kgg8.pictusweb.com/share/0r0Ekex2i52O16ao/test-proudzivota-new.pictusweb.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-red-700 hover:bg-red-800 !text-white rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"
+          >
+            <BarChart size={16} />
+            Zobrazit analytiku
+          </Link>
         </div>
       </div>
 
