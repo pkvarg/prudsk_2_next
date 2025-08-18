@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
@@ -36,7 +35,10 @@ const OrderPage = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    if (orderId) getOrderDetails(orderId)
+    if (orderId) {
+      getOrderDetails(orderId)
+      clearCart()
+    }
   }, [orderId])
 
   const deliverHandler = async () => {
