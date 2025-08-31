@@ -49,11 +49,17 @@ const useProductStore = create((set, get) => ({
   currentPage: 1,
   pageSize: 8,
 
-  setSearchKeyword: (keyword) =>
-    set((state) => ({
-      searchKeyword: keyword,
-      isSearchActive: !!keyword.trim(),
-    })),
+  setSearchKeyword: (keyword) => {
+    console.log('setSearchKeyword called with:', keyword)
+    set((state) => {
+      const newState = {
+        searchKeyword: keyword,
+        isSearchActive: !!keyword.trim(),
+      }
+      console.log('setSearchKeyword setting state:', newState)
+      return newState
+    })
+  },
 
   clearSearch: () =>
     set((state) => ({
@@ -71,12 +77,15 @@ const useProductStore = create((set, get) => ({
   // List products with pagination
   listProducts: async (keyword = '', pageNumber = 1, pageSize = 10) => {
     try {
+      console.log('listProducts called with:', { keyword, pageNumber, pageSize })
+      console.trace('listProducts call stack') // This will show where the call came from
       set({ loading: true })
 
       const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}&t=${Date.now()}`,
       )
 
+      console.log('listProducts response:', data)
       set({
         loading: false,
         products: data.products,
@@ -84,6 +93,7 @@ const useProductStore = create((set, get) => ({
         pages: data.pages,
       })
     } catch (error) {
+      console.error('listProducts error:', error)
       set({
         loading: false,
         error:

@@ -45,7 +45,8 @@ export default function ProductsClient({
 
   useEffect(() => {
     // Only fetch if search params changed or if we're not on page 1
-    if (searchKeyword !== keyword || currentPage !== 1) {
+    // But don't override search results from SearchBox component
+    if (keyword && (searchKeyword !== keyword || currentPage !== 1)) {
       listProducts(keyword, currentPage, pageSize)
     }
   }, [listProducts, keyword, currentPage, searchKeyword])

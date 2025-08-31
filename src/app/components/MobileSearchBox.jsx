@@ -8,7 +8,7 @@ import useProductStore from '@/store/productStore'
 const MobileSearchBox = () => {
   const [keyword, setKeyword] = useState('')
   const router = useRouter()
-  const { setSearchKeyword, clearSearch } = useProductStore()
+  const { setSearchKeyword, clearSearch, listProducts } = useProductStore()
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -16,12 +16,18 @@ const MobileSearchBox = () => {
 
     if (trimmedKeyword) {
       setSearchKeyword(trimmedKeyword)
+      // Directly call listProducts with the search keyword
+      listProducts(trimmedKeyword, 1, 8)
     } else {
       clearSearch()
+      // Load all products when search is cleared
+      listProducts('', 1, 8)
     }
 
-    // Navigate to home page
-    router.push('/')
+    // Only navigate if not already on home page
+    if (window.location.pathname !== '/') {
+      router.push('/')
+    }
   }
 
   const handleInputChange = (e) => {
