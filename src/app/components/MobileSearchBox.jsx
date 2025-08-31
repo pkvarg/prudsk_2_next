@@ -16,11 +16,20 @@ const MobileSearchBox = () => {
 
     if (trimmedKeyword) {
       setSearchKeyword(trimmedKeyword)
-      // Directly call listProducts with the search keyword
       listProducts(trimmedKeyword, 1, 8)
+      
+      // Scroll to products section after search
+      setTimeout(() => {
+        const productsSection = document.querySelector('h1')
+        if (productsSection) {
+          productsSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          })
+        }
+      }, 300)
     } else {
       clearSearch()
-      // Load all products when search is cleared
       listProducts('', 1, 8)
     }
 

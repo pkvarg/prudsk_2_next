@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import useProductStore from '@/store/productStore'
 import Product from '../components/Product'
@@ -15,6 +15,7 @@ const HomeScreen = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 8
+  const productsRef = useRef(null)
 
   const products = useProductStore((state) => state.products)
   const loading = useProductStore((state) => state.loading)
@@ -36,6 +37,18 @@ const HomeScreen = () => {
     listProducts('', 1, pageSize)
   }, []) // Only run on mount
 
+  // Scroll to products when search results change
+  useEffect(() => {
+    if (searchKeyword && products.length > 0 && productsRef.current) {
+      setTimeout(() => {
+        productsRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      }, 100)
+    }
+  }, [searchKeyword, products])
+
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage)
     // Call listProducts with current search term and new page
@@ -56,7 +69,9 @@ const HomeScreen = () => {
         </Link>
       )}
 
-      <h1 className="!text-3xl !font-normal text-[#9E7B54] mb-4">Naše publikace</h1>
+      <h1 className="!text-3xl !font-normal text-[#9E7B54] mb-4" ref={productsRef}>
+        Naše publikace
+      </h1>
       <hr className="border-gray-300 mb-6" />
 
       {loading ? (
