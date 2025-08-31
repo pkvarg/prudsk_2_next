@@ -58,7 +58,7 @@ const OrderListScreen = () => {
                   Zrušena
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Užívatel
+                  Používateľ
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
                   Datum
@@ -67,13 +67,13 @@ const OrderListScreen = () => {
                   Cena
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Zaplaceno
+                  Zaplatené
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Odeslano
+                  Odoslané
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Akce
+                  Akcie
                 </th>
               </tr>
             </thead>
@@ -89,7 +89,7 @@ const OrderListScreen = () => {
                     {order.createdAt?.substring(0, 10)}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-900 font-medium">
-                    {order.totalPrice} Kč
+                    {order.totalPrice} €
                   </td>
                   <td className="px-4 py-3 text-sm">
                     <div className="flex items-center justify-between">
@@ -101,7 +101,7 @@ const OrderListScreen = () => {
                         )}
                       </span>
                       <span className="ml-4">
-                        {order.paymentMethod === 'Hotovost' ? (
+                        {order.paymentMethod === 'Hotovosť' ? (
                           <CashCoin className="text-[#9b7d57] w-4 h-4" />
                         ) : (
                           <CreditCard className="text-[#9b7d57] w-4 h-4" />
@@ -130,7 +130,7 @@ const OrderListScreen = () => {
           </table>
 
           {(!orders || orders.length === 0) && !loading && (
-            <div className="text-center py-8 text-gray-500">Žádné objednávky nebyly nalezeny</div>
+            <div className="text-center py-8 text-gray-500">Žiadne objednávky neboli nájdené</div>
           )}
         </div>
       )}

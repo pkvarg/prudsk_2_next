@@ -13,13 +13,13 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'hono-api.pictusweb.com',
-        pathname: '/api/upload/proud2next/**',
+        pathname: '/api/upload/prudsk2next/**',
       },
       {
         protocol: 'http',
         hostname: 'localhost',
         port: '3013',
-        pathname: '/api/upload/proud2next/**',
+        pathname: '/api/upload/prudsk2next/**',
       },
       {
         protocol: 'https',

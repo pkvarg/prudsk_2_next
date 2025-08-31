@@ -79,7 +79,7 @@ const OrderPage = () => {
     return order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   }
 
-  const isAbroad = order?.shippingAddress?.country !== 'Česká republika'
+  const isAbroad = order?.shippingAddress?.country !== 'Slovenská republika'
 
   if (loadingDetails || loadingDeliver || loadingPaid || loadingConfirmationEmail) {
     return <Loader />
@@ -90,7 +90,7 @@ const OrderPage = () => {
   }
 
   if (!order) {
-    return <div>Order not found</div>
+    return <div>Objednávka nenájdená</div>
   }
 
   return (
@@ -99,7 +99,7 @@ const OrderPage = () => {
 
       {successConfirmationEmail && (
         <Message variant="success" className="mt-2">
-          Potvrzovací email s fakturou odeslán
+          Potvrdzovací email s faktúrou odoslaný
         </Message>
       )}
 
@@ -108,9 +108,9 @@ const OrderPage = () => {
           <div className="space-y-6">
             {/* Shipping Address Section */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-2xl font-semibold mb-4">Doručovací adresa</h2>
+              <h2 className="text-2xl font-semibold mb-4">Doručovacia adresa</h2>
               <p className="mb-2">
-                <span className="font-semibold">Jméno: </span>
+                <span className="font-semibold">Meno: </span>
                 {order.name}
               </p>
               {/* <p className="mb-2">
@@ -128,7 +128,7 @@ const OrderPage = () => {
 
               {order.shippingAddress.billingName && (
                 <div className="mt-4">
-                  <h4 className="text-lg font-semibold mb-2">Fakturační údaje</h4>
+                  <h4 className="text-lg font-semibold mb-2">Fakturačné údaje</h4>
                   <p>
                     {order.shippingAddress.billingName}, {order.shippingAddress.billingAddress},{' '}
                     {order.shippingAddress.billingPostalCode}, {order.shippingAddress.billingCity},{' '}
@@ -149,9 +149,9 @@ const OrderPage = () => {
               <h2 className="text-2xl font-semibold mt-6 mb-4">Stav objednávky</h2>
 
               {order.isDelivered ? (
-                <Message variant="success">Odesláno {order.deliveredAt}</Message>
+                <Message variant="success">Odoslané {order.deliveredAt}</Message>
               ) : (
-                <Message variant="danger">Neodesláno</Message>
+                <Message variant="danger">Neodoslané</Message>
               )}
 
               {order.isCancelled && <Message variant="danger">Zrušená!</Message>}
@@ -161,19 +161,19 @@ const OrderPage = () => {
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-2xl font-semibold mb-4">Platba</h2>
               <p className="mb-4">
-                <span className="font-semibold">Způsob: </span>
+                <span className="font-semibold">Spôsob: </span>
                 {order.paymentMethod}
               </p>
 
-              {order.isPaid && <Message variant="success">Zaplaceno {order.paidAt}</Message>}
-              {!order.isPaid && <Message variant="danger">Nezaplaceno</Message>}
+              {order.isPaid && <Message variant="success">Zaplatené {order.paidAt}</Message>}
+              {!order.isPaid && <Message variant="danger">Nezaplatené</Message>}
             </div>
 
             {/* Order Items Section */}
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-2xl font-semibold mb-4">Objednané produkty: </h2>
               {order.orderItems?.length === 0 ? (
-                <Message>Objednávka neobsahuje žádné produkty</Message>
+                <Message>Objednávka neobsahuje žiadne produkty</Message>
               ) : (
                 <div className="space-y-4">
                   {order.orderItems?.map((item, index) => (
@@ -190,12 +190,12 @@ const OrderPage = () => {
                         </Link>
                         {order.discounts?.[index]?.discount > 0 && (
                           <h5 className="text-green-600 font-semibold">
-                            Sleva {order.discounts[index].discount}%
+                            Zľava {order.discounts[index].discount}%
                           </h5>
                         )}
                       </div>
                       <div className="w-5/12 text-right">
-                        {item.qty} x {item.price} Kč = {item.qty * item.price} Kč
+                        {item.qty} x {parseFloat(item.price).toFixed(2)} € = {parseFloat(item.qty * item.price).toFixed(2)} €
                       </div>
                     </div>
                   ))}
@@ -208,23 +208,23 @@ const OrderPage = () => {
         <div className="w-full md:w-1/3 px-4 mt-6 md:mt-0">
           <div className="bg-white rounded-lg shadow">
             <div className="p-6">
-              <h2 className="text-2xl font-semibold mb-4">Souhrn objednávky</h2>
+              <h2 className="text-2xl font-semibold mb-4">Súhrn objednávky</h2>
 
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span>Produkty:</span>
-                  <span>{calculateItemsPrice()} Kč</span>
+                  <span>{parseFloat(calculateItemsPrice()).toFixed(2)} €</span>
                 </div>
 
                 {!isAbroad && (
                   <>
                     <div className="flex justify-between">
                       <span>Poštovné a balné:</span>
-                      <span>{order.shippingPrice} Kč</span>
+                      <span>{parseFloat(order.shippingPrice).toFixed(2)} €</span>
                     </div>
                     <div className="flex justify-between border-t pt-4">
-                      <span>Celkem:</span>
-                      <span>{order.totalPrice} Kč</span>
+                      <span>Celkom:</span>
+                      <span>{parseFloat(order.totalPrice).toFixed(2)} €</span>
                     </div>
                   </>
                 )}
@@ -244,10 +244,10 @@ const OrderPage = () => {
                         }`}
                         disabled={loadingDeliver}
                       >
-                        {loadingDeliver ? 'Loading...' : 'Označit jako odeslané*'}
+                        {loadingDeliver ? 'Načítava...' : 'Označiť ako odoslané*'}
                       </button>
                       <p className="text-left text-[15px] leading-4 mx-2 mt-1">
-                        * Odesílá se potvrzení zákazníkovi i adminovi.
+                        * Odosiela sa potvrdenie zákazníkovi aj adminovi.
                       </p>
                     </>
                   )}
@@ -261,10 +261,10 @@ const OrderPage = () => {
                         }`}
                         disabled={loadingPaid}
                       >
-                        {loadingPaid ? 'Loading...' : 'Označit jako zaplacené*'}
+                        {loadingPaid ? 'Načítava...' : 'Označiť ako zaplatené*'}
                       </button>
                       <p className="text-left text-[15px] leading-4 mx-2 mt-1">
-                        * Odesílá se potvrzení zákazníkovi i adminovi.
+                        * Odosiela sa potvrdenie zákazníkovi aj adminovi.
                       </p>
                     </>
                   )}
@@ -274,7 +274,7 @@ const OrderPage = () => {
                       onClick={cancellHandler}
                       className="w-full py-2 px-4 rounded text-white bg-red-600 hover:bg-red-700"
                     >
-                      {loadingCancel ? 'Loading...' : 'Zrušit objednávku'}
+                      {loadingCancel ? 'Načítava...' : 'Zrušiť objednávku'}
                     </button>
                   )}
                 </div>
@@ -284,7 +284,7 @@ const OrderPage = () => {
                 onClick={newOrderHandler}
                 className="w-full py-2 px-4 rounded text-white bg-[#2bb2e6] hover:bg-blue-700 mt-2"
               >
-                Vytvořit novou objednávku
+                Vytvoriť novú objednávku
               </button>
 
               <button
@@ -294,13 +294,13 @@ const OrderPage = () => {
                 }`}
                 disabled={loadingConfirmationEmail}
               >
-                {loadingConfirmationEmail ? 'Loading...' : 'Doposlat potvrzovací email s fakturou*'}
+                {loadingConfirmationEmail ? 'Načítava...' : 'Doposlať potvrdzovací email s faktúrou*'}
               </button>
               <p className="text-justify text-[15px] mx-2 my-2">
-                * Info pouze pro zahraničí: Při objednávce do zahraničí se faktura ze systému
-                neodešle, odešle se jenom notifikace. Je nutné poslat si fakturu žlutým tlačítkem,
-                upravit poštovné a celkovou sumu a odeslat fakturu zákazníkovi mailem manuálně.
-                <br />* Pro CZ: posílá se email s fakturou.
+                * Info len pre zahraničie: Pri objednávke do zahraničia sa faktúra zo systému
+                neodošle, odošle sa len notifikácia. Je nutné poslať si faktúru žltým tlačidlom,
+                upraviť poštovné a celkovú sumu a odoslať faktúru zákazníkovi emailom manuálne.
+                <br />* Pre SK: posiela sa email s faktúrou.
               </p>
 
               <button
@@ -313,8 +313,8 @@ const OrderPage = () => {
                 disabled={loadingConfirmationEmail}
               >
                 {loadingConfirmationEmail
-                  ? 'Loading...'
-                  : 'Poslat potvrzovací email s fakturou jenom Adminovi'}
+                  ? 'Načítava...'
+                  : 'Poslať potvrdzovací email s faktúrou len Adminovi'}
               </button>
             </div>
           </div>

@@ -73,13 +73,13 @@ export async function POST(request) {
         name: user.name,
         email: user.email,
         url: registerURL,
-        origin: 'PROUD2NEXT',
+        origin: 'prudsk2next',
         isGoogle: false,
       }
 
       // call API
-      const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/register'
-      // const apiUrl = 'http://localhost:3013/api/proud2next/register'
+      const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/register'
+      // const apiUrl = 'http://localhost:3013/api/prudsk2next/register'
 
       try {
         // Make the API request

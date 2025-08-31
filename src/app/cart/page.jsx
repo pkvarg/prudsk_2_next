@@ -65,23 +65,23 @@ const Cart = () => {
         className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
         onClick={() => router.back()}
       >
-        ← Zpět
+        ← Späť
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items Section */}
         <div className="lg:col-span-2">
-          <h1 className="text-3xl font-bold text-[#071e46] mb-6">Nákupní košík</h1>
+          <h1 className="text-3xl font-bold text-[#071e46] mb-6">Nákupný košík</h1>
 
           {cartItems.length === 0 ? (
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
               <p className="text-blue-700">
-                Váš košík je prázdný{' '}
+                Váš košík je prázdny{' '}
                 <Link
                   href="/"
                   className="text-[#071e46] hover:text-[#9b7d57] font-medium underline"
                 >
-                  Zpět
+                  Späť
                 </Link>
               </p>
             </div>
@@ -113,7 +113,7 @@ const Cart = () => {
                       </Link>
                     </div>
 
-                    <div className="col-span-1 text-[#191817]">{item.price} Kč</div>
+                    <div className="col-span-1 text-[#191817]">{parseFloat(item.price).toFixed(2)} €</div>
 
                     <div className="col-span-1">
                       <select
@@ -161,7 +161,7 @@ const Cart = () => {
                     </div>
 
                     <div className="flex justify-between items-center">
-                      <span className="text-[#191817]">{item.price} Kč</span>
+                      <span className="text-[#191817]">{parseFloat(item.price).toFixed(2)} €</span>
 
                       <div className="flex items-center gap-2">
                         <select
@@ -200,19 +200,19 @@ const Cart = () => {
             <div className="space-y-3 mb-4">
               <div className="flex justify-between text-[#191817]">
                 <span>Produkty:</span>
-                <span>{totalPrice} Kč</span>
+                <span>{parseFloat(totalPrice).toFixed(2)} €</span>
               </div>
 
               <div className="flex justify-between text-[#191817]">
                 <span>Poštovné a balné:</span>
-                <span>{shippingPrice} Kč</span>
+                <span>{parseFloat(shippingPrice).toFixed(2)} €</span>
               </div>
 
               <hr className="border-gray-200" />
 
               <div className="flex justify-between font-semibold text-[#071e46] text-lg">
-                <span>Celkem:</span>
-                <span>{finalTotal} Kč</span>
+                <span>Celkom:</span>
+                <span>{parseFloat(finalTotal).toFixed(2)} €</span>
               </div>
             </div>
 
@@ -223,7 +223,7 @@ const Cart = () => {
                 disabled={cartItems.length === 0}
                 className="w-full mb-3 px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 font-medium"
               >
-                Přejít k pokladně
+                Prejsť k pokladni
               </button>
             )}
 
@@ -232,7 +232,7 @@ const Cart = () => {
               type="button"
               className="w-full px-4 py-3 bg-[#2bb2e6] text-white rounded-lg hover:bg-[#218334] transition-colors duration-200 font-medium"
             >
-              Pokračovat v nákupu
+              Pokračovať v nákupe
             </button>
           </div>
         </div>

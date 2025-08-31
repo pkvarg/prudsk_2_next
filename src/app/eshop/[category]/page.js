@@ -93,7 +93,7 @@ export async function generateMetadata({ params }) {
   // Format category name for display
   const formatCategoryName = (cat) => {
     if (!cat) return 'Eshop'
-    if (cat === 'abecední-seznam-kníh') return 'Abecední seznam knih'
+    if (cat === 'abecední-seznam-kníh') return 'Abecedný zoznam kníh'
     const formatted = cat.replace(/-/g, ' ')
     return formatted.charAt(0).toUpperCase() + formatted.slice(1).toLowerCase()
   }
@@ -113,27 +113,27 @@ export async function generateMetadata({ params }) {
   const productCount = filteredProducts.length
 
   return {
-    title: `${categoryName} - Křesťanská literatura | Proud života`,
+    title: `${categoryName} - Kresťanská literatúra | Prúd života`,
     description:
       category === 'abecední-seznam-kníh'
-        ? `Kompletní abecední seznam všech ${productCount} knih křesťanské literatury. Watchman Nee, Witness Lee a další duchovní knihy.`
-        : `Objevte ${productCount} knih v kategorii ${categoryName}. Křesťanská literatura, duchovní knihy a Bible studium. Rychlé dodání.`,
-    keywords: `${categoryName}, křesťanské knihy, křesťanská literatura, duchovní knihy, Bible, studium Biblie, Watchman Nee, Witness Lee${
+        ? `Kompletný abecedne zoradený zoznam všetkých ${productCount} kníh kresťanskej literatúry. Watchman Nee, Witness Lee a ďalšie duchovné knihy.`
+        : `Objavte ${productCount} kníh v kategórii ${categoryName}. Kresťanská literatúra, duchovné knihy a štúdium Biblie. Rýchle doručenie.`,
+    keywords: `${categoryName}, kresťanské knihy, kresťanská literatúra, duchovné knihy, Biblia, štúdium Biblie, Watchman Nee, Witness Lee${
       category ? `, ${category}` : ''
     }`,
     openGraph: {
-      title: `${categoryName} - Křesťanská literatura | Proud života`,
+      title: `${categoryName} - Kresťanská literatúra | Prúd života`,
       description:
         category === 'abecední-seznam-kníh'
-          ? `Kompletní abecední seznam všech ${productCount} knih křesťanské literatury`
-          : `Objevte ${productCount} knih v kategorii ${categoryName}. Křesťanská literatura a duchovní knihy.`,
+          ? `Kompletný abecedne zoradený zoznam všetkých ${productCount} kníh kresťanskej literatúry`
+          : `Objavte ${productCount} kníh v kategórii ${categoryName}. Kresťanská literatúra a duchovné knihy.`,
       type: 'website',
-      url: `https://proudzivota.cz/eshop/${category}`,
+      url: `https://prud.sk/eshop/${category}`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${categoryName} - Křesťanská literatura`,
-      description: `${productCount} knih křesťanské literatury v kategorii ${categoryName}`,
+      title: `${categoryName} - Kresťanská literatúra`,
+      description: `${productCount} kníh kresťanskej literatúry v kategórii ${categoryName}`,
     },
     robots: {
       index: true,
@@ -157,7 +157,7 @@ export default async function CategoryPage({ params }) {
   // Format category name for display
   const formatCategoryName = (cat) => {
     if (!cat) return 'Eshop'
-    if (cat === 'abecední-seznam-kníh') return 'Abecední seznam knih'
+    if (cat === 'abecední-seznam-kníh') return 'Abecedný zoznam kníh'
     const formatted = cat.replace(/-/g, ' ')
     return formatted.charAt(0).toUpperCase() + formatted.slice(1).toLowerCase()
   }
@@ -184,9 +184,9 @@ export default async function CategoryPage({ params }) {
     name: formatCategoryName(category),
     description:
       category === 'abecední-seznam-kníh'
-        ? `Kompletní abecední seznam všech ${filteredProducts.length} knih křesťanské literatury`
-        : `${filteredProducts.length} knih v kategorii ${formatCategoryName(category)}`,
-    url: `https://proudzivota.cz/eshop/${category}`,
+        ? `Kompletný abecedne zoradený zoznam všetkých ${filteredProducts.length} kníh kresťanskej literatúry`
+        : `${filteredProducts.length} kníh v kategórii ${formatCategoryName(category)}`,
+    url: `https://prud.sk/eshop/${category}`,
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: filteredProducts.length,
@@ -196,13 +196,13 @@ export default async function CategoryPage({ params }) {
         item: {
           '@type': 'Product',
           name: product.name,
-          url: `https://proudzivota.cz/product/${product.id}`,
+          url: `https://prud.sk/product/${product.id}`,
           ...(product.author && { author: { '@type': 'Person', name: product.author } }),
           ...(product.price && {
             offers: {
               '@type': 'Offer',
               price: product.price,
-              priceCurrency: 'CZK',
+              priceCurrency: 'EUR',
             },
           }),
         },
@@ -214,20 +214,20 @@ export default async function CategoryPage({ params }) {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Domů',
-          item: 'https://proudzivota.cz',
+          name: 'Domov',
+          item: 'https://prud.sk',
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Eshop',
-          item: 'https://proudzivota.cz/eshop',
+          item: 'https://prud.sk/eshop',
         },
         {
           '@type': 'ListItem',
           position: 3,
           name: formatCategoryName(category),
-          item: `https://proudzivota.cz/eshop/${category}`,
+          item: `https://prud.sk/eshop/${category}`,
         },
       ],
     },
@@ -256,7 +256,7 @@ export default async function CategoryPage({ params }) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Zpět
+            Späť
           </Link>
         </div>
 
@@ -271,7 +271,7 @@ export default async function CategoryPage({ params }) {
               ? 'produkt'
               : filteredProducts.length < 5
               ? 'produkty'
-              : 'produktů'}
+              : 'produktov'}
           </p>
         </div>
 

@@ -119,7 +119,7 @@ const AudioList = () => {
     <div className="container px-4 py-8">
       {/* Header Row - Desktop */}
       <div className="hidden md:flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Audio soubory</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Audio súbory</h1>
         <button
           className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg flex items-center gap-2 transition-colors"
           onClick={createAudioHandler}
@@ -130,7 +130,7 @@ const AudioList = () => {
           ) : (
             <Icon.Plus size={20} />
           )}
-          Přidat audio súbor
+          Pridať audio súbor
         </button>
       </div>
 
@@ -147,7 +147,7 @@ const AudioList = () => {
           ) : (
             <Icon.Plus size={18} />
           )}
-          <span className="text-sm">Přidat audio súbor</span>
+          <span className="text-sm">Pridať audio súbor</span>
         </button>
       </div>
 
@@ -156,7 +156,7 @@ const AudioList = () => {
         <div className="relative max-w-md">
           <input
             type="text"
-            placeholder="Hledat audio soubory..."
+            placeholder="Hľadať audio súbory..."
             value={searchTerm}
             onChange={(e) => handleSearch(e.target.value)}
             className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
@@ -199,7 +199,7 @@ const AudioList = () => {
                       Název
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Soubor
+                      Súbor
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Kategorie
@@ -273,7 +273,7 @@ const AudioList = () => {
 
                 <div className="space-y-2 text-sm text-gray-600">
                   <div>
-                    <span className="font-medium text-gray-700">Soubor:</span>
+                    <span className="font-medium text-gray-700">Súbor:</span>
                     <span className="ml-2">{audio.mp3file}</span>
                   </div>
                   <div>
@@ -289,14 +289,14 @@ const AudioList = () => {
           {filteredAudios.length === 0 && (
             <div className="text-center py-12">
               <Icon.MusicNote className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Žádné audio soubory</h3>
-              <p className="text-gray-500 mb-6">Začněte přidáním prvního audio souboru.</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Žiadne audio súbory</h3>
+              <p className="text-gray-500 mb-6">Začnite pridávaním prvého audio súboru.</p>
               <button
                 className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
                 onClick={createAudioHandler}
               >
                 <Icon.Plus size={20} className="inline mr-2" />
-                Přidat audio súbor
+                Pridať audio súbor
               </button>
             </div>
           )}

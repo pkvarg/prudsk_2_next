@@ -27,7 +27,7 @@ function ForgotPasswordForm() {
   useEffect(() => {
     if (email.includes('@gmail.com')) {
       setMessage(
-        `Pro Gmail účty nelze obnovit heslo tímto způsobem. Váš Google účet je spravován na accounts.google.com. Prosím použijte možnost "Přihlásit se přes Google" na přihlašovací stránce.`,
+        `Pre Gmail účty sa nedá obnoviť heslo týmto spôsobom. Váš Google účet je spravovaný na accounts.google.com. Prosím použite možnosť "Prihlásiť sa cez Google" na prihlasovacej stránke.`,
       )
       return
     }
@@ -38,7 +38,7 @@ function ForgotPasswordForm() {
 
     // Email validation like in original
     if (!email) {
-      setMessage('Musíte zadat stávající email')
+      setMessage('Musíte zadať existujúci email')
       return
     }
 
@@ -49,7 +49,7 @@ function ForgotPasswordForm() {
 
     try {
       await forgotPassword({ email, origURL })
-      setSuccessMessage('Linka byla odeslána na Váš email')
+      setSuccessMessage('Odkaz bol odoslaný na Váš email')
     } catch (err) {
       // Error is handled by Zustand store
     }
@@ -63,7 +63,7 @@ function ForgotPasswordForm() {
   return (
     <section className="mt-8">
       <FormContainer>
-        <h1 className="text-2xl font-bold mb-6">Zapomenuté heslo</h1>
+        <h1 className="text-2xl font-bold mb-6">Zabudnuté heslo</h1>
 
         {message && <Message variant="danger">{message}</Message>}
         {successMessage && <Message variant="success">{successMessage}</Message>}
@@ -71,7 +71,7 @@ function ForgotPasswordForm() {
         {loading && <Loader />}
 
         <p className="mb-4 text-gray-600">
-          Zadejte svůj email a my vám pošleme odkaz pro obnovení hesla.
+          Zadajte svoj email a my vám pošleme odkaz pre obnovenie hesla.
         </p>
 
         <form onSubmit={submitHandler} className="w-full">
@@ -94,7 +94,7 @@ function ForgotPasswordForm() {
             className="w-full my-5 bg-[#2bb2e6] hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors duration-200"
             disabled={loading}
           >
-            Poslat link pro obnovu hesla
+            Poslať odkaz pre obnovu hesla
           </button>
         </form>
 
@@ -103,14 +103,14 @@ function ForgotPasswordForm() {
             href={redirect ? `/login?redirect=${redirect}` : '/login'}
             className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
           >
-            Zpět na přihlášení
+            Späť na prihlásenie
           </Link>
 
           <Link
             href={redirect ? `/register?redirect=${redirect}` : '/register'}
             className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
           >
-            Registrovat se
+            Registrovať sa
           </Link>
         </div>
       </FormContainer>

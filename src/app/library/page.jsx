@@ -35,14 +35,14 @@ const Library = () => {
         href="/"
         className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
       >
-        ← Zpět
+        ← Späť
       </Link>
 
       <div className="my-3">
-        <h1 className="text-3xl font-bold text-[#071e46] mb-6">Čítárna</h1>
+        <h1 className="text-3xl font-bold text-[#071e46] mb-6">Čitáreň</h1>
 
         {loading ? (
-          <div className="text-center py-8">Loading...</div>
+          <div className="text-center py-8">Načítava...</div>
         ) : error ? (
           <div className="text-center py-8 text-red-600">{error}</div>
         ) : (
@@ -78,7 +78,7 @@ const Library = () => {
                         href={`/library/${product.id}`}
                         className="inline-block text-[#071e46] hover:text-[#9b7d57] font-medium underline decoration-2 underline-offset-4 hover:decoration-[#9b7d57] transition-colors duration-200"
                       >
-                        Přečíst si víc
+                        Prečítať si viac
                       </Link>
                     </div>
                   </div>
@@ -89,7 +89,7 @@ const Library = () => {
             {/* Show message if no products found */}
             {products.length === 0 && !loading && (
               <div className="text-center py-8">
-                <p className="text-gray-600">Žádné publikace s úryvky nebyly nalezeny.</p>
+                <p className="text-gray-600">Žiadne publikácie s úryvkami neboli nájdené.</p>
               </div>
             )}
           </>

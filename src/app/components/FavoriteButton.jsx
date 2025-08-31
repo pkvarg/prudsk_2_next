@@ -55,7 +55,7 @@ export default function FavoriteButton({ product }) {
         {isFavorite ? (
           <Icon.HeartFill className="w-6 h-6 text-red-500" />
         ) : (
-          <p className="text-blue-600 cursor-pointer hover:underline">Přidat k oblíbeným</p>
+          <p className="text-blue-600 cursor-pointer hover:underline">Pridať k obľúbeným</p>
         )}
       </button>
       {message && <Message variant="success">{message}</Message>}

@@ -62,7 +62,7 @@ function RegisterForm() {
   // AVOID REGISTERING HERE WITH GOOGLE EMAIL
   useEffect(() => {
     if (email.includes('@gmail.com')) {
-      setMessage(`Pro ${email} prosím použijte možnost Přihlásit se přes Google`)
+      setMessage(`Pre ${email} prosím použite možnosť Prihlásiť sa cez Google`)
       return
     }
   }, [email])
@@ -72,12 +72,12 @@ function RegisterForm() {
 
     // Validate form
     if (password !== confirmPassword) {
-      setMessage('Hesla se neshodují')
+      setMessage('Heslá sa nezhodujú')
       return
     }
 
     if (password.length < 6) {
-      setMessage('Heslo musí obsahovat alespoň 6 znaků')
+      setMessage('Heslo musí obsahovať najmenej 6 znakov')
       return
     }
 
@@ -96,8 +96,8 @@ function RegisterForm() {
     <div className="flex justify-center items-center min-h-[80vh] px-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">Registrace</h1>
-          <p className="text-gray-600">Vytvořte si nový účet Proud Distribution</p>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">Registrácia</h1>
+          <p className="text-gray-600">Vytvorte si nový účet Prúd</p>
         </div>
 
         {/* Success message */}
@@ -105,7 +105,7 @@ function RegisterForm() {
           <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 rounded-md flex items-center">
             <CheckCircleFill className="mr-2 flex-shrink-0" />
             <p className="text-sm">
-              Registrace byla úspěšná! Za okamžik budete přesměrováni na přihlášení.
+              Registrácia bola úspešná! O chvíľu budete presmerovaní na prihlásenie.
             </p>
           </div>
         )}
@@ -122,7 +122,7 @@ function RegisterForm() {
         <form onSubmit={submitHandler} className="space-y-4 mb-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-              Jméno
+              Meno
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -134,7 +134,7 @@ function RegisterForm() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Jméno"
+                placeholder="Meno"
                 required
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
@@ -189,7 +189,7 @@ function RegisterForm() {
               htmlFor="confirmPassword"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Potvrdit heslo
+              Potvrdiť heslo
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -201,7 +201,7 @@ function RegisterForm() {
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Potvrdit heslo"
+                placeholder="Potvrdiť heslo"
                 required
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
@@ -215,7 +215,7 @@ function RegisterForm() {
               registerLoading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
-            {registerLoading ? 'Registrace...' : 'Registrovat se'}
+            {registerLoading ? 'Registrácia...' : 'Registrovať sa'}
           </button>
         </form>
 
@@ -227,7 +227,7 @@ function RegisterForm() {
               href={redirect ? `/login?redirect=${redirect}` : '/login'}
               className="font-medium text-blue-600 hover:text-blue-500"
             >
-              Přihlaste se
+              Prihláste sa
             </Link>
           </p>
         </div>

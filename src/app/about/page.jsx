@@ -13,68 +13,72 @@ const About = () => {
           <h1 className="text-[#071e46] font-bold text-2xl md:text-3xl mb-6">O nás</h1>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-8">
-            Distribuce Proud se zaměřuje na šíření křesťanské literatury s cílem zpřístupnit ji všem
-            hledajícím lidem. Konkrétně se jedná o distribuci publikací společnosti Living Stream
-            Ministry, která vydává především díla Watchmana Neeho a Witnesse Leeho. Naším posláním
-            je přinášet bohatství Božího slova všem věřícím v zemi, včetně pořádání seminářů a
-            konferencí za účelem prezentace těchto publikací. Naším cílem je dodávat duchovní pokrm
-            jako výživu všem věřícím, aby mohli růst v božském životě pro budování Těla Kristova.
+            Prúd je neziskovým združením založeným s úmyslom šírenia klasickej kresťanskej literatúry s
+            cieľom sprístupnenia týchto publikácií všetkým hľadajúcim ľuďom. Sústreďuje sa na distribúciu
+            publikácií Living Stream Ministry, ktoré publikuje hlavne diela Watchmana Nee a Witnessa Lee.
+            Našim poslaním je priniesť bohatstvá Božieho Slova všetkým veriacim na Slovensku,
+            organizovaním seminárov a konferencií za účelom prezentovania týchto publikácií. Našim cieľom
+            je zásobovať duchovnou stravou, ako výživou, všetkých veriacich, aby takto mohli rásť v
+            božskom živote pre budovanie Tela Kristovho.
           </p>
 
           <h3 className="text-[#071e46] font-bold text-xl md:text-2xl mb-4">
             O LIVING STREAM MINISTRY (LSM)
           </h3>
           <p className="text-[#191817] text-[17px] leading-relaxed mb-8">
-            LSM je nezisková společnost, která se věnuje především vydávání služby Watchmana Neeho a
-            Witnesse Leeho. Stejně jako tito dva služebníci Pána Ježíše Krista věrně rozvíjeli odkaz
-            služby, který Pán předal církvi, je záměrem LSM následovat jejich věrný příklad a šířit
-            Kristovo bohatství pro budování Těla Kristova. LSM má jediný cíl: dodávat duchovní pokrm
-            jako výživu všem věřícím, aby mohli růst v božském životě pro budování Těla Kristova.
+            LSM je neziskovým združením, ktoré sa venuje hlavne publikovaniu posluhovania – služby
+            Watchmana Nee a Witnessa Lee. Rovnako ako títo dvaja služobníci Pána Ježiša Krista verne
+            rozvíjali dedičstvo posluhovania, ktoré Pán odovzdal cirkvi, je aj zámerom LSM nasledovať
+            ich verný príklad tým, že budú distribuovať bohatstvá Krista pre budovanie Tela Kristovho.
+            LSM má jeden cieľ: zásobovať duchovnou stravou ako výživou všetkých veriacich, aby takto
+            mohli rásť v božskom živote k budovaniu Tela Kristovho.
           </p>
 
-          <h3 className="text-[#071e46] font-bold text-xl md:text-2xl mb-4">Naše víra</h3>
+          <h3 className="text-[#071e46] font-bold text-xl md:text-2xl mb-4">Naša viera</h3>
 
           <div className="space-y-4">
             <p className="text-[#191817] text-[17px] leading-relaxed">
-              Naše víra je založena na svaté Bibli, která je Božím Slovem.
+              Zachovávame všeobecnú vieru, ktorá je zdieľaná všetkými veriacimi kresťanmi, obsah ktorej
+              bol ustanovený raz a navždy v Starom a Novom Zákone.
             </p>
 
             <p className="text-[#191817] text-[17px] leading-relaxed">
-              Bibli považujeme za úplné a jedinečné božské zjevení.
+              Konkrétne je táto všeobecná, viera zostavená z nasledujúcich faktov, v ktoré veríme, v
+              súvislosti s Bibliou, Bohom, Kristom, spásou a večnosťou: Považujeme Bibliu za úplné a
+              jediné božské zjavenie.
             </p>
 
             <p className="text-[#191817] text-[17px] leading-relaxed">
-              Pevně věříme, že Bůh je navěky jeden a zároveň je navěky Otec, Syn a Duch, přičemž ti
-              tři jsou odlišní, ale neoddělitelní.
+              Pevne veríme, že Boh je večne jeden a tiež večne Otcom, Synom a Duchom – traja, ktorí sú
+              odlišní avšak neoddeliteľní.
             </p>
 
             <p className="text-[#191817] text-[17px] leading-relaxed">
-              Věříme, že Kristus je úplný Bůh i dokonalý člověk. Aniž by se vzdal svého božství, byl
-              počat v lůně lidské panny, žil opravdovým lidským životem na zemi a zemřel zástupnou a
-              všezahrnující smrtí na kříži. Po třech dnech tělesně vstal z mrtvých a vystoupil do
-              nebes. Nyní je ve slávě, plně Bůh, a přece stále plně člověk. Vyhlížíme Jeho blízký
-              návrat s Božím královstvím, jehož prostřednictvím bude vládnout zemi během tisíciletí
-              a ve věčnosti.
+              Veríme, že Kristus je úplný Boh i dokonalý človek. Bez opustenia Svojho božstva bol počatý
+              v lone ľudskej panny, žil naozajstným ľudským životom na zemi a zomrel zástupnú a všetko
+              zahŕňajúcu smrť na kríži. Po troch dňoch vstal telesne z mŕtvych a vystúpil do nebies.
+              Teraz je v sláve, plne Boh a stále plne človek. Očakávame Jeho blízky príchod s Božím
+              kráľovstvom, skrze ktoré bude vládnuť nad zemou v miléniu a vo večnosti.
             </p>
 
             <p className="text-[#191817] text-[17px] leading-relaxed">
-              Vyznáváme, že třetí z Trojice, Duch, je stejně Bohem. Vše, co má a čím je Otec, je
-              vyjádřeno v Synu, a vše, co má a čím je Syn, se stává skutečností v Duchu.
+              Vyznávame, že tretí z Trojice, Duch, je takisto Bohom. Všetko, čo Otec má a je, je
+              vyjadrené Synom a všetko, čo Syn má a je, je uskutočnené ako Duch.
             </p>
 
             <p className="text-[#191817] text-[17px] leading-relaxed">
-              Dále věříme, že lidstvo potřebuje Boží spásu. Ačkoli jsme byli zcela neschopní naplnit
-              těžké požadavky Boží spravedlnosti, svatosti a slávy, Kristus všechny požadavky
-              naplnil skrze svou smrt na kříži. Díky Kristově smrti nám Bůh odpustil naše hříchy,
-              smířil nás sám se sebou a ospravedlnil nás tím, že učinil Krista naší spravedlností.
-              Na základě Kristova vykoupení Bůh znovuzrozuje vykoupené svým Duchem, aby završil svou
-              spásu, aby se mohli stát Jeho dětmi.
+              Ďalej veríme, že ľudstvo potrebuje Božiu spásu. Keďže sme boli úplne neschopní naplniť
+              ťažké požiadavky Božej spravodlivosti, svätosti a slávy, Kristus všetky požiadavky naplnil
+              Svojou smrťou na kríži. Kvôli Kristovej smrti nám Boh odpustil naše hriechy, zmieril nás
+              so sebou samým a ospravedlnil nás tým, že Krista učinil našou spravodlivosťou. Na základe
+              Kristovho vykúpenia Boh obrodzuje vykúpených Svojím Duchom pre dovŕšenie svoje spásy, aby
+              sa mohli stať Jeho deťmi.
             </p>
 
             <p className="text-[#191817] text-[17px] leading-relaxed">
-              Věřící, kteří nyní mají Boží život a přirozenost, se těší z každodenní spásy v Jeho
-              Těle v tomto věku a z věčné spásy v budoucím věku a ve věčnosti. Ve věčnosti budeme
-              přebývat spolu s Bohem v Novém Jeruzalémě, završení Boží spásy Jeho vyvolených.
+              Majúc teraz Boží život a prirodzenosť, veriaci vychutnávajú každodennú spásu v Jeho Tele v
+              tomto veku a večnú spásu v prichádzajúcom veku a vo večnosti. Vo večnosti budeme prebývať
+              s Bohom v Novom Jeruzaleme, dovŕšení Božej spásy Jeho vyvolených.
             </p>
           </div>
         </div>

@@ -23,7 +23,7 @@
 
 //         const response = await fetch('/api/audio')
 //         if (!response.ok) {
-//           throw new Error('Chyba při načítání audio souborů')
+//           throw new Error('Chyba pri načítavaní audio súborov')
 //         }
 
 //         const data = await response.json()
@@ -79,7 +79,7 @@
 //               d="M15 19l-7-7 7-7"
 //             />
 //           </svg>
-//           Zpět
+//           Späť
 //         </Link>
 //       </div>
 
@@ -89,7 +89,7 @@
 //         <h3 className="text-xl md:text-2xl font-semibold text-[#9b7d57] mb-6">STUDIUM ŽIVOTA</h3>
 //         <div className="bg-[#edeae4] p-6 rounded-lg">
 //           <p className="text-gray-700 leading-relaxed">
-//             Dvacetiminutové relace jsou věnovány rozsáhlému dílu Witnesse Leeho – Studiu života v
+//             Dvacetiminutové relace jsou věnovány rozsáhlému dílu Witnesse Lee – Studiu života v
 //             Bibli. Studium života v Bibli je obsáhlé a klasické knižní dílo, které navazuje na vše,
 //             co Pán zjevil své církvi v průběhu minulých staletí až do dnešních dnů. Se svými více
 //             než 25 000 stranami komentářů ke všem biblickým knihám se řadí k nejbohatším současným a
@@ -101,7 +101,7 @@
 //       {/* Error handling */}
 //       {error && (
 //         <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-//           <p>Chyba při načítání audio souborů: {error}</p>
+//           <p>Chyba pri načítavaní audio súborov: {error}</p>
 //         </div>
 //       )}
 
@@ -170,7 +170,7 @@
 //                   }}
 //                   className="px-4 py-2 bg-[#071e46] text-white rounded hover:bg-[#9b7d57] transition-colors duration-200"
 //                 >
-//                   Zrušit filtry
+//                   Zrušiť filtre
 //                 </button>
 //               )}
 //             </div>
@@ -210,7 +210,7 @@ const LifeStudy = () => {
 
         const response = await fetch('/api/audio')
         if (!response.ok) {
-          throw new Error('Chyba při načítání audio souborů')
+          throw new Error('Chyba pri načítavaní audio súborov')
         }
 
         const data = await response.json()
@@ -266,21 +266,21 @@ const LifeStudy = () => {
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          Zpět
+          Späť
         </Link>
       </div>
 
       {/* Header section */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-[#071e46] mb-4">Posluchárna</h1>
-        <h3 className="text-xl md:text-2xl font-semibold text-[#9b7d57] mb-6">STUDIUM ŽIVOTA</h3>
+        <h1 className="text-3xl md:text-4xl font-bold text-[#071e46] mb-4">Poslucháreň</h1>
+        <h3 className="text-xl md:text-2xl font-semibold text-[#9b7d57] mb-6">ŠTÚDIUM ŽIVOTA</h3>
         <div className="bg-[#edeae4] p-6 rounded-lg">
           <p className="text-gray-700 leading-relaxed">
-            Dvacetiminutové relace jsou věnovány rozsáhlému dílu Witnesse Leeho – Studiu života v
-            Bibli. Studium života v Bibli je obsáhlé a klasické knižní dílo, které navazuje na vše,
-            co Pán zjevil své církvi v průběhu minulých staletí až do dnešních dnů. Se svými více
-            než 25 000 stranami komentářů ke všem biblickým knihám se řadí k nejbohatším současným a
-            aktuálním výkladům biblické pravdy.
+            Dvadsaťminútové relácie sú venované rozsiahlemudielu Witnessa Lee – Štúdiu života v
+            Biblii. Štúdium života v Biblii je obsiahle a klasické knižné dielo, ktoré nadväzuje na
+            všetko, čo Pán zjavil svojej cirkvi v priebehu minulých storočí až po dnešné dni. So
+            svojimi viac ako 25 000 stranami komentárov ku všetkým biblickým knihám sa radí k
+            najbohatším súčasným a aktuálnym výkladom biblickej pravdy.
           </p>
         </div>
       </div>
@@ -288,7 +288,7 @@ const LifeStudy = () => {
       {/* Error handling */}
       {error && (
         <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          <p>Chyba při načítání audio souborů: {error}</p>
+          <p>Chyba pri načítavaní audio súborov: {error}</p>
         </div>
       )}
 
@@ -314,7 +314,7 @@ const LifeStudy = () => {
                   <h5 className="text-[#071e46] font-semibold text-center line-clamp-2 mb-2">
                     {audio.audioTitle}
                   </h5>
-                  <p className="text-xs text-gray-500 text-center">Klikněte pro přehrání</p>
+                  <p className="text-xs text-gray-500 text-center">Kliknite pre prehranie</p>
                 </div>
               </div>
             ))}
@@ -339,13 +339,13 @@ const LifeStudy = () => {
               </div>
               <h3 className="text-lg font-medium text-[#071e46] mb-2">
                 {searchTerm || selectedSubcategory !== 'all'
-                  ? 'Žádné výsledky nenalezeny'
-                  : 'Žádné nahrávky k dispozici'}
+                  ? 'Žiadne výsledky nenájdené'
+                  : 'Žiadne nahrávky k dispozícii'}
               </h3>
               <p className="text-[#9b7d57] mb-4">
                 {searchTerm || selectedSubcategory !== 'all'
-                  ? 'Zkuste upravit vyhledávání nebo filtr.'
-                  : 'Momentálně nejsou k dispozici žádné nahrávky Studia života.'}
+                  ? 'Skúste upraviť vyhľadávanie alebo filter.'
+                  : 'Momentálne nie sú k dispozícii žiadne nahrávky Štúdia života.'}
               </p>
               {(searchTerm || selectedSubcategory !== 'all') && (
                 <button
@@ -355,7 +355,7 @@ const LifeStudy = () => {
                   }}
                   className="px-4 py-2 bg-[#071e46] text-white rounded hover:bg-[#9b7d57] transition-colors duration-200"
                 >
-                  Zrušit filtry
+                  Zrušiť filtre
                 </button>
               )}
             </div>

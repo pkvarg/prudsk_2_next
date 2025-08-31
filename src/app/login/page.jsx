@@ -79,7 +79,7 @@ export default function LoginPage() {
 
       if (!res.ok) {
         // Show custom error message from backend
-        setError(data.message || 'Přihlášení selhalo')
+        setError(data.message || 'Prihlásenie zlyhalo')
         return
       }
 
@@ -102,7 +102,7 @@ export default function LoginPage() {
 
       router.push(callbackUrl)
     } catch (err) {
-      setError('Přihlášení selhalo. Zkuste to znovu.')
+      setError('Prihlásenie zlyhalo. Skúste to znova.')
     } finally {
       setLoading(false)
     }
@@ -112,7 +112,7 @@ export default function LoginPage() {
   //   try {
   //     await signIn('github', { callbackUrl }) // or your dashboard URL
   //   } catch (err) {
-  //     setError('Přihlášení přes GitHub selhalo. Zkuste to znovu.')
+  //     setError('Prihlásenie přes GitHub selhalo. Skúste to znova.')
   //   }
   // }
 
@@ -120,7 +120,7 @@ export default function LoginPage() {
     try {
       await signIn('google')
     } catch (err) {
-      setError('Přihlášení přes Google selhalo. Zkuste to znovu.')
+      setError('Prihlásenie cez Google zlyhalo. Skúste to znova.')
     }
   }
 
@@ -128,8 +128,8 @@ export default function LoginPage() {
     <div className="flex justify-center items-center min-h-[80vh] px-4 mt-8">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">Přihlášení</h1>
-          <p className="text-gray-600">Přihlaste se ke svému účtu Proud Distribution</p>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">Prihlásenie</h1>
+          <p className="text-gray-600">Prihláste sa do svojho účtu Prúd</p>
         </div>
 
         {/* Error message */}
@@ -187,7 +187,7 @@ export default function LoginPage() {
               href="/forgot-password"
               className="text-sm font-medium text-blue-600 hover:text-blue-500"
             >
-              Zapomenuté heslo?
+              Zabudnuté heslo?
             </Link>
           </div>
 
@@ -198,7 +198,7 @@ export default function LoginPage() {
               loading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
-            {loading ? 'Přihlašování...' : 'Přihlásit se'}
+            {loading ? 'Prihlasovanie...' : 'Prihlásiť sa'}
           </button>
         </form>
 
@@ -208,7 +208,7 @@ export default function LoginPage() {
             <div className="w-full border-t border-gray-300"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">nebo pokračujte s</span>
+            <span className="px-2 bg-white text-gray-500">alebo pokračujte s</span>
           </div>
         </div>
 
@@ -244,7 +244,7 @@ export default function LoginPage() {
               />
               <path fill="none" d="M0 0h48v48H0z" />
             </svg>
-            Přihlásit se přes Google
+            Prihlásiť sa cez Google
           </button>
           {/* <button
             type="button"
@@ -261,7 +261,7 @@ export default function LoginPage() {
             >
               <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
             </svg>
-            <span className="ml-1">Přihlásit se přes GitHub</span>
+            <span className="ml-1">Prihlásiť sa cez GitHub</span>
           </button> */}
         </div>
 
@@ -270,7 +270,7 @@ export default function LoginPage() {
           <p className="text-sm text-gray-600">
             Nemáte účet?{' '}
             <Link href="/register" className="font-medium text-blue-600 hover:text-blue-500">
-              Zaregistrujte se
+              Zaregistrujte sa
             </Link>
           </p>
         </div>

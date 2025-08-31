@@ -117,24 +117,24 @@ export async function generateMetadata({ params }) {
 
   if (!product) {
     return {
-      title: 'Produkt nenalezen - Proud života',
-      description: 'Požadovaný produkt nebyl nalezen.',
+      title: 'Produkt nenájdený - Prúd života',
+      description: 'Požadovaný produkt nebol nájdený.',
     }
   }
 
   return {
-    title: `${product.name} - Proud života`,
+    title: `${product.name} - Prúd života`,
     description:
       product.description ||
-      `Křesťanská literatura - ${product.name}. Přinášet bohatství Božího slova všemu Božímu lidu.`,
+      `Kresťanská literatúra - ${product.name}. Prinášať bohatstvo Božieho slova celému Božiemu ľudu.`,
     keywords: `${product.name}, ${
       product.author || ''
-    }, křesťanské knihy, křesťanská literatura, duchovní knihy, Bible, studium Biblie, ${
+    }, kresťanské knihy, kresťanská literatúra, duchovné knihy, Biblia, štúdium Biblie, ${
       product.tags || ''
     }`,
     openGraph: {
-      title: `${product.name} - Proud života`,
-      description: product.description || `Křesťanská literatura - ${product.name}`,
+      title: `${product.name} - Prúd života`,
+      description: product.description || `Kresťanská literatúra - ${product.name}`,
       images: product.image
         ? [
             {
@@ -146,12 +146,12 @@ export async function generateMetadata({ params }) {
           ]
         : [],
       type: 'website',
-      url: `https://proudzivota.cz/product/${resolvedParams.id}`, // Add canonical URL
+      url: `https://prud.sk/product/${resolvedParams.id}`, // Add canonical URL
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${product.name} - Proud života`,
-      description: product.description || `Křesťanská literatura - ${product.name}`,
+      title: `${product.name} - Prúd života`,
+      description: product.description || `Kresťanská literatúra - ${product.name}`,
       images: product.image ? [product.image] : [],
     },
     robots: {
@@ -189,20 +189,20 @@ export default async function ProductPage({ params }) {
     name: product.name,
     description: product.description,
     image: product.image,
-    url: `https://proudzivota.cz/product/${product.id}`,
+    url: `https://prud.sk/product/${product.id}`,
     brand: {
       '@type': 'Brand',
-      name: 'Proud života',
+      name: 'Prúd života',
     },
     offers: {
       '@type': 'Offer',
       price: product.price,
-      priceCurrency: 'CZK',
+      priceCurrency: 'EUR',
       availability:
         product.countInStock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: {
         '@type': 'Organization',
-        name: 'Proud života',
+        name: 'Prúd života',
       },
     },
     ...(product.author && {
@@ -276,7 +276,7 @@ export default async function ProductPage({ params }) {
 
                 {product.weight && (
                   <>
-                    <h5 className="text-lg font-semibold mb-2">Hmotnost</h5>
+                    <h5 className="text-lg font-semibold mb-2">Hmotnosť</h5>
                     <h6 className="mb-4">{product.weight.replace('.', ',')}kg</h6>
                   </>
                 )}
@@ -297,7 +297,7 @@ export default async function ProductPage({ params }) {
 
                 {product.pages && (
                   <>
-                    <h5 className="text-lg font-semibold mb-2">Počet stran</h5>
+                    <h5 className="text-lg font-semibold mb-2">Počet strán</h5>
                     <h6 className="mb-4">{product.pages}</h6>
                   </>
                 )}
@@ -320,7 +320,7 @@ export default async function ProductPage({ params }) {
                 ) : (
                   <Image
                     src="/images/flag_cz40px_2_27.png"
-                    alt="Český jazyk"
+                    alt="Slovenský jazyk"
                     width={40}
                     height={40}
                   />
@@ -329,7 +329,7 @@ export default async function ProductPage({ params }) {
                 {product.excerpt?.excerpt && (
                   <Link href={`/library/${product.id}`}>
                     <h5 className="text-lg font-semibold mb-2 text-blue-600 hover:underline">
-                      Do čítárny
+                      Do čitárne
                     </h5>
                   </Link>
                 )}
@@ -348,7 +348,7 @@ export default async function ProductPage({ params }) {
                 </div>
 
                 <div className="bg-white p-4 rounded-lg shadow">
-                  <p>Cena: {product.price} Kč</p>
+                  <p>Cena: {parseFloat(product.price).toFixed(2)} €</p>
                 </div>
 
                 {product.description && (
@@ -373,7 +373,7 @@ export default async function ProductPage({ params }) {
             <h6 className="mb-4">{product.catalog}</h6>
 
             {(product.related || product.related2 || product.related3) && (
-              <h5 className="text-lg font-semibold mb-2">Podívejte se také na</h5>
+              <h5 className="text-lg font-semibold mb-2">Pozrite sa tiež na</h5>
             )}
 
             {product.related && (
@@ -394,7 +394,7 @@ export default async function ProductPage({ params }) {
 
             {product.weight && (
               <>
-                <h5 className="text-lg font-semibold mb-2">Hmotnost</h5>
+                <h5 className="text-lg font-semibold mb-2">Hmotnosť</h5>
                 <h6 className="mb-4">{product.weight}</h6>
               </>
             )}
@@ -415,7 +415,7 @@ export default async function ProductPage({ params }) {
 
             {product.pages && (
               <>
-                <h5 className="text-lg font-semibold mb-2">Počet stran</h5>
+                <h5 className="text-lg font-semibold mb-2">Počet strán</h5>
                 <h6 className="mb-4">{product.pages}</h6>
               </>
             )}
@@ -432,13 +432,13 @@ export default async function ProductPage({ params }) {
               <Image src="/images/flag_sk40px_0.png" alt="Slovenský jazyk" width={40} height={40} />
             )}
             {product.language === 'CZ' && (
-              <Image src="/images/flag_cz40px_2_27.png" alt="Český jazyk" width={40} height={40} />
+              <Image src="/images/flag_cz40px_2_27.png" alt="Slovenský jazyk" width={40} height={40} />
             )}
 
             {product.excerpt?.excerpt && (
               <Link href={`/library/${product.id}`}>
                 <h5 className="text-lg font-semibold mb-2 text-blue-600 hover:underline">
-                  Do čítárny
+                  Do čítarne
                 </h5>
               </Link>
             )}

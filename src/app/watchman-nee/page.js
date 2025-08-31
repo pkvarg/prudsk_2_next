@@ -4,22 +4,22 @@ import BackButton from '../components/BackButton'
 
 // Enhanced metadata for SEO
 export const metadata = {
-  title: 'Watchman Nee - Životopis a služba | Proud života',
+  title: 'Watchman Nee - Životopis a služba | Prúd života',
   description:
-    'Seznamte se s životem a službou Watchmana Neeho, významného křesťanského kazatele a spisovatele. Jeho víra, uvěznění a odkaz pro církev.',
+    'Oboznámte sa so životom a službou Watchmana Nee, významného kresťanského kazateľa a spisovateľa. Jeho viera, uväznenie a odkaz pre cirkev.',
   keywords:
-    'Watchman Nee, křesťanský kazatel, křesťanský spisovatel, církev, duchovní literatura, křesťanské knihy, Bible, služba Pánu, víra, uvěznění pro víru',
+    'Watchman Nee, kresťanský kazateľ, kresťanský spisovateľ, cirkev, duchovná literatúra, kresťanské knihy, Biblia, služba Pánovi, viera, uväznenie pre vieru',
   openGraph: {
-    title: 'Watchman Nee - Životopis a služba | Proud života',
+    title: 'Watchman Nee - Životopis a služba | Prúd života',
     description:
-      'Životopis Watchmana Neeho, významného křesťanského kazatele a spisovatele. Jeho víra, služba a uvěznění pro Krista.',
+      'Životopis Watchmana Nee, významného kresťanského kazateľa a spisovateľa. Jeho viera, služba a uväznenie pre Krista.',
     type: 'article',
-    url: 'https://proudzivota.cz/watchman-nee',
+    url: 'https://prud.sk/watchman-nee',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Watchman Nee - Životopis a služba',
-    description: 'Životopis Watchmana Neeho, významného křesťanského kazatele a spisovatele',
+    description: 'Životopis Watchmana Nee, významného kresťanského kazateľa a spisovateľa',
   },
   robots: {
     index: true,
@@ -33,7 +33,7 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical: 'https://proudzivota.cz/watchman-nee',
+    canonical: 'https://prud.sk/watchman-nee',
   },
 }
 
@@ -44,32 +44,32 @@ export default function WatchmanNeePage() {
     '@type': 'Article',
     headline: 'Watchman Nee - Životopis a služba',
     description:
-      'Životopis Watchmana Neeho, významného křesťanského kazatele a spisovatele. Jeho víra, služba a uvěznění pro Krista.',
+      'Životopis Watchmana Nee, významného kresťanského kazateľa a spisovateľa. Jeho viera, služba a uväznenie pre Krista.',
     author: {
       '@type': 'Organization',
-      name: 'Proud života',
+      name: 'Prúd života',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Proud života',
+      name: 'Prúd života',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://proudzivota.cz/logo.png',
+        url: 'https://prud.sk/logo.png',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': 'https://proudzivota.cz/watchman-nee',
+      '@id': 'https://prud.sk/watchman-nee',
     },
     about: {
       '@type': 'Person',
       name: 'Watchman Nee',
-      description: 'Křesťanský kazatel, učitel a spisovatel',
+      description: 'Kresťanský kazateľ, učiteľ a spisovateľ',
       birthDate: '1903',
       deathDate: '1972-05-30',
       nationality: 'Chinese',
-      occupation: 'Křesťanský kazatel a spisovatel',
-      knowsAbout: ['Křesťanství', 'Bible', 'Duchovní život', 'Církev'],
+      occupation: 'Kresťanský kazateľ a spisovateľ',
+      knowsAbout: ['Kresťanstvo', 'Biblia', 'Duchovný život', 'Cirkev'],
     },
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -77,14 +77,14 @@ export default function WatchmanNeePage() {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Domů',
-          item: 'https://proudzivota.cz',
+          name: 'Domov',
+          item: 'https://prud.sk',
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Watchman Nee',
-          item: 'https://proudzivota.cz/watchman-nee',
+          item: 'https://prud.sk/watchman-nee',
         },
       ],
     },
@@ -113,7 +113,7 @@ export default function WatchmanNeePage() {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Zpět
+            Späť
           </Link>
         </div>
 
@@ -123,105 +123,107 @@ export default function WatchmanNeePage() {
           {/* Introduction */}
           <div className="mb-8 p-6 bg-[#f8f9fa] rounded-lg border-l-4 border-[#9b7d57]">
             <p className="text-[#191817] text-lg leading-relaxed">
-              <strong>Watchman Nee (1903-1972)</strong> byl významný křesťanský kazatel, učitel a
-              spisovatel z Číny. Jeho život byl poznamenán hlubokou vírou v Krista, službou místním
-              církvím a nakonec uvězněním pro svou víru.
+              <strong>Watchman Nee (1903-1972)</strong> bol významný kresťanský kazateľ, učiteľ a
+              spisovateľ z Číny. Jeho život bol poznamenaný hlbokou vierou v Krista, službou
+              miestnym cirkvám a nakoniec uväznením pre svoju vieru.
             </p>
           </div>
 
           <div className="space-y-8">
             <section>
               <h2 className="text-2xl font-semibold text-[#071e46] mb-4 border-b-2 border-[#9b7d57] pb-2">
-                POČÁTKY SLUŽBY
+                ZAČIATKY SLUŽBY
               </h2>
               <p className="text-[#191817] text-[17px] leading-relaxed text-justify">
-                Watchman Nee brzy po svém spasení začal milovat Pána a měl velkou touhu kázat
-                evangelium svým spolužákům a krajanům vhod či nevhod. Díky jeho kázání byli téměř
-                všichni jeho spolužáci přivedeni k Pánu a v roce 1923 nastalo na jeho škole
-                probuzení, které se široce rozšířilo mezi lidmi v jeho městě. Stovky lidí byly
-                zachráněny a jejich životy se změnily. Watchman Nee nenavštěvoval žádnou teologickou
-                školu ani biblický institut. Většinu toho, co se naučil o Kristu, duchovních věcech
-                a dějinách církve, získal studiem Bible a četbou knih duchovních lidí. Watchman Nee
-                byl nejen skvělým studentem Bible, ale také čtenářem duchovní literatury. Měl
-                pozoruhodný dar vybírat, porozumět, rozlišovat a zapamatovat si ten správný
-                materiál. Dokázal okamžitě pochopit hlavní body jakékoli knihy.
+                Watchman Nee čoskoro po svojej spáse začal milovať Pána a mal veľkú túžbu kázať
+                evanjelium svojim spolužiakom a krajanom vhod či nevhod. Vďaka jeho kázaniu boli
+                takmer všetci jeho spolužiaci privedení k Pánovi a v roku 1923 nastalo na jeho škole
+                prebudenie, ktoré sa široko rozšírilo medzi ľuďmi v jeho meste. Stovky ľudí boli
+                zachránené a ich životy sa zmenili. Watchman Nee nenavštevoval žiadnu teologickú
+                školu ani biblický inštitút. Väčšinu toho, čo sa naučil o Kristovi, duchovných
+                veciach a dejinách cirkvi, získal štúdiom Biblie a čítaním kníh duchovných ľudí.
+                Watchman Nee bol nielen skvelým študentom Biblie, ale aj čitateľom duchovnej
+                literatúry. Mal pozoruhodný dar vyberať, porozumieť, rozlišovať a zapamätať si ten
+                správny materiál. Dokázal okamžite pochopiť hlavné body akejkoľvek knihy.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-[#071e46] mb-4 border-b-2 border-[#9b7d57] pb-2">
-                ŽIVÁ VÍRA
+                ŽIVÁ VIERA
               </h2>
               <p className="text-[#191817] text-[17px] leading-relaxed text-justify">
-                Kvůli pracovnímu přetížení a nedostatečné fyzické péči onemocněl Watchman Nee v roce
-                1924 tuberkulózou. Situace byla natolik vážná, že se rozšířily falešné zprávy o jeho
-                smrti. Během své nemoci se naučil důvěřovat Bohu ohledně své existence a Bůh se o
-                něj věrně staral. Bůh ho milostivě uzdravil z tuberkulózy, ale ve své svrchovanosti
-                mu ponechal s anginou pectoris. Každou chvíli mohl zemřít. To ho však spontánně
-                přivedlo k naprosté důvěře v Pána. V každém okamžiku žil z víry v Boha a po celá
-                léta až do své smrti ho Bůh zaopatřoval svou milostivou péčí a životem vzkříšení.
-                Skrze tyto fyzické těžkosti zakoušel Boha a těšil se z Něj mnohem více, než by bylo
-                možné bez nich. Boží uzdravení, které Watchman Nee zažil, nebylo jen zázračným Božím
-                činem, ale bylo to působení života vzkříšení skrze milost uplatňování živé víry ve
-                věrné Boží Slovo pro budování a růst v životě. Nebyl to jen zázrak Boží moci, byla
-                to zcela záležitost milosti a božského života.
+                Kvôli pracovnému preťaženiu a nedostatočnej fyzickej starostlivosti ochorel Watchman
+                Nee v roku 1924 na tuberkulózu. Situácia bola natoľko vážna, že sa rozšírili
+                nepravdivé správy o jeho smrti. Počas svojej choroby sa naučil dôverovať Bohu
+                ohľadom svojej existencie a Boh sa oň verne staral. Boh ho milostivo uzdravil z
+                tuberkulózy, ale vo svojej zvrchovanosti mu ponechal anginu pectoris. Každú chvíľu
+                mohol zomrieť. To ho však spontánne priviedlo k úplnej dôvere v Pána. V každom
+                okamihu žil z viery v Boha a po celé roky až do svojej smrti ho Boh zaopatrieval
+                svojou milostivou starostlivosťou a životom vzkriesenia. Skrze tieto fyzické
+                ťažkosti zakúšal Boha a tešil sa z Neho oveľa viac, ako by bolo možné bez nich.
+                Božie uzdravenie, ktoré Watchman Nee zažil, nebolo len zázračným Božím činom, ale
+                bolo to pôsobenie života vzkriesenia skrze milosť uplatňovania živej viery vo verné
+                Božie Slovo pre budovanie a rast v živote. Nebol to len zázrak Božej moci, bola to
+                úplne záležitosť milosti a božského života.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-[#071e46] mb-4 border-b-2 border-[#9b7d57] pb-2">
-                ŽIVOT A DÍLO
+                ŽIVOT A DIELO
               </h2>
               <p className="text-[#191817] text-[17px] leading-relaxed text-justify">
-                Kdykoli byla Watchmanu Neemu položena nějaká otázka, jeho odpověď byla vždy
-                praktická, věcná, jasná, plná pomazání a světla. Jeho chování bylo velmi přirozené a
-                otevřené; byl to člověk snadno přístupný. Měl široké srdce. V duchovních otázkách
-                stoupal k výšinám a dotýkal se hlubin. Měl bohaté znalosti a zkušenosti ve věcech
-                týkajících se Božích principů a Božího záměru. Vždy působil příjemným dojmem, ale
-                vždy vzbuzoval respekt. Jeho postoj byl mírný a klidný a jeho slova byla plná
-                pomazání. Při rozhovoru s ním nebyl cítit odstup, ale pocit osvěžení a podpory.
-                Dojem, který zanechal svými slovy a chováním, je nezapomenutelný. Watchman Nee
-                uviděl důležitou věc týkající se naší služby: Nezáleží na kvantitě, ale na kvalitě.
-                Skutečná služba je přetékáním života.
+                Kedykoľvek bola Watchmanovi Nee položená nejaká otázka, jeho odpoveď bola vždy
+                praktická, vecná, jasná, plná pomazania a svetla. Jeho správanie bolo veľmi
+                prirodzené a otvorené; bol to človek ľahko prístupný. Mal široké srdce. V duchovných
+                otázkach stúpal k výšinám a dotýkal sa hlbín. Mal bohaté znalosti a skúsenosti vo
+                veciach týkajúcich sa Božích princípov a Božieho zámeru. Vždy pôsobil príjemným
+                dojmom, ale vždy vzbuzoval úctu. Jeho postoj bol mierny a pokojný a jeho slová boli
+                plné pomazania. Pri rozhovore s ním nebol cítiť odstup, ale pocit osvieženia a
+                podpory. Dojem, ktorý zanechal svojimi slovami a správaním, je nezabudnuteľný.
+                Watchman Nee uvidel dôležitú vec týkajúcu sa našej služby: Nezáleží na kvantite, ale
+                na kvalite. Skutočná služba je pretiekaním života.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-[#071e46] mb-4 border-b-2 border-[#9b7d57] pb-2">
-                UVĚZNĚNÍ
+                UVÄZNENIE
               </h2>
               <p className="text-[#191817] text-[17px] leading-relaxed text-justify mb-4">
-                V únoru 1949 se Watchman Nee po dlouhých modlitbách a úvahách rozhodl zůstat v
-                Šanghaji kvůli svému břemenu pro místní církve, spolupracovníky a Pánovo svědectví v
-                pevninské Číně. Na jedné straně plně důvěřoval Pánově svrchovanosti, na druhé straně
-                si byl vědom nebezpečí a byl připraven obětovat se pro Pánovo svědectví. Na jaře
-                1952 byl pro svou víru zatčen a uvězněn a v létě 1956 byl po dlouhém procesu
-                odsouzen k patnácti letům vězení. Nikdy však nebyl propuštěn. Během jeho věznění
-                byly povoleny pouze příležitostné návštěvy jeho manželky. Zemřela 7. listopadu 1971.
-                Watchman Nee byl její smrtí hluboce zarmoucen a zcela odříznut od kontaktu s okolním
-                světem. Brzy poté, 30. května 1972, ukončil Watchman Nee své putování po této zemi a
-                spočinul v Kristu, kterému sloužil i za cenu svého života. Pod polštářem zanechal na
-                kousku papíru několik řádek psaných velkým, roztřeseným písmem: &quot;Kristus je Syn
-                Boží, který zemřel pro vykoupení hříšníků a po třech dnech vstal z mrtvých. To je
-                největší pravda ve vesmíru. Umírám pro svou víru v Krista. Watchman Nee.&quot;
+                V februári 1949 sa Watchman Nee po dlhých modlitbách a úvahách rozhodol zostať v
+                Šanghaji kvôli svojmu bremenu pre miestne cirkvi, spolupracovníkov a Pánovo
+                svedectvo v pevninskej Číne. Na jednej strane plne dôveroval Pánovej zvrchovanosti,
+                na druhej strane si bol vedomý nebezpečenstva a bol pripravený obetovať sa pre
+                Pánovo svedectvo. Na jar 1952 bol pre svoju vieru zatknutý a uväznený a v lete 1956
+                bol po dlhom procese odsúdený na pätnásť rokov väzenia. Nikdy však nebol prepustený.
+                Počas jeho väznenia boli povolené len príležitostné návštevy jeho manželky. Zomrela
+                7. novembra 1971. Watchman Nee bol jej smrťou hlboko zarmútený a úplne odrezaný od
+                kontaktu s okolitým svetom. Čoskoro potom, 30. mája 1972, ukončil Watchman Nee svoje
+                putovanie po tejto zemi a spočinul v Kristovi, ktorému slúžil aj za cenu svojho
+                života. Pod vankúšom zanechal na kúsku papiera niekoľko riadkov písaných veľkým,
+                roztrasseným písmom: &quot;Kristus je Syn Boží, ktorý zomrel pre vykúpenie
+                hriešnikov a po troch dňoch vstal z mŕtvych. To je najväčšia pravda vo vesmíre.
+                Umriem pre svoju vieru v Krista. Watchman Nee.&quot;
               </p>
 
               <div className="bg-[#edeae4] p-6 rounded-lg border-l-4 border-[#9b7d57]">
-                <h3 className="text-lg font-semibold text-[#071e46] mb-3">Památné citáty</h3>
+                <h3 className="text-lg font-semibold text-[#071e46] mb-3">Pamätné citáty</h3>
                 <p className="text-[#191817] text-[17px] leading-relaxed text-justify italic mb-4">
-                  &quot;Je důležité, abychom přijali Boží uspořádání našich okolností. Je to výchova
-                  Ducha Svatého. Pouhý jeden únik z Božího uspořádání znamená ztrátu příležitosti ke
-                  zvýšení naší kapacity. Věřící člověk nemůže nikdy zůstat stejný poté, co projde
-                  utrpením.&quot;
+                  &quot;Je dôležité, aby sme prijali Božie usporiadanie našich okolností. Je to
+                  výchova Ducha Svätého. Jediný únik z Božieho usporiadania znamená stratu
+                  príležitosti na zvýšenie našej kapacity. Veriaci človek nemôže nikdy zostať
+                  rovnaký potom, čo prejde utrpením.&quot;
                 </p>
                 <p className="text-[#191817] text-[17px] leading-relaxed text-justify italic">
-                  &quot;Když jsem začal sloužit Pánu, měl jsem obavy o své živobytí. Protože jsem
-                  však měl kráčet po Pánově cestě, spoléhal jsem na to, že mě hmotně zajistí On. V
-                  letech 1921 a 1922 bylo v Číně jen velmi málo kazatelů, kteří žili tak, že
-                  spoléhali pouze na Pána. Když jsem však vzhlédl k Pánu, řekl mi: &apos;Pokud
-                  nedokážeš žít z víry, nemůžeš pro mě konat dílo.&apos; Věděl jsem, že abych mohl
-                  sloužit živému Bohu, musím konat živé dílo a mít živou víru. Bůh se postaral o
-                  všechny mé potřeby a nikdy nezklamal.&quot;
+                  &quot;Keď som začal slúžiť Pánovi, mal som obavy o svojebytie. Pretože som však
+                  mal kráčať po Pánovej ceste, spoliehal som sa na to, že ma hmotne zabezpečí On. V
+                  rokoch 1921 a 1922 bolo v Číne len veľmi málo kazateľov, ktorí žili tak, že
+                  spoliehali len na Pána. Keď som však vzhliadol k Pánovi, povedal mi: &apos;Ak
+                  nedokážeš žiť z viery, nemôžeš pre mňa konať dielo.&apos; Vedel som, že aby som
+                  mohol slúžiť živému Bohu, musím konať živé dielo a mať živú vieru. Boh sa postaral
+                  o všetky moje potreby a nikdy nesklamal.&quot;
                 </p>
               </div>
             </section>

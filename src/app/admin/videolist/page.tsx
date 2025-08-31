@@ -60,7 +60,7 @@ const VideoList = () => {
   }, [successDelete, resetVideoDelete, listVideo, pageNumber])
 
   const deleteHandler = (id) => {
-    if (window.confirm('Jste si jisti?')) {
+    if (window.confirm('Ste si istí?')) {
       deleteVideo(id)
     }
   }
@@ -113,7 +113,7 @@ const VideoList = () => {
           ) : (
             <Icon.Plus size={20} />
           )}
-          Přidat YouTube Video
+          Pridať YouTube Video
         </button>
       </div>
 
@@ -130,7 +130,7 @@ const VideoList = () => {
           ) : (
             <Icon.Plus size={18} />
           )}
-          <span className="text-sm">Přidat YouTube Video</span>
+          <span className="text-sm">Pridať YouTube Video</span>
         </button>
       </div>
 
@@ -154,13 +154,13 @@ const VideoList = () => {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Název (v tomto -abecední-seznam-kníh- pořadí budou videa zobrazená)
+                      Názov (v tomto -abecednom-zozname-kníh- poradí budú videá zobrazované)
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Video
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Akce
+                      Akcie
                     </th>
                   </tr>
                 </thead>
@@ -237,14 +237,14 @@ const VideoList = () => {
           {sortedVideos.length === 0 && (
             <div className="text-center py-12">
               <Icon.PlayBtn className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Žádná YouTube videa</h3>
-              <p className="text-gray-500 mb-6">Začněte přidáním prvního YouTube videa.</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Žiadne YouTube videá</h3>
+              <p className="text-gray-500 mb-6">Začnite pridaním prvého YouTube videa.</p>
               <button
                 className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
                 onClick={createVideoHandler}
               >
                 <Icon.Plus size={20} className="inline mr-2" />
-                Přidat YouTube Video
+                Pridať YouTube Video
               </button>
             </div>
           )}

@@ -9,25 +9,25 @@ export const revalidate = 1800 // 30 minutes in seconds
 
 // Enhanced metadata for better SEO
 export const metadata = {
-  metadataBase: new URL('https://proudzivota.cz'),
-  title: 'Proud života - Křesťanská literatura a duchovní knihy',
+  metadataBase: new URL('https://prud.sk'),
+  title: 'Prúd života - Kresťanská literatúra a duchovné knihy',
   description:
-    'Přinášet bohatství Božího slova všemu Božímu lidu. Objevte křesťanské knihy, duchovní literaturu a Bible studia od Watchman Nee, Witness Lee a dalších.',
+    'Prinášať bohatstvo Božieho slova celému Božiemu ľudu. Objavte kresťanské knihy, duchovnú literatúru a štúdiá Biblie od Watchman Nee, Witness Lee a ďalších.',
   keywords:
-    'křesťanské knihy, křesťanská literatura, duchovní knihy, duchovní literatúra, Bůh, trojjediný Bůh, Kristus, Ježíš Kristus, Duch, Duch Svatý, Život, Studium života, Bible, svatá Bible, studium Biblie, Písmo, Svaté Písmo, křesťanství, křesťané, církev, Církev, místní církev, místní cirkve, Watchman Nee, Witness Lee',
+    'kresťanské knihy, kresťanská literatúra, duchovné knihy, duchovná literatúra, Boh, trojjediný Boh, Kristus, Ježiš Kristus, Duch, Duch Svätý, Život, Štúdium života, Biblia, svätá Biblia, štúdium Biblie, Písmo, Sväté písmo, kresťanstvo, kresťania, cirkev, Cirkev, miestna cirkev, miestne cirkvi, Watchman Nee, Witness Lee',
   openGraph: {
-    title: 'Proud života - Křesťanská literatura a duchovní knihy',
+    title: 'Prúd života - Kresťanská literatúra a duchovné knihy',
     description:
-      'Přinášet bohatství Božího slova všemu Božímu lidu. Křesťanské knihy, duchovní literatura a Bible studia.',
+      'Prinášať bohatstvo Božieho slova celému Božiemu ľudu. Kresťanské knihy, duchovná literatúra a štúdiá Biblie.',
     type: 'website',
-    url: 'https://proudzivota.cz',
-    siteName: 'Proud života',
+    url: 'https://prud.sk',
+    siteName: 'Prúd života',
     locale: 'cs_CZ',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Proud života - Křesťanská literatura',
-    description: 'Křesťanské knihy, duchovní literatura a Bible studia',
+    title: 'Prúd života - Kresťanská literatúra',
+    description: 'Kresťanské knihy, duchovná literatúra a štúdiá Biblie',
   },
   robots: {
     index: true,
@@ -41,7 +41,7 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical: 'https://proudzivota.cz',
+    canonical: 'https://prud.sk',
   },
 }
 
@@ -71,7 +71,7 @@ async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
       return { products: [], pages: 0 }
     }
     console.error('[HOMEPAGE] Error fetching initial products:', error)
-    return { products: [], pages: 0, error: 'Nepodařilo se načíst produkty' }
+    return { products: [], pages: 0, error: 'Nepodarilo sa načítať produkty' }
   }
 }
 
@@ -153,30 +153,29 @@ export default async function HomePage({ searchParams }) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Proud života',
-    description: 'Přinášet bohatství Božího slova všemu Božímu lidu',
-    url: 'https://proudzivota.cz',
+    name: 'Prúd života',
+    description: 'Prinášať bohatstvo Božieho slova celému Božiemu ľudu',
+    url: 'https://prud.sk',
     publisher: {
       '@type': 'Organization',
-      name: 'Distribuce Proud',
+      name: 'Prúd života',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://proudzivota.cz/logo.png',
+        url: 'https://prud.sk/logo.png',
       },
     },
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate:
-          'https://proudzivota.cz/eshop/abecední-seznam-kníh?search={search_term_string}',
+        urlTemplate: 'https://prud.sk/eshop/abecední-seznam-kníh?search={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },
     ...(featuredProducts.length > 0 && {
       mainEntity: {
         '@type': 'ItemList',
-        name: 'Doporučené knihy',
+        name: 'Odporúčané knihy',
         numberOfItems: featuredProducts.length,
         itemListElement: featuredProducts.slice(0, 8).map((product, index) => ({
           '@type': 'ListItem',
@@ -186,7 +185,7 @@ export default async function HomePage({ searchParams }) {
             name: product.name,
             description: product.description,
             image: product.image,
-            url: `https://proudzivota.cz/product/${product.id}`,
+            url: `https://prud.sk/product/${product.id}`,
             ...(product.author && {
               author: {
                 '@type': 'Person',
@@ -197,7 +196,7 @@ export default async function HomePage({ searchParams }) {
               offers: {
                 '@type': 'Offer',
                 price: product.price,
-                priceCurrency: 'CZK',
+                priceCurrency: 'EUR',
                 availability:
                   product.countInStock > 0
                     ? 'https://schema.org/InStock'
@@ -214,8 +213,8 @@ export default async function HomePage({ searchParams }) {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Domů',
-          item: 'https://proudzivota.cz',
+          name: 'Domov',
+          item: 'https://prud.sk',
         },
       ],
     },
@@ -225,16 +224,16 @@ export default async function HomePage({ searchParams }) {
   const organizationJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Distribuce Proud',
-    alternateName: 'Proud života',
-    url: 'https://proudzivota.cz',
-    logo: 'https://proudzivota.cz/logo.png',
-    description: 'Distribuce křesťanské literatury a duchovních knih',
+    name: 'Prúd života',
+    alternateName: 'Prúd života',
+    url: 'https://prud.sk',
+    logo: 'https://prud.sk/logo.png',
+    description: 'Distribúcia kresťanskej literatúry a duchovných kníh',
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+420 724 526 926',
+      telephone: '+421 904 060 262',
       contactType: 'customer service',
-      email: 'proud@proudnihy.cz',
+      email: 'eshop@prud.sk',
     },
     sameAs: [
       // Add your social media URLs here if you have any
@@ -257,7 +256,7 @@ export default async function HomePage({ searchParams }) {
         {/* Server-rendered carousel */}
         <ProductCarousel images={bannerImages} />
 
-        <h1 className="!text-3xl !font-normal text-[#9E7B54] mb-4">Naše publikace</h1>
+        <h1 className="!text-3xl !font-normal text-[#9E7B54] mb-4">Naše publikácie</h1>
         <hr className="border-gray-300 mb-6" />
 
         {/* Client component with Suspense boundary */}
@@ -273,16 +272,16 @@ export default async function HomePage({ searchParams }) {
         {/* SEO-friendly content section */}
         <section className="mt-12 mb-8">
           <div className="bg-[#f8f9fa] p-6 rounded-lg">
-            <h2 className="text-2xl font-semibold text-[#071e46] mb-4">O nás - Proud života</h2>
+            <h2 className="text-2xl font-semibold text-[#071e46] mb-4">O nás - Prúd života</h2>
             <p className="text-[#191817] leading-relaxed mb-4">
-              Jsme distribuce křesťanské literatury, která si klade za cíl přinášet bohatství Božího
-              slova všemu Božímu lidu. Naše knihy obsahují díla Watchmana Nee a Witnesse Lee, která
-              vám pomohou v duchovním růstu a hlubším poznání Boha.
+              Sme distribúcia kresťanskej literatúry, ktorá si kladie za cieľ prinášať bohatstvo
+              Božieho slova celému Božiemu ľudu. Naše knihy obsahujú diela Watchmana Nee a Witnessa
+              Lee, ktoré vám pomôžu v duchovnom raste a hlbšom poznaní Boha.
             </p>
             <p className="text-[#191817] leading-relaxed">
-              Nabízíme široký výběr křesťanských knih, duchovní literatury a materiálů pro studium
-              Bible. Každá kniha je pečlivě vybrána pro svou duchovní hodnotu a schopnost obohatit
-              váš křesťanský život.
+              Ponúkame široký výber kresťanských kníh, duchovnej literatúry a materiálov na štúdium
+              Biblie. Každá kniha je starostlivo vybraná pre svoju duchovnú hodnotu a schopnosť
+              obohatiť váš kresťanský život.
             </p>
           </div>
         </section>

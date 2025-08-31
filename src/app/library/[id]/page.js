@@ -89,8 +89,8 @@ export async function generateMetadata({ params }) {
 
   if (!product || !product.excerpt?.excerpt) {
     return {
-      title: 'Ukázka nenalezena - Proud života',
-      description: 'Požadovaná ukázka z knihy nebyla nalezena.',
+      title: 'Ukážka nenájdená - Prúd života',
+      description: 'Požadovaná ukážka z knihy nebola nájdená.',
     }
   }
 
@@ -101,18 +101,18 @@ export async function generateMetadata({ params }) {
       : product.excerpt.excerpt
 
   return {
-    title: `${product.name} - Ukázka z knihy | Proud života`,
-    description: `Přečtěte si ukázku z knihy "${product.name}"${
+    title: `${product.name} - Ukázka z knihy | Prúd života`,
+    description: `Prečítajte si ukážku z knihy "${product.name}"${
       product.author ? ` od ${product.author}` : ''
     }. ${excerptPreview}`,
-    keywords: `${product.name}, ukázka z knihy, ${
+    keywords: `${product.name}, ukážka z knihy, ${
       product.author || ''
-    }, křesťanské knihy, křesťanská literatura, duchovní knihy, Bible, studium Biblie, čítárna${
+    }, kresťanské knihy, kresťanská literatúra, duchovné knihy, Biblia, štúdium Biblie, čitáreň${
       product.tags ? `, ${product.tags}` : ''
     }`,
     openGraph: {
-      title: `${product.name} - Ukázka z knihy | Proud života`,
-      description: `Přečtěte si ukázku z knihy "${product.name}"${
+      title: `${product.name} - Ukázka z knihy | Prúd života`,
+      description: `Prečítajte si ukážku z knihy "${product.name}"${
         product.author ? ` od ${product.author}` : ''
       }`,
       images:
@@ -127,12 +127,12 @@ export async function generateMetadata({ params }) {
             ]
           : [],
       type: 'article',
-      url: `https://proudzivota.cz/library/${productId}`,
+      url: `https://prud.sk/library/${productId}`,
     },
     twitter: {
       card: 'summary_large_image',
       title: `${product.name} - Ukázka z knihy`,
-      description: `Přečtěte si ukázku z knihy "${product.name}"${
+      description: `Prečítajte si ukážku z knihy "${product.name}"${
         product.author ? ` od ${product.author}` : ''
       }`,
       images:
@@ -177,8 +177,8 @@ export default async function LibraryPage({ params }) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `Ukázka z knihy: ${product.name}`,
-    description: `Přečtěte si ukázku z knihy "${product.name}"${
+    headline: `Ukážka z knihy: ${product.name}`,
+    description: `Prečítajte si ukážku z knihy "${product.name}"${
       product.author ? ` od ${product.author}` : ''
     }`,
     image: product.excerpt.image || product.image,
@@ -191,19 +191,19 @@ export default async function LibraryPage({ params }) {
         }
       : {
           '@type': 'Organization',
-          name: 'Proud života',
+          name: 'Prúd života',
         },
     publisher: {
       '@type': 'Organization',
-      name: 'Proud života',
+      name: 'Prúd života',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://proudzivota.cz/logo.png',
+        url: 'https://prud.sk/logo.png',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://proudzivota.cz/library/${productId}`,
+      '@id': `https://prud.sk/library/${productId}`,
     },
     isPartOf: {
       '@type': 'Book',
@@ -215,7 +215,7 @@ export default async function LibraryPage({ params }) {
           }
         : undefined,
       isbn: product.isbn || undefined,
-      url: `https://proudzivota.cz/product/${productId}`,
+      url: `https://prud.sk/product/${productId}`,
     },
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -223,20 +223,20 @@ export default async function LibraryPage({ params }) {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Domů',
-          item: 'https://proudzivota.cz',
+          name: 'Domov',
+          item: 'https://prud.sk',
         },
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Čítárna',
-          item: 'https://proudzivota.cz/library',
+          name: 'Čitáreň',
+          item: 'https://prud.sk/library',
         },
         {
           '@type': 'ListItem',
           position: 3,
           name: product.name,
-          item: `https://proudzivota.cz/library/${productId}`,
+          item: `https://prud.sk/library/${productId}`,
         },
       ],
     },
@@ -265,7 +265,7 @@ export default async function LibraryPage({ params }) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Zpět
+            Späť
           </Link>
         </div>
 
@@ -280,7 +280,7 @@ export default async function LibraryPage({ params }) {
               <Link href={`/product/${product.id}`} className="float-left mr-8 mb-6 block">
                 <Image
                   src={product.excerpt.image || product.image}
-                  alt={`Ukázka z knihy ${product.name}`}
+                  alt={`Ukážka z knihy ${product.name}`}
                   width={800}
                   height={600}
                   className="w-full max-w-xl h-auto object-cover rounded shadow-md hover:shadow-lg transition-shadow duration-200"
@@ -290,7 +290,7 @@ export default async function LibraryPage({ params }) {
 
               <div className="text-justify">
                 <div className="mb-4 p-4 bg-[#f8f9fa] rounded-lg">
-                  <p className="text-sm text-[#6c757d] font-medium">Ukázka z knihy</p>
+                  <p className="text-sm text-[#6c757d] font-medium">Ukážka z knihy</p>
                 </div>
                 <div className="prose prose-lg max-w-none">
                   <p className="text-[#191817] text-[18px] leading-relaxed whitespace-pre-line">

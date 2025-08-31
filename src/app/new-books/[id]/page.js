@@ -85,8 +85,8 @@ export async function generateMetadata({ params }) {
 
   if (!year) {
     return {
-      title: 'Knihy podle roku - Proud života',
-      description: 'Procházejte křesťanské knihy podle roku vydání.',
+      title: 'Knihy podľa roku - Prúd života',
+      description: 'Prechádzajte kresťanské knihy podľa roku vydania.',
     }
   }
 
@@ -96,31 +96,31 @@ export async function generateMetadata({ params }) {
   const productCount = productsByYear.length
 
   return {
-    title: `Knihy ${year} - Křesťanská literatura | Proud života`,
+    title: `Knihy ${year} - Kresťanská literatúra | Prúd života`,
     description:
       productCount > 0
-        ? `Objevte ${productCount} ${
-            productCount === 1 ? 'knihu' : productCount < 5 ? 'knihy' : 'knih'
-          } křesťanské literatury z roku ${year}. Watchman Nee, Witness Lee a další duchovní knihy.`
-        : `Křesťanské knihy z roku ${year}. Procházejte naši sbírku duchovních knih a Bible studií.`,
-    keywords: `knihy ${year}, křesťanské knihy ${year}, křesťanská literatura, duchovní knihy, Bible, studium Biblie, Watchman Nee, Witness Lee, rok ${year}`,
+        ? `Objavte ${productCount} ${
+            productCount === 1 ? 'knihu' : productCount < 5 ? 'knihy' : 'kníh'
+          } kresťanskej literatúry z roku ${year}. Watchman Nee, Witness Lee a ďalšie duchovné knihy.`
+        : `Kresťanské knihy z roku ${year}. Prechádzajte našu zbierku duchovných kníh a štúdií Biblie.`,
+    keywords: `knihy ${year}, kresťanské knihy ${year}, kresťanská literatúra, duchovné knihy, Biblia, štúdium Biblie, Watchman Nee, Witness Lee, rok ${year}`,
     openGraph: {
-      title: `Knihy ${year} - Křesťanská literatura | Proud života`,
+      title: `Knihy ${year} - Kresťanská literatúra | Prúd života`,
       description:
         productCount > 0
-          ? `Objevte ${productCount} ${
-              productCount === 1 ? 'knihu' : productCount < 5 ? 'knihy' : 'knih'
-            } křesťanské literatury z roku ${year}`
-          : `Křesťanské knihy z roku ${year}`,
+          ? `Objavte ${productCount} ${
+              productCount === 1 ? 'knihu' : productCount < 5 ? 'knihy' : 'kníh'
+            } kresťanskej literatúry z roku ${year}`
+          : `Kresťanské knihy z roku ${year}`,
       type: 'website',
-      url: `https://proudzivota.cz/new-books/${year}`,
+      url: `https://prud.sk/new-books/${year}`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: `Knihy ${year} - Křesťanská literatura`,
+      title: `Knihy ${year} - Kresťanská literatúra`,
       description: `${productCount} ${
-        productCount === 1 ? 'kniha' : productCount < 5 ? 'knihy' : 'knih'
-      } křesťanské literatury z roku ${year}`,
+        productCount === 1 ? 'kniha' : productCount < 5 ? 'knihy' : 'kníh'
+      } kresťanskej literatúry z roku ${year}`,
     },
     robots: {
       index: true,
@@ -162,10 +162,10 @@ export default async function NewBooksPage({ params }) {
     description:
       productsByYear.length > 0
         ? `${productsByYear.length} ${
-            productsByYear.length === 1 ? 'kniha' : productsByYear.length < 5 ? 'knihy' : 'knih'
-          } křesťanské literatury z roku ${year}`
-        : `Křesťanské knihy z roku ${year}`,
-    url: `https://proudzivota.cz/new-books/${year}`,
+            productsByYear.length === 1 ? 'kniha' : productsByYear.length < 5 ? 'knihy' : 'kníh'
+          } kresťanskej literatúry z roku ${year}`
+        : `Kresťanské knihy z roku ${year}`,
+    url: `https://prud.sk/new-books/${year}`,
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: productsByYear.length,
@@ -175,13 +175,13 @@ export default async function NewBooksPage({ params }) {
         item: {
           '@type': 'Product',
           name: product.name,
-          url: `https://proudzivota.cz/product/${product.id}`,
+          url: `https://prud.sk/product/${product.id}`,
           ...(product.author && { author: { '@type': 'Person', name: product.author } }),
           ...(product.price && {
             offers: {
               '@type': 'Offer',
               price: product.price,
-              priceCurrency: 'CZK',
+              priceCurrency: 'EUR',
             },
           }),
           ...(product.year && { datePublished: product.year }),
@@ -194,20 +194,20 @@ export default async function NewBooksPage({ params }) {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Domů',
-          item: 'https://proudzivota.cz',
+          name: 'Domov',
+          item: 'https://prud.sk',
         },
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Knihy podle roku',
-          item: 'https://proudzivota.cz/new-books',
+          name: 'Knihy podľa roku',
+          item: 'https://prud.sk/new-books',
         },
         {
           '@type': 'ListItem',
           position: 3,
           name: `Knihy ${year}`,
-          item: `https://proudzivota.cz/new-books/${year}`,
+          item: `https://prud.sk/new-books/${year}`,
         },
       ],
     },
@@ -236,7 +236,7 @@ export default async function NewBooksPage({ params }) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Zpět
+            Späť
           </Link>
         </div>
 
@@ -245,8 +245,8 @@ export default async function NewBooksPage({ params }) {
           <h1 className="text-3xl md:text-4xl font-bold text-[#071e46] mb-2">Knihy {year}</h1>
           {productsByYear.length > 0 && (
             <p className="text-[#9b7d57] text-lg">
-              Nalezeno {productsByYear.length}{' '}
-              {productsByYear.length === 1 ? 'kniha' : productsByYear.length < 5 ? 'knihy' : 'knih'}
+              Nájdených {productsByYear.length}{' '}
+              {productsByYear.length === 1 ? 'kniha' : productsByYear.length < 5 ? 'knihy' : 'kníh'}
             </p>
           )}
         </div>
@@ -290,16 +290,16 @@ export default async function NewBooksPage({ params }) {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-[#071e46] mb-2">Žádné knihy nenalezeny</h3>
+              <h3 className="text-lg font-medium text-[#071e46] mb-2">Žiadne knihy nenájdené</h3>
               <p className="text-[#9b7d57]">
-                Pro rok {year} nejsou momentálně k dispozici žádné knihy.
+                Pre rok {year} nie sú momentálne k dispozícii žiadne knihy.
               </p>
               <div className="mt-6">
                 <Link
                   href="/eshop/abecední-seznam-kníh"
-                  className="inline-flex items-center px-4 py-2 bg-[#071e46] text-white rounded hover:bg-[#9b7d57] transition-colors duration-200"
+                  className="inline-flex items-center px-4 py-2 bg-[#2CB1E6] !text-white rounded hover:bg-[#9b7d57] transition-colors duration-200"
                 >
-                  Procházet všechny knihy
+                  Prechádzať všetky knihy
                 </Link>
               </div>
             </div>

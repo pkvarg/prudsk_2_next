@@ -38,9 +38,9 @@ export async function PUT(request, { params }) {
     })
 
     // SEND HONO EMAIL
-    // const apiUrl = 'http://localhost:3013/api/proud2next/order-admin-delivered'
+    // const apiUrl = 'http://localhost:3013/api/prudsk2next/order-admin-delivered'
 
-    const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/order-admin-delivered'
+    const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/order-admin-delivered'
 
     const response = await fetch(apiUrl, {
       method: 'POST',

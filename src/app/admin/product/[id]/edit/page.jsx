@@ -68,18 +68,18 @@ const ProductEditScreen = () => {
   })
 
   const categories = [
-    { value: 'Boží-ekonomie', label: 'Boží ekonomie' },
-    { value: 'brožury', label: 'Brožury' },
-    { value: 'církev', label: 'Církev' },
+    { value: 'božia-ekonómia', label: 'Božia ekonómia' },
+    { value: 'brožúry', label: 'Brožúry' },
+    { value: 'cirkev', label: 'Cirkev' },
     { value: 'duch', label: 'Duch' },
-    { value: 'evangelium', label: 'Evangelium' },
-    { value: 'křesťanská-praxe', label: 'Křesťanská praxe' },
-    { value: 'křesťanská-služba', label: 'Křesťanská služba' },
+    { value: 'evanjelium', label: 'Evanjelium' },
+    { value: 'kresťanská-prax', label: 'Kresťanská prax' },
+    { value: 'kresťanská-služba', label: 'Kresťanská služba' },
     { value: 'kristus', label: 'Kristus' },
     { value: 'letáky', label: 'Letáky' },
     { value: 'mládež', label: 'Mládež' },
-    { value: 'studium-a-výklad-bible', label: 'Studium a výklad Bible' },
-    { value: 'Trojjediný-Bůh', label: 'Trojjediný Bůh' },
+    { value: 'štúdium-a-výklad-biblie', label: 'Štúdium a výklad Biblie' },
+    { value: 'trojjediný-boh', label: 'Trojjediný Boh' },
     { value: 'život', label: 'Život' },
     { value: 'životopisné', label: 'Životopisné' },
   ]
@@ -224,8 +224,8 @@ const ProductEditScreen = () => {
     setUploading(true)
 
     try {
-      // const apiUrl = 'http://localhost:3013/api/upload/proud2next'
-      const apiUrl = 'https://hono-api.pictusweb.com/api/upload/proud2next'
+      // const apiUrl = 'http://localhost:3013/api/upload/prudsk2next'
+      const apiUrl = 'https://hono-api.pictusweb.com/api/upload/prudsk2next'
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
@@ -301,7 +301,7 @@ const ProductEditScreen = () => {
           href="/admin/productlist"
           className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
         >
-          ← Zpět
+          ← Späť
         </Link>
         <div
           className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
@@ -320,11 +320,11 @@ const ProductEditScreen = () => {
           href="/admin/productlist"
           className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
         >
-          ← Zpět
+          ← Späť
         </Link>
 
         <div className="bg-white shadow-lg rounded-lg p-6 md:p-8">
-          <h1 className="text-2xl md:text-3xl font-medium text-[#313131] mb-8">Editovat produkt</h1>
+          <h1 className="text-2xl md:text-3xl font-medium text-[#313131] mb-8">Editovať produkt</h1>
 
           {loadingUpdate && (
             <div className="flex justify-center items-center py-4">
@@ -342,13 +342,13 @@ const ProductEditScreen = () => {
             {/* Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Název <span className="text-red-500">*</span>
+                Názov <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 name="name"
                 required
-                placeholder="Název"
+                placeholder="Názov"
                 value={formData.name}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-full focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none"
@@ -358,7 +358,7 @@ const ProductEditScreen = () => {
             {/* Price */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Cena <span className="text-red-500">*</span> (ve formátu např: 5.8 bez měny)
+                Cena <span className="text-red-500">*</span> (vo formáte napríklad: 5.8 bez meny)
               </label>
               <input
                 type="text"
@@ -374,11 +374,11 @@ const ProductEditScreen = () => {
             {/* Discount */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Sleva (ve formátu např: 30 bez %)
+                Zľava (vo formáte napríklad: 30 bez %)
               </label>
               <input
                 type="number"
-                placeholder="Sleva"
+                placeholder="Zľava"
                 value={formData.discount}
                 onChange={(e) => handleDiscountChange(e.target.value)}
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-full focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none"
@@ -388,11 +388,11 @@ const ProductEditScreen = () => {
             {/* Discounted Price */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Cena po slevě (automatický výpočet a zaokrouhlení na 5 centů)
+                Cena po zľave (automatický výpočet a zaokrúhlenie na 5 centov)
               </label>
               <input
                 type="number"
-                placeholder="Cena po slevě"
+                placeholder="Cena po zľave"
                 value={formData.discountedPrice}
                 readOnly
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-full bg-gray-100 focus:outline-none"
@@ -402,12 +402,12 @@ const ProductEditScreen = () => {
             {/* Image Upload */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Obrázek (274 x 379 pixelů)
+                Obrázok (274 x 379 pixelů)
               </label>
               <input
                 type="text"
                 name="image"
-                placeholder="Obrázek"
+                placeholder="Obrázok"
                 value={formData.image}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-full focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none mb-3"
@@ -444,12 +444,12 @@ const ProductEditScreen = () => {
             {/* Stock Count */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Počet na skladě
+                Počet na sklade
               </label>
               <input
                 type="number"
                 name="countInStock"
-                placeholder="Počet na skladě"
+                placeholder="Počet na sklade"
                 value={formData.countInStock}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-full focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none"
@@ -458,11 +458,11 @@ const ProductEditScreen = () => {
 
             {/* Year */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Rok vydání</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Rok vydania</label>
               <input
                 type="text"
                 name="year"
-                placeholder="Rok vydání"
+                placeholder="Rok vydania"
                 value={formData.year}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-full focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none"
@@ -472,7 +472,7 @@ const ProductEditScreen = () => {
             {/* Category Dropdown */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Kategorie (aby se produkt zobrazil v záložce E-shop ve své kategorii)
+                Kategória (aby sa produkt zobrazil v záložke E-shop vo svojej kategórii)
               </label>
               <div className="relative">
                 <button
@@ -480,7 +480,7 @@ const ProductEditScreen = () => {
                   onClick={() => toggleDropdown('category')}
                   className="w-full px-4 py-3 text-left bg-[#24b9d6] text-white rounded-full hover:bg-[#2cb3e6] focus:outline-none focus:ring-2 focus:ring-[#2cb3e6] mb-3"
                 >
-                  {formData.category || 'Vybrat kategorii'}
+                  {formData.category || 'Vybrať kategóriu'}
                   <span className="float-right">▼</span>
                 </button>
                 {dropdownStates.category && (
@@ -504,7 +504,7 @@ const ProductEditScreen = () => {
               <input
                 type="text"
                 name="category"
-                placeholder="Kategorie"
+                placeholder="Kategória"
                 value={formData.category}
                 readOnly
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-full bg-gray-100 focus:outline-none"
@@ -527,12 +527,12 @@ const ProductEditScreen = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Hmotnost bez kg, např. 0.33
+                  Hmotnosť bez kg, napríklad 0.33
                 </label>
                 <input
                   type="text"
                   name="weight"
-                  placeholder="Hmotnost"
+                  placeholder="Hmotnosť"
                   value={formData.weight}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 text-base border border-gray-300 rounded-full focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none"
@@ -545,7 +545,7 @@ const ProductEditScreen = () => {
               {/* Related Product 1 */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Související titul č.1
+                  Súvisiaci titul č.1
                 </label>
                 <div className="relative">
                   <button
@@ -553,14 +553,14 @@ const ProductEditScreen = () => {
                     onClick={() => toggleDropdown('related1')}
                     className="w-full px-4 py-3 text-left bg-[#24b9d6] text-white rounded-full hover:bg-[#2cb3e6] focus:outline-none mb-3"
                   >
-                    {formData.related ? getRelatedProductName(formData.related) : 'Vybrat produkt'}
+                    {formData.related ? getRelatedProductName(formData.related) : 'Vybrať produkt'}
                     <span className="float-right">▼</span>
                   </button>
                   {dropdownStates.related1 && (
                     <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                       <input
                         type="text"
-                        placeholder="Hledat produkt..."
+                        placeholder="Hľadať produkt..."
                         value={searchTerms.related1}
                         onChange={(e) => handleRelatedSearchChange(e.target.value, 1)}
                         className="w-full px-4 py-2 border-b border-gray-200 focus:outline-none"
@@ -574,7 +574,7 @@ const ProductEditScreen = () => {
                         }}
                         className="w-full px-4 py-2 text-left hover:bg-gray-100 focus:outline-none text-red-600"
                       >
-                        Odstranit výběr
+                        Odstrániť výber
                       </button>
                       {getFilteredProducts(searchTerms.related1, [
                         formData.related2,
@@ -598,7 +598,7 @@ const ProductEditScreen = () => {
               {/* Related Product 2 */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Související titul č.2
+                  Súvisiaci titul č.2
                 </label>
                 <div className="relative">
                   <button
@@ -608,14 +608,14 @@ const ProductEditScreen = () => {
                   >
                     {formData.related2
                       ? getRelatedProductName(formData.related2)
-                      : 'Vybrat produkt'}
+                      : 'Vybrať produkt'}
                     <span className="float-right">▼</span>
                   </button>
                   {dropdownStates.related2 && (
                     <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                       <input
                         type="text"
-                        placeholder="Hledat produkt..."
+                        placeholder="Hľadať produkt..."
                         value={searchTerms.related2}
                         onChange={(e) => handleRelatedSearchChange(e.target.value, 2)}
                         className="w-full px-4 py-2 border-b border-gray-200 focus:outline-none"
@@ -629,7 +629,7 @@ const ProductEditScreen = () => {
                         }}
                         className="w-full px-4 py-2 text-left hover:bg-gray-100 focus:outline-none text-red-600"
                       >
-                        Odstranit výběr
+                        Odstrániť výber
                       </button>
                       {getFilteredProducts(searchTerms.related2, [
                         formData.related,
@@ -653,7 +653,7 @@ const ProductEditScreen = () => {
               {/* Related Product 3 */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Související titul č.3
+                  Súvisiaci titul č.3
                 </label>
                 <div className="relative">
                   <button
@@ -663,14 +663,14 @@ const ProductEditScreen = () => {
                   >
                     {formData.related3
                       ? getRelatedProductName(formData.related3)
-                      : 'Vybrat produkt'}
+                      : 'Vybrať produkt'}
                     <span className="float-right">▼</span>
                   </button>
                   {dropdownStates.related3 && (
                     <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                       <input
                         type="text"
-                        placeholder="Hledat produkt..."
+                        placeholder="Hľadať produkt..."
                         value={searchTerms.related3}
                         onChange={(e) => handleRelatedSearchChange(e.target.value, 3)}
                         className="w-full px-4 py-2 border-b border-gray-200 focus:outline-none"
@@ -684,7 +684,7 @@ const ProductEditScreen = () => {
                         }}
                         className="w-full px-4 py-2 text-left hover:bg-gray-100 focus:outline-none text-red-600"
                       >
-                        Odstranit výběr
+                        Odstrániť výber
                       </button>
                       {getFilteredProducts(searchTerms.related3, [
                         formData.related,
@@ -733,11 +733,11 @@ const ProductEditScreen = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Počet stran</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Počet strán</label>
                 <input
                   type="text"
                   name="pages"
-                  placeholder="Počet stran"
+                  placeholder="Počet strán"
                   value={formData.pages}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 text-base border border-gray-300 rounded-full focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none"
@@ -766,7 +766,7 @@ const ProductEditScreen = () => {
                   onClick={() => toggleDropdown('language')}
                   className="w-full px-4 py-3 text-left bg-[#24b9d6] text-white rounded-full hover:bg-[#2cb3e6] focus:outline-none mb-3"
                 >
-                  {formData.language || 'Vybrat jazyk'}
+                  {formData.language || 'Vybrať jazyk'}
                   <span className="float-right">▼</span>
                 </button>
                 {dropdownStates.language && (
@@ -813,13 +813,13 @@ const ProductEditScreen = () => {
             {/* Excerpt Image */}
             <div>
               <label className="block text-sm font-medium text-red-500 mb-2">
-                Ukázka - Obrázek (názov súboru musí obsahovat "ukazka", napr.
-                dvaja_duchovia_ukazka.png, 250 x 250 pixelů)
+                Ukážka - Obrázok (názov súboru musí obsahovať "ukazka", napríklad
+                dvaja_duchovia_ukazka.png, 250 x 250 pixelov)
               </label>
               <input
                 type="text"
                 name="excerptImage"
-                placeholder="Ukázka - Obrázek"
+                placeholder="Ukážka - Obrázok"
                 value={formData.excerptImage}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-full focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none mb-3"
@@ -835,12 +835,12 @@ const ProductEditScreen = () => {
             {/* Excerpt Part */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Ukázka - část (zobrazí se v čítárně)
+                Ukážka - časť (zobrazí sa v čitárni)
               </label>
               <textarea
                 name="excerptPart"
                 rows={15}
-                placeholder="Ukázka-část"
+                placeholder="Ukážka-časť"
                 value={formData.excerptPart}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none resize-vertical"
@@ -850,12 +850,12 @@ const ProductEditScreen = () => {
             {/* Excerpt */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Ukázka (Rozklik na Přečíst si víc)
+                Ukážka (Rozklik na Prečítať si viac)
               </label>
               <textarea
                 name="excerpt"
                 rows={15}
-                placeholder="Ukázka"
+                placeholder="Ukážka"
                 value={formData.excerpt}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-[#2cb3e6] focus:border-[#2cb3e6] focus:outline-none resize-vertical"
@@ -869,7 +869,7 @@ const ProductEditScreen = () => {
                 disabled={loadingUpdate}
                 className="w-full md:w-auto px-8 py-3 bg-[#2cb3e6] text-white font-medium rounded-lg hover:bg-white hover:text-[#2cb3e6] border border-[#2cb3e6] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loadingUpdate ? 'Ukládá se...' : 'Uložit'}
+                {loadingUpdate ? 'Ukladá sa...' : 'Uložiť'}
               </button>
             </div>
           </form>

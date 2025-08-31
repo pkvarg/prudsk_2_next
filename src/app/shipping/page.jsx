@@ -23,7 +23,7 @@ const ShippingScreen = () => {
   const [address, setAddress] = useState('')
   const [city, setCity] = useState('')
   const [postalCode, setPostalCode] = useState('')
-  const [country, setCountry] = useState('Česká republika')
+  const [country, setCountry] = useState('Slovenská republika')
   const [billingName, setBillingName] = useState('')
   const [billingAddress, setBillingAddress] = useState('')
   const [billingCity, setBillingCity] = useState('')
@@ -41,7 +41,7 @@ const ShippingScreen = () => {
       setAddress(shippingAddress.address || '')
       setCity(shippingAddress.city || '')
       setPostalCode(shippingAddress.postalCode || '')
-      setCountry(shippingAddress.country || 'Česká republika')
+      setCountry(shippingAddress.country || 'Slovenská republika')
       setBillingName(shippingAddress.billingName || '')
       setBillingAddress(shippingAddress.billingAddress || '')
       setBillingCity(shippingAddress.billingCity || '')
@@ -54,47 +54,33 @@ const ShippingScreen = () => {
   }, [shippingAddress])
 
   const autofilledAlternatives = [
-    'czech republic',
-    'Czech Republic',
-    'čr',
-    'cr',
-    'Cr',
-    'ČR',
-    'cz',
-    'CZ',
-    'česká republika',
-    'ceská republika',
-    'Česká republika',
-    'Ceská Republika',
-    'Ceska Republika',
-    'ceska republika',
-    'Czechia',
-    'czechia',
-    'česko',
-    'Česko',
-    'Cesko',
-    'cesko',
-    'Čechy',
-    'Cechy',
-    'čechy',
-    'cechy',
-    'Morava',
-    'Slezsko',
-    'Czech Rep.',
-    'czech rep',
-    'Czech rep',
+    'slovakia',
+    'Slovakia',
+    'sr',
+    'SR',
+    'sk',
+    'SK',
+    'slovenská republika',
+    'Slovenská republika',
+    'Slovensko',
+    'slovensko',
+    'Slovak Republic',
+    'slovak republic',
+    'Slovak Rep.',
+    'slovak rep',
+    'Slovak rep',
   ]
 
   useEffect(() => {
     if (autofilledAlternatives.includes(country)) {
-      setCountry('Česká republika')
+      setCountry('Slovenská republika')
     }
   }, [country])
 
   const submitHandler = (e) => {
     e.preventDefault()
-    if (country === '' || country === 'Uvedte stát' || country.includes('Uvedte stát')) {
-      alert('Uvedte prosím stát.')
+    if (country === '' || country === 'Uvedte štát' || country.includes('Uvedte štát')) {
+      alert('Uvedte prosím štát.')
       return
     }
 
@@ -147,24 +133,24 @@ const ShippingScreen = () => {
         href="/cart"
         className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
       >
-        ← Zpět
+        ← Späť
       </Link>
       <CheckoutSteps step1 step2 />
 
       <div className="py-8">
-        <h1 className="text-3xl font-bold text-[#071e46] mb-6">Doručení</h1>
-        <h2 className="text-xl font-semibold text-[#071e46] mb-6">Doručovací adresa:</h2>
+        <h1 className="text-3xl font-bold text-[#071e46] mb-6">Doručenie</h1>
+        <h2 className="text-xl font-semibold text-[#071e46] mb-6">Doručovacia adresa:</h2>
 
         <form onSubmit={submitHandler} className="space-y-6">
           {/* Name */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-[#191817] mb-2">
-              Jméno a příjmení<sup className="text-red-500">*</sup>
+              Meno a priezvisko<sup className="text-red-500">*</sup>
             </label>
             <input
               type="text"
               id="name"
-              placeholder="Jméno a příjmení"
+              placeholder="Meno a priezvisko"
               value={name}
               required
               onChange={(e) => setName(e.target.value)}
@@ -180,7 +166,7 @@ const ShippingScreen = () => {
             <input
               type="text"
               id="address"
-              placeholder="Ulice a číslo"
+              placeholder="Ulica a číslo"
               value={address}
               required
               onChange={(e) => setAddress(e.target.value)}
@@ -191,12 +177,12 @@ const ShippingScreen = () => {
           {/* City */}
           <div>
             <label htmlFor="city" className="block text-sm font-medium text-[#191817] mb-2">
-              Město<sup className="text-red-500">*</sup>
+              Mesto<sup className="text-red-500">*</sup>
             </label>
             <input
               type="text"
               id="city"
-              placeholder="Město"
+              placeholder="Mesto"
               value={city}
               required
               onChange={(e) => setCity(e.target.value)}
@@ -223,7 +209,7 @@ const ShippingScreen = () => {
           {/* Country */}
           <div>
             <label className="block text-sm font-medium text-[#191817] mb-2">
-              Stát<sup className="text-red-500">*</sup>
+              Štát<sup className="text-red-500">*</sup>
             </label>
 
             <div className="space-y-2">
@@ -231,34 +217,34 @@ const ShippingScreen = () => {
                 <input
                   type="radio"
                   name="countryOption"
-                  value="Česká republika"
-                  checked={country === 'Česká republika'}
+                  value="Slovenská republika"
+                  checked={country === 'Slovenská republika'}
                   onChange={handleRadioChange}
                   className="mr-2 text-[#2bb2e6] focus:ring-[#2bb2e6]"
                 />
-                <span className="text-[#191817]">Česká republika</span>
+                <span className="text-[#191817]">Slovenská republika</span>
               </label>
 
               <label className="flex items-center">
                 <input
                   type="radio"
                   name="countryOption"
-                  value="Uvedte stát"
-                  checked={country !== 'Česká republika' && country !== ''}
+                  value="Uvedte štát"
+                  checked={country !== 'Slovenská republika' && country !== ''}
                   onChange={handleRadioChange}
                   className="mr-2 text-[#2bb2e6] focus:ring-[#2bb2e6]"
                 />
-                <span className="text-[#191817]">Jiné</span>
+                <span className="text-[#191817]">Iné</span>
               </label>
             </div>
 
-            {country !== 'Česká republika' && (
+            {country !== 'Slovenská republika' && (
               <input
                 type="text"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 className="w-full mt-3 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2bb2e6] focus:border-transparent"
-                placeholder="Zadejte stát"
+                placeholder="Zadajte štát"
               />
             )}
           </div>
@@ -302,7 +288,7 @@ const ShippingScreen = () => {
                 className="mt-1 text-[#2bb2e6] focus:ring-[#2bb2e6] rounded"
               />
               <h2 className="!text-[15px] font-semibold text-[#071e46]">
-                Fakturační adresa se liší od doručovací
+                Fakturačná adresa sa líši od doručovacej
               </h2>
             </label>
           </div>
@@ -310,19 +296,19 @@ const ShippingScreen = () => {
           {/* Billing Address Fields */}
           {checked && (
             <div className="space-y-6 bg-gray-50 py-6 rounded-lg">
-              <h3 className="font-semibold text-[#071e46] mb-4">Fakturační adresa</h3>
+              <h3 className="font-semibold text-[#071e46] mb-4">Fakturačná adresa</h3>
 
               <div>
                 <label
                   htmlFor="billingName"
                   className="block text-sm font-medium text-[#191817] mb-2"
                 >
-                  Jméno a příjmení / Firma
+                  Meno a priezvisko / Firma
                 </label>
                 <input
                   type="text"
                   id="billingName"
-                  placeholder="Jméno a příjmení / Firma"
+                  placeholder="Meno a priezvisko / Firma"
                   value={billingName}
                   onChange={(e) => setBillingName(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2bb2e6] focus:border-transparent"
@@ -334,12 +320,12 @@ const ShippingScreen = () => {
                   htmlFor="billingAddress"
                   className="block text-sm font-medium text-[#191817] mb-2"
                 >
-                  Fakturační adresa
+                  Fakturačná adresa
                 </label>
                 <input
                   type="text"
                   id="billingAddress"
-                  placeholder="Ulice a číslo"
+                  placeholder="Ulica a číslo"
                   value={billingAddress}
                   onChange={(e) => setBillingAddress(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2bb2e6] focus:border-transparent"
@@ -351,12 +337,12 @@ const ShippingScreen = () => {
                   htmlFor="billingCity"
                   className="block text-sm font-medium text-[#191817] mb-2"
                 >
-                  Město
+                  Mesto
                 </label>
                 <input
                   type="text"
                   id="billingCity"
-                  placeholder="Město"
+                  placeholder="Mesto"
                   value={billingCity}
                   onChange={(e) => setBillingCity(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2bb2e6] focus:border-transparent"
@@ -385,12 +371,12 @@ const ShippingScreen = () => {
                   htmlFor="billingCountry"
                   className="block text-sm font-medium text-[#191817] mb-2"
                 >
-                  Stát
+                  Štát
                 </label>
                 <input
                   type="text"
                   id="billingCountry"
-                  placeholder="Stát"
+                  placeholder="Štát"
                   value={billingCountry}
                   onChange={(e) => setBillingCountry(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2bb2e6] focus:border-transparent"
@@ -434,7 +420,7 @@ const ShippingScreen = () => {
             type="submit"
             className="w-full py-3 px-4 bg-[#2bb2e6] text-white rounded-lg hover:bg-[#218334] transition-colors duration-200 font-medium text-lg mt-8"
           >
-            Pokračovat
+            Pokračovať
           </button>
         </form>
       </div>

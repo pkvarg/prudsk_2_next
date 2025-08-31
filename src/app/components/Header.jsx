@@ -117,13 +117,13 @@ const Header = () => {
                       href="/profile"
                       className="block px-4 py-2 hover:bg-[#24b9d6]  !text-[#000000]"
                     >
-                      Můj profil
+                      Môj profil
                     </Link>
                     <button
                       onClick={logoutHandler}
                       className="w-full text-left px-4 py-2 hover:bg-[#24b9d6] !text-[#000000]"
                     >
-                      Odhlásit se
+                      Odhlásiť sa
                     </button>
                   </div>
                 )}
@@ -132,7 +132,7 @@ const Header = () => {
               <Link href="/login" className="text-[#313131] font-normal">
                 <div className="flex items-center">
                   <Icon.Person className="text-[25px] mr-1" />
-                  <span>Přihlášení</span>
+                  <span>Prihlásenie</span>
                 </div>
               </Link>
             )}
@@ -152,7 +152,7 @@ const Header = () => {
                       href="/admin/userlist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
-                      Uživatelé
+                      Používatelia
                     </Link>
                     <Link
                       href="/admin/productlist"
@@ -188,7 +188,7 @@ const Header = () => {
                       href="/admin/subscriberslist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                     >
-                      Odběratelé novinek
+                      Odoberatelia noviniek
                     </Link>
                   </div>
                 )}
@@ -237,10 +237,10 @@ const Header = () => {
           <div className="flex justify-between items-center">
             <div>
               <Link href="/" className="no-underline">
-                <img src="/images/wwwproudbanner.png" className="h-16" alt="prud-zivota" />
+                <img src="/images/prudbanner.png" className="h-16" alt="prud-zivota" />
               </Link>
               <h3 className="text-[#A07C54] italic text-lg mt-2">
-                Přinášet bohatství Božího slova všemu Božímu lidu
+                Prinášať bohatstvo Božieho slova celému Božiemu ľudu
               </h3>
             </div>
             <div>
@@ -271,13 +271,13 @@ const Header = () => {
                         className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                         onClick={closeUserDropdown}
                       >
-                        Můj profil
+                        Môj profil
                       </Link>
                       <button
                         onClick={logoutHandler}
                         className="w-full text-left px-4 py-2 !text-[#352106] hover:bg-gray-50"
                       >
-                        Odhlásit se
+                        Odhlásiť sa
                       </button>
                     </div>
                   )}
@@ -343,11 +343,11 @@ const Header = () => {
                 {activeDropdown === 'news' && (
                   <div className="absolute top-full left-0 mt-3 w-48 bg-white shadow-lg z-50 border">
                     <Link
-                      href="/new-books/2025"
+                      href="/new-books/2024"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Knihy 2025
+                      Knihy 2024
                     </Link>
                   </div>
                 )}
@@ -369,14 +369,14 @@ const Header = () => {
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Slova života
+                      Slová života
                     </Link>
                     <Link
                       href="/life-study"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Studium života
+                      Štúdium života
                     </Link>
                   </div>
                 )}
@@ -403,28 +403,28 @@ const Header = () => {
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Abecední seznam knih
+                      Abecedný zoznam kníh
                     </Link>
                     <Link
-                      href="/eshop/Boží-ekonomie"
+                      href="/eshop/božia-ekonómia"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Boží ekonomie
+                      Božia ekonómia
                     </Link>
                     <Link
-                      href="/eshop/brožury"
+                      href="/eshop/brožúry"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Brožury
+                      Brožúry
                     </Link>
                     <Link
-                      href="/eshop/církev"
+                      href="/eshop/cirkev"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Církev
+                      Cirkev
                     </Link>
                     <Link
                       href="/eshop/duch"
@@ -434,11 +434,11 @@ const Header = () => {
                       Duch
                     </Link>
                     <Link
-                      href="/eshop/evangelium"
+                      href="/eshop/evanjelium"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Evangelium
+                      Evanjelium
                     </Link>
                     <Link
                       href="/eshop/kristus"
@@ -448,18 +448,18 @@ const Header = () => {
                       Kristus
                     </Link>
                     <Link
-                      href="/eshop/křesťanská-praxe"
+                      href="/eshop/kresťanská-prax"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Křesťanská praxe
+                      Kresťanská prax
                     </Link>
                     <Link
-                      href="/eshop/křesťanská-služba"
+                      href="/eshop/kresťanská-služba"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Křesťanská služba
+                      Kresťanská služba
                     </Link>
                     <Link
                       href="/eshop/letáky"
@@ -476,18 +476,18 @@ const Header = () => {
                       Mládež
                     </Link>
                     <Link
-                      href="/eshop/studium-a-výklad-bible"
+                      href="/eshop/štúdium-a-výklad-biblie"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Studium a výklad Bible
+                      Štúdium a výklad Biblie
                     </Link>
                     <Link
-                      href="/eshop/Trojjediný-Bůh"
+                      href="/eshop/trojjediný-boh"
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Trojjediný Bůh
+                      Trojjediný Boh
                     </Link>
                     <Link
                       href="/eshop/život"
@@ -507,9 +507,9 @@ const Header = () => {
                 )}
               </div>
 
-              {/* Čítárna */}
+              {/* Čitáreň */}
               <Link href="/library" className="!text-white hover:text-gray-200 transition-colors">
-                Čítárna
+                Čitáreň
               </Link>
 
               {/* Info */}
@@ -549,7 +549,7 @@ const Header = () => {
                       className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
                       onClick={closeAllDropdowns}
                     >
-                      Bezpečnost a soukromí
+                      Bezpečnosť a súkromie
                     </Link>
                   </div>
                 )}
@@ -564,7 +564,7 @@ const Header = () => {
                 className="!text-white hover:text-gray-200 transition-colors"
                 onClick={closeAllDropdowns}
               >
-                Ke stažení
+                Na stiahnutie
               </Link>
 
               {/* Favorites - desktop */}
@@ -590,7 +590,7 @@ const Header = () => {
                   {activeDropdown === 'mobile-news' && (
                     <div className="px-8 py-2">
                       <Link
-                        href="/new-books/2025"
+                        href="/new-books/2024"
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
@@ -615,14 +615,14 @@ const Header = () => {
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Slova života
+                        Slová života
                       </Link>
                       <Link
                         href="/life-study"
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Studium života
+                        Štúdium života
                       </Link>
                     </div>
                   )}
@@ -651,24 +651,24 @@ const Header = () => {
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Abecední seznam knih
+                        Abecedný zoznam kníh
                       </Link>
                       <Link
-                        href="/eshop/Boží-ekonomie"
+                        href="/eshop/božia-ekonómia"
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Boží ekonomie
+                        Božia ekonómia
                       </Link>
-                      <Link href="/eshop/brožury" className="block py-1 !text-white text-sm">
-                        Brožury
+                      <Link href="/eshop/brožúry" className="block py-1 !text-white text-sm">
+                        Brožúry
                       </Link>
                       <Link
-                        href="/eshop/církev"
+                        href="/eshop/cirkev"
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Církev
+                        Cirkev
                       </Link>
                       <Link
                         href="/eshop/duch"
@@ -678,11 +678,11 @@ const Header = () => {
                         Duch
                       </Link>
                       <Link
-                        href="/eshop/evangelium"
+                        href="/eshop/evanjelium"
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Evangelium
+                        Evanjelium
                       </Link>
                       <Link
                         href="/eshop/kristus"
@@ -692,18 +692,18 @@ const Header = () => {
                         Kristus
                       </Link>
                       <Link
-                        href="/eshop/křesťanská-praxe"
+                        href="/eshop/kresťanská-prax"
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Křesťanská praxe
+                        Kresťanská prax
                       </Link>
                       <Link
-                        href="/eshop/křesťanská-služba"
+                        href="/eshop/kresťanská-služba"
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Křesťanská služba
+                        Kresťanská služba
                       </Link>
                       <Link
                         href="/eshop/letáky"
@@ -720,18 +720,18 @@ const Header = () => {
                         Mládež
                       </Link>
                       <Link
-                        href="/eshop/studium-a-výklad-bible"
+                        href="/eshop/štúdium-a-výklad-biblie"
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Studium a výklad Bible
+                        Štúdium a výklad Biblie
                       </Link>
                       <Link
-                        href="/eshop/Trojjediný-Bůh"
+                        href="/eshop/trojjediný-boh"
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Trojjediný Bůh
+                        Trojjediný Boh
                       </Link>
                       <Link
                         href="/eshop/život"
@@ -756,7 +756,7 @@ const Header = () => {
                   className="block px-4 py-2 !text-white"
                   onClick={closeAllDropdowns}
                 >
-                  Čítárna
+                  Čitáreň
                 </Link>
 
                 <div>
@@ -795,7 +795,7 @@ const Header = () => {
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Bezpečnost a soukromí
+                        Bezpečnosť a súkromie
                       </Link>
                     </div>
                   )}
@@ -813,7 +813,7 @@ const Header = () => {
                   className="block px-4 py-2 !text-white"
                   onClick={closeAllDropdowns}
                 >
-                  Ke stažení
+                  Na stiahnutie
                 </Link>
                 {/* Add this ADMIN section for mobile */}
                 {userInfo && userInfo.isAdmin && !userInfo.isAssistant && (
@@ -832,7 +832,7 @@ const Header = () => {
                           className="block py-1 !text-white text-sm"
                           onClick={closeAllDropdowns}
                         >
-                          Uživatelé
+                          Používatelia
                         </Link>
                         <Link
                           href="/admin/productlist"
@@ -874,7 +874,7 @@ const Header = () => {
                           className="block py-1 !text-white text-sm"
                           onClick={closeAllDropdowns}
                         >
-                          Odběratelé novinek
+                          Odoberatelia noviniek
                         </Link>
                       </div>
                     )}
@@ -929,10 +929,10 @@ const Header = () => {
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center">
               <Link href="/" className="no-underline">
-                <img src="/images/wwwproudbanner.png" className="h-16" alt="prud-zivota" />
+                <img src="/images/prudbanner.png" className="h-16" alt="prud-zivota" />
               </Link>
               <h3 className="text-[#A07C54] text-center italic !text-[15px] mt-2">
-                Přinášet bohatství Božího slova všemu Božímu lidu
+                Prinášať bohatstvo Božieho slova celému Božiemu ľudu
               </h3>
             </div>
             {/* Display on '/' only  */}

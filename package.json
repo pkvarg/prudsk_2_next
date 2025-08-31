@@ -1,11 +1,11 @@
 {
-  "name": "proud2_next",
+  "name": "prudsk_2_next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 3015",
+    "dev": "next dev --turbopack -p 4001",
     "build": "next build",
-    "start": "next start -p 3015",
+    "start": "next start -p 4001",
     "lint": "next lint",
     "postinstall": "prisma generate"
   },

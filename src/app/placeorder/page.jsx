@@ -83,7 +83,7 @@ const PlaceOrderScreen = () => {
         isSubscribed: newsletterChecked,
       })
     } else {
-      setMessage('Potvrďte souhlas níže')
+      setMessage('Potvrďte súhlas nižšie')
     }
   }
 
@@ -111,7 +111,7 @@ const PlaceOrderScreen = () => {
           className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
           href="/payment"
         >
-          ← Zpět na Způsob platby
+          ← Späť na Spôsob platby
         </Link>
 
         <CheckoutSteps step1 step2 step3 step4 />
@@ -119,10 +119,10 @@ const PlaceOrderScreen = () => {
           <div className="lg:col-span-2 space-y-6">
             {/* Shipping Section */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <h2 className="text-xl font-bold text-[#071e46] mb-4">Doručení</h2>
+              <h2 className="text-xl font-bold text-[#071e46] mb-4">Doručenie</h2>
               <div className="space-y-2">
                 <p className="text-gray-700">
-                  <strong>Příjemce: </strong>
+                  <strong>Príjemca: </strong>
                   {shippingAddress?.name}, {shippingAddress?.address}, {shippingAddress?.city},{' '}
                   {shippingAddress?.postalCode}, {shippingAddress?.country},{' '}
                   {shippingAddress?.phone}
@@ -130,7 +130,7 @@ const PlaceOrderScreen = () => {
 
                 {shippingAddress?.billingName && (
                   <div className="mt-4">
-                    <h4 className="font-semibold text-[#071e46] mb-2">Fakturační údaje</h4>
+                    <h4 className="font-semibold text-[#071e46] mb-2">Fakturačné údaje</h4>
                     <p className="text-gray-700">
                       {shippingAddress.billingName}, {shippingAddress.billingAddress},{' '}
                       {shippingAddress.billingPostalCode}, {shippingAddress.billingCity},{' '}
@@ -152,7 +152,7 @@ const PlaceOrderScreen = () => {
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <h2 className="text-xl font-bold text-[#071e46] mb-4">Platba</h2>
               <p className="text-gray-700">
-                <strong>Způsob platby: </strong>
+                <strong>Spôsob platby: </strong>
                 {paymentMethod}
               </p>
             </div>
@@ -161,7 +161,7 @@ const PlaceOrderScreen = () => {
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <h2 className="text-xl font-bold text-[#071e46] mb-4">Objednané produkty:</h2>
               {cart.length === 0 ? (
-                <Message>Váš košík je prázdný</Message>
+                <Message>Váš košík je prázdny</Message>
               ) : (
                 <div className="space-y-4">
                   {cart.map((item, index) => (
@@ -185,12 +185,12 @@ const PlaceOrderScreen = () => {
                           </Link>
                           {item.discount > 0 && (
                             <div className="text-green-600 font-medium text-sm mt-1">
-                              Sleva {item.discount}%
+                              Zľava {item.discount}%
                             </div>
                           )}
                         </div>
                         <div className="text-right text-gray-700">
-                          {item.qty} x {item.price} Kč = {item.qty * item.price} Kč
+                          {item.qty} x {parseFloat(item.price).toFixed(2)} € = {parseFloat(item.qty * item.price).toFixed(2)} €
                         </div>
                       </div>
                     </div>
@@ -203,27 +203,27 @@ const PlaceOrderScreen = () => {
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-white border border-gray-200 rounded-lg p-6 sticky top-4">
-              <h2 className="text-xl font-bold text-[#071e46] mb-6">Souhrn objednávky</h2>
+              <h2 className="text-xl font-bold text-[#071e46] mb-6">Súhrn objednávky</h2>
 
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between items-center py-2 border-b border-gray-100">
                   <span className="text-gray-700">Produkty:</span>
-                  <span className="font-medium">{itemsPrice} Kč</span>
+                  <span className="font-medium">{parseFloat(itemsPrice).toFixed(2)} €</span>
                 </div>
 
                 <div className="flex justify-between items-center py-2 border-b border-gray-100">
                   <span className="text-gray-700">Poštovné a balné:</span>
                   {shippingAddress?.country !== 'Česká republika' ? (
-                    <span className="text-sm text-gray-600">Bude oznámeno fakturou</span>
+                    <span className="text-sm text-gray-600">Bude oznámené faktúrou</span>
                   ) : (
-                    <span className="font-medium">{shippingPrice} Kč</span>
+                    <span className="font-medium">{parseFloat(shippingPrice).toFixed(2)} €</span>
                   )}
                 </div>
 
                 {cart.shippingAddress?.country === 'Česká republika' && (
                   <div className="flex justify-between items-center py-2 font-bold text-lg">
-                    <span className="text-[#071e46]">Celkem:</span>
-                    <span className="text-[#071e46]">{totalPrice} Kč</span>
+                    <span className="text-[#071e46]">Celkom:</span>
+                    <span className="text-[#071e46]">{parseFloat(totalPrice).toFixed(2)} €</span>
                   </div>
                 )}
               </div>
@@ -246,7 +246,7 @@ const PlaceOrderScreen = () => {
                       target="_blank"
                       className="text-[#071e46] hover:text-[#0a2554] underline"
                     >
-                      Souhlasím se zpracovaním osobních údajů
+                      Súhlasím so spracovaním osobných údajov
                     </a>
                   </span>
                 </label>
@@ -265,7 +265,7 @@ const PlaceOrderScreen = () => {
                       target="_blank"
                       className="text-[#071e46] hover:text-[#0a2554] underline"
                     >
-                      Souhlasím s obchodními podmínkami
+                      Súhlasím s obchodnými podmienkami
                     </a>
                   </span>
                 </label>
@@ -279,7 +279,7 @@ const PlaceOrderScreen = () => {
                     className="mt-1 w-4 h-4 text-[#071e46] border-gray-300 rounded focus:ring-[#071e46] focus:ring-2"
                   />
                   <span className="text-sm text-gray-700">
-                    Souhlasím se zasíláním mailů o novinkách a akcích (max. 2x ročně)
+                    Súhlasím so zasielaním mailov o novinkách a akciách (max. 2x ročne)
                   </span>
                 </label> */}
 
@@ -292,7 +292,7 @@ const PlaceOrderScreen = () => {
                     className="mt-1 w-4 h-4 min-w-[1rem] min-h-[1rem] text-[#071e46] border-gray-300 rounded focus:ring-[#071e46] focus:ring-2 flex-shrink-0"
                   />
                   <span className="text-sm text-gray-700">
-                    Souhlasím se zasíláním mailů o novinkách a akcích (max. 2x ročně)
+                    Súhlasím so zasielaním mailov o novinkách a akciách (max. 2x ročne)
                   </span>
                 </label>
               </div>
@@ -305,7 +305,7 @@ const PlaceOrderScreen = () => {
                 disabled={cart.length === 0 || clicked || loading}
                 onClick={placeOrderhandler}
               >
-                {loading ? 'Zpracování...' : 'Závazně objednat'}
+                {loading ? 'Spracovanie...' : 'Záväzne objednať'}
               </button>
             </div>
           </div>

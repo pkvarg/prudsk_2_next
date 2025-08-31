@@ -251,7 +251,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/pictus/PW-Local-Projects/proud2_next/src/prisma/generated/prisma",
+      "value": "/Users/pictus/PW-Local-Projects/prudSK_2_next/src/prisma/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -265,7 +265,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/pictus/PW-Local-Projects/proud2_next/src/prisma/schema.prisma",
+    "sourceFilePath": "/Users/pictus/PW-Local-Projects/prudSK_2_next/src/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -279,12 +279,11 @@ const config = {
     "db"
   ],
   "activeProvider": "mongodb",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "mongodb+srv://pkvarg:PetoMongo8201@prudcluster.qh9fx35.mongodb.net/Prud2Next?retryWrites=true&w=majority"
       }
     }
   },

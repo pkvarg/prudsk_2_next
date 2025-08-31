@@ -3,23 +3,23 @@ import Link from 'next/link'
 
 // Enhanced metadata for SEO
 export const metadata = {
-  title: 'Witness Lee - Životopis a služba | Proud života',
+  title: 'Witness Lee - Životopis a služba | Prúd života',
   description:
-    'Seznamte se s životem a službou Witness Leeho, významného křesťanského učitele a spolupracovníka Watchmana Neeho. Jeho služba v Číně, Tchaj-wanu a USA.',
+    'Oboznámte sa so životom a službou Witness Lee, významného kresťanského učiteľa a spolupracovníka Watchmana Nee. Jeho služba v Číne, Taiwane a USA.',
   keywords:
-    'Witness Lee, křesťanský učitel, křesťanský spisovatel, Living Stream Ministry, Recovery Version, Studium života, místní církve, Watchman Nee, křesťanské knihy',
+    'Witness Lee, kresťanský učiteľ, kresťanský spisovateľ, Living Stream Ministry, Recovery Version, Štúdium života, miestne cirkvi, Watchman Nee, kresťanské knihy',
   openGraph: {
-    title: 'Witness Lee - Životopis a služba | Proud života',
+    title: 'Witness Lee - Životopis a služba | Prúd života',
     description:
-      'Životopis Witness Leeho, významného křesťanského učitele a spolupracovníka Watchmana Neeho. Jeho služba a dílo.',
+      'Životopis Witness Lee, významného kresťanského učiteľa a spolupracovníka Watchmana Nee. Jeho služba a dielo.',
     type: 'article',
-    url: 'https://proudzivota.cz/witness-lee',
+    url: 'https://prud.sk/witness-lee',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Witness Lee - Životopis a služba',
     description:
-      'Životopis Witness Leeho, významného křesťanského učitele a spolupracovníka Watchmana Neeho',
+      'Životopis Witness Lee, významného kresťanského učiteľa a spolupracovníka Watchmana Nee',
   },
   robots: {
     index: true,
@@ -33,7 +33,7 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical: 'https://proudzivota.cz/witness-lee',
+    canonical: 'https://prud.sk/witness-lee',
   },
 }
 
@@ -44,32 +44,32 @@ export default function WitnessLeePage() {
     '@type': 'Article',
     headline: 'Witness Lee - Životopis a služba',
     description:
-      'Životopis Witness Leeho, významného křesťanského učitele a spolupracovníka Watchmana Neeho. Jeho služba a dílo.',
+      'Životopis Witness Lee, významného kresťanského učiteľa a spolupracovníka Watchmana Nee. Jeho služba a dielo.',
     author: {
       '@type': 'Organization',
-      name: 'Proud života',
+      name: 'Prúd života',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Proud života',
+      name: 'Prúd života',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://proudzivota.cz/logo.png',
+        url: 'https://prud.sk/logo.png',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': 'https://proudzivota.cz/witness-lee',
+      '@id': 'https://prud.sk/witness-lee',
     },
     about: {
       '@type': 'Person',
       name: 'Witness Lee',
-      description: 'Křesťanský učitel, kazatel a spisovatel',
+      description: 'Kresťanský učiteľ, kazateľ a spisovateľ',
       birthDate: '1905',
       deathDate: '1997',
       nationality: 'Chinese',
-      occupation: 'Křesťanský učitel a spisovatel',
-      knowsAbout: ['Křesťanství', 'Bible', 'Duchovní život', 'Místní církve'],
+      occupation: 'Kresťanský učiteľ a spisovateľ',
+      knowsAbout: ['Kresťanstvo', 'Biblia', 'Duchovný život', 'Miestne cirkvi'],
       worksFor: {
         '@type': 'Organization',
         name: 'Living Stream Ministry',
@@ -81,14 +81,14 @@ export default function WitnessLeePage() {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Domů',
-          item: 'https://proudzivota.cz',
+          name: 'Domov',
+          item: 'https://prud.sk',
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Witness Lee',
-          item: 'https://proudzivota.cz/witness-lee',
+          item: 'https://prud.sk/witness-lee',
         },
       ],
     },
@@ -117,7 +117,7 @@ export default function WitnessLeePage() {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Zpět
+            Späť
           </Link>
         </div>
 
@@ -127,89 +127,90 @@ export default function WitnessLeePage() {
           {/* Introduction */}
           <div className="mb-8 p-6 bg-[#f8f9fa] rounded-lg border-l-4 border-[#9b7d57]">
             <p className="text-[#191817] text-lg leading-relaxed">
-              <strong>Witness Lee (1905-1997)</strong> byl významný křesťanský učitel, kazatel a
-              spisovatel. Spolupracoval s Watchmanem Neem a pokračoval v jeho díle, sloužil v Číně,
-              Tchaj-wanu a později ve Spojených státech.
+              <strong>Witness Lee (1905-1997)</strong> bol významný kresťanský učiteľ, kazateľ a
+              spisovateľ. Spolupracoval s Watchmanom Neem a pokračoval v jeho diele, slúžil v Číne,
+              Taiwane a neskôr v Spojených štátoch.
             </p>
           </div>
 
           <div className="space-y-8">
             <section>
               <h2 className="text-2xl font-semibold text-[#071e46] mb-4 border-b-2 border-[#9b7d57] pb-2">
-                POČÁTKY
+                O AUTOROVI
               </h2>
               <p className="text-[#191817] text-[17px] leading-relaxed text-justify">
-                Witness Lee se narodil v roce 1905 v severní Číně a vyrůstal v křesťanské rodině. V
-                devatenácti letech byl zcela uchvácen Kristem a okamžitě se rozhodl zasvětit svůj
-                život kázání evangelia. Na počátku své služby se setkal se známým kazatelem,
-                učitelem a spisovatelem Watchmanem Neem. Witness Lee spolupracoval s Watchmanem Neem
-                pod jeho vedením. Počátkem roku 1934 mu Watchman Nee svěřil vedení svého
-                nakladatelství Shanghai Gospel Book Room.
+                Witness Lee sa narodil v roku 1905 v severnej Číne a vyrastal v kresťanskej rodine.
+                Vo svojich devätnástich rokoch bol plne uchvátený Kristom a okamžite sa rozhodol
+                zasvätiť celý svoj život kázaniu evanjelia. Na počiatku svojej služby sa stretol s
+                Watchmanom Nee, známym kazateľom, učiteľom a spisovateľom. Witness Lee pracoval
+                spoločne s Watchmana Nee pod jeho vedením. Začiatkom roku 1934 Watchman Nee zveril
+                Witnessovi Lee vedenie svojej publikačnej činnosti v Šanghajskom vydavateľstve
+                Dobrej Zvesti (Shanghai Gospel Book Room).
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-[#071e46] mb-4 border-b-2 border-[#9b7d57] pb-2">
-                TCHAJ-WAN
+                TAIWAN
               </h2>
               <p className="text-[#191817] text-[17px] leading-relaxed text-justify">
-                Těsně před komunistickým převratem v roce 1949 poslal Watchman Nee Witnesse Leeho a
-                další, kteří s ním spolupracovali v Číně, na Tchaj-wan, aby zajistili, že věci,
-                které jim Pán svěřil, nepodlehnou zkáze. Watchman Nee pověřil Witnesse Leeho, aby
-                pokračoval ve vydavatelské práci v zahraničí. Tak vzniklo nakladatelství Taiwan
-                Gospel Book Room. Od té doby je Taiwan Gospel Book Room všeobecně uznávaným
-                vydavatelem děl Watchmana Neeho mimo Čínu. Krátce nato se projevilo hojné Pánovo
-                požehnání. Z 350 věřících, kteří právě uprchli z pevninské Číny, se místní církve
-                během pěti let rozrostly na 20 000 věřících.
+                Tesne pred komunistickým prevratom v roku 1949 Watchman Nee vyslal Witnessa Lee a
+                ďalších, ktorí s ním spolupracovali v Číne, na Taiwan, aby tak bolo zaistené, že
+                veci, ktoré im boli zverené Pánom, nepodľahnú skaze. Watchman Nee poveril Witnessa
+                Lee, aby pokračoval v doterajšej vydavateľskej činnosti v zahraničí. Tak vzniklo
+                vydavateľstvo Taiwan Gospel Book Room. Od toho momentu je Taiwan Gospel Book Room
+                všeobecne uznávaným vydavateľstvom diel Watchmana Nee mimo Číny. Krátko nato, sa
+                prejavilo Pánovo hojné požehnanie. Z 350 veriacich, ktorí práve ušli z
+                kontinentálnej Číny vzrástli cirkvi na 20 tisíc veriacich počas piatich rokov.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-[#071e46] mb-4 border-b-2 border-[#9b7d57] pb-2">
-                SPOJENÉ STÁTY
+                USA
               </h2>
               <p className="text-[#191817] text-[17px] leading-relaxed text-justify">
-                V roce 1962 byl Witness Lee veden Pánem, aby přijel do Spojených států, kde se
-                usadil v Los Angeles. Během své pětatřicetileté služby ve Spojených státech neúnavně
-                sloužil na týdenních shromážděních a víkendových konferencích a pronesl několik
-                tisíc poselství. Z těchto promluv bylo vydáno více než 400 knih. Mnohé z nich byly
-                přeloženy do více než čtrnácti jazyků. Svou poslední konferenci vedl v únoru 1997 ve
-                věku jedenadevadesáti let.
+                V roku 1962 bol Witness Lee vedený Pánom na pricestovanie do USA, kde sa usadil v
+                Los Angeles. Počas tridsiatich piatich rokov služby v USA neúnavne slúžil na
+                týždňových stretnutiach a víkendových konferenciách, a predniesol niekoľko tisíc
+                posolstiev. Z týchto promluv bolo vydaných viac ako 400 kníh. Mnohé z nich boli
+                preložené do viac ako štrnástich jazykov. Svoju poslednú konferenciu viedol v
+                februári 1997 vo veku deväťdesiatjeden rokov.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-[#071e46] mb-4 border-b-2 border-[#9b7d57] pb-2">
-                DÍLO
+                DIELO
               </h2>
               <p className="text-[#191817] text-[17px] leading-relaxed text-justify mb-4">
-                Zanechává po sobě bohatý výklad biblické pravdy. Jeho hlavní dílo Studium života v
-                Bibli obsahuje více než 25 000 stran komentářů ke všem biblickým knihám, které jsou
-                zpracovány z hlediska potěšení a zkušenosti věřících s božským životem v Kristu
-                skrze Ducha Svatého. Pod vedením Witnesse Leeho byla do angličtiny přeložena celá
-                Bible (Recovery Version) a byl také šéfredaktorem čínského překladu Nového zákona.
-                Recovery Version byla přeložena i do dalších jazyků. Sestavil rozsáhlé poznámky pod
-                čarou, osnovy a odkazy, které se týkají duchovních témat. Ve Spojených státech je
-                možné poslouchat jeho poselství na křesťanských rozhlasových stanicích. Witness Lee
-                založil v roce 1965 neziskovou společnost Living Stream Ministry se sídlem v
-                Anaheimu v Kalifornii, která oficiálně zastupuje službu Witnesse Leeho a Watchmana
-                Neeho.
+                Zanecháva po sebe bohatý výklad biblickej pravdy. Jeho hlavné dielo Štúdium života
+                v Biblii obsahuje viac ako 25 000 strán komentárov ku všetkým biblickým knihám,
+                ktoré sú spracované z hľadiska potešenia a skúsenosti veriacich s božským životom v
+                Kristovi skrze Ducha Svätého. Pod vedením Witnessa Lee bola do angličtiny
+                preložená celá Biblia (Recovery Version) a bol aj šéfredaktorom čínskeho prekladu
+                Nového zákona. Recovery Version bola preložená aj do ďalších jazykov. Zostavil
+                rozsiahle poznámky pod čiarou, osnovy a odkazy, ktoré sa týkajú duchovných tém. V
+                Spojených štátoch je možné počúvať jeho posolstvá na kresťanských rozhlasových
+                staniciach. Witness Lee založil v roku 1965 neziskovú spoločnosť Living Stream
+                Ministry so sídlom v Anaheime v Kalifornii, ktorá oficiálne zastupuje službu
+                Witnessa Lee a Watchmana Nee.
               </p>
 
               <div className="bg-[#f0f8ff] p-4 rounded-lg border border-[#2bb2e6]">
-                <h3 className="text-lg font-semibold text-[#071e46] mb-2">Významná díla:</h3>
+                <h3 className="text-lg font-semibold text-[#071e46] mb-2">Významné diela:</h3>
                 <ul className="text-[#191817] space-y-1">
                   <li>
-                    • <strong>Studium života v Bibli</strong> - více než 25 000 stran komentářů
+                    • <strong>Štúdium života v Biblii</strong> - viac ako 25 000 strán komentárov
                   </li>
                   <li>
-                    • <strong>Recovery Version</strong> - překlad Bible s poznámkami
+                    • <strong>Recovery Version</strong> - preklad Biblie s poznámkami
                   </li>
                   <li>
-                    • <strong>Více než 400 knih</strong> z jeho poselství
+                    • <strong>Viac ako 400 kníh</strong> z jeho posolstiev
                   </li>
                   <li>
-                    • <strong>Living Stream Ministry</strong> - založeno v roce 1965
+                    • <strong>Living Stream Ministry</strong> - založené v roku 1965
                   </li>
                 </ul>
               </div>
@@ -221,13 +222,14 @@ export default function WitnessLeePage() {
               </h2>
               <div className="bg-[#edeae4] p-6 rounded-lg border-l-4 border-[#9b7d57]">
                 <p className="text-[#191817] text-[17px] leading-relaxed text-justify">
-                  Witness Lee ve své službě zdůrazňuje prožívání Krista jako života a praktickou
-                  jednotu věřících jako Těla Kristova. Tím, že zdůrazňoval důležitost péče o oba
-                  tyto aspekty, vedl místní církve, které měl na starosti, k růstu v křesťanském
-                  životě a funkčnosti. Witness Lee byl neochvějně přesvědčen, že Božím cílem není
-                  úzkoprsé sektářství, ale Tělo Kristovo. V reakci na toto přesvědčení se věřící
-                  začali jednoduše scházet jako církev ve svých městech. V nedávné minulosti vznikly
-                  nové místní církve v Rusku a v mnoha východoevropských zemích.
+                  Witness Lee vo svojej službe zdôrazňuje prožívanie Krista ako života a
+                  praktickú jednotu veriacich ako Tela Kristovho. Tým, že zdôrazňoval dôležitosť
+                  starostlivosti o oba tieto aspekty, viedol miestne cirkvi, ktoré mal na
+                  starosti, k rastu v kresťanskom živote a funkčnosti. Witness Lee bol neochvejne
+                  presvedčený, že Božím cieľom nie je úzkoprsé sektárstvo, ale Telo Kristovo. V
+                  reakcii na toto presvedčenie sa veriaci začali jednoducho schádzať ako cirkev vo
+                  svojich mestách. V nedávnej minulosti vznikli nové miestne cirkvi v Rusku a v
+                  mnohých východoeurópskych krajinách.
                 </p>
               </div>
             </section>
@@ -237,11 +239,11 @@ export default function WitnessLeePage() {
                 ODKAZ
               </h2>
               <p className="text-[#191817] text-[17px] leading-relaxed text-justify">
-                Witness Lee zemřel v roce 1997, ale jeho služba a učení pokračuje prostřednictvím
-                Living Stream Ministry a místních církví po celém světě. Jeho důraz na prožívání
-                Krista jako života a praktickou jednotu věřících ovlivnil tisíce křesťanů napříč
-                kontinenty. Jeho knihy a poselství jsou stále studovány a aplikovány věřícími, kteří
-                hledají hlubší zkušenost s Kristem a praktický církevní život.
+                Witness Lee zomrel v roku 1997, ale jeho služba a učenie pokračuje prostredníctvom
+                Living Stream Ministry a miestnych cirkví po celom svete. Jeho dôraz na prožívanie
+                Krista ako života a praktickú jednotu veriacich ovplyvnil tisíce kresťanov naprieč
+                kontinentmi. Jeho knihy a posolstvá sú stále študované a aplikované veriacimi, ktorí
+                hľadajú hlbšiu skúsenosť s Kristom a praktický cirkevný život.
               </p>
             </section>
           </div>

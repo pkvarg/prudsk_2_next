@@ -13,10 +13,10 @@ const Meta = ({ title, description, keywords }) => {
 }
 
 Meta.defaultProps = {
-  title: 'Proud života',
-  description: 'Přinášet bohatství Božího slova všemu Božímu lidu',
+  title: 'Prúd života',
+  description: 'Prinášať bohatstvo Božieho slova všetkému Božiemu ľudu',
   keywords:
-    'křesťanské knihy, křesťanská literatura, duchovní knihy, duchovní literatúra, Bůh, trojjediný Bůh, Kristus, Ježíš Kristus, Duch, Duch Svatý, Život, Studium života, Bible, svatá Bible, studium Biblie, Písmo, Svaté Písmo, křesťanství, křesťané, církev, Církev, místní církev, místní cirkve',
+    'kresťanské knihy, kresťanská literatúra, duchovné knihy, duchovná literatúra, Boh, trojjediný Boh, Kristus, Ježiš Kristus, Duch, Duch Svätý, Život, Štúdium života, Biblia, svätá Biblia, štúdium Biblie, Písmo, Sväté písmo, kresťanstvo, kresťania, cirkev, Cirkev, miestna cirkev, miestne cirkvi',
 }
 
 export default Meta

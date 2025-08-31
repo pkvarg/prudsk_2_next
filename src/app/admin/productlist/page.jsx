@@ -156,7 +156,7 @@ const ProductListPage = () => {
               <thead className="bg-gray-100">
                 <tr>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    NÁZEV
+                    NÁZOV
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     Skladem ks
@@ -165,7 +165,7 @@ const ProductListPage = () => {
                     CENA
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    KATEGORIE
+                    KATEGÓRIA
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     SLEVA
@@ -198,13 +198,13 @@ const ProductListPage = () => {
                       >
                         {product.countInStock}
                       </td>
-                      <td className="py-2 px-4 border-b border-gray-200">{product.price} Kč</td>
+                      <td className="py-2 px-4 border-b border-gray-200">{parseFloat(product.price).toFixed(2)} €</td>
                       <td className="py-2 px-4 border-b border-gray-200 truncate max-w-[150px]">
                         {product.category.replace('-', ' ').replace('-', ' ').replace('-', ' ')}
                       </td>
                       <td className="py-2 px-4 border-b border-gray-200">{product.discount}%</td>
                       <td className="py-2 px-4 border-b border-gray-200">
-                        {product.discountedPrice} Kč
+                        {parseFloat(product.discountedPrice).toFixed(2)} €
                       </td>
                       <td className="py-2 px-4 border-b border-gray-200">
                         {product.excerpt &&

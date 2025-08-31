@@ -11,113 +11,140 @@ const SafetyPrivacy = () => {
       <div className="container mx-auto px-3 md:px-0">
         <div className="my-3 py-8">
           <h1 className="text-[#071e46] font-bold text-2xl md:text-3xl mb-6">
-            Bezpečnost a soukromí
+            Bezpečnosť a súkromie
           </h1>
 
           <h3 className="text-[#071e46] font-bold text-xl md:text-2xl mb-4">
-            Ochrana osobních údajů na proudzivota.cz
+            Ochrana osobných údajov na prud.sk
           </h3>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Abychom vám mohli poskytnout všechny služby, potřebujeme o vás znát základní informace.
-            Některé z nich mají povahu osobních údajů.
+            Prevádzkovateľom internetovej stránky prud.sk je: Občianske združenie Prúd (ďalej len
+            "Prevádzkovateľ"), Špieszova 5, 841 04 Bratislava, admin@prud.sk
           </p>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Správcem osobních údajů na proudzivota.cz podle čl. 4 bod 7 nařízení Evropského
-            parlamentu a Rady (EU) 2016/679 o ochraně fyzických osob v souvislosti se zpracováním
-            osobních údajů a o volném pohybu těchto údajů je Distribuce Proud – Adam Surjomartono,
-            IČO: 68368844, se sídlem Hnězdenská 586, 18100 Praha 8 (dále jen: „provozovatel").
+            IČO: 360 765 89, DIČ: 202 202 8173.
+          </p>
+
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
+            Ochrana fyzických osôb v súvislosti so spracúvaním osobných údajov patrí medzi základné
+            práva. V článku 8 ods. 1 Charty základných práv Európskej únie a v článku 16 ods. 1
+            Zmluvy o fungovaní Európskej únie sa stanovuje, že každý má právo na ochranu osobných
+            údajov, ktoré sa ho týkajú.
+          </p>
+
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
+            Aby sme Vám mohli poskytnúť všetky služby, potrebujeme o Vás vedieť základné informácie.
+          </p>
+
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
+            Niektoré z nich majú povahu osobných údajov v zmysle zákona o ochrane osobných údajov a
+            zmeny a doplnení niektorých zákonov, ktorému bolo v zbierke zákonov pridelené číslo
+            18/2018 Z.z. a ktorým sa 25.05.2018 (ďalej len "zákon"). My sa týmto zákonom pri
+            používaní Vašich údajov riadime.
+          </p>
+
+          <h4 className="text-[#071e46] font-semibold text-lg mb-3">
+            Právny základ spracúvania osobných údajov:
+          </h4>
+
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
+            a) spracúvanie osobných údajov je nevyhnutné podľa osobitného predpisu alebo
+            medzinárodnej zmluvy, ktorou je Slovenská republika viazaná. Predovšetkým podľa zákona
+            č. 222/2004 Z.z. o dani z pridanej hodnoty v znení neskorších predpisov
           </p>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
-            Zpracování osobních údajů je nezbytné pro plnění smlouvy a na základě oprávněného zájmu
-            zákazníka. Správce tedy zpracovává osobní údaje subjektů údajů za účelem vytvoření
-            možnosti uzavřít smlouvy uzavřené na dálku nebo mimo obchodní prostory na základě
-            souhlasu se zpracováním osobních údajů subjektů údajů. Před nákupem v obchodě je nutné
-            se zaregistrovat. Při registraci a nakupování je potřebné o sobě uvést následující
-            údaje:
+            b) spracúvanie osobných údajov je nevyhnutné na plnenie zmluvy a na základe oprávneného
+            záujmu zákazníka. Prevádzkovateľ teda spracúva osobné údaje dotknutých osôb, za účelom
+            vytvorenia príležitosti uzatvárať zmluvy uzavreté na diaľku alebo mimo prevádzkových
+            priestorov na základe súhlasu so spracovaním osobných údajov dotknutých osôb. Pred
+            nakupovaním v obchode je potrebné zaregistrovať sa. Pri registrácii a nakupovaní je
+            potrebné poskytnúť nasledovné informácie o Vás:
           </p>
 
           <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
             <li className="list-disc">
-              Jméno a příjmení, přesná adresa včetně země (tj. adresa, která bude uvedena na
-              faktuře).
+              meno a priezvisko, presná adresa vrátane krajiny (teda adresa, ktorá ma byť uvedená na
+              faktúre)
             </li>
             <li className="list-disc">
-              Vaše e-mailová adresa (slouží k identifikaci v systému a ke komunikaci s vámi ohledně
-              stávající objednávky nebo informací o nových produktech).
+              Vaša e-mailová adresa (slúži na Vašu identifikáciu v systéme a na komunikáciu s Vami v
+              súvislosti s existujúcou objednávkou, prípadne informáciami o nových produktoch).
             </li>
             <li className="list-disc">
-              Volitelně další adresy (pokud chcete doručovat na jinou než fakturační adresu).
+              voliteľne ďalšie adresy (ak si želáte doručiť zásielku na inú adresu ako je fakturačná)
             </li>
-            <li className="list-disc">Volitelně telefonní číslo (pro rychlejší kontakt s vámi).</li>
             <li className="list-disc">
-              Pokud nakupujete jako firma / živnostník, navíc: název firmy, DIČ a IČ DPH (kvůli
-              fakturaci a správnému zaúčtování).
+              voliteľne telefónne číslo (pre rýchlejší kontakt s Vami)
+            </li>
+            <li className="list-disc">
+              ak nakupujete ako firma / živnostník, naviac: obchodný názov, IČO a IČ DPH (pre
+              vystavenie faktúry a správne zaúčtovanie).
             </li>
           </ul>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Tyto údaje jsou uloženy v databázi na našem serveru, takže je nemusíte při každé
-            návštěvě znovu zadávat. Vaše údaje zpracováváme za účelem zpracování a doručení vaší
-            objednávky. Tyto údaje jsou rovněž nezbytné pro náš účetní a fakturační systém. Své
-            údaje a další nastavení můžete kdykoli změnit nebo aktualizovat prostřednictvím e-mailu
-            nebo po přihlášení do sekce Uživatelský účet na našich webových stránkách. Pokud si
-            přejete zrušit svou registraci, požádejte nás o to e-mailem. Váš účet bude zrušen.
+            Tieto údaje sú uchovávané v databáze na našom serveri, aby ste ich nemuseli nanovo
+            zapisovať pri každej návšteve. Vaše údaje spracovávame pre účely vybavenia a doručenia
+            vašej objednávky. Tieto údaje sú taktiež nutné pre náš účtovný a fakturačný systém. Svoje
+            údaje a ďalšie nastavenia môžete kedykoľvek zmeniť resp. aktualizovať prostredníctvom
+            e-mailu alebo po prihlásení na našej stránke v sekcii Používateľský účet. V prípade, že
+            si želáte zrušiť svoju registráciu, požiadajte nás o to e-mailom. Vaše konto bude zrušené.
           </p>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            V našem obchodě nezadáváte žádné informace, které přímo souvisejí s prací s penězi.
-            Platba za objednané zboží proběhne až po doručení zboží na vámi uvedenou adresu na
-            dobírku prostřednictvím Slovenské pošty, případně kurýrní nebo doručovací společnosti.
-            Alternativním způsobem platby je platba předem převodem na náš účet nebo v hotovosti při
-            osobním odběru objednaného zboží.
+            V našom obchode nezadávate žiadne informácie, ktoré by sa priamo týkali práce s peniazmi.
+            Platba za objednaný tovar prebehne až pri doručení tovaru na vami uvedenú adresu a to
+            dobierkou prostredníctvom Slovenskej pošty, prípadne kuriérskej alebo doručovateľskej
+            spoločnosti. Alternatívnym spôsobom úhrady je platba vopred prevodom na náš účet (262 075
+            3192/1100) , prípadne v hotovosti pri osobnom prebratí objednaného tovaru.
           </p>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Během vaší návštěvy se na našem serveru ukládají dočasné informace, které jsou nezbytné
-            pro správné fungování obchodu (např. co jste vložili do nákupního košíku, kdy jste na
-            stránky přišli, odkud jste na stránky přišli).
+            Počas Vašej návštevy sú na našom serveri uchovávané dočasné informácie, ktoré sú potrebné
+            pre správne fungovanie obchodu (napr. čo ste vložili do nákupného košíka, kedy ste na
+            stránku prišli, odkiaľ ste na stránku prišli).
           </p>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Kdykoli po přihlášení na www.proudzivota.cz můžete zkontrolovat své osobní údaje a v
-            případě potřeby je změnit v části „Upravit".
+            Kedykoľvek po prihlásení sa na stránke www.prud.sk, si môžete svoje osobné údaje
+            skontrolovať a v prípade potreby zmeniť v časti "Upraviť".
           </p>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Vaše osobní údaje nezveřejňujeme, nesdílíme ani neposkytujeme žádným dalším subjektům, s
-            výjimkou organizací, s nimiž je spolupráce nezbytná pro řádné vyřízení vaší objednávky.
-            Jedná se zejména o: Českou poštu, doručovací a kurýrní služby nebo některé vydavatele a
-            dodavatele, pokud to vyžaduje povaha objednaného produktu. Tyto údaje jsou však vždy
-            poskytovány jednorázově za účelem vyřízení vaší konkrétní objednávky. Databázi osobních
-            údajů chráníme před poškozením, zničením, ztrátou a zneužitím.
+            Vaše osobné údaje nezverejňujeme, nesprístupňujeme, neposkytujeme žiadnym iným subjektom,
+            s výnimkou organizácií, s ktorými je spolupráca nevyhnutná pre správne vybavenie Vašej
+            objednávky. Sú to najmä: Slovenská pošta, doručovateľské a kuriérske služby, či niektorí
+            vydavatelia a dodávatelia, keď si to vyžaduje povaha objednaného produktu. Tieto údaje sú
+            však vždy poskytnuté jednorazovo pre vybavenie Vašej konkrétnej objednávky. Databázu
+            osobných údajov chránime pred ich poškodením, zničením, stratou a zneužitím.
           </p>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Registrací nám udělujete souhlas se zpracováním vašich osobních údajů uvedených v
-            objednávce za účelem vyřízení objednávky a dodání zboží, a to po dobu nezbytnou k plnění
-            smlouvy. Máte právo požadovat informace o zpracování svých osobních údajů a seznam
-            osobních údajů, které jsou předmětem zpracování, právo na opravu nesprávných, neúplných
-            nebo neaktuálních osobních údajů, právo na likvidaci osobních údajů, pokud skončil účel
-            jejich zpracování, právo vznést na základě bezplatné písemné žádosti námitku proti
-            použití vašich osobních údajů pro marketingové účely.
+            Registráciou nám udeľujete súhlas so spracovaním svojich osobných údajov uvedených v
+            objednávke za účelom vybavenia objednávky a dodania tovaru, a to na dobu nevyhnutnú na
+            plnenie zmluvy. V súlade s § 28 zákona máte právo požadovať informáciu o spracovaní
+            vašich osobných údajov, a zoznam osobných údajov, ktoré sú predmetom spracovania, právo
+            na opravu nesprávnych, neúplných alebo neaktuálnych osobných údajov, právo na likvidáciu
+            osobných údajov, ak účel ich spracovania skončil, právo na základe bezplatnej písomnej
+            žiadosti namietať voči využívaniu svojich osobných údajov na marketingové účely.
           </p>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Vaše osobní údaje jsme oprávněni zpracovávat po skončení původního účelu zpracování
-            pouze v rozsahu nezbytném pro statistické, účetní a výzkumné účely a pro poskytování
-            souhrnných statistických informací o zákaznících, návštěvnosti, obratu a dalších údajů
-            třetím stranám nebo veřejnosti, avšak v anonymizované podobě tak, aby na základě těchto
-            informací nebylo možné naše zákazníky jakkoli identifikovat.
+            Vaše osobné údaje sme oprávnení spracovávať aj po skončení pôvodného účelu spracovania
+            len v nevyhnutnom rozsahu pre účely štatistiky, účtovníctva a prieskumu, a poskytnúť
+            tretím stranám alebo verejnosti súhrnné štatistické informácie o zákazníkoch,
+            návštevnosti, obrate a ďalšie údaje, avšak v anonymizovanej podobe tak, že na ich základe
+            nebude možné nijakým spôsobom identifikovať našich zákazníkov.
           </p>
 
           <p className="text-[#191817] text-[17px] leading-relaxed mb-4 font-medium">
-            Vaše soukromí je pro nás důležité!
+            Na zachovaní vášho súkromia nám záleží!
           </p>
 
-          <p className="text-[#191817] text-[17px] leading-relaxed">Distribuce Proud</p>
+          <p className="text-[#191817] text-[17px] leading-relaxed">Tím Prúd.sk</p>
         </div>
       </div>
     </div>

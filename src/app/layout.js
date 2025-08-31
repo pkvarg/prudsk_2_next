@@ -16,15 +16,14 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata = {
-  title: 'Proud2Next',
+  title: 'prud.sk',
   description: 'Next js 15',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="cs">
-      <head>
-      </head>
+      <head></head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider>
           <Header />

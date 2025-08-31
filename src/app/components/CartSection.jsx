@@ -30,11 +30,11 @@ export default function CartSection({ product }) {
           <div className="text-right">
             {product.discount ? (
               <div>
-                <span className="text-green-600 font-semibold">Sleva {product.discount}%</span>
-                <h5 className="text-xl font-bold">{product.discountedPrice} Kč</h5>
+                <span className="text-green-600 font-semibold">Zľava {product.discount}%</span>
+                <h5 className="text-xl font-bold">{parseFloat(product.discountedPrice).toFixed(2)} €</h5>
               </div>
             ) : (
-              <p className="text-xl font-bold">{product.price} Kč</p>
+              <p className="text-xl font-bold">{parseFloat(product.price).toFixed(2)} €</p>
             )}
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function CartSection({ product }) {
         <div className="flex justify-between items-center">
           <p>Status:</p>
           <p className={product.countInStock > 0 ? 'text-green-600' : 'text-red-600'}>
-            {product.countInStock > 0 ? 'Na skladě' : 'Vyprodané'}
+            {product.countInStock > 0 ? 'Na sklade' : 'Vypredané'}
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export default function CartSection({ product }) {
           className="w-full py-2 px-4 bg-red-600 text-white rounded hover:bg-red-700"
           disabled={product.countInStock === 0}
         >
-          Přidat do košíku
+          Pridať do košíka
         </button>
 
         <button

@@ -18,8 +18,8 @@ const UserListPage = () => {
   const { users, loading, error, userInfo, successDelete, listUsers, deleteUser, getUserDetails } =
     useUserStore()
 
-  const apiUrl = 'https://hono-api.pictusweb.com/api/stats/proud2next'
-  //const apiUrl = 'http://localhost:3013/api/stats/proud2next'
+  const apiUrl = 'https://hono-api.pictusweb.com/api/stats/prudsk2next'
+  //const apiUrl = 'http://localhost:3013/api/stats/prudsk2next'
 
   useEffect(() => {
     const getStats = async () => {
@@ -58,7 +58,7 @@ const UserListPage = () => {
   }, [userInfo, router, successDelete, listUsers, getUserDetails, userInfo?.id])
 
   const deleteHandler = (id) => {
-    if (window.confirm('Jste si jisti?')) {
+    if (window.confirm('Ste si istí?')) {
       deleteUser(id)
     }
   }
@@ -66,7 +66,7 @@ const UserListPage = () => {
   return (
     <main className="mx-8">
       <div className="flex items-center justify-between mb-4 mx-8 mt-12">
-        <h1 className="text-2xl font-bold">Uživatelé</h1>
+        <h1 className="text-2xl font-bold">Používatelia</h1>
 
         <div className="mb-4 text-[15px]">
           <p className="font-bold mt-2">Počet návštev: {countVisitors}</p>
@@ -74,13 +74,13 @@ const UserListPage = () => {
           <p className="font-bold mt-2">Emaily : {countEmails}</p>
           <p className="font-bold mt-2">Posledná návšteva: {lastVisit}</p>
           <Link
-            href="https://umami-p00gs00gwcwo00s4k4c4kgg8.pictusweb.com/share/0r0Ekex2i52O16ao/test-proudzivota-new.pictusweb.com"
+            href="https://umami-p00gs00gwcwo00s4k4c4kgg8.pictusweb.com/share/0r0Ekex2i52O16ao/test-prudsk2.betterhost.sk"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-red-700 hover:bg-red-800 !text-white rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"
           >
             <BarChart size={16} />
-            Zobrazit analytiku
+            Zobraziť analytiku
           </Link>
         </div>
       </div>
@@ -95,19 +95,19 @@ const UserListPage = () => {
             <thead className="bg-gray-100">
               <tr>
                 <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  JMÉNO
+                  MENO
                 </th>
                 <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                   E-MAIL
                 </th>
                 <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  REGISTRACE
+                  REGISTRÁCIA
                 </th>
                 <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                   ADMIN
                 </th>
                 <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  AKCE
+                  AKCIE
                 </th>
               </tr>
             </thead>

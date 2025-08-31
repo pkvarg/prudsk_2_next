@@ -35,7 +35,7 @@ export default function ProductList() {
     fetchProducts()
   }, [])
 
-  if (loading) return <div>Načítání produktů...</div>
+  if (loading) return <div>Načítání produktov...</div>
   if (error) return <div>Chyba: {error}</div>
 
   return (

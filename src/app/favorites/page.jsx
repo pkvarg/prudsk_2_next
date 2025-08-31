@@ -55,7 +55,7 @@ const Favorites = () => {
         className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
         onClick={() => router.back()}
       >
-        ← Zpět
+        ← Späť
       </button>
 
       <div className="my-3">

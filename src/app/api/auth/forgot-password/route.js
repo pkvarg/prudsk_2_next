@@ -51,12 +51,12 @@ export async function POST(request) {
       name: user.name,
       email,
       resetUrl,
-      origin: 'PROUD2NEXT',
+      origin: 'prudsk2next',
     }
 
     // HONO MAILER
-    const apiUrl = 'https://hono-api.pictusweb.com/api/proud2next/forgot-password'
-    //const apiUrl = 'http://localhost:3013/api/proud2next/forgot-password'
+    const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/forgot-password'
+    //const apiUrl = 'http://localhost:3013/api/prudsk2next/forgot-password'
 
     // Make the API request
     const response = await fetch(apiUrl, {

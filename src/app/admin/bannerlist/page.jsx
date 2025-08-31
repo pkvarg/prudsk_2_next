@@ -116,7 +116,7 @@ const BannerList = () => {
           ) : (
             <Icon.Plus size={20} />
           )}
-          Přidat Banner
+          Pridať Banner
         </button>
       </div>
 
@@ -133,7 +133,7 @@ const BannerList = () => {
           ) : (
             <Icon.Plus size={18} />
           )}
-          <span className="text-sm">Přidat obrázek</span>
+          <span className="text-sm">Pridať obrázok</span>
         </button>
       </div>
 
@@ -157,13 +157,13 @@ const BannerList = () => {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Název
+                      Názov
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Soubor
+                      Súbor
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Kategorie
+                      Kategória
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Akce
@@ -234,11 +234,11 @@ const BannerList = () => {
 
                 <div className="space-y-2 text-sm text-gray-600">
                   <div>
-                    <span className="font-medium text-gray-700">Soubor:</span>
+                    <span className="font-medium text-gray-700">Súbor:</span>
                     <span className="ml-2">{banner.image}</span>
                   </div>
                   <div>
-                    <span className="font-medium text-gray-700">Kategorie:</span>
+                    <span className="font-medium text-gray-700">Kategória:</span>
                     <span className="ml-2">{banner.category}</span>
                   </div>
                 </div>
@@ -257,7 +257,7 @@ const BannerList = () => {
                 onClick={createBannerHandler}
               >
                 <Icon.Plus size={20} className="inline mr-2" />
-                Přidat Banner
+                Pridať Banner
               </button>
             </div>
           )}

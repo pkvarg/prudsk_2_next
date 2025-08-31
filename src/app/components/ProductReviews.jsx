@@ -18,7 +18,7 @@ export default function ProductReviews({ product, initialReviews }) {
 
   useLayoutEffect(() => {
     if (successProductReview) {
-      setMessage('Recenze odeslaná adminovi')
+      setMessage('Recenzia odoslaná adminovi')
       setComment('')
       setSuccessProductReview(false)
     }
@@ -54,8 +54,8 @@ export default function ProductReviews({ product, initialReviews }) {
   return (
     <div className="flex flex-wrap lg:mx-4 mt-8">
       <div className="w-full md:w-1/2 lg:px-4">
-        <h2 className="text-2xl font-bold mb-4">Recenze</h2>
-        {reviews.length === 0 && <Message>Žádné recenze</Message>}
+        <h2 className="text-2xl font-bold mb-4">Recenzie</h2>
+        {reviews.length === 0 && <Message>Žiadne recenzie</Message>}
         <div className="space-y-4">
           {reviews.map(
             (review) =>
@@ -68,7 +68,7 @@ export default function ProductReviews({ product, initialReviews }) {
           )}
 
           <div className="bg-white p-4 rounded-lg shadow">
-            <h2 className="text-2xl font-bold mb-4">Napište recenzi</h2>
+            <h2 className="text-2xl font-bold mb-4">Napíšte recenziu</h2>
             {errorProductReview && <Message variant="danger">{errorProductReview}</Message>}
             {message && <Message variant="success">{message}</Message>}
 
@@ -80,19 +80,19 @@ export default function ProductReviews({ product, initialReviews }) {
                     rows="3"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder="Napište vaši recenzi..."
+                    placeholder="Napíšte vašu recenziu..."
                   />
                 </div>
                 <button
                   type="submit"
                   className="px-4 py-2 bg-[#2bb2e6] text-white rounded hover:bg-blue-700"
                 >
-                  Odeslat
+                  Odoslať
                 </button>
               </form>
             ) : (
               <Message>
-                Prosím <Link href="/login">Přihlašte se</Link> pro napsání recenze
+                Prosím <Link href="/login">Prihláste sa</Link> pre napísanie recenzie
               </Message>
             )}
           </div>

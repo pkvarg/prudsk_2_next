@@ -59,18 +59,18 @@ const Product = ({ product }) => {
               <div className="space-y-1">
                 {/* Discount label */}
                 <div className="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm font-medium">
-                  Sleva {product.discount}%
+                  Zľava {product.discount}%
                 </div>
                 {/* Discounted price */}
                 <div className="flex items-center space-x-2">
                   <span className="text-xl font-bold text-[#071e46]">
-                    {product.discountedPrice} Kč
+                    {parseFloat(product.discountedPrice).toFixed(2)} €
                   </span>
-                  <span className="text-sm text-gray-500 line-through">{product.price} Kč</span>
+                  <span className="text-sm text-gray-500 line-through">{parseFloat(product.price).toFixed(2)} €</span>
                 </div>
               </div>
             ) : (
-              <div className="font-normal text-[#9E7B54]">{product.price} Kč</div>
+              <div className="font-normal text-[#9E7B54]">{parseFloat(product.price).toFixed(2)} €</div>
             )}
           </div>
         </div>

@@ -9,9 +9,9 @@ const DownloadPage = () => {
   const [error, setError] = useState(null)
 
   // Configuration - change these values as needed
-  const PDF_FILENAME = 'tajemstvi.pdf' // Change to your PDF filename
-  const PDF_TITLE = 'Tajemství lidského života'
-  const PDF_DESCRIPTION = `Leták ${PDF_TITLE} ke stažení.`
+  const PDF_FILENAME = 'tajomstvo.pdf' // Change to your PDF filename
+  const PDF_TITLE = 'Tajomstvo ľudského života'
+  const PDF_DESCRIPTION = `Leták ${PDF_TITLE} na stiahnutie.`
 
   useEffect(() => {
     // Set the PDF URL from public folder
@@ -24,12 +24,12 @@ const DownloadPage = () => {
         if (response.ok) {
           setLoading(false)
         } else {
-          setError('PDF soubor nebyl nalezen')
+          setError('PDF súbor nebol nájdený')
           setLoading(false)
         }
       })
       .catch(() => {
-        setError('Chyba při načítání PDF souboru')
+        setError('Chyba pri načítavaní PDF súboru')
         setLoading(false)
       })
   }, [])
@@ -48,7 +48,7 @@ const DownloadPage = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Načítání PDF...</p>
+          <p className="text-gray-600">Načítava PDF...</p>
         </div>
       </div>
     )
@@ -59,10 +59,10 @@ const DownloadPage = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center max-w-md mx-auto p-6">
           <AlertCircle className="h-16 w-16 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Chyba při načítání</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">Chyba pri načítaní</h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <p className="text-sm text-gray-500">
-            Ujistěte se, že soubor "{PDF_FILENAME}" je umístěn ve složce public.
+            Uistite sa, že súbor "{PDF_FILENAME}" je umiestnený v priečinku public.
           </p>
         </div>
       </div>
@@ -83,13 +83,13 @@ const DownloadPage = () => {
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="p-1 lg:p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-gray-900">Náhled</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Náhľad</h2>
               <button
                 onClick={handleDownload}
                 className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
               >
                 <Download className="h-5 w-5 mr-2" />
-                Stáhnout PDF
+                Stiahnuť PDF
               </button>
             </div>
 
@@ -100,12 +100,12 @@ const DownloadPage = () => {
                   src={`${pdfUrl}#page=1&toolbar=0&navpanes=0&scrollbar=0`}
                   className="w-full h-full border-0 rounded"
                   title="PDF Preview"
-                  onError={() => setError('Chyba při zobrazování PDF náhledu')}
+                  onError={() => setError('Chyba pri zobrazovaní PDF náhľadu')}
                 >
                   <p className="text-center text-gray-500 mt-8">
-                    Váš prohlížeč nepodporuje zobrazení PDF souborů.{' '}
+                    Váš prehliadač nepodporuje zobrazenie PDF súborov.{' '}
                     <button onClick={handleDownload} className="text-blue-600 hover:underline">
-                      Klikněte zde pro stažení
+                      Kliknite sem pre stiahnutie
                     </button>
                   </p>
                 </iframe>
@@ -119,10 +119,10 @@ const DownloadPage = () => {
                   <Download className="h-5 w-5 text-blue-600 mt-0.5" />
                 </div>
                 <div className="ml-3">
-                  <h3 className="text-sm font-medium text-blue-900">Ke stažení</h3>
+                  <h3 className="text-sm font-medium text-blue-900">Na stiahnutie</h3>
                   <p className="text-sm text-blue-700 mt-1">
-                    Klikněte na tlačítko "Stáhnout PDF" pro uložení dokumentu do vašeho zařízení.
-                    Soubor bude stažen ve formátu PDF.
+                    Kliknite na tlačidlo "Stiahnuť PDF" pre uloženie dokumentu do vášho zariadenia.
+                    Súbor bude stiahnutý vo formáte PDF.
                   </p>
                 </div>
               </div>
@@ -133,7 +133,7 @@ const DownloadPage = () => {
         {/* Additional Info */}
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">
-            Máte problémy se stažením?{' '}
+            Máte problémy so stiahnutím?{' '}
             <Link href="/contact" className="text-blue-600 hover:underline">
               Kontaktujte nás
             </Link>

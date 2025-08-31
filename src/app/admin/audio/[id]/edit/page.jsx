@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import useAudioStore from '@/store/audioStore'
@@ -24,46 +24,46 @@ const AudioEditPage = () => {
   const { loading, error, audio } = audioDetails
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = audioUpdate
 
-  // Categories and subcategories data
-  const categories = ['Slova života', 'Studium života']
+  // Categories and subcategories data - matching database exactly
+  const categories = ['Slová života', 'Štúdium života']
 
   const subcategoriesSlova = [
-    'Bůh v listu Římanům',
-    'Boží evangelium',
-    'Člověk a dva stromy',
-    'Evangelium království',
-    'Fakt, víra a prožitek',
-    'Hlavní Kristovy kroky',
-    'Charakter Pánova pracovníka',
-    'Kristovo vzkříšení',
-    'Kristus jako slitovnice',
-    'Křesťanský život',
-    'Milostivé léto',
-    'Naplnění Starého zákona',
-    'Nevystižitelné Kristovo bohatství',
-    'O člověku',
+    'Boh v liste Rimanom',
+    'Božie evanjelium',
+    'Charakter Pánovho pracovníka',
+    'Človek a dva stromy',
+    'Evanjelium kráľovstva',
+    'Fakt viera a skúsenosť',
+    'Hlavné Kristove kroky',
+    'Kresťanský život',
+    'Kristovo vzkriesenie',
+    'Kristus ako zľutovnica',
+    'Naplnenie starého zákona',
+    'Nevystihnuteľné Kristovo bohatstvo',
+    'O človeku',
     'O Duchu',
-    'O Kristu',
-    'Poselství evangelia',
-    'Prožívání Krista',
-    'Rozdílení života',
-    'Řada pro nové věřící',
-    'Spasení',
-    'Struktura Božího evangelia',
-    'Svědomí',
+    'O Kristovi',
+    'Porátať sa s hriechmi',
+    'Porátať sa so svetom',
+    'Posolstvo evanjelia',
+    'Prežívanie Krista',
+    'Rada pre nových veriacich',
+    'Rok milosti',
+    'Skúsenosti veriacich s Kristovým vzkriesením',
+    'Skúsenosť života',
+    'Spasenie',
+    'Svedomie',
+    'Štruktúra Božieho evanjelia',
     'Trojnásobné semeno',
-    'Učení apoštolů',
-    'Věčný Boží plán',
-    'Vypořádání se s hříchy',
-    'Vypořádání se se světem',
-    'Vzepřít se Satanovi',
-    'Základní prvky křesťanského života',
-    'Zjevení života',
-    'Zkušenosti věřících s Kristovým vzkříšením',
-    'Zkušenost života',
+    'Učenie apoštolov',
+    'Udeľovanie života',
+    'Večný Boží plán',
+    'Vzoprieť sa satanovi',
+    'Zjavenie života',
+    'Základné prvky kresťanského života',
   ]
 
-  const subcategoriesStudium = ['Studium života']
+  const subcategoriesStudium = ['Štúdium života']
 
   // Load audio details only when audioId changes
   useEffect(() => {
@@ -124,7 +124,7 @@ const AudioEditPage = () => {
   }
 
   // Dropdown component
-  const Dropdown = ({ title, options, value, onChange, show, onToggle }) => (
+  const Dropdown = ({ title, options, onChange, show, onToggle }) => (
     <div className="relative mb-4">
       <button
         type="button"
@@ -167,7 +167,7 @@ const AudioEditPage = () => {
         href="/admin/audiolist"
         className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
       >
-        ← Zpět
+        ← Späť
       </Link>
 
       <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
@@ -185,12 +185,12 @@ const AudioEditPage = () => {
             {/* Audio Title */}
             <div>
               <label htmlFor="audio-title" className="block text-sm font-medium text-gray-700 mb-2">
-                Název (napr. Bůh v listu Římanům I)
+                Názov (napríklad Boh v liste Rimanom I)
               </label>
               <input
                 type="text"
                 id="audio-title"
-                placeholder="Název"
+                placeholder="Názov"
                 value={audioTitle}
                 onChange={(e) => setAudioTitle(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
@@ -200,7 +200,7 @@ const AudioEditPage = () => {
             {/* Audio File */}
             <div>
               <label htmlFor="audio-file" className="block text-sm font-medium text-gray-700 mb-2">
-                Linka z Google drive (bez uvozovek)
+                Linka z Google drive (bez úvožoviek)
               </label>
               <div className="mb-3">
                 <Image
@@ -224,9 +224,9 @@ const AudioEditPage = () => {
 
             {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Kategorie</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Kategória</label>
               <Dropdown
-                title="Kategorie"
+                title="Kategória"
                 options={categories}
                 value={category}
                 onChange={setCategory}
@@ -235,7 +235,7 @@ const AudioEditPage = () => {
               />
               <input
                 type="text"
-                placeholder="Kategorie"
+                placeholder="Kategória"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
@@ -245,11 +245,11 @@ const AudioEditPage = () => {
             {/* Subcategory */}
             {category && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Podkategorie</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Podkategória</label>
                 <Dropdown
-                  title="Podkategorie"
+                  title="Podkategória"
                   options={
-                    category === 'Studium života' ? subcategoriesStudium : subcategoriesSlova
+                    category === 'Štúdium života' ? subcategoriesStudium : subcategoriesSlova
                   }
                   value={subcategory}
                   onChange={setSubcategory}
@@ -258,7 +258,7 @@ const AudioEditPage = () => {
                 />
                 <input
                   type="text"
-                  placeholder="Podkategorie"
+                  placeholder="Podkategória"
                   value={subcategory}
                   onChange={(e) => setSubcategory(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
@@ -275,10 +275,10 @@ const AudioEditPage = () => {
               {loadingUpdate ? (
                 <>
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Ukládání...
+                  Ukládanie...
                 </>
               ) : (
-                'Uložit'
+                'Uložiť'
               )}
             </button>
           </form>

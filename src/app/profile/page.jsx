@@ -65,7 +65,7 @@ const ProfilePage = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
-      setMessage('Hesla nesouhlasí')
+      setMessage('Heslá nesúhlasia')
     } else {
       updateUserProfile({
         id: user.id,
@@ -74,7 +74,7 @@ const ProfilePage = () => {
         password,
         isSubscribed,
       })
-      setMessageSuccess('Data úspěšně změněna')
+      setMessageSuccess('Dáta úspešne zmenené')
     }
   }
 
@@ -83,7 +83,7 @@ const ProfilePage = () => {
       <div className="flex flex-wrap -mx-4">
         {/* Profile Form Section */}
         <div className="w-full md:w-1/4 px-4">
-          <h2 className="text-lg font-medium mb-4">Můj profil</h2>
+          <h2 className="text-lg font-medium mb-4">Môj profil</h2>
 
           {message && <Message variant="danger">{message}</Message>}
           {messageSuccess && <Message variant="success">{messageSuccess}</Message>}
@@ -94,12 +94,12 @@ const ProfilePage = () => {
           <form onSubmit={submitHandler}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-gray-700 text-sm mb-2">
-                Jméno a příjmení
+                Meno a priezvisko
               </label>
               <input
                 type="text"
                 id="name"
-                placeholder="Jméno a příjmení"
+                placeholder="Meno a priezvisko"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -123,7 +123,7 @@ const ProfilePage = () => {
 
             {!isGoogleUser && (
               <>
-                <h3 className="text-left">Zmenit moje heslo</h3>
+                <h3 className="text-left">Zmeniť moje heslo</h3>
                 <div className="mb-4">
                   <label htmlFor="password" className="block text-gray-700 text-sm mb-2">
                     Heslo
@@ -162,7 +162,7 @@ const ProfilePage = () => {
                 className="form-checkbox h-4 w-4 text-blue-600"
               />
               <label htmlFor="newsletter" className="text-gray-700 text-sm">
-                Přejete si odebírat informace o novinkách a akcích (cca 2x ročně)?
+                Prajete si odoberať informácie o novinkách a akciách (cca 2x ročne)?
               </label>
             </div>
 
@@ -170,7 +170,7 @@ const ProfilePage = () => {
               type="submit"
               className="mt-5 bg-[#2cb3e6] hover:bg-white hover:text-[#2cb3e6] hover:border hover:border-[#2cb3e6] text-white px-6 py-2 rounded-lg transition-colors duration-200"
             >
-              Upravit profil
+              Upraviť profil
             </button>
           </form>
         </div>
@@ -190,9 +190,9 @@ const ProfilePage = () => {
                   <tr className="bg-gray-50">
                     <th className="border border-gray-200 px-4 py-2 text-left">ČÍSLO</th>
                     <th className="border border-gray-200 px-4 py-2 text-left">DATUM</th>
-                    <th className="border border-gray-200 px-4 py-2 text-left">CELKEM Kč</th>
-                    <th className="border border-gray-200 px-4 py-2 text-left">ZAPLACENO</th>
-                    <th className="border border-gray-200 px-4 py-2 text-left">ODESLÁNO</th>
+                    <th className="border border-gray-200 px-4 py-2 text-left">CELKOM €</th>
+                    <th className="border border-gray-200 px-4 py-2 text-left">ZAPLATENÉ</th>
+                    <th className="border border-gray-200 px-4 py-2 text-left">ODOSLANÉ</th>
                     <th className="border border-gray-200 px-4 py-2"></th>
                   </tr>
                 </thead>

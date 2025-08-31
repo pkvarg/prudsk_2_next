@@ -55,8 +55,8 @@ const BannerEditPage = () => {
     formData.append('file', file)
     setUploading(true)
     try {
-      //const apiUrl = 'http://localhost:3013/api/upload/proud2next'
-      const apiUrl = 'https://hono-api.pictusweb.com/api/upload/proud2next'
+      //const apiUrl = 'http://localhost:3013/api/upload/prudsk2next'
+      const apiUrl = 'https://hono-api.pictusweb.com/api/upload/prudsk2next'
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
@@ -115,7 +115,7 @@ const BannerEditPage = () => {
         href="/admin/bannerlist"
         className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
       >
-        ← Zpět
+        ← Späť
       </Link>
 
       <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
@@ -143,12 +143,12 @@ const BannerEditPage = () => {
                 htmlFor="banner-title"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                Název
+                Názov
               </label>
               <input
                 type="text"
                 id="banner-title"
-                placeholder="Název"
+                placeholder="Názov"
                 value={bannerTitle}
                 onChange={(e) => setBannerTitle(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
@@ -216,10 +216,10 @@ const BannerEditPage = () => {
               {loadingUpdate ? (
                 <>
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Ukládání...
+                  Ukládanie...
                 </>
               ) : (
-                'Uložit'
+                'Uložiť'
               )}
             </button>
           </form>
@@ -241,7 +241,7 @@ const BannerEditPage = () => {
             </li>
             <li className="flex items-start">
               <span className="text-red-500 mr-2">•</span>
-              Maximální velikost souboru: 5MB
+              Maximálna veľkosť súboru: 5MB
             </li>
             <li className="flex items-start">
               <span className="text-red-500 mr-2">•</span>

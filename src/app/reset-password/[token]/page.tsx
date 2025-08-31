@@ -57,10 +57,10 @@ const ResetPasswordPage = () => {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.message || 'Došlo k chybě při obnově hesla')
+        throw new Error(data.message || 'Došlo k chybe pri obnovení hesla')
       }
 
-      setSuccessMessage('Heslo bylo úspěšně změněno. Za chvíli budete přesměrováni na přihlášení.')
+      setSuccessMessage('Heslo bolo úspešne zmenené. Za chvíľu budete presmerovaní na prihlásenie.')
 
       // Redirect to login after 3 seconds
       setTimeout(() => {
@@ -128,7 +128,7 @@ const ResetPasswordPage = () => {
             href="/login"
             className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
           >
-            Zpět na přihlášení
+            Späť na prihlásenie
           </Link>
         </div>
       </FormContainer>

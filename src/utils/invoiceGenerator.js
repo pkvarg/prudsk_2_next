@@ -64,7 +64,7 @@ const header = (doc, invoice, projectRoot) => {
       ? invoice.header.company_logo.startsWith('/')
         ? path.join(projectRoot, 'public', invoice.header.company_logo.substring(1))
         : invoice.header.company_logo
-      : path.join(projectRoot, 'public', 'assets', 'wwwproudbanner.png')
+      : path.join(projectRoot, 'public', 'assets', 'prudbanner.png')
 
   try {
     if (fs.existsSync(logoPath)) {
@@ -100,7 +100,7 @@ const customerInformation = (doc, invoice) => {
   doc
     .fillColor('#444444')
     .fontSize(15)
-    .text('Faktura - Daňový doklad:', 50, 160)
+    .text('Faktúra - Daňový doklad:', 50, 160)
     .fontSize(15)
     .text(invoice.orderNumber, 235, 160)
 
@@ -111,22 +111,22 @@ const customerInformation = (doc, invoice) => {
   doc
     .fontSize(13)
     .font('Cardo')
-    .text('Datum vystavení:', 50, customerInformationTop)
+    .text('Dátum vystavenia:', 50, customerInformationTop)
     .text(invoice.date.billing_date, 175, customerInformationTop)
-    .text('Datum splatnosti:', 50, customerInformationTop + 15)
+    .text('Dátum splatnosti:', 50, customerInformationTop + 15)
     .text(invoice.date.due_date, 175, customerInformationTop + 15)
-    .text('Způsob platby:', 50, customerInformationTop + 30)
+    .text('Spôsob platby:', 50, customerInformationTop + 30)
     .text(invoice.paymentMethod, 175, customerInformationTop + 30)
 
-  if (invoice.paymentMethod === 'Bankovním převodem') {
+  if (invoice.paymentMethod === 'Bankovým prevodom') {
     doc
-      .text('Variabilní symbol:', 50, customerInformationTop + 45)
+      .text('Variabilný symbol:', 50, customerInformationTop + 45)
       .text(invoice.orderNumber.replace('W', ''), 175, customerInformationTop + 45)
   }
 
   doc
     .font('Cardo-Bold')
-    .text('Doručovací údaje', 320, customerInformationTop)
+    .text('Doručovacie údaje', 320, customerInformationTop)
     .font('Cardo')
     .text(invoice.shipping.name, 320, customerInformationTop + 15)
     .text(invoice.shipping.address + ', ' + invoice.shipping.city, 320, customerInformationTop + 30)
@@ -144,7 +144,7 @@ const customerInformation = (doc, invoice) => {
     doc
       .font('Cardo-Bold')
       .fontSize(12)
-      .text('Fakturační údaje', 50, customerInformationTop + 65)
+      .text('Fakturačné údaje', 50, customerInformationTop + 65)
       .font('Cardo')
       .text(invoice.shipping.name, 50, customerInformationTop + 77.5)
       .text(
@@ -167,7 +167,7 @@ const customerInformation = (doc, invoice) => {
     doc
       .font('Cardo-Bold')
       .fontSize(13)
-      .text('Fakturační údaje', 50, customerInformationTop + 65)
+      .text('Fakturačné údaje', 50, customerInformationTop + 65)
       .font('Cardo')
       .fontSize(12)
       .text(invoice.billing.name, 50, customerInformationTop + 77.5)
@@ -193,10 +193,10 @@ const customerInformation = (doc, invoice) => {
 const invoiceTable = (doc, invoice) => {
   let i
   const invoiceTableTop = 330
-  const currencySymbol = invoice.currency_symbol || 'Kč'
+  const currencySymbol = invoice.currency_symbol || '€'
 
   doc.font('Cardo-Bold')
-  tableRow(doc, invoiceTableTop, 'Produkty', '', 'Cena/ks', 'Počet', 'Celkem')
+  tableRow(doc, invoiceTableTop, 'Produkty', '', 'Cena/ks', 'Počet', 'Celkom')
   generateHr(doc, invoiceTableTop + 15)
   doc.font('Cardo')
 
@@ -210,7 +210,7 @@ const invoiceTable = (doc, invoice) => {
     // Handle discounts
     let discount = ''
     if (invoice.discounts && invoice.discounts[i] && invoice.discounts[i].discount > 0) {
-      discount = `sleva ${invoice.discounts[i].discount}%`
+      discount = `zľava ${invoice.discounts[i].discount}%`
     }
 
     const position = invoiceTableTop + (i + 1) * 15
@@ -245,7 +245,7 @@ const invoiceTable = (doc, invoice) => {
 
   const paidToDatePosition = shippingPosition + 10
   doc.font('Cardo-Bold')
-  totalTable(doc, paidToDatePosition, 'Celkem', formatCurrency(totalPrice, currencySymbol))
+  totalTable(doc, paidToDatePosition, 'Celkom', formatCurrency(totalPrice, currencySymbol))
 }
 
 const footer = (doc, invoice) => {

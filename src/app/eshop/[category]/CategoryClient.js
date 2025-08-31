@@ -11,7 +11,7 @@ const CategoryClient = ({ initialProducts, category }) => {
   // Format category name for display (moved to client component)
   const formatCategoryName = (cat) => {
     if (!cat) return 'Eshop'
-    if (cat === 'abecední-seznam-kníh') return 'Abecední seznam knih'
+    if (cat === 'abecední-seznam-kníh') return 'Abecedný zoznam kníh'
     const formatted = cat.replace(/-/g, ' ')
     return formatted.charAt(0).toUpperCase() + formatted.slice(1).toLowerCase()
   }
@@ -60,12 +60,12 @@ const CategoryClient = ({ initialProducts, category }) => {
           {searchTerm && (
             <div className="mb-4">
               <p className="text-[#9b7d57]">
-                Nalezeno {filteredProducts.length}{' '}
+                Nájdených {filteredProducts.length}{' '}
                 {filteredProducts.length === 1
                   ? 'produkt'
                   : filteredProducts.length < 5
                   ? 'produkty'
-                  : 'produktů'}{' '}
+                  : 'produktov'}{' '}
                 pro &quot;{searchTerm}&quot;
               </p>
             </div>
@@ -128,14 +128,14 @@ const CategoryClient = ({ initialProducts, category }) => {
               </svg>
             </div>
             <h3 className="text-lg font-medium text-[#071e46] mb-2">
-              {searchTerm || category ? 'Žádné produkty nenalezeny' : 'Žádné produkty k dispozici'}
+              {searchTerm || category ? 'Žiadne produkty nenájdené' : 'Žiadne produkty k dispozícii'}
             </h3>
             <p className="text-[#9b7d57] mb-4">
               {searchTerm
-                ? `Pro hledaný výraz "${searchTerm}" nebyly nalezeny žádné produkty.`
+                ? `Pre hľadaný výraz "${searchTerm}" neboli nájdené žiadne produkty.`
                 : category
-                ? `V kategorii "${formatCategoryName(category)}" nejsou momentálně žádné produkty.`
-                : 'Momentálně nejsou k dispozici žádné produkty.'}
+                ? `V kategórii "${formatCategoryName(category)}" nie sú momentálne žiadne produkty.`
+                : 'Momentálne nie sú k dispozícii žiadne produkty.'}
             </p>
             {(searchTerm || category !== 'abecední-seznam-kníh') && (
               <div className="space-x-2">
@@ -144,14 +144,14 @@ const CategoryClient = ({ initialProducts, category }) => {
                     onClick={() => setSearchTerm('')}
                     className="px-4 py-2 bg-[#071e46] text-white rounded hover:bg-[#9b7d57] transition-colors duration-200"
                   >
-                    Zrušit vyhledávání
+                    Zrušiť vyhľadávanie
                   </button>
                 )}
                 <Link
                   href="/eshop/abecední-seznam-kníh"
                   className="inline-block px-4 py-2 bg-[#edeae4] text-[#071e46] rounded hover:bg-[#9b7d57] hover:text-white transition-colors duration-200"
                 >
-                  Zobrazit všechny produkty
+                  Zobraziť všetky produkty
                 </Link>
               </div>
             )}
