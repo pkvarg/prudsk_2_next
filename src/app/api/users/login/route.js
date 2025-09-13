@@ -17,7 +17,7 @@ export async function POST(request) {
     })
 
     if (!user) {
-      return NextResponse.json({ message: 'Uživatel neexistuje.' }, { status: 401 })
+      return NextResponse.json({ message: 'Používateľ neexistuje.' }, { status: 401 })
     }
 
     // Check if user has completed registration
@@ -25,7 +25,7 @@ export async function POST(request) {
       return NextResponse.json(
         {
           message:
-            'Nedokončená registrace. Zkontrolujte svůj registrační email a potvrďte svou registraci kliknutím na poslaný link.',
+            'Nedokončená registrácia. Skontrolujte svoj registračný email a potvrďte svoju registráciu kliknutím na poslaný odkaz.',
         },
         { status: 401 },
       )

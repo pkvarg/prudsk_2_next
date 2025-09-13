@@ -237,7 +237,7 @@ const Header = () => {
           <div className="flex justify-between items-center">
             <div>
               <Link href="/" className="no-underline">
-                <img src="/images/prudbanner.png" className="h-16" alt="prud-zivota" />
+                <img src="/images/prud-zivota-logo.png" className="h-16" alt="prud-zivota" />
               </Link>
               <h3 className="text-[#A07C54] italic text-lg mt-2">
                 Prinášať bohatstvo Božieho slova celému Božiemu ľudu
@@ -929,7 +929,7 @@ const Header = () => {
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center">
               <Link href="/" className="no-underline">
-                <img src="/images/prudbanner.png" className="h-16" alt="prud-zivota" />
+                <img src="/images/prud-zivota-logo.png" className="h-16" alt="prud-zivota" />
               </Link>
               <h3 className="text-[#A07C54] text-center italic !text-[15px] mt-2">
                 Prinášať bohatstvo Božieho slova celému Božiemu ľudu

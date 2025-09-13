@@ -64,7 +64,7 @@ const header = (doc, invoice, projectRoot) => {
       ? invoice.header.company_logo.startsWith('/')
         ? path.join(projectRoot, 'public', invoice.header.company_logo.substring(1))
         : invoice.header.company_logo
-      : path.join(projectRoot, 'public', 'assets', 'prudbanner.png')
+      : path.join(projectRoot, 'public', 'assets', 'prud-zivota-logo.png')
 
   try {
     if (fs.existsSync(logoPath)) {

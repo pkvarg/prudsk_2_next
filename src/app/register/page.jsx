@@ -105,7 +105,7 @@ function RegisterForm() {
           <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 rounded-md flex items-center">
             <CheckCircleFill className="mr-2 flex-shrink-0" />
             <p className="text-sm">
-              Registrácia bola úspešná! O chvíľu budete presmerovaní na prihlásenie.
+              Registrácia bola úspešná! O chvíľu budete presmerovaný na prihlásenie.
             </p>
           </div>
         )}

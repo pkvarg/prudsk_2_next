@@ -17,7 +17,7 @@ export async function POST(request) {
     if (!user) {
       // Don't reveal that user doesn't exist for security reasons
       return NextResponse.json({
-        message: 'Email s instrukcemi pro obnovu hesla byl odeslán, pokud účet existuje.',
+        message: 'Email s pokynmi na obnovenie hesla bol odoslaný, pokiaľ účet existuje.',
       })
     }
 
@@ -84,12 +84,12 @@ export async function POST(request) {
     const data = await response.json()
 
     return NextResponse.json({
-      message: 'Email s instrukcemi pro obnovu hesla byl odeslán, pokud účet existuje.',
+      message: 'Email s pokynmi na obnovenie hesla bol odoslaný, pokiaľ účet existuje.',
     })
   } catch (error) {
     console.error('Forgot password error:', error)
     return NextResponse.json(
-      { message: 'Došlo k chybě při odesílání emailu pro obnovení hesla.' },
+      { message: 'Došlo k chybe pri odosielaní emailu na obnovenie hesla.' },
       { status: 500 },
     )
   }

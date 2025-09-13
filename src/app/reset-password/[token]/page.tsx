@@ -19,12 +19,12 @@ const ResetPasswordPage = () => {
 
   const validatePassword = () => {
     if (password.length < 6) {
-      setError('Heslo musí obsahovat alespoň 6 znaků')
+      setError('Heslo musí obsahovať aspoň 6 znakov')
       return false
     }
 
     if (password !== confirmPassword) {
-      setError('Hesla se neshodují')
+      setError('Heslá sa nezhodujú')
       return false
     }
 
@@ -60,7 +60,7 @@ const ResetPasswordPage = () => {
         throw new Error(data.message || 'Došlo k chybe pri obnovení hesla')
       }
 
-      setSuccessMessage('Heslo bolo úspešne zmenené. Za chvíľu budete presmerovaní na prihlásenie.')
+      setSuccessMessage('Heslo bolo úspešne zmenené. Za chvíľu budete presmerovaný na prihlásenie.')
 
       // Redirect to login after 3 seconds
       setTimeout(() => {
@@ -76,7 +76,7 @@ const ResetPasswordPage = () => {
   return (
     <section className="mt-8">
       <FormContainer>
-        <h1 className="text-2xl font-bold mb-6">Obnovení hesla</h1>
+        <h1 className="text-2xl font-bold mb-6">Obnovenie hesla</h1>
 
         {error && <Message variant="danger">{error}</Message>}
         {successMessage && <Message variant="success">{successMessage}</Message>}
@@ -90,7 +90,7 @@ const ResetPasswordPage = () => {
             <input
               type="password"
               id="password"
-              placeholder="Zadejte nové heslo"
+              placeholder="Zadajte nové heslo"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -101,12 +101,12 @@ const ResetPasswordPage = () => {
 
           <div className="mb-4">
             <label htmlFor="confirmPassword" className="block text-gray-700 mb-2">
-              Potvrzení hesla
+              Potvrdenie hesla
             </label>
             <input
               type="password"
               id="confirmPassword"
-              placeholder="Zadejte heslo znovu"
+              placeholder="Zadajte heslo znova"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -119,7 +119,7 @@ const ResetPasswordPage = () => {
             className="w-full my-5 bg-[#2bb2e6] hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors duration-200"
             disabled={loading}
           >
-            Změnit heslo
+            Zmeniť heslo
           </button>
         </form>
 

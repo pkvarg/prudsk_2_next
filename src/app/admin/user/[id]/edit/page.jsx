@@ -72,7 +72,7 @@ const UserEditPage = () => {
         Späť
       </Link>
       <FormContainer>
-        <h1 className="text-2xl font-bold mb-4">Upravit uživatele</h1>
+        <h1 className="text-2xl font-bold mb-4">Upraviť používateľa</h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
@@ -131,7 +131,7 @@ const UserEditPage = () => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <label htmlFor="isassistant" className="ml-2 block text-sm text-gray-700">
-                Asistent? (zaškrtnutím sa přístup omezí na Audio, Video a Bannery)
+                Asistent? (zaškrtnutím sa prístup obmedzie na Audio, Video a Bannery)
               </label>
             </div>
 
@@ -144,7 +144,7 @@ const UserEditPage = () => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <label htmlFor="isregistered" className="ml-2 block text-sm text-gray-700">
-                Dokončená registrace?
+                Dokončená registrácia?
               </label>
             </div>
 
@@ -157,7 +157,7 @@ const UserEditPage = () => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <label htmlFor="isSubscribed" className="ml-2 block text-sm text-gray-700">
-                Odběratel novinek?
+                Odoberateľ noviniek?
               </label>
             </div>
 
@@ -165,7 +165,7 @@ const UserEditPage = () => {
               type="submit"
               className="mt-5 bg-[#2bb2e6] hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
-              Upravit
+              Upraviť
             </button>
           </form>
         )}

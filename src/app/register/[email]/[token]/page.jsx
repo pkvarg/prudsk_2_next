@@ -24,7 +24,7 @@ const CompleteRegistration = () => {
         console.log('res', res)
 
         if (res.data === 'ok') {
-          setMessage('Registrace byla úspěšně dokončena! Můžete se přihlásit.')
+          setMessage('Registrácia bola úspešne dokončená! Môžete sa prihlásiť.')
           setTimeout(goToLogin, 3000)
         } else {
           setError(res.data)

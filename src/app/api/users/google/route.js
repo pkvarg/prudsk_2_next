@@ -50,7 +50,7 @@ export async function POST(request) {
       }
 
       const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/register'
-      // const apiUrl = 'http://localhost:3013/api/prudsk2next/register'
+      //const apiUrl = 'http://localhost:3013/api/prudsk2next/register'
 
       try {
         // Make the API request
