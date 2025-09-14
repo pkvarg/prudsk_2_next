@@ -29,9 +29,9 @@ export const getOrderNumber = async () => {
         data: { isCancelledOrderNumberUsed: true },
       })
 
-      // Return the order number without 'W' suffix for reuse
+      // Return the order number keeping 'W' suffix for reuse
       const orderNumber = cancelledOrder.orderNumber.toString()
-      return orderNumber.endsWith('W') ? orderNumber.slice(0, -1) : orderNumber
+      return orderNumber
     }
 
     // Find the highest order number for this year

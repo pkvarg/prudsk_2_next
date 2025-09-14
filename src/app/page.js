@@ -53,7 +53,7 @@ async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
     const response = await fetch(
-      `${baseUrl}/api/products?keyword=${searchKeyword}&page=${page}&pageSize=${pageSize}`,
+      `${baseUrl}/api/products?keyword=${searchKeyword}&pageNumber=${page}&pageSize=${pageSize}`,
       {
         cache: 'force-cache', // Changed from 'no-store' to enable static generation
         next: { revalidate: 1800 }, // Revalidate every 30 minutes

@@ -15,7 +15,7 @@ const Reviews = () => {
   }, [])
 
   const deleteHandler = async (product, comment) => {
-    if (window.confirm('Odstránit recenzi?')) {
+    if (window.confirm('Odstrániť recenziu?')) {
       await deleteProductReview(product, comment)
     }
     getAllReviews()
@@ -23,7 +23,7 @@ const Reviews = () => {
 
   const acknowledgeHandler = async (productId, comment) => {
     acknowledgeProductReview(productId, comment)
-    alert('Recenze schválená')
+    alert('Recenzia schválená')
     getAllReviews()
     clearCacheHandler()
   }
@@ -64,14 +64,14 @@ const Reviews = () => {
               className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-800 transition-colors duration-200 text-sm font-medium"
               onClick={() => acknowledgeHandler(review.productId, review.comment)}
             >
-              Schválit recenzi
+              Schváliť recenziu
             </button>
 
             <button
               className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors duration-200 text-sm font-medium"
               onClick={() => deleteHandler(review.productId, review.comment)}
             >
-              Smazat
+              Zmazať
             </button>
           </div>
         </div>
@@ -79,7 +79,7 @@ const Reviews = () => {
 
       {reviews.length === 0 && (
         <div className="text-center py-8 text-gray-600">
-          <p>Žádné recenze k zobrazení</p>
+          <p>Žiadne recenzie na zobrazenie</p>
         </div>
       )}
     </div>

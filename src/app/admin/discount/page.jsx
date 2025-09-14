@@ -48,9 +48,9 @@ const CreateDiscount = () => {
       console.log('discount', discount)
 
       if (discount > 0) {
-        setMessageSuccess(`Akce vytvorená`)
+        setMessageSuccess(`Akcia vytvorená`)
       } else if (discount === 0) {
-        setMessageSuccess(`Akce zrušená`)
+        setMessageSuccess(`Akcia zrušená`)
       }
       clearCacheHandler()
     } catch (error) {
@@ -69,7 +69,7 @@ const CreateDiscount = () => {
       </Link>
 
       <FormContainer>
-        <h1 className="text-2xl font-bold text-[#071e46] mb-6">Nová akce na všechny produkty</h1>
+        <h1 className="text-2xl font-bold text-[#071e46] mb-6">Nová akcia na všetky produkty</h1>
         <div className="flex items-center justify-center h-16">{loadingDiscount && <Loader />}</div>
 
         {messageSuccess && <Message variant="success">{messageSuccess}</Message>}
@@ -80,12 +80,12 @@ const CreateDiscount = () => {
               htmlFor="discount-value"
               className="block text-sm font-medium text-[#071e46] mb-2"
             >
-              Výška akce bez %. Akci možno zrušit zadáním 0.
+              Výška akcie bez %. Akciu možno zrušiť zadaním 0.
             </label>
             <input
               id="discount-value"
               type="text"
-              placeholder="sleva"
+              placeholder="zľava"
               value={discount}
               onChange={(e) => setDiscount(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9b7d57] focus:border-[#9b7d57]"
@@ -96,7 +96,7 @@ const CreateDiscount = () => {
             className="w-full bg-[#2bb2e6] text-white py-2 px-4 rounded-md transition-colors mt-5 font-medium cursor-pointer"
             type="submit"
           >
-            Vytvořit
+            Vytvoriť
           </button>
         </form>
       </FormContainer>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Search } from 'react-bootstrap-icons'
 import useProductStore from '@/store/productStore'
@@ -8,7 +8,14 @@ import useProductStore from '@/store/productStore'
 const SearchBox = () => {
   const [keyword, setKeyword] = useState('')
   const router = useRouter()
-  const { setSearchKeyword, clearSearch, listProducts } = useProductStore()
+  const { setSearchKeyword, clearSearch, listProducts, searchKeyword } = useProductStore()
+
+  // Clear input field when search is cleared from elsewhere
+  useEffect(() => {
+    if (!searchKeyword) {
+      setKeyword('')
+    }
+  }, [searchKeyword])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -16,25 +23,11 @@ const SearchBox = () => {
 
     if (trimmedKeyword) {
       setSearchKeyword(trimmedKeyword)
-      listProducts(trimmedKeyword, 1, 8)
-      
-      // Scroll to products section after search
-      setTimeout(() => {
-        const productsSection = document.querySelector('h1')
-        if (productsSection) {
-          productsSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-          })
-        }
-      }, 300)
+      // Navigate with search parameter to update URL
+      router.push(`/?keyword=${encodeURIComponent(trimmedKeyword)}`)
     } else {
       clearSearch()
-      listProducts('', 1, 8)
-    }
-
-    // Only navigate if not already on home page
-    if (window.location.pathname !== '/') {
+      // Navigate back to home page without search parameter
       router.push('/')
     }
   }

@@ -72,9 +72,9 @@ export async function POST(request) {
               countInStock: updatedCountInStockToDb,
             }
 
-            const apiUrl = 'http://localhost:3013/api/prudsk2next/low-storage-count'
+            //const apiUrl = 'http://localhost:3013/api/prudsk2next/low-storage-count'
 
-            //const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/low-storage-count'
+            const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/low-storage-count'
 
             const response = await fetch(apiUrl, {
               method: 'POST',

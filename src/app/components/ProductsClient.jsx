@@ -24,7 +24,7 @@ export default function ProductsClient({
   // Create a ref for the products section
   const productsRef = useRef(null)
 
-  const { products, loading, error, pages, listProducts, searchKeyword } = useProductStore()
+  const { products, loading, error, pages, listProducts, searchKeyword, clearSearch } = useProductStore()
 
   // Initialize store with server data
   useEffect(() => {
@@ -44,10 +44,15 @@ export default function ProductsClient({
   }, [keyword])
 
   useEffect(() => {
-    // Only fetch if search params changed or if we're not on page 1
-    // But don't override search results from SearchBox component
-    if (keyword && (searchKeyword !== keyword || currentPage !== 1)) {
+    // Load products when:
+    // 1. There's a keyword in URL (search request)
+    // 2. No keyword but we're not on page 1 (pagination)
+    // 3. Keyword changed and we need to load search results
+    if (keyword && (searchKeyword !== keyword || currentPage === 1)) {
       listProducts(keyword, currentPage, pageSize)
+    } else if (!keyword && currentPage !== 1) {
+      // Load products for pagination when no search term
+      listProducts('', currentPage, pageSize)
     }
   }, [listProducts, keyword, currentPage, searchKeyword])
 
@@ -76,7 +81,11 @@ export default function ProductsClient({
       {keyword && (
         <Link
           href="/"
-          className="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded my-3 transition-colors"
+          onClick={() => {
+            // Clear search when going back
+            clearSearch()
+          }}
+          className="inline-flex items-center px-4 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200 my-3"
         >
           Späť
         </Link>
