@@ -34,7 +34,7 @@ const Subscribers = () => {
   const copyEmails = () => {
     const emails = subscribers.map((user) => user.email).join(', ')
     navigator.clipboard.writeText(emails)
-    alert('E-mailové adresy byly zkopírovány do schránky')
+    alert('E-mailové adresy boli skopírované do schránky')
   }
 
   return (
@@ -42,7 +42,7 @@ const Subscribers = () => {
       <div className="container mx-auto max-w-4xl">
         {/* Header Section */}
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-[#071e46] text-2xl md:text-3xl font-bold">Odběratelé novinek</h1>
+          <h1 className="text-[#071e46] text-2xl md:text-3xl font-bold">Odberatelia noviniek</h1>
         </div>
 
         {/* Subscribers Section */}
@@ -63,13 +63,13 @@ const Subscribers = () => {
             onClick={copyEmails}
             className="mt-6 bg-[#071e46] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#0a2554] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#071e46] focus:ring-offset-2 cursor-pointer"
           >
-            Kopírovat mailové adresy odběratelů
+            Kopírovať mailové adresy odberateľov
           </button>
         </div>
 
         {/* Unsubscribers Section */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-[#071e46] text-xl md:text-2xl font-bold mb-6">Odběr zrušili</h2>
+          <h2 className="text-[#071e46] text-xl md:text-2xl font-bold mb-6">Odber zrušili</h2>
 
           <div className="space-y-4">
             {unsubscribers?.map((user) => (

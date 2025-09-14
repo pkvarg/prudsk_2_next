@@ -2,6 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { formatPrice } from '@/utils/priceFormatter'
 
 const Product = ({ product }) => {
   return (
@@ -64,13 +65,13 @@ const Product = ({ product }) => {
                 {/* Discounted price */}
                 <div className="flex items-center space-x-2">
                   <span className="text-xl font-bold text-[#071e46]">
-                    {parseFloat(product.discountedPrice).toFixed(2)} €
+                    {formatPrice(product.discountedPrice)}
                   </span>
-                  <span className="text-sm text-gray-500 line-through">{parseFloat(product.price).toFixed(2)} €</span>
+                  <span className="text-sm text-gray-500 line-through">{formatPrice(product.price)}</span>
                 </div>
               </div>
             ) : (
-              <div className="font-normal text-[#9E7B54]">{parseFloat(product.price).toFixed(2)} €</div>
+              <div className="font-normal text-[#9E7B54]">{formatPrice(product.price)}</div>
             )}
           </div>
         </div>

@@ -58,7 +58,7 @@ const Contact = () => {
   async function sendMail() {
     const origin = 'prudsk2next'
     const subject = 'Kontakt Eshop'
-    const locale = 'cz'
+    const locale = 'sk'
 
     try {
       const sendData = {
@@ -168,7 +168,7 @@ const Contact = () => {
                 placeholder="Meno a priezvisko"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full mt-1 text-[17px] border border-gray-300 rounded-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="w-full mt-1 text-[17px] border border-gray-300 rounded-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-blue-300 pl-3"
               />
             </div>
 
@@ -183,7 +183,7 @@ const Contact = () => {
                 placeholder="E-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full mt-1 text-[17px] border border-gray-300 rounded-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="w-full mt-1 text-[17px] border border-gray-300 rounded-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-blue-300 pl-3"
               />
             </div>
 
@@ -198,7 +198,7 @@ const Contact = () => {
                 placeholder="Telefon"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full mt-1 text-[17px] border border-gray-300 rounded-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="w-full mt-1 text-[17px] border border-gray-300 rounded-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-blue-300 pl-3"
               />
             </div>
 
@@ -213,7 +213,7 @@ const Contact = () => {
                 placeholder="Vaša správa"
                 value={mailMessage}
                 onChange={(e) => setMailMessage(e.target.value)}
-                className="w-full mt-1 text-[17px] border border-gray-300 rounded-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="w-full mt-1 text-[17px] border border-gray-300 rounded-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-blue-300 pl-3"
               />
             </div>
 
@@ -242,9 +242,9 @@ const Contact = () => {
                 name="gdprCheck"
                 id="gdprCheck"
                 required
-                className="transform translate-y-[30%]"
+                className="transform lg:translate-y-[20%]"
               />
-              <p className="text-[20px]">Súhlasím so spracovaním osobných údajov</p>
+              <p className="text-[15px] lg:text-[20px]">Súhlasím so spracovaním osobných údajov</p>
             </div>
 
             <button

@@ -6,6 +6,7 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import useCartStore from '@/store/cartStore'
 import { Trash } from 'lucide-react'
+import { formatPrice } from '@/utils/priceFormatter'
 
 // Loading component
 const PageLoader = () => (
@@ -113,7 +114,7 @@ const Cart = () => {
                       </Link>
                     </div>
 
-                    <div className="col-span-1 text-[#191817]">{parseFloat(item.price).toFixed(2)} €</div>
+                    <div className="col-span-1 text-[#191817]">{formatPrice(item.price)}</div>
 
                     <div className="col-span-1">
                       <select
@@ -161,7 +162,7 @@ const Cart = () => {
                     </div>
 
                     <div className="flex justify-between items-center">
-                      <span className="text-[#191817]">{parseFloat(item.price).toFixed(2)} €</span>
+                      <span className="text-[#191817]">{formatPrice(item.price)}</span>
 
                       <div className="flex items-center gap-2">
                         <select
@@ -200,21 +201,46 @@ const Cart = () => {
             <div className="space-y-3 mb-4">
               <div className="flex justify-between text-[#191817]">
                 <span>Produkty:</span>
-                <span>{parseFloat(totalPrice).toFixed(2)} €</span>
+                <span>{formatPrice(totalPrice)}</span>
               </div>
 
               <div className="flex justify-between text-[#191817]">
                 <span>Poštovné a balné:</span>
-                <span>{parseFloat(shippingPrice).toFixed(2)} €</span>
+                <div className="text-right">
+                  {shippingPrice === 0 ? (
+                    <div>
+                      <span className="line-through text-gray-400">{formatPrice(4.5)}</span>
+                      <span className="ml-2 text-green-600 font-medium">Zadarmo</span>
+                    </div>
+                  ) : (
+                    <span>{formatPrice(shippingPrice)}</span>
+                  )}
+                </div>
               </div>
 
               <hr className="border-gray-200" />
 
               <div className="flex justify-between font-semibold text-[#071e46] text-lg">
                 <span>Celkom:</span>
-                <span>{parseFloat(finalTotal).toFixed(2)} €</span>
+                <span>{formatPrice(finalTotal)}</span>
               </div>
             </div>
+
+            {/* Free shipping notification */}
+            {cartItems.length > 0 && totalPrice >= 75 && (
+              <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                {totalPrice >= 100 ? (
+                  <p className="text-green-600 text-sm font-medium text-center">
+                    🎉 Máte poštovné zadarmo!
+                  </p>
+                ) : (
+                  <p className="text-blue-600 text-sm text-center">
+                    💡 Pridajte ešte tovar za {formatPrice(100 - totalPrice)} a získate poštovné
+                    zadarmo!
+                  </p>
+                )}
+              </div>
+            )}
 
             {cartItems.length > 0 && (
               <button
@@ -223,7 +249,7 @@ const Cart = () => {
                 disabled={cartItems.length === 0}
                 className="w-full mb-3 px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 font-medium"
               >
-                Prejsť k pokladni
+                Prejsť do pokladne
               </button>
             )}
 

@@ -69,7 +69,7 @@ const BannerList = () => {
   }, [successDelete, resetBannerDelete, listBanner, pageNumber])
 
   const deleteHandler = (id) => {
-    if (window.confirm('Jste si jisti?')) {
+    if (window.confirm('Si si istý?')) {
       deleteBanner(id)
       clearCacheHandler()
     }

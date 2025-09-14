@@ -30,6 +30,7 @@ const ShippingScreen = () => {
   const [billingPostalCode, setBillingPostalCode] = useState('')
   const [billingCountry, setBillingCountry] = useState('')
   const [billingICO, setBillingICO] = useState('')
+  const [billingDIC, setBillingDIC] = useState('')
   const [note, setNote] = useState('')
   const [phone, setPhone] = useState('')
   const [checked, setChecked] = useState(false)
@@ -48,6 +49,7 @@ const ShippingScreen = () => {
       setBillingPostalCode(shippingAddress.billingPostalCode || '')
       setBillingCountry(shippingAddress.billingCountry || '')
       setBillingICO(shippingAddress.billingICO || '')
+      setBillingDIC(shippingAddress.billingDIC || '')
       setNote(shippingAddress.note || '')
       setPhone(shippingAddress.phone || '')
     }
@@ -96,6 +98,7 @@ const ShippingScreen = () => {
       billingPostalCode,
       billingCountry,
       billingICO,
+      billingDIC,
       note,
       phone,
     })
@@ -391,26 +394,44 @@ const ShippingScreen = () => {
                     onChange={handleChangeICO}
                     className="mt-1 text-[#2bb2e6] focus:ring-[#2bb2e6] rounded"
                   />
-                  <h3 className="!text-[15px] font-semibold text-[#071e46]">IČO</h3>
+                  <h3 className="!text-[15px] font-semibold text-[#071e46]">IČO / DIČ</h3>
                 </label>
               </div>
 
               {checkedICO && (
-                <div>
-                  <label
-                    htmlFor="billingICO"
-                    className="block text-sm font-medium text-[#191817] mb-2"
-                  >
-                    IČO
-                  </label>
-                  <input
-                    type="text"
-                    id="billingICO"
-                    placeholder="IČO"
-                    value={billingICO}
-                    onChange={(e) => setBillingICO(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2bb2e6] focus:border-transparent"
-                  />
+                <div className="space-y-6">
+                  <div>
+                    <label
+                      htmlFor="billingICO"
+                      className="block text-sm font-medium text-[#191817] mb-2"
+                    >
+                      IČO
+                    </label>
+                    <input
+                      type="text"
+                      id="billingICO"
+                      placeholder="IČO"
+                      value={billingICO}
+                      onChange={(e) => setBillingICO(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2bb2e6] focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="billingDIC"
+                      className="block text-sm font-medium text-[#191817] mb-2"
+                    >
+                      DIČ
+                    </label>
+                    <input
+                      type="text"
+                      id="billingDIC"
+                      placeholder="DIČ"
+                      value={billingDIC}
+                      onChange={(e) => setBillingDIC(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2bb2e6] focus:border-transparent"
+                    />
+                  </div>
                 </div>
               )}
             </div>

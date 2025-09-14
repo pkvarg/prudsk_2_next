@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import useCartStore from '@/store/cartStore'
 import Message from '@/app/components/Message'
+import { formatPrice } from '@/utils/priceFormatter'
 
 export default function CartSection({ product }) {
   const [qty, setQty] = useState(1)
@@ -31,10 +32,10 @@ export default function CartSection({ product }) {
             {product.discount ? (
               <div>
                 <span className="text-green-600 font-semibold">Zľava {product.discount}%</span>
-                <h5 className="text-xl font-bold">{parseFloat(product.discountedPrice).toFixed(2)} €</h5>
+                <h5 className="text-xl font-bold">{formatPrice(product.discountedPrice)}</h5>
               </div>
             ) : (
-              <p className="text-xl font-bold">{parseFloat(product.price).toFixed(2)} €</p>
+              <p className="text-xl font-bold">{formatPrice(product.price)}</p>
             )}
           </div>
         </div>
@@ -75,7 +76,7 @@ export default function CartSection({ product }) {
           onClick={continueShopping}
           className="w-full py-2 px-4 bg-[#2bb2e6] text-white rounded hover:bg-blue-700"
         >
-          Pokračovat v nákupu
+          Pokračovat v nákupe
         </button>
       </div>
 

@@ -94,8 +94,9 @@ const useCartStore = create(
       },
 
       getShippingPrice: () => {
-        // Add your shipping logic here
-        return 75 // Fixed shipping price as shown in your cart component
+        const cartTotal = get().getCartTotal()
+        // Free shipping for orders over 100 €, otherwise 4.50 €
+        return cartTotal > 100 ? 0 : 4.5
       },
 
       getFinalTotal: () => {

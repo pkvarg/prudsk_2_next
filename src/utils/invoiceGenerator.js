@@ -177,7 +177,8 @@ const customerInformation = (doc, invoice) => {
         invoice.billing.postalCode +
           ', ' +
           invoice.billing.country +
-          (invoice.billing.ICO ? ', IČO: ' + invoice.billing.ICO : ''),
+          (invoice.billing.ICO ? ', IČO: ' + invoice.billing.ICO : '') +
+          (invoice.billing.DIC ? ', DIČ: ' + invoice.billing.DIC : ''),
         50,
         customerInformationTop + 102.5,
       )

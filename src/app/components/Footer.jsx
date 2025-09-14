@@ -24,11 +24,11 @@ const Footer = () => {
   }
 
   const loadUmamiScript = () => {
-    if (!document.querySelector('[data-website-id="dda1780c-8861-4ad7-a963-0f347d73e476"]')) {
+    if (!document.querySelector('[data-website-id="6b118a72-1e0a-4fe7-915c-dbbd7b549af2"]')) {
       const script = document.createElement('script')
       script.defer = true
       script.src = 'https://umami-p00gs00gwcwo00s4k4c4kgg8.pictusweb.com/script.js'
-      script.setAttribute('data-website-id', 'dda1780c-8861-4ad7-a963-0f347d73e476')
+      script.setAttribute('data-website-id', '6b118a72-1e0a-4fe7-915c-dbbd7b549af2')
       document.head.appendChild(script)
     }
   }
@@ -65,7 +65,7 @@ const Footer = () => {
           incrementCount()
         }}
       >
-        Táto stránka používa len analytické a pre fungovanie webu nezbytné cookies pre anonymnú
+        Táto stránka používa len analytické a pre fungovanie webu nevyhnutné cookies pre anonymnú
         analytiku návštevnosti. Nepoužívame funkčné ani marketingové súbory cookies.{' '}
         <a
           style={{

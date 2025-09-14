@@ -10,6 +10,7 @@ import Paginate from '@/app/components/Paginate'
 import useProductStore from '@/store/productStore'
 import useUserStore from '@/store/userStore'
 import { ClearCacheButton } from '@/app/components/ClearCacheButton'
+import { formatPrice } from '@/utils/priceFormatter'
 
 const ProductListPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -38,7 +39,7 @@ const ProductListPage = () => {
   const { userInfo } = useUserStore()
 
   const deleteHandler = (id) => {
-    if (window.confirm('Jste si jisti?')) {
+    if (window.confirm('Si si istý?')) {
       deleteProduct(id)
     }
   }
@@ -95,19 +96,19 @@ const ProductListPage = () => {
             className="py-2 px-4 bg-[#2bb2e6] hover:bg-blue-700 text-white rounded"
             onClick={linkToReviews}
           >
-            Recenze
+            Recenzie
           </button>
           <button
             className="py-2 px-4 bg-red-600 hover:bg-red-700 text-white rounded flex items-center gap-1"
             onClick={linkToCreateDiscount}
           >
-            <Plus size={20} /> Vytvořit akci
+            <Plus size={20} /> Vytvoriť akciu
           </button>
           <button
             className="py-2 px-4 bg-[#2bb2e6] hover:bg-blue-700 text-white rounded flex items-center gap-1"
             onClick={createProductHandler}
           >
-            <Plus size={20} /> Vytvořit produkt
+            <Plus size={20} /> Vytvoriť produkt
           </button>
           <ClearCacheButton />
         </div>
@@ -123,19 +124,19 @@ const ProductListPage = () => {
             className="py-2 px-4 bg-[#2bb2e6] hover:bg-blue-700 text-white rounded"
             onClick={linkToReviews}
           >
-            Recenze
+            Recenzie
           </button>
           <button
             className="py-2 px-4 bg-red-600 hover:bg-red-700 text-white rounded flex items-center gap-1"
             onClick={linkToCreateDiscount}
           >
-            <Plus size={20} /> Vytvorit akci
+            <Plus size={20} /> Vytvoriť akciu
           </button>
           <button
             className="py-2 px-4 bg-[#2bb2e6] hover:bg-blue-700 text-white rounded flex items-center gap-1"
             onClick={createProductHandler}
           >
-            <Plus size={20} /> Vytvorit produkt
+            <Plus size={20} /> Vytvoriť produkt
           </button>
         </div>
       </div>
@@ -159,7 +160,7 @@ const ProductListPage = () => {
                     NÁZOV
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Skladem ks
+                    Na sklade ks
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     CENA
@@ -168,19 +169,19 @@ const ProductListPage = () => {
                     KATEGÓRIA
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    SLEVA
+                    ZĽAVA
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     CEL.CENA
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Úryvek
+                    Úryvok
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     Detaily
                   </th>
                   <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    AKCE
+                    AKCIE
                   </th>
                 </tr>
               </thead>
@@ -198,13 +199,15 @@ const ProductListPage = () => {
                       >
                         {product.countInStock}
                       </td>
-                      <td className="py-2 px-4 border-b border-gray-200">{parseFloat(product.price).toFixed(2)} €</td>
+                      <td className="py-2 px-4 border-b border-gray-200">
+                        {formatPrice(product.price)}
+                      </td>
                       <td className="py-2 px-4 border-b border-gray-200 truncate max-w-[150px]">
                         {product.category.replace('-', ' ').replace('-', ' ').replace('-', ' ')}
                       </td>
                       <td className="py-2 px-4 border-b border-gray-200">{product.discount}%</td>
                       <td className="py-2 px-4 border-b border-gray-200">
-                        {parseFloat(product.discountedPrice).toFixed(2)} €
+                        {formatPrice(product.discountedPrice)}
                       </td>
                       <td className="py-2 px-4 border-b border-gray-200">
                         {product.excerpt &&
@@ -246,7 +249,7 @@ const ProductListPage = () => {
                 ) : (
                   <tr>
                     <td colSpan="9" className="py-4 px-4 text-center text-gray-500">
-                      Žádné produkty nebyly nalezeny
+                      Žiadne produkty neboli nájdené
                     </td>
                   </tr>
                 )}

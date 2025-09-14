@@ -72,9 +72,9 @@ export async function POST(request) {
               countInStock: updatedCountInStockToDb,
             }
 
-            //const apiUrl = 'http://localhost:3013/api/prudsk2next/low-storage-count'
+            const apiUrl = 'http://localhost:3013/api/prudsk2next/low-storage-count'
 
-            const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/low-storage-count'
+            //const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/low-storage-count'
 
             const response = await fetch(apiUrl, {
               method: 'POST',
@@ -124,6 +124,7 @@ export async function POST(request) {
           billingPostalCode: shippingAddress.billingPostalCode,
           billingCountry: shippingAddress.billingCountry,
           billingICO: shippingAddress.billingICO || '',
+          billingDIC: shippingAddress.billingDIC || '',
         },
         paymentMethod,
         discounts: discounts || [],
@@ -195,14 +196,15 @@ export async function POST(request) {
       addressInfo.billingPostalCode +
       ', ' +
       addressInfo.billingCountry +
-      (addressInfo.billingICO ? ', IČO: ' + addressInfo.billingICO : '')
+      (addressInfo.billingICO ? ', IČO: ' + addressInfo.billingICO : '') +
+      (addressInfo.billingDIC ? ', DIČ: ' + addressInfo.billingDIC : '')
 
     const productsOnly = createdOrder.totalPrice - createdOrder.shippingPrice
     productsObject.productsOnlyPrice = productsOnly
     productsObject.note = createdOrder.shippingAddress.note
 
     // SEND HONO EMAIL
-    // const apiUrl = 'http://localhost:3013/api/prudsk2next/order-send-confirmation'
+    //const apiUrl = 'http://localhost:3013/api/prudsk2next/order-send-confirmation'
 
     const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/order-send-confirmation'
 
@@ -220,39 +222,6 @@ export async function POST(request) {
     }
 
     return NextResponse.json(createdOrder, { status: 201 })
-
-    // try {
-    //   await niceInvoice(invoiceDetails, invoicePath)
-    //   const fileTosend = invoicePath
-
-    //   if (
-    //     createdOrder.shippingAddress.country !== 'Česká republika' &&
-    //     createdOrder.paymentMethod === 'Platba bankovním převodem předem'
-    //   ) {
-    //     await new Email(productsObject, '', '').sendOrderNotCzToEmail()
-    //     await new Email(productsObject, '', fileTosend).sendOrderNotCzAdminOnlyToEmail()
-    //   } else if (
-    //     createdOrder.shippingAddress.country === 'Česká republika' &&
-    //     createdOrder.paymentMethod === 'Platba bankovním převodem předem'
-    //   ) {
-    //     await new Email(productsObject, '', fileTosend).sendOrderCzBankTransferToEmail()
-    //   } else {
-    //     await new Email(productsObject, '', fileTosend).sendOrderToEmail()
-    //   }
-
-    //   return NextResponse.json(createdOrder, { status: 201 })
-    // } catch (err) {
-    //   console.error('Error with invoice or email:', err)
-    //   // Notify about the email issue but return successful order creation
-    //   return NextResponse.json(
-    //     {
-    //       message:
-    //         'Objednávka byla vytvořena, ale potvrzovací e-mail obdržíte později. Brzy Vás budeme informovat.',
-    //       order: createdOrder,
-    //     },
-    //     { status: 201 },
-    //   )
-    // }
   } catch (error) {
     console.error('Order creation error:', error)
     return NextResponse.json({ message: error.message }, { status: 500 })

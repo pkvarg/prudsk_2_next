@@ -8,6 +8,7 @@ import useUserStore from '@/store/userStore'
 import useCartStore from '@/store/cartStore'
 import Message from '@/app/components/Message'
 import Loader from '@/app/components/Loader'
+import { formatPrice } from '@/utils/priceFormatter'
 
 const OrderPage = () => {
   const params = useParams()
@@ -136,6 +137,9 @@ const OrderPage = () => {
                     {order.shippingAddress.billingICO && (
                       <span>IČO: {order.shippingAddress.billingICO}</span>
                     )}
+                    {order.shippingAddress.billingDIC && (
+                      <span>, DIČ: {order.shippingAddress.billingDIC}</span>
+                    )}
                   </p>
                 </div>
               )}
@@ -195,7 +199,7 @@ const OrderPage = () => {
                         )}
                       </div>
                       <div className="w-5/12 text-right">
-                        {item.qty} x {parseFloat(item.price).toFixed(2)} € = {parseFloat(item.qty * item.price).toFixed(2)} €
+                        {item.qty} x {formatPrice(item.price)} = {formatPrice(item.qty * item.price)}
                       </div>
                     </div>
                   ))}
@@ -213,18 +217,18 @@ const OrderPage = () => {
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span>Produkty:</span>
-                  <span>{parseFloat(calculateItemsPrice()).toFixed(2)} €</span>
+                  <span>{formatPrice(calculateItemsPrice())}</span>
                 </div>
 
                 {!isAbroad && (
                   <>
                     <div className="flex justify-between">
                       <span>Poštovné a balné:</span>
-                      <span>{parseFloat(order.shippingPrice).toFixed(2)} €</span>
+                      <span>{formatPrice(order.shippingPrice)}</span>
                     </div>
                     <div className="flex justify-between border-t pt-4">
                       <span>Celkom:</span>
-                      <span>{parseFloat(order.totalPrice).toFixed(2)} €</span>
+                      <span>{formatPrice(order.totalPrice)}</span>
                     </div>
                   </>
                 )}

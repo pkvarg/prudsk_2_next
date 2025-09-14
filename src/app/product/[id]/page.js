@@ -6,6 +6,7 @@ import BackButton from '../../components/BackButton'
 import FavoriteButton from '../../components/FavoriteButton'
 import CartSection from '../../components/CartSection'
 import ProductReviews from '../../components/ProductReviews'
+import { formatPrice } from '@/utils/priceFormatter'
 
 // CRITICAL: Add this to enable ISR (revalidate every hour)
 export const revalidate = 3600 // 1 hour in seconds
@@ -348,7 +349,7 @@ export default async function ProductPage({ params }) {
                 </div>
 
                 <div className="bg-white p-4 rounded-lg shadow">
-                  <p>Cena: {parseFloat(product.price).toFixed(2)} €</p>
+                  <p>Cena: {formatPrice(product.price)}</p>
                 </div>
 
                 {product.description && (

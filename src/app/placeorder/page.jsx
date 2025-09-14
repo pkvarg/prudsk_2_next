@@ -9,6 +9,7 @@ import useOrderStore from '@/store/orderStore'
 import useUserStore from '@/store/userStore'
 import Message from '@/app/components/Message'
 import CheckoutSteps from '@/app/components/CheckoutSteps'
+import { formatPrice } from '@/utils/priceFormatter'
 
 const PlaceOrderScreen = () => {
   const router = useRouter()
@@ -27,7 +28,7 @@ const PlaceOrderScreen = () => {
   console.log('cart', cart)
 
   const itemsPrice = cart.reduce((acc, item) => acc + item.price * item.qty, 0)
-  const shippingPrice = 75
+  const shippingPrice = itemsPrice > 100 ? 0 : 4.5
   const totalPrice = Number(itemsPrice) + Number(shippingPrice)
 
   useEffect(() => {
@@ -136,6 +137,9 @@ const PlaceOrderScreen = () => {
                       {shippingAddress.billingPostalCode}, {shippingAddress.billingCity},{' '}
                       {shippingAddress.billingCountry}{' '}
                       {shippingAddress.billingICO && <span>IČO: {shippingAddress.billingICO}</span>}
+                      {shippingAddress.billingDIC && (
+                        <span>, DIČ: {shippingAddress.billingDIC}</span>
+                      )}
                     </p>
                   </div>
                 )}
@@ -190,7 +194,8 @@ const PlaceOrderScreen = () => {
                           )}
                         </div>
                         <div className="text-right text-gray-700">
-                          {item.qty} x {parseFloat(item.price).toFixed(2)} € = {parseFloat(item.qty * item.price).toFixed(2)} €
+                          {item.qty} x {formatPrice(item.price)} ={' '}
+                          {formatPrice(item.qty * item.price)}
                         </div>
                       </div>
                     </div>
@@ -208,22 +213,27 @@ const PlaceOrderScreen = () => {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between items-center py-2 border-b border-gray-100">
                   <span className="text-gray-700">Produkty:</span>
-                  <span className="font-medium">{parseFloat(itemsPrice).toFixed(2)} €</span>
+                  <span className="font-medium">{formatPrice(itemsPrice)}</span>
                 </div>
 
                 <div className="flex justify-between items-center py-2 border-b border-gray-100">
                   <span className="text-gray-700">Poštovné a balné:</span>
-                  {shippingAddress?.country !== 'Česká republika' ? (
+                  {shippingAddress?.country !== 'Slovenská republika' ? (
                     <span className="text-sm text-gray-600">Bude oznámené faktúrou</span>
+                  ) : shippingPrice === 0 ? (
+                    <div className="text-right">
+                      <span className="line-through text-gray-400 text-sm">{formatPrice(4.5)}</span>
+                      <span className="ml-2 text-green-600 font-medium">Zadarmo</span>
+                    </div>
                   ) : (
-                    <span className="font-medium">{parseFloat(shippingPrice).toFixed(2)} €</span>
+                    <span className="font-medium">{formatPrice(shippingPrice)}</span>
                   )}
                 </div>
 
-                {cart.shippingAddress?.country === 'Česká republika' && (
+                {shippingAddress?.country === 'Slovenská republika' && (
                   <div className="flex justify-between items-center py-2 font-bold text-lg">
                     <span className="text-[#071e46]">Celkom:</span>
-                    <span className="text-[#071e46]">{parseFloat(totalPrice).toFixed(2)} €</span>
+                    <span className="text-[#071e46]">{formatPrice(totalPrice)}</span>
                   </div>
                 )}
               </div>
