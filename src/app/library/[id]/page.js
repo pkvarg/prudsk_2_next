@@ -12,14 +12,9 @@ export async function generateStaticParams() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
     
-    // Use production URL or skip if localhost
+    // Skip static generation if no baseUrl is available
     if (!baseUrl) {
       console.log('No API URL configured - skipping static generation')
-      return []
-    }
-    
-    if (baseUrl.includes('localhost')) {
-      console.log('Localhost detected - skipping static generation during build')
       return []
     }
     
@@ -75,10 +70,6 @@ async function getProduct(id) {
     
     // Return null if no baseUrl is available (will be handled at runtime)
     if (!baseUrl) {
-      return null
-    }
-    
-    if (baseUrl.includes('localhost')) {
       return null
     }
     

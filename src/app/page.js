@@ -53,9 +53,9 @@ async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
     
-    // Skip API call if no baseUrl is available or localhost during build
-    if (!baseUrl || baseUrl.includes('localhost')) {
-      console.log('[HOMEPAGE] Skipping initial products fetch - API not available during build')
+    // Only skip if explicitly undefined (not if localhost)
+    if (!baseUrl) {
+      console.log('[HOMEPAGE] No API URL configured - skipping initial products fetch')
       return { products: [], pages: 0 }
     }
     
@@ -87,9 +87,9 @@ async function getBannerImages() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
     
-    // Skip API call if no baseUrl is available or localhost during build
-    if (!baseUrl || baseUrl.includes('localhost')) {
-      console.log('[HOMEPAGE] Skipping banner images fetch - API not available during build')
+    // Only skip if explicitly undefined (not if localhost)
+    if (!baseUrl) {
+      console.log('[HOMEPAGE] No API URL configured - skipping banner images fetch')
       return []
     }
     
@@ -120,9 +120,9 @@ async function getFeaturedProducts() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
     
-    // Skip API call if no baseUrl is available or localhost during build
-    if (!baseUrl || baseUrl.includes('localhost')) {
-      console.log('[HOMEPAGE] Skipping featured products fetch - API not available during build')
+    // Only skip if explicitly undefined (not if localhost)
+    if (!baseUrl) {
+      console.log('[HOMEPAGE] No API URL configured - skipping featured products fetch')
       return []
     }
     
