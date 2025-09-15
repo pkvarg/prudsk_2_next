@@ -59,7 +59,7 @@ const Favorites = () => {
       </button>
 
       <div className="my-3">
-        <h1 className="text-3xl font-bold text-[#071e46] mb-8">Moje oblíbené produkty</h1>
+        <h1 className="text-3xl font-bold text-[#071e46] mb-8">Moje obľúbené produkty</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {favoriteProducts.length > 0 ? (
@@ -68,7 +68,7 @@ const Favorites = () => {
                 <button
                   onClick={() => removeFromFavoritesHandler(product.id)}
                   className="absolute top-2 right-2 z-10 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors duration-200 shadow-md"
-                  aria-label="Odstranit z oblíbených"
+                  aria-label="Odstrániť z obľúbených"
                 >
                   <X size={16} />
                 </button>
@@ -77,13 +77,13 @@ const Favorites = () => {
             ))
           ) : (
             <div className="col-span-full text-center py-12">
-              <h4 className="text-xl text-[#9b7d57] mb-4">Nemáte žádné oblíbené produkty</h4>
+              <h4 className="text-xl text-[#9b7d57] mb-4">Nemáte žiadne obľúbené produkty</h4>
               {!userInfo && (
                 <Link
                   href="/login"
                   className="inline-block px-6 py-3 bg-[#2bb2e6] text-white rounded hover:bg-[#218334] transition-colors duration-200 font-medium"
                 >
-                  Přihlásit se
+                  Prihlásiť sa
                 </Link>
               )}
             </div>

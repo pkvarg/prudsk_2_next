@@ -74,7 +74,7 @@ const UserListPage = () => {
           <p className="font-bold mt-2">Emaily : {countEmails}</p>
           <p className="font-bold mt-2">Posledná návšteva: {lastVisit}</p>
           <Link
-            href="https://umami-p00gs00gwcwo00s4k4c4kgg8.pictusweb.com/share/0r0Ekex2i52O16ao/test-prudsk2.betterhost.sk"
+            href="https://umami-p00gs00gwcwo00s4k4c4kgg8.pictusweb.com/share/4qow26JwJaZkn1IN/test-prudsk.betterhost.sk"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-red-700 hover:bg-red-800 !text-white rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"

@@ -12,7 +12,7 @@ const Library = () => {
   const [currentPage, setCurrentPage] = useState(1)
 
   const keyword = params.keyword
-  const pageSize = 2 // Set to 2 products per page as requested
+  const pageSize = 5 // Set to 2 products per page as requested
 
   const { products, page, pages, listLibraryProducts, loading, error } = useProductStore()
 

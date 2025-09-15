@@ -67,11 +67,17 @@ const Header = () => {
   const closeAllDropdowns = () => {
     setActiveDropdown(null)
     setIsMenuOpen(false)
+    setIsOpen(false)
+    setIsAdminOpen(false)
+    setIsAssistantOpen(false)
   }
 
   const closeUserDropdown = () => {
     setActiveDropdown(null)
     setIsMenuOpen(false)
+    setIsOpen(false)
+    setIsAdminOpen(false)
+    setIsAssistantOpen(false)
   }
 
   return (
@@ -116,6 +122,7 @@ const Header = () => {
                     <Link
                       href="/profile"
                       className="block px-4 py-2 hover:bg-[#24b9d6]  !text-[#000000]"
+                      onClick={closeUserDropdown}
                     >
                       Môj profil
                     </Link>
@@ -151,42 +158,49 @@ const Header = () => {
                     <Link
                       href="/admin/userlist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Používatelia
                     </Link>
                     <Link
                       href="/admin/productlist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Produkty
                     </Link>
                     <Link
                       href="/admin/orderlist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Objednávky
                     </Link>
                     <Link
                       href="/admin/audiolist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Audio
                     </Link>
                     <Link
                       href="/admin/videolist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Video
                     </Link>
                     <Link
                       href="/admin/bannerlist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Bannery
                     </Link>
                     <Link
                       href="/admin/subscriberslist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Odoberatelia noviniek
                     </Link>
@@ -209,18 +223,21 @@ const Header = () => {
                     <Link
                       href="/admin/audiolist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Audio
                     </Link>
                     <Link
                       href="/admin/videolist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Video
                     </Link>
                     <Link
                       href="/admin/bannerlist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
                     >
                       Bannery
                     </Link>
@@ -594,7 +611,7 @@ const Header = () => {
                         className="block py-1 !text-white text-sm"
                         onClick={closeAllDropdowns}
                       >
-                        Knihy 2025
+                        Knihy 2024
                       </Link>
                     </div>
                   )}
