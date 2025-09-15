@@ -15,6 +15,13 @@ export const revalidate = 3600 // 1 hour in seconds
 export async function generateStaticParams() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
+    
+    // Skip static generation if no baseUrl is available (e.g., during build in deployment)
+    if (!baseUrl || baseUrl.includes('localhost')) {
+      console.log('Skipping static generation - API URL not available during build')
+      return []
+    }
+    
     const response = await fetch(`${baseUrl}/api/products/all`, {
       cache: 'force-cache',
     })
@@ -63,6 +70,12 @@ export async function generateStaticParams() {
 async function getProduct(id) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
+    
+    // Return null if no baseUrl is available (will be handled at runtime)
+    if (!baseUrl || baseUrl.includes('localhost')) {
+      return null
+    }
+    
     const response = await fetch(`${baseUrl}/api/products/${id}`, {
       cache: 'force-cache', // Changed from 'no-store' to enable static generation
       next: { revalidate: 3600 }, // Alternative way to set revalidation
@@ -90,6 +103,12 @@ async function getProduct(id) {
 async function getProductReviews(id) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
+    
+    // Return empty array if no baseUrl is available
+    if (!baseUrl || baseUrl.includes('localhost')) {
+      return []
+    }
+    
     const response = await fetch(`${baseUrl}/api/products/${id}/reviews`, {
       cache: 'force-cache', // Changed from 'no-store'
       next: { revalidate: 3600 },

@@ -10,6 +10,13 @@ export const revalidate = 14400 // 4 hours in seconds
 export async function generateStaticParams() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
+    
+    // Skip static generation if no baseUrl is available (e.g., during build in deployment)
+    if (!baseUrl || baseUrl.includes('localhost')) {
+      console.log('Skipping static generation - API URL not available during build')
+      return []
+    }
+    
     const response = await fetch(`${baseUrl}/api/products/all`, {
       cache: 'force-cache',
     })
@@ -55,6 +62,12 @@ export async function generateStaticParams() {
 async function getAllProducts() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
+    
+    // Return empty array if no baseUrl is available
+    if (!baseUrl || baseUrl.includes('localhost')) {
+      return []
+    }
+    
     const response = await fetch(`${baseUrl}/api/products/all`, {
       cache: 'force-cache',
       next: { revalidate: 14400 },
