@@ -42,11 +42,29 @@ const Footer = () => {
           color: '#8a1b1f',
           fontSize: '15px',
           textAlign: 'justify',
+          width: '100%',
+          maxWidth: '100vw',
+          padding: '16px',
+          boxSizing: 'border-box',
+          overflowX: 'hidden',
         }}
+        contentStyle={{
+          flex: '1 1 auto',
+          margin: '0',
+          paddingRight: '8px',
+          maxWidth: '100%',
+          wordWrap: 'break-word',
+        }}
+        buttonWrapperClasses="flex flex-row gap-2 mt-3 sm:mt-0"
         buttonStyle={{
           background: '#1d9f2f',
           color: '#fff',
           fontSize: '17.5px',
+          minWidth: '120px',
+          padding: '8px 16px',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
         }}
         buttonText="Súhlasím"
         expires={365}
@@ -59,6 +77,11 @@ const Footer = () => {
           background: 'red',
           color: '#fff',
           fontSize: '17.5px',
+          minWidth: '120px',
+          padding: '8px 16px',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
         }}
         declineButtonText="Nesúhlasím"
         onDecline={() => {
