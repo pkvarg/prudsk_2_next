@@ -52,6 +52,13 @@ export const dynamic = 'force-static'
 async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
+    
+    // Skip API call if no baseUrl is available or localhost during build
+    if (!baseUrl || baseUrl.includes('localhost')) {
+      console.log('[HOMEPAGE] Skipping initial products fetch - API not available during build')
+      return { products: [], pages: 0 }
+    }
+    
     const response = await fetch(
       `${baseUrl}/api/products?keyword=${searchKeyword}&pageNumber=${page}&pageSize=${pageSize}`,
       {
@@ -79,6 +86,13 @@ async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
 async function getBannerImages() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
+    
+    // Skip API call if no baseUrl is available or localhost during build
+    if (!baseUrl || baseUrl.includes('localhost')) {
+      console.log('[HOMEPAGE] Skipping banner images fetch - API not available during build')
+      return []
+    }
+    
     const response = await fetch(`${baseUrl}/api/banner`, {
       cache: 'force-cache', // Banners probably don't change often
       next: { revalidate: 3600 }, // Revalidate every hour
@@ -105,6 +119,13 @@ async function getBannerImages() {
 async function getFeaturedProducts() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
+    
+    // Skip API call if no baseUrl is available or localhost during build
+    if (!baseUrl || baseUrl.includes('localhost')) {
+      console.log('[HOMEPAGE] Skipping featured products fetch - API not available during build')
+      return []
+    }
+    
     const response = await fetch(`${baseUrl}/api/products/top`, {
       cache: 'force-cache',
       next: { revalidate: 1800 },
