@@ -81,8 +81,6 @@ const AudioList = () => {
     setSearchTerm(value)
   }
 
-  console.log('filtered audions', filteredAudios)
-
   const deleteHandler = (id) => {
     if (window.confirm('Si si istý?')) {
       deleteAudio(id)

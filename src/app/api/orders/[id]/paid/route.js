@@ -45,7 +45,6 @@ export async function PUT(request, { params }) {
     })
 
     const data = await response.json()
-    console.log('data admin order paid', data.success)
 
     if (!data.success) {
       throw new Error('Nepodarilo sa odoslať admin order paid email')

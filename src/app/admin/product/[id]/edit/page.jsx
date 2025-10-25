@@ -100,8 +100,6 @@ const ProductEditScreen = () => {
   // Update form when product data changes
   useEffect(() => {
     if (product && product.id === productId) {
-      //console.log('Setting form data from product:', product)
-
       // Handle related products - they might be objects or strings
       const getRelatedValue = (related) => {
         if (!related) return ''
@@ -144,8 +142,6 @@ const ProductEditScreen = () => {
       router.push('/admin/productlist')
     }
   }, [successUpdate, resetUpdate, router])
-
-  console.log('Total products:', products)
 
   // Filter products based on search terms
   const getFilteredProducts = (searchTerm, excludeIds = []) => {
@@ -236,7 +232,6 @@ const ProductEditScreen = () => {
       }
 
       const data = await response.json()
-      console.log('data', data)
 
       if (data.imageUrl.includes('ukazka')) {
         setFormData((prev) => ({ ...prev, excerptImage: data.imageUrl }))
@@ -281,7 +276,6 @@ const ProductEditScreen = () => {
       excerpt: excerptObject,
     }
 
-    console.log('Submitting data:', dataToSubmit)
     updateProduct(dataToSubmit)
     clearCacheHandler()
   }

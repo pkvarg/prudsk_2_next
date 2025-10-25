@@ -16,8 +16,6 @@ export async function PUT(request, { params }) {
     const body = await request.json()
     const { userId } = body
 
-    console.log('remove back', id, userId)
-
     if (!userId) {
       return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
     }

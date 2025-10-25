@@ -18,7 +18,6 @@ export async function generateStaticParams() {
     
     // Skip static generation if no baseUrl is available
     if (!baseUrl) {
-      console.log('No API URL configured - skipping static generation')
       return []
     }
     
@@ -41,15 +40,12 @@ export async function generateStaticParams() {
       return []
     }
 
-    console.log(`Found ${products.length} products for static generation`)
-
     // Return array of params for each product
     const params = products
       .map((product) => {
         // Handle both _id and id fields (MongoDB compatibility)
         const productId = product.id || product._id
         if (!productId) {
-          console.warn('Product missing ID:', product)
           return null
         }
         return {
@@ -58,7 +54,6 @@ export async function generateStaticParams() {
       })
       .filter(Boolean) // Remove any null entries
 
-    console.log('Final static params:', params.length, 'products')
     return params
   } catch (error) {
     console.error('Error generating static params:', error)

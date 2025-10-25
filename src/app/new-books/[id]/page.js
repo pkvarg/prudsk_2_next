@@ -13,7 +13,6 @@ export async function generateStaticParams() {
 
     // Skip static generation if no baseUrl is available
     if (!baseUrl) {
-      console.log('No API URL configured - skipping static generation')
       return []
     }
 
@@ -32,7 +31,6 @@ export async function generateStaticParams() {
     const products = data.products || data
 
     if (!Array.isArray(products) || products.length === 0) {
-      console.warn('No products found for year static generation')
       return []
     }
 
@@ -46,7 +44,6 @@ export async function generateStaticParams() {
     })
 
     const years = Array.from(yearsSet).filter((year) => year) // Remove empty years
-    console.log(`Found ${years.length} years for static generation:`, years)
 
     // Return array of params for each year
     return years.map((year) => ({
@@ -154,16 +151,12 @@ export default async function NewBooksPage({ params }) {
   const resolvedParams = await params
   const year = resolvedParams.id
 
-  console.log('year', year)
-
   if (!year) {
     notFound()
   }
 
   // Get all products
   const allProducts = await getAllProducts()
-
-  console.log('all products', allProducts)
 
   // Filter products by year
   const productsByYear = allProducts.filter((product) => product.year === parseInt(year))

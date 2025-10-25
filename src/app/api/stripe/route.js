@@ -15,8 +15,6 @@ export async function POST(request) {
     const body = await request.json()
     const { products, email, url, initPaymentId, shippingPrice } = body.requestBody || body
 
-    console.log('stripe', url, initPaymentId, shippingPrice)
-
     // Map products to Stripe line items
     const lineItems = products.map((product) => {
       const item = {

@@ -113,8 +113,6 @@ const useOrderStore = create((set, get) => ({
 
       const { data } = await axios.post(`/api/orders/`, order)
 
-      console.log('order store create order', data)
-
       set({
         loadingCreate: false,
         successCreate: true,

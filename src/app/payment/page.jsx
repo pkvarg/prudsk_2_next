@@ -11,8 +11,6 @@ const PaymentScreen = () => {
   const router = useRouter()
   const { shippingAddress, paymentMethod, savePaymentMethod } = useCartStore()
 
-  console.log('pay method', paymentMethod)
-
   useEffect(() => {
     if (!shippingAddress) {
       router.push('/shipping')

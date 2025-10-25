@@ -14,7 +14,6 @@ export async function generateStaticParams() {
     
     // Skip static generation if no baseUrl is available
     if (!baseUrl) {
-      console.log('No API URL configured - skipping static generation')
       return []
     }
     
@@ -53,7 +52,6 @@ export async function generateStaticParams() {
     categoriesSet.add('abecední-seznam-kníh')
 
     const categories = Array.from(categoriesSet)
-    //console.log(`Found ${categories.length} categories for static generation:`, categories)
 
     // Return array of params for each category
     return categories.map((category) => ({

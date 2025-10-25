@@ -28,9 +28,6 @@ export async function POST(request) {
     // Set token expiration (1 hour from now)
     const passwordResetExpires = new Date(Date.now() + 60 * 60 * 1000)
 
-    console.log('user in fp', user)
-    console.log('Token Expiry:', new Date(Date.now() + 60 * 60 * 1000)) // Should be valid
-
     // Save token to database
     await prisma.user.update({
       where: { id: user.id },
@@ -40,12 +37,9 @@ export async function POST(request) {
       },
     })
 
-    console.log('orig url', origURL)
     // Create reset URL
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || origURL
     const resetUrl = `${baseUrl}/reset-password/${resetToken}`
-
-    console.log('resetUrl in forgot password', resetUrl)
 
     const userData = {
       name: user.name,

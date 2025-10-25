@@ -53,8 +53,6 @@ export async function POST(request) {
       },
     })
 
-    console.log('created audio', createdAudio)
-
     return NextResponse.json(createdAudio, { status: 201 })
   } catch (error) {
     console.error('Error creating audio:', error)

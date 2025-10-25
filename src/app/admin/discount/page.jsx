@@ -39,13 +39,9 @@ const CreateDiscount = () => {
     e.preventDefault()
 
     try {
-      console.log('Submitting discount:', discount)
-
       await createDiscount({
         discount: discount,
       })
-
-      console.log('discount', discount)
 
       if (discount > 0) {
         setMessageSuccess(`Akcia vytvorená`)

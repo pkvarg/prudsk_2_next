@@ -15,8 +15,6 @@ export default function ProductList() {
         setLoading(true)
         const response = await fetch('/api/products/')
 
-        console.log('response', response)
-
         if (!response.ok) {
           throw new Error('Nepodařilo se načíst produkty')
         }

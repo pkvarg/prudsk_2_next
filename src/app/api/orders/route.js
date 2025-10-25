@@ -43,8 +43,6 @@ export async function POST(request) {
 
     const orderNumber = await getOrderNumber()
 
-    console.log('orderNumber', orderNumber)
-
     /* Update Count in stock on purchased products */
     if (qtys) {
       for (const key of Object.keys(qtys)) {
@@ -57,7 +55,6 @@ export async function POST(request) {
 
         if (product) {
           const updatedCountInStockToDb = product.countInStock - purchasedProductQty
-          console.log('countStockInDB', updatedCountInStockToDb)
 
           if (updatedCountInStockToDb <= 10) {
             await prisma.product.update({
@@ -140,8 +137,6 @@ export async function POST(request) {
     const productsCount = createdOrder.orderItems.length
     let productsObject = {}
 
-    console.log('created order', createdOrder)
-
     createdOrder.orderItems.forEach((item, i) => {
       if (discounts[i] && discounts[i].discount > 0) {
         productsObject[i] =
@@ -214,8 +209,6 @@ export async function POST(request) {
     })
 
     const resData = await response.json()
-    console.log('data order send confirmation', resData)
-    console.log('data order send confirmation', resData.success)
 
     if (!resData.success) {
       throw new Error('Nepodarilo sa odoslať send order')

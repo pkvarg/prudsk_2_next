@@ -58,8 +58,6 @@ export async function POST(request, { params }) {
 
     const { name: userName, id: userId } = user
 
-    console.log('user in rew', userName, userId)
-
     // Check if product exists
     const product = await prisma.product.findUnique({
       where: { id },
@@ -78,10 +76,7 @@ export async function POST(request, { params }) {
       },
     })
 
-    console.log('existing?', existingReview)
-
     if (existingReview) {
-      console.log('exist')
       return NextResponse.json({ error: 'Recenze už existuje' }, { status: 400 })
     }
 
@@ -123,8 +118,6 @@ export async function POST(request, { params }) {
       comment,
     }
 
-    console.log('before sending', userName, comment)
-
     // TODO
 
     // SEND HONO EMAIL
@@ -138,7 +131,6 @@ export async function POST(request, { params }) {
     })
 
     const data = await response.json()
-    console.log('data admin new review', data.success)
 
     return NextResponse.json({ message: 'Recenze byla přidána' }, { status: 201 })
   } catch (error) {

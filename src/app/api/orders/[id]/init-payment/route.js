@@ -28,7 +28,6 @@ export async function PUT(request, { params }) {
 
     // Create token using crypto
     const token = crypto.createHash('sha256').update(id).digest('hex')
-    console.log('tkcry', token)
 
     // Update the order with the init payment ID
     const updatedOrder = await prisma.order.update({

@@ -61,45 +61,6 @@ const Video = () => {
     return uniqueCategories.sort()
   }, [links])
 
-  // const { videos: links, getAllVideos } = useVideoStore()
-
-  // console.log('videos', links)
-
-  // useEffect(() => {
-  //   getAllVideos()
-  // }, [])
-
-  // // Sort and filter videos
-  // const processedVideos = useMemo(() => {
-  //   let filteredLinks = [...links]
-
-  //   // Filter by search term
-  //   if (searchTerm) {
-  //     filteredLinks = filteredLinks.filter(
-  //       (link) =>
-  //         link.videoTitle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //         link.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //         link.category?.toLowerCase().includes(searchTerm.toLowerCase()),
-  //     )
-  //   }
-
-  //   // Sort videos
-  //   filteredLinks.sort((a, b) => {
-  //     switch (sortBy) {
-  //       case 'title':
-  //         return a.videoTitle.localeCompare(b.videoTitle)
-  //       case 'date':
-  //         return new Date(b.uploadDate || 0) - new Date(a.uploadDate || 0)
-  //       case 'duration':
-  //         return (b.duration || 0) - (a.duration || 0)
-  //       default:
-  //         return a.videoTitle.localeCompare(b.videoTitle)
-  //     }
-  //   })
-
-  //   return filteredLinks
-  // }, [searchTerm, sortBy])
-
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Back button */}

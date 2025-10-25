@@ -23,8 +23,6 @@ const HomeScreen = () => {
   const pages = useProductStore((state) => state.pages)
   const listProducts = useProductStore((state) => state.listProducts)
   const searchKeyword = useProductStore((state) => state.searchKeyword)
-  
-  console.log('Home component render - searchKeyword:', searchKeyword)
 
   // Reset to page 1 when keyword changes
   useEffect(() => {
@@ -33,7 +31,6 @@ const HomeScreen = () => {
 
   // Load initial products only on mount, search is now handled by SearchBox directly
   useEffect(() => {
-    console.log('Home useEffect - initial load only')
     listProducts('', 1, pageSize)
   }, []) // Only run on mount
 

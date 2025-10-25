@@ -52,13 +52,12 @@ export const dynamic = 'force-static'
 async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
-    
+
     // Only skip if explicitly undefined (not if localhost)
     if (!baseUrl) {
-      console.log('[HOMEPAGE] No API URL configured - skipping initial products fetch')
       return { products: [], pages: 0 }
     }
-    
+
     const response = await fetch(
       `${baseUrl}/api/products?keyword=${searchKeyword}&pageNumber=${page}&pageSize=${pageSize}`,
       {
@@ -86,13 +85,12 @@ async function getInitialProducts(searchKeyword = '', page = 1, pageSize = 8) {
 async function getBannerImages() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
-    
+
     // Only skip if explicitly undefined (not if localhost)
     if (!baseUrl) {
-      console.log('[HOMEPAGE] No API URL configured - skipping banner images fetch')
       return []
     }
-    
+
     const response = await fetch(`${baseUrl}/api/banner`, {
       cache: 'force-cache', // Banners probably don't change often
       next: { revalidate: 3600 }, // Revalidate every hour
@@ -119,13 +117,12 @@ async function getBannerImages() {
 async function getFeaturedProducts() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
-    
+
     // Only skip if explicitly undefined (not if localhost)
     if (!baseUrl) {
-      console.log('[HOMEPAGE] No API URL configured - skipping featured products fetch')
       return []
     }
-    
+
     const response = await fetch(`${baseUrl}/api/products/top`, {
       cache: 'force-cache',
       next: { revalidate: 1800 },

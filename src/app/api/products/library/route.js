@@ -7,8 +7,6 @@ import prisma from '@/db/db'
 // @access Public
 
 export async function GET(request) {
-  console.log('here get library products')
-
   try {
     // Get the URL object from the request
     const { searchParams } = new URL(request.url)

@@ -45,8 +45,6 @@ export async function PUT(request, { params }) {
       },
     })
 
-    console.log('New favorite created successfully:', newFavorite)
-
     return NextResponse.json(
       {
         message: 'Úspěšně přidáno do oblíbených',
@@ -89,7 +87,6 @@ export async function GET(request, { params }) {
         favoriteOf: userId,
       },
     })
-    //console.log('Found by criteria:', foundByCriteria)
 
     if (foundByCriteria) {
       return NextResponse.json({ message: 'isFavorite' }, { status: 200 })

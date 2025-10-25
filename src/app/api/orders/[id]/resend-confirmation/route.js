@@ -13,8 +13,6 @@ export async function PUT(request, { params }) {
   const body = await request.json()
   const { adminOnly } = body
 
-  console.log('adminOnly:', adminOnly)
-
   try {
     const user = await isAdmin()
 
@@ -22,8 +20,6 @@ export async function PUT(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
     const { id } = await params
-
-    console.log('here in resend', id)
 
     // Find the order with all related data
     const order = await prisma.order.findUnique({
@@ -49,7 +45,6 @@ export async function PUT(request, { params }) {
     })
 
     const data = await response.json()
-    console.log('data order resend confirmation', data.success)
 
     if (!data.success) {
       throw new Error('Nepodarilo sa odoslať order resend confirmation')

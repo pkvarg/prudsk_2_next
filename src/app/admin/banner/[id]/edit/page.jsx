@@ -67,7 +67,7 @@ const BannerEditPage = () => {
       }
 
       const data = await response.json()
-      console.log('data', data)
+
       setImage(data.imageUrl)
       setUploading(false)
     } catch (error) {

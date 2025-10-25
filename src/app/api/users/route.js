@@ -91,8 +91,6 @@ export async function POST(request) {
           body: JSON.stringify(userData),
         })
 
-        console.log('response', response)
-
         // Check if request was successful
         if (!response.ok) {
           const errorData = await response.json()
@@ -100,7 +98,6 @@ export async function POST(request) {
           // Don't fail registration if email fails - just log it
         } else {
           const data = await response.json()
-          console.log('data', data)
         }
       } catch (emailError) {
         console.error('Failed to send registration email:', emailError)

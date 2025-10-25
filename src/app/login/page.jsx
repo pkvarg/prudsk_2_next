@@ -39,7 +39,7 @@ export default function LoginPage() {
       router.push(callbackUrl)
     } catch (err) {
       //setError(err)
-      console.log('goggle login error', err)
+      console.log('google login error', err)
     }
   }
 

@@ -111,8 +111,6 @@ export async function PUT(request, { params }) {
 
     // Handle favorites update
     if (userData.favorites) {
-      console.log('Adding to favorites:', userData.favorites)
-
       // Assuming favorites is a relation to another model
       // If it's an array field, you might need to adjust this logic
       const updatedUser = await prisma.user.update({
@@ -123,8 +121,6 @@ export async function PUT(request, { params }) {
           },
         },
       })
-
-      console.log('FUU:', updatedUser)
 
       return NextResponse.json({
         id: updatedUser.id,

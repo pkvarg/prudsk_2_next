@@ -14,14 +14,10 @@ const CompleteRegistration = () => {
     router.push('/login')
   }
 
-  console.log('em tok', email, token)
-
   useEffect(() => {
     const checkToken = async () => {
       try {
         const res = await axios.get(`/api/users/register/${email}/${token}`)
-
-        console.log('res', res)
 
         if (res.data === 'ok') {
           setMessage('Registrácia bola úspešne dokončená! Môžete sa prihlásiť.')

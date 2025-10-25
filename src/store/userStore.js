@@ -129,7 +129,6 @@ const useUserStore = create(
         }),
 
       getUserDetails: async (id) => {
-        console.log('in getuserDetails')
         set((state) => ({
           userDetails: { ...state.userDetails, loading: true },
         }))
@@ -163,7 +162,6 @@ const useUserStore = create(
       },
 
       updateUserProfile: async (userData) => {
-        console.log('in update userDetails')
         try {
           const response = await fetch('/api/users/profile', {
             method: 'PUT',

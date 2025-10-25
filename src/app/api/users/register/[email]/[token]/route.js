@@ -10,8 +10,6 @@ export async function GET(request, { params }) {
     const prms = await params
     const { email, token } = prms
 
-    console.log('here in reg em tok', email, token)
-
     // Find user by email
     const user = await prisma.user.findUnique({
       where: { email },

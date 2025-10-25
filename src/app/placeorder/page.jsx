@@ -25,8 +25,6 @@ const PlaceOrderScreen = () => {
   const { userInfo, updateUserProfile } = useUserStore()
 
   // Calculate Prices
-  console.log('cart', cart)
-
   const itemsPrice = cart.reduce((acc, item) => acc + item.price * item.qty, 0)
   const shippingPrice = itemsPrice > 100 ? 0 : 4.5
   const totalPrice = Number(itemsPrice) + Number(shippingPrice)
@@ -102,8 +100,6 @@ const PlaceOrderScreen = () => {
   const handleNewsletter = () => {
     setNewsletterChecked((prev) => !prev)
   }
-
-  console.log('in placeorder', cart)
 
   return (
     <div className="min-h-screen bg-white">

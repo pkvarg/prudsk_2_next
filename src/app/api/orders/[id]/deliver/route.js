@@ -15,8 +15,6 @@ export async function PUT(request, { params }) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    console.log('id', id)
-
     // Find the order first
     const order = await prisma.order.findUnique({
       where: {
@@ -48,7 +46,6 @@ export async function PUT(request, { params }) {
     })
 
     const data = await response.json()
-    console.log('data admin order delivered', data.success)
 
     return NextResponse.json({ message: 'Update order success' }, { status: 200 })
   } catch (error) {

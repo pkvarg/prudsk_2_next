@@ -33,7 +33,6 @@ const Contact = () => {
         },
       })
 
-      //console.log('data bots', data)
     } catch (error) {
       console.error('Error increasing bots:', error)
     }
@@ -49,7 +48,6 @@ const Contact = () => {
           'Content-Type': 'application/json',
         },
       })
-      //console.log('data email', data)
     } catch (error) {
       console.error('Error increasing emails:', error)
     }
@@ -71,8 +69,6 @@ const Contact = () => {
         origin,
         subject,
       }
-
-      console.log('sendData', sendData)
 
       //const apiUrl = 'http://localhost:3013/api/prudsk2next/contact'
       const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/contact'
@@ -98,7 +94,6 @@ const Contact = () => {
       // Return success response
       const data = await response.json()
 
-      //console.log('returned data', data)
       return {
         success: true,
         message: data.message || 'Správa bola úspěšne odoslaná',

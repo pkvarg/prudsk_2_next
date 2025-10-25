@@ -4,8 +4,6 @@ import { NextResponse } from 'next/server'
 // List of routes that require authentication
 const protectedRoutes = ['/admin']
 
-console.log(protectedRoutes)
-
 export default auth((req) => {
   const isLoggedIn = !!req.auth
   const isProtectedRoute = protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route))

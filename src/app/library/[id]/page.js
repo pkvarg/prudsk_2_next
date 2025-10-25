@@ -14,7 +14,6 @@ export async function generateStaticParams() {
     
     // Skip static generation if no baseUrl is available
     if (!baseUrl) {
-      console.log('No API URL configured - skipping static generation')
       return []
     }
     
@@ -42,14 +41,11 @@ export async function generateStaticParams() {
       (product) => product.excerpt && product.excerpt.excerpt && product.excerpt.excerpt.trim(),
     )
 
-    console.log(`Found ${productsWithExcerpts.length} products with excerpts for static generation`)
-
     // Return array of params for each product with excerpt
     return productsWithExcerpts
       .map((product) => {
         const productId = product.id || product._id
         if (!productId) {
-          console.warn('Product missing ID:', product)
           return null
         }
         return {
