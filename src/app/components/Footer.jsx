@@ -64,7 +64,7 @@ const Footer = () => {
           wordWrap: 'break-word',
           lineHeight: '1.6',
         }}
-        buttonWrapperClasses="flex flex-row gap-3 shrink-0"
+        buttonWrapperClasses="flex flex-row gap-auto lg:gap-3 shrink-0"
         buttonStyle={{
           background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
           color: '#fff',
