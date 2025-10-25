@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_API_URL || 'https://prud.sk'),
   title: 'prud.sk',
-  description: 'Next js 15',
+  description: 'Distribúcia kresťanskej literatúry',
 }
 
 export default function RootLayout({ children }) {
