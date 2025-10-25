@@ -67,8 +67,9 @@ async function getAllProducts() {
     }
 
     const response = await fetch(`${baseUrl}/api/products/all`, {
-      cache: 'no-store', // Changed to no-store to avoid stale cache issues
-      next: { revalidate: 0 }, // Disable caching for dynamic data
+      // cache: 'no-store', // Changed to no-store to avoid stale cache issues
+      //  next: { revalidate: 0 }, // Disable caching for dynamic data
+      next: { revalidate: 14400 }, // 4 hours in seconds
     })
 
     if (!response.ok) {
