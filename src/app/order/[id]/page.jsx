@@ -199,7 +199,8 @@ const OrderPage = () => {
                         )}
                       </div>
                       <div className="w-5/12 text-right">
-                        {item.qty} x {formatPrice(item.price)} = {formatPrice(item.qty * item.price)}
+                        {item.qty} x {formatPrice(item.price)} ={' '}
+                        {formatPrice(item.qty * item.price)}
                       </div>
                     </div>
                   ))}
@@ -298,13 +299,16 @@ const OrderPage = () => {
                 }`}
                 disabled={loadingConfirmationEmail}
               >
-                {loadingConfirmationEmail ? 'Načítava...' : 'Doposlať potvrdzovací email s faktúrou*'}
+                {loadingConfirmationEmail
+                  ? 'Načítava...'
+                  : 'Doposlať potvrdzovací email s faktúrou*'}
               </button>
               <p className="text-justify text-[15px] mx-2 my-2">
                 * Info len pre zahraničie: Pri objednávke do zahraničia sa faktúra zo systému
                 neodošle, odošle sa len notifikácia. Je nutné poslať si faktúru žltým tlačidlom,
                 upraviť poštovné a celkovú sumu a odoslať faktúru zákazníkovi emailom manuálne.
-                <br />* Pre SK: posiela sa email s faktúrou.
+                <br />* Pre SK: posiela sa email s faktúrou zákazníkovi aj adminovi. Vhodné použiť
+                pri zlyhaní odoslania faktúry a pod.
               </p>
 
               <button
