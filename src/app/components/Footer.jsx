@@ -38,33 +38,45 @@ const Footer = () => {
       <CookieConsent
         location="bottom"
         style={{
-          background: '#dadada',
-          color: '#8a1b1f',
-          fontSize: '15px',
-          textAlign: 'justify',
+          background: 'linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%)',
+          color: '#2c3e50',
+          fontSize: '14px',
+          textAlign: 'left',
           width: '100%',
           maxWidth: '100vw',
-          padding: '16px',
+          padding: '20px 24px',
           boxSizing: 'border-box',
           overflowX: 'hidden',
+          boxShadow: '0 -4px 12px rgba(0, 0, 0, 0.15)',
+          borderTop: '3px solid #8a1b1f',
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          gap: '16px',
         }}
+        containerClasses="cookie-consent-container"
         contentStyle={{
           flex: '1 1 auto',
           margin: '0',
-          paddingRight: '8px',
-          maxWidth: '100%',
+          paddingRight: '0',
+          maxWidth: 'none',
           wordWrap: 'break-word',
+          lineHeight: '1.6',
         }}
-        buttonWrapperClasses="flex flex-row gap-2 mt-3 sm:mt-0"
+        buttonWrapperClasses="flex flex-row gap-3 shrink-0"
         buttonStyle={{
-          background: '#1d9f2f',
+          background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
           color: '#fff',
-          fontSize: '17.5px',
-          minWidth: '120px',
-          padding: '8px 16px',
+          fontSize: '15px',
+          fontWeight: '600',
+          minWidth: '140px',
+          padding: '12px 24px',
           border: 'none',
-          borderRadius: '4px',
+          borderRadius: '8px',
           cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          boxShadow: '0 2px 6px rgba(34, 197, 94, 0.3)',
         }}
         buttonText="Súhlasím"
         expires={365}
@@ -74,33 +86,40 @@ const Footer = () => {
           incrementCount()
         }}
         declineButtonStyle={{
-          background: 'red',
+          background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
           color: '#fff',
-          fontSize: '17.5px',
-          minWidth: '120px',
-          padding: '8px 16px',
+          fontSize: '15px',
+          fontWeight: '600',
+          minWidth: '140px',
+          padding: '12px 24px',
           border: 'none',
-          borderRadius: '4px',
+          borderRadius: '8px',
           cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          boxShadow: '0 2px 6px rgba(239, 68, 68, 0.3)',
         }}
         declineButtonText="Nesúhlasím"
         onDecline={() => {
           incrementCount()
         }}
       >
-        Táto stránka používa len analytické a pre fungovanie webu nevyhnutné cookies pre anonymnú
-        analytiku návštevnosti. Nepoužívame funkčné ani marketingové súbory cookies.{' '}
-        <a
-          style={{
-            color: '#8a1b1f',
-            fontSize: '15px',
-            //textDecoration: 'none',
-          }}
-          href="/safety-privacy"
-        >
-          {' '}
-          GDPR
-        </a>
+        <span className="text-[14px] sm:text-[15px] leading-relaxed">
+          Táto stránka používa len analytické a pre fungovanie webu nevyhnutné cookies pre anonymnú
+          analytiku návštevnosti.{' '}
+          <a
+            style={{
+              color: '#8a1b1f',
+              fontSize: '15px',
+              fontWeight: '600',
+              textDecoration: 'underline',
+              textUnderlineOffset: '3px',
+            }}
+            href="/safety-privacy"
+            className="hover:opacity-80 transition-opacity"
+          >
+            GDPR →
+          </a>
+        </span>
       </CookieConsent>
       <footer className="bg-[#edeae4]">
         <div className="container mx-auto">

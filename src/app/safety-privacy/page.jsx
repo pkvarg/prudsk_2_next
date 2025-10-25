@@ -108,6 +108,59 @@ const SafetyPrivacy = () => {
             stránku prišli, odkiaľ ste na stránku prišli).
           </p>
 
+          <h3 className="text-[#071e46] font-bold text-xl md:text-2xl mb-4 mt-8">
+            Cookies a sledovanie
+          </h3>
+
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
+            Táto webstránka používa nasledujúce typy cookies a technológií:
+          </p>
+
+          <h4 className="text-[#071e46] font-semibold text-lg mb-3">1. Nevyhnutné cookies</h4>
+
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
+            Tieto cookies sú potrebné pre základné fungovanie webu a nemožno ich vypnúť:
+          </p>
+
+          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
+            <li className="list-disc">Uloženie Vášho súhlasu s cookies (CookieConsent) - 365 dní</li>
+            <li className="list-disc">Funkčnosť kontaktného formulára</li>
+          </ul>
+
+          <h4 className="text-[#071e46] font-semibold text-lg mb-3">2. Analytické cookies (voliteľné)</h4>
+
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
+            S Vaším súhlasom používame vlastný analytický nástroj Umami na:
+          </p>
+
+          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
+            <li className="list-disc">Meranie návštevnosti stránky</li>
+            <li className="list-disc">Analýzu správania návštevníkov (anonymne)</li>
+            <li className="list-disc">Zlepšenie používateľského zážitku</li>
+          </ul>
+
+          <h4 className="text-[#071e46] font-semibold text-lg mb-3">3. Čo nepoužívame</h4>
+
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">Nepoužívame:</p>
+
+          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
+            <li className="list-disc">Marketingové cookies</li>
+            <li className="list-disc">Reklamné cookies tretích strán</li>
+            <li className="list-disc">Cookies sociálnych sietí</li>
+            <li className="list-disc">Sledovacie cookies tretích strán</li>
+          </ul>
+
+          <h4 className="text-[#071e46] font-semibold text-lg mb-3">Správa súhlasu</h4>
+
+          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
+            Váš súhlas s analytickými cookies môžete kedykoľvek zmeniť:
+          </p>
+
+          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
+            <li className="list-disc">Vymazaním údajov prehliadača</li>
+            <li className="list-disc">Pri návšteve stránky sa banner zobrazí znovu po vymazaní cookies</li>
+          </ul>
+
           <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
             Kedykoľvek po prihlásení sa na stránke www.prud.sk, si môžete svoje osobné údaje
             skontrolovať a v prípade potreby zmeniť v časti "Upraviť".

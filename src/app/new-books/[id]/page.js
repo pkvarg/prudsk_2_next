@@ -10,13 +10,13 @@ export const revalidate = 14400 // 4 hours in seconds
 export async function generateStaticParams() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
-    
+
     // Skip static generation if no baseUrl is available
     if (!baseUrl) {
       console.log('No API URL configured - skipping static generation')
       return []
     }
-    
+
     const response = await fetch(`${baseUrl}/api/products/all`, {
       cache: 'force-cache',
     })
@@ -40,8 +40,8 @@ export async function generateStaticParams() {
     const yearsSet = new Set()
 
     products.forEach((product) => {
-      if (product.year && product.year.trim()) {
-        yearsSet.add(product.year.trim())
+      if (product.year) {
+        yearsSet.add(product.year)
       }
     })
 
@@ -62,12 +62,12 @@ export async function generateStaticParams() {
 async function getAllProducts() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL
-    
+
     // Return empty array if no baseUrl is available
     if (!baseUrl) {
       return []
     }
-    
+
     const response = await fetch(`${baseUrl}/api/products/all`, {
       cache: 'force-cache',
       next: { revalidate: 14400 },
@@ -105,7 +105,7 @@ export async function generateMetadata({ params }) {
 
   // Get products to count them for description
   const allProducts = await getAllProducts()
-  const productsByYear = allProducts.filter((product) => product.year === year)
+  const productsByYear = allProducts.filter((product) => product.year === parseInt(year))
   const productCount = productsByYear.length
 
   return {
@@ -154,6 +154,8 @@ export default async function NewBooksPage({ params }) {
   const resolvedParams = await params
   const year = resolvedParams.id
 
+  console.log('year', year)
+
   if (!year) {
     notFound()
   }
@@ -161,8 +163,10 @@ export default async function NewBooksPage({ params }) {
   // Get all products
   const allProducts = await getAllProducts()
 
+  console.log('all products', allProducts)
+
   // Filter products by year
-  const productsByYear = allProducts.filter((product) => product.year === year)
+  const productsByYear = allProducts.filter((product) => product.year === parseInt(year))
 
   // Sort products by name
   productsByYear.sort((a, b) => (a.name || '').localeCompare(b.name || ''))

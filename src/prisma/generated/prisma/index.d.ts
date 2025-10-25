@@ -7205,6 +7205,7 @@ export namespace Prisma {
     countInStock: number | null
     discount: number | null
     discountedPrice: number | null
+    year: number | null
   }
 
   export type ProductSumAggregateOutputType = {
@@ -7214,6 +7215,7 @@ export namespace Prisma {
     countInStock: number | null
     discount: number | null
     discountedPrice: number | null
+    year: number | null
   }
 
   export type ProductMinAggregateOutputType = {
@@ -7236,7 +7238,7 @@ export namespace Prisma {
     binding: string | null
     pages: string | null
     isbn: string | null
-    year: string | null
+    year: number | null
     searchName: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7263,7 +7265,7 @@ export namespace Prisma {
     binding: string | null
     pages: string | null
     isbn: string | null
-    year: string | null
+    year: number | null
     searchName: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7310,6 +7312,7 @@ export namespace Prisma {
     countInStock?: true
     discount?: true
     discountedPrice?: true
+    year?: true
   }
 
   export type ProductSumAggregateInputType = {
@@ -7319,6 +7322,7 @@ export namespace Prisma {
     countInStock?: true
     discount?: true
     discountedPrice?: true
+    year?: true
   }
 
   export type ProductMinAggregateInputType = {
@@ -7517,7 +7521,7 @@ export namespace Prisma {
     binding: string | null
     pages: string | null
     isbn: string | null
-    year: string | null
+    year: number | null
     searchName: string | null
     createdAt: Date
     updatedAt: Date
@@ -7650,7 +7654,7 @@ export namespace Prisma {
       binding: string | null
       pages: string | null
       isbn: string | null
-      year: string | null
+      year: number | null
       searchName: string | null
       createdAt: Date
       updatedAt: Date
@@ -8073,7 +8077,7 @@ export namespace Prisma {
     readonly binding: FieldRef<"Product", 'String'>
     readonly pages: FieldRef<"Product", 'String'>
     readonly isbn: FieldRef<"Product", 'String'>
-    readonly year: FieldRef<"Product", 'String'>
+    readonly year: FieldRef<"Product", 'Int'>
     readonly searchName: FieldRef<"Product", 'String'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly updatedAt: FieldRef<"Product", 'DateTime'>
@@ -12400,7 +12404,7 @@ export namespace Prisma {
     binding?: StringNullableFilter<"Product"> | string | null
     pages?: StringNullableFilter<"Product"> | string | null
     isbn?: StringNullableFilter<"Product"> | string | null
-    year?: StringNullableFilter<"Product"> | string | null
+    year?: IntNullableFilter<"Product"> | number | null
     searchName?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
@@ -12471,7 +12475,7 @@ export namespace Prisma {
     binding?: StringNullableFilter<"Product"> | string | null
     pages?: StringNullableFilter<"Product"> | string | null
     isbn?: StringNullableFilter<"Product"> | string | null
-    year?: StringNullableFilter<"Product"> | string | null
+    year?: IntNullableFilter<"Product"> | number | null
     searchName?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
@@ -12544,7 +12548,7 @@ export namespace Prisma {
     binding?: StringNullableWithAggregatesFilter<"Product"> | string | null
     pages?: StringNullableWithAggregatesFilter<"Product"> | string | null
     isbn?: StringNullableWithAggregatesFilter<"Product"> | string | null
-    year?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    year?: IntNullableWithAggregatesFilter<"Product"> | number | null
     searchName?: StringNullableWithAggregatesFilter<"Product"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
@@ -13282,7 +13286,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13315,7 +13319,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13347,7 +13351,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13379,7 +13383,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13412,7 +13416,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13442,7 +13446,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13471,7 +13475,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14225,6 +14229,7 @@ export namespace Prisma {
     countInStock?: SortOrder
     discount?: SortOrder
     discountedPrice?: SortOrder
+    year?: SortOrder
   }
 
   export type ProductMaxOrderByAggregateInput = {
@@ -14288,6 +14293,7 @@ export namespace Prisma {
     countInStock?: SortOrder
     discount?: SortOrder
     discountedPrice?: SortOrder
+    year?: SortOrder
   }
 
   export type ProductNullableScalarRelationFilter = {
@@ -15189,7 +15195,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15221,7 +15227,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15473,7 +15479,7 @@ export namespace Prisma {
     binding?: StringNullableFilter<"Product"> | string | null
     pages?: StringNullableFilter<"Product"> | string | null
     isbn?: StringNullableFilter<"Product"> | string | null
-    year?: StringNullableFilter<"Product"> | string | null
+    year?: IntNullableFilter<"Product"> | number | null
     searchName?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
@@ -16290,7 +16296,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16322,7 +16328,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16428,7 +16434,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16459,7 +16465,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16491,7 +16497,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16523,7 +16529,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16625,7 +16631,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16656,7 +16662,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16861,7 +16867,7 @@ export namespace Prisma {
     binding?: string | null
     pages?: string | null
     isbn?: string | null
-    year?: string | null
+    year?: number | null
     searchName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16959,7 +16965,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16990,7 +16996,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17021,7 +17027,7 @@ export namespace Prisma {
     binding?: NullableStringFieldUpdateOperationsInput | string | null
     pages?: NullableStringFieldUpdateOperationsInput | string | null
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
     searchName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

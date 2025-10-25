@@ -102,7 +102,7 @@ export async function POST(request) {
         binding: '',
         pages: '',
         isbn: '',
-        year: '',
+        year: null,
         searchName: '',
       },
     })

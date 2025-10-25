@@ -277,7 +277,7 @@ const ProductEditScreen = () => {
       countInStock: parseInt(formData.countInStock) || 0,
       weight: formData.weight ? formData.weight : '',
       pages: formData.pages ? formData.pages : '',
-      year: formData.year ? formData.year : '',
+      year: formData.year ? parseInt(formData.year) : null,
       excerpt: excerptObject,
     }
 

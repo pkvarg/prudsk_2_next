@@ -146,7 +146,7 @@ model Product {
   binding         String?
   pages           String?
   isbn            String?
-  year            String?
+  year            Int?
   searchName      String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt

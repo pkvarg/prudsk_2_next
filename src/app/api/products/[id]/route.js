@@ -150,6 +150,9 @@ export async function PUT(request, { params }) {
     // Generate searchName from name with diacritics removed
     const searchName = name ? name.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : ''
 
+    // Parse year to integer if it's a string
+    const parsedYear = year ? (typeof year === 'string' ? parseInt(year) : year) : null
+
     // Update the product
     const updatedProduct = await prisma.product.update({
       where: { id },
@@ -174,7 +177,7 @@ export async function PUT(request, { params }) {
         binding,
         pages,
         isbn,
-        year,
+        year: parsedYear,
         searchName,
       },
     })
