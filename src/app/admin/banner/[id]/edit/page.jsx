@@ -124,7 +124,7 @@ const BannerEditPage = () => {
         {/* Image Requirements */}
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
           <p className="text-sm text-yellow-800 font-medium">
-            📏 Obrázek musí mít rozměry 1296x382px
+            📏 Obrázok musí mať rozmery 1296x382px
           </p>
         </div>
 
@@ -237,7 +237,7 @@ const BannerEditPage = () => {
             </li>
             <li className="flex items-start">
               <span className="text-red-500 mr-2">•</span>
-              Doporučené rozměry: 1296x382px
+              Doporučené rozmery: 1296x382px
             </li>
             <li className="flex items-start">
               <span className="text-red-500 mr-2">•</span>
@@ -245,7 +245,7 @@ const BannerEditPage = () => {
             </li>
             <li className="flex items-start">
               <span className="text-red-500 mr-2">•</span>
-              Banner se zobrazí v hlavní části webu
+              Banner sa zobrazí v hlavní části webu
             </li>
           </ul>
         </div>

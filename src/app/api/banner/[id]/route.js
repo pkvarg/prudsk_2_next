@@ -22,13 +22,13 @@ export async function GET(request, { params }) {
     if (banner) {
       return NextResponse.json(banner)
     } else {
-      return NextResponse.json({ error: 'Banner nebyl nalezen' }, { status: 404 })
+      return NextResponse.json({ error: 'Banner nenájdený' }, { status: 404 })
     }
   } catch (error) {
     console.error('Error fetching banner:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se načíst banner', details: error.message },
+      { error: 'Nepodarilo sa načítať banner', details: error.message },
       { status: 500 },
     )
   }
@@ -57,7 +57,7 @@ export async function DELETE(request, { params }) {
     })
 
     if (!banner) {
-      return NextResponse.json({ error: 'Banner nebyl nalezen' }, { status: 404 })
+      return NextResponse.json({ error: 'Banner nenájdený' }, { status: 404 })
     }
 
     // Delete the banner
@@ -65,12 +65,12 @@ export async function DELETE(request, { params }) {
       where: { id },
     })
 
-    return NextResponse.json({ message: 'Banner byl odstraněn' })
+    return NextResponse.json({ message: 'Banner bol odstranený' })
   } catch (error) {
     console.error('Error deleting banner:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se smazat banner', details: error.message },
+      { error: 'Nepodarilo sa zmazať banner', details: error.message },
       { status: 500 },
     )
   }
@@ -105,7 +105,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!banner) {
-      return NextResponse.json({ error: 'Banner nebyl nalezen' }, { status: 404 })
+      return NextResponse.json({ error: 'Banner nenájdený' }, { status: 404 })
     }
 
     // Update the banner
@@ -124,7 +124,7 @@ export async function PUT(request, { params }) {
     console.error('Error updating banner:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se aktualizovat banner', details: error.message },
+      { error: 'Nepodarilo sa aktualizovať banner', details: error.message },
       { status: 500 },
     )
   }

@@ -250,8 +250,8 @@ const BannerList = () => {
           {banners.length === 0 && (
             <div className="text-center py-12">
               <Icon.Image className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Žádné banner obrázky</h3>
-              <p className="text-gray-500 mb-6">Začněte přidáním prvního banner obrázku.</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Žiadne banner obrázky</h3>
+              <p className="text-gray-500 mb-6">Začnite pridaním prvého banner obrázku.</p>
               <button
                 className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
                 onClick={createBannerHandler}

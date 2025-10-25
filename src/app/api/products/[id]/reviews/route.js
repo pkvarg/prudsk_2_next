@@ -17,7 +17,7 @@ export async function GET(request, { params }) {
     })
 
     if (!reviews) {
-      return NextResponse.json({ error: 'Recenze nebyly nalezeny' }, { status: 404 })
+      return NextResponse.json({ error: 'Recenzie nenájdené' }, { status: 404 })
     }
 
     return NextResponse.json(reviews)
@@ -25,7 +25,7 @@ export async function GET(request, { params }) {
     console.error('Error deleting review:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se smazat recenzi', details: error.message },
+      { error: 'Nepodarilo sa zmazať recenziu', details: error.message },
       { status: 500 },
     )
   }
@@ -44,16 +44,16 @@ export async function POST(request, { params }) {
 
     // Validate input
     if (typeof rating !== 'number' || rating < 0 || !comment) {
-      return NextResponse.json({ error: 'Hodnocení a komentář jsou povinné' }, { status: 400 })
+      return NextResponse.json({ error: 'Hodnotenie a komentár sú povinné' }, { status: 400 })
     }
 
     const user = await isAdmin()
     if (!user) {
-      return NextResponse.json({ error: 'Uživatel není ověřen' }, { status: 401 })
+      return NextResponse.json({ error: 'Užívatel nie je overený' }, { status: 401 })
     }
 
     if (!user.id || !user.name) {
-      return NextResponse.json({ error: 'Neplatná uživatelská data' }, { status: 400 })
+      return NextResponse.json({ error: 'Neplatné užívateľské dáta' }, { status: 400 })
     }
 
     const { name: userName, id: userId } = user
@@ -65,7 +65,7 @@ export async function POST(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ error: 'Produkt nebyl nalezen' }, { status: 404 })
+      return NextResponse.json({ error: 'Produkt nenájdený' }, { status: 404 })
     }
 
     // Check if user already reviewed this product
@@ -77,7 +77,7 @@ export async function POST(request, { params }) {
     })
 
     if (existingReview) {
-      return NextResponse.json({ error: 'Recenze už existuje' }, { status: 400 })
+      return NextResponse.json({ error: 'Recenzia už existuje' }, { status: 400 })
     }
 
     // Create the review
@@ -132,12 +132,12 @@ export async function POST(request, { params }) {
 
     const data = await response.json()
 
-    return NextResponse.json({ message: 'Recenze byla přidána' }, { status: 201 })
+    return NextResponse.json({ message: 'Recenzia pridaná' }, { status: 201 })
   } catch (error) {
     console.error('Error creating review:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se vytvořit recenzi', details: error.message },
+      { error: 'Nepodarilo sa vytvoriť recenziu', details: error.message },
       { status: 500 },
     )
   }
@@ -161,7 +161,7 @@ export async function DELETE(request, { params }) {
 
     if (!comment) {
       return NextResponse.json(
-        { error: 'Komentář je vyžadován pro identifikaci recenze' },
+        { error: 'Komentár je vyžadovaný pre identifikíciu recenzie' },
         { status: 400 },
       )
     }
@@ -173,7 +173,7 @@ export async function DELETE(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ error: 'Produkt nebyl nalezen' }, { status: 404 })
+      return NextResponse.json({ error: 'Produkt nenájdený' }, { status: 404 })
     }
 
     // Find the review by comment
@@ -185,7 +185,7 @@ export async function DELETE(request, { params }) {
     })
 
     if (!review) {
-      return NextResponse.json({ error: 'Recenze nebyla nalezena' }, { status: 404 })
+      return NextResponse.json({ error: 'Recenzia nenájdená' }, { status: 404 })
     }
 
     // Delete the review
@@ -211,12 +211,12 @@ export async function DELETE(request, { params }) {
       },
     })
 
-    return NextResponse.json({ message: 'Recenze byla úspěšně smazána' }, { status: 200 })
+    return NextResponse.json({ message: 'Recenzia úspešne zmazaná' }, { status: 200 })
   } catch (error) {
     console.error('Error deleting review:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se smazat recenzi', details: error.message },
+      { error: 'Nepodarilo sa zmazať recenziu', details: error.message },
       { status: 500 },
     )
   }

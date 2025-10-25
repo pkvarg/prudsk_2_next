@@ -32,7 +32,6 @@ const Contact = () => {
           'Content-Type': 'application/json',
         },
       })
-
     } catch (error) {
       console.error('Error increasing bots:', error)
     }
@@ -96,7 +95,7 @@ const Contact = () => {
 
       return {
         success: true,
-        message: data.message || 'Správa bola úspěšne odoslaná',
+        message: data.message || 'Správa bola úspešne odoslaná',
       }
     } catch (error) {
       // Handle validation errors
@@ -128,7 +127,7 @@ const Contact = () => {
     } else {
       await sendMail()
       increaseEmails()
-      setMessageSuccess('Správa úspěšne odoslaná')
+      setMessageSuccess('Správa úspešne odoslaná')
       setName('')
       setEmail('')
       setMailMessage('')

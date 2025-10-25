@@ -27,7 +27,7 @@ export async function GET() {
     console.error('Error fetching subscribers:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se načíst odběratele', details: error.message },
+      { error: 'Nepodarilo sa načítať odberateľov', details: error.message },
       { status: 500 },
     )
   }

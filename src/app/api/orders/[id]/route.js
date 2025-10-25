@@ -25,7 +25,7 @@ export async function GET(request, { params }) {
     if (order) {
       return NextResponse.json(order)
     } else {
-      return NextResponse.json({ message: 'Objednávka nebyla nalezena' }, { status: 404 })
+      return NextResponse.json({ message: 'Objednávka nenájdená' }, { status: 404 })
     }
   } catch (error) {
     console.error('Error fetching order:', error)

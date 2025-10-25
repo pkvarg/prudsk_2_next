@@ -24,7 +24,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ message: 'Produkt nebyl nalezen' }, { status: 404 })
+      return NextResponse.json({ message: 'Produkt nenájdený' }, { status: 404 })
     }
 
     const existingFavorite = await prisma.favorite.findFirst({
@@ -35,7 +35,7 @@ export async function PUT(request, { params }) {
     })
 
     if (existingFavorite) {
-      return NextResponse.json({ message: 'Produkt je již v oblíbených' }, { status: 400 })
+      return NextResponse.json({ message: 'Produkt je už v obľúbených' }, { status: 400 })
     }
 
     const newFavorite = await prisma.favorite.create({
@@ -47,7 +47,7 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json(
       {
-        message: 'Úspěšně přidáno do oblíbených',
+        message: 'Úspešne přidené do obľúbených',
         favorite: newFavorite,
       },
       { status: 200 },
@@ -77,7 +77,7 @@ export async function GET(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ message: 'Produkt nebyl nalezen' }, { status: 404 })
+      return NextResponse.json({ message: 'Produkt nenájdený' }, { status: 404 })
     }
 
     // Try to find by the same criteria

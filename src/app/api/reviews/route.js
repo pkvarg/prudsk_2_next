@@ -12,7 +12,7 @@ export async function GET(request) {
     const reviews = await prisma.review.findMany({})
 
     if (!reviews) {
-      return NextResponse.json({ error: 'Žádné recenze nebyly nalezeny' }, { status: 404 })
+      return NextResponse.json({ error: 'Žiadne recenzie' }, { status: 404 })
     }
 
     return NextResponse.json(reviews)
@@ -20,7 +20,7 @@ export async function GET(request) {
     console.error('Error getting review:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se získat recenzi', details: error.message },
+      { error: 'Nepodarilo sa získať recenziu', details: error.message },
       { status: 500 },
     )
   }

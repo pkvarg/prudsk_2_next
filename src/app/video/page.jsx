@@ -166,19 +166,19 @@ const Video = () => {
               </svg>
             </div>
             <h3 className="text-lg font-medium text-[#071e46] mb-2">
-              {searchTerm ? 'Žádná videa nenalezena' : 'Žádná videa k dispozici'}
+              {searchTerm ? 'Žiadne videá neboli nájdené' : 'Žiadne videa k dispozícii'}
             </h3>
             <p className="text-[#9b7d57] mb-4">
               {searchTerm
-                ? `Pro hledaný výraz "${searchTerm}" nebyly nalezeny žádné výsledky.`
-                : 'Momentálně nejsou k dispozici žádná videa.'}
+                ? `Pre hľadaný výraz "${searchTerm}" neboli nájdené žiadne výsledky.`
+                : 'Momentálne nie sú k dispozícii žiadne videá.'}
             </p>
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
                 className="px-4 py-2 bg-[#071e46] text-white rounded hover:bg-[#9b7d57] transition-colors duration-200"
               >
-                Zobrazit všechna videa
+                Zobraziť všetky videá
               </button>
             )}
           </div>

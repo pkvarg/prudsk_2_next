@@ -191,7 +191,7 @@ const Footer = () => {
                 rel="noreferrer"
                 className="text-[16px] !text-[#828282] ml-0.5"
               >
-                se svolením
+                so súhlasom
                 <span className="ml-2 underline">Living Stream Ministry</span>
               </a>
               <a
@@ -216,7 +216,7 @@ const Footer = () => {
                 rel="noreferrer"
                 className="text-[16px] !text-[#828282] ml-0 cursor-pointer"
               >
-                se svolením
+                so súhlasom
                 <span className="ml-2 underline">LIVING STREAM MINISTRY</span>
               </a>
               <a

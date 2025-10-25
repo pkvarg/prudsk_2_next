@@ -22,7 +22,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!order) {
-      return NextResponse.json({ message: 'Objednávka nebyla nalezena' }, { status: 404 })
+      return NextResponse.json({ message: 'Objednávka nenájdená' }, { status: 404 })
     }
 
     // Update the order to cancelled status

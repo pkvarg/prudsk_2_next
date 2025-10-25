@@ -42,9 +42,9 @@ export async function POST(request) {
       },
     })
 
-    return NextResponse.json({ message: 'Heslo bylo úspěšně aktualizováno.' })
+    return NextResponse.json({ message: 'Heslo bolo úspešne aktualizované.' })
   } catch (error) {
     console.error('Reset password error:', error)
-    return NextResponse.json({ message: 'Došlo k chybě při obnově hesla.' }, { status: 500 })
+    return NextResponse.json({ message: 'Došlo ku chybe pri obnove hesla.' }, { status: 500 })
   }
 }

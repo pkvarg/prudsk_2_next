@@ -50,7 +50,7 @@ export async function PUT(request, { params }) {
     })
 
     if (!product) {
-      return NextResponse.json({ error: 'Produkt nebyl nalezen' }, { status: 404 })
+      return NextResponse.json({ error: 'Produkt nenájdený' }, { status: 404 })
     }
 
     // Handle favoriteOf separately (it's a special case that adds to an array)

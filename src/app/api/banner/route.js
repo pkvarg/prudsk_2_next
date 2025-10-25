@@ -15,7 +15,7 @@ export async function GET(request) {
     console.error('Error fetching banners:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se načíst bannery', details: error.message },
+      { error: 'Nepodarilo sa načítať bannery', details: error.message },
       { status: 500 },
     )
   }
@@ -49,7 +49,7 @@ export async function POST(request) {
     console.error('Error creating banner:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se vytvořit banner', details: error.message },
+      { error: 'Nepodarilo sa vytvoriť banner', details: error.message },
       { status: 500 },
     )
   }

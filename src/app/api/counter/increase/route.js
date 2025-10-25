@@ -15,7 +15,7 @@ export async function PUT(request) {
     })
 
     if (!counter) {
-      return NextResponse.json({ error: 'Záznam počítadla nebyl nalezen' }, { status: 404 })
+      return NextResponse.json({ error: 'Záznam počítadla nenájdený' }, { status: 404 })
     }
 
     // Get current URL path to match original logic
@@ -43,7 +43,7 @@ export async function PUT(request) {
     console.error('Error increasing visitor count:', error)
 
     return NextResponse.json(
-      { error: 'Nepodařilo se navýšit počet návštěvníků', details: error.message },
+      { error: 'Nepodarilo sa navýšiť počet návštevníkov', details: error.message },
       { status: 500 },
     )
   }
