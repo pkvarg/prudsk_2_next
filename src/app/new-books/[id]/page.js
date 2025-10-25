@@ -5,6 +5,7 @@ import Product from '@/app/components/Product'
 
 // CRITICAL: Add this to enable ISR (revalidate every 4 hours)
 export const revalidate = 14400 // 4 hours in seconds
+export const dynamicParams = true // Allow dynamic params not in generateStaticParams
 
 // Generate static params for all years at build time
 export async function generateStaticParams() {
@@ -66,8 +67,8 @@ async function getAllProducts() {
     }
 
     const response = await fetch(`${baseUrl}/api/products/all`, {
-      cache: 'force-cache',
-      next: { revalidate: 14400 },
+      cache: 'no-store', // Changed to no-store to avoid stale cache issues
+      next: { revalidate: 0 }, // Disable caching for dynamic data
     })
 
     if (!response.ok) {
