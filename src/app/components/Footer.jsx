@@ -287,7 +287,7 @@ const Footer = () => {
           boxSizing: 'border-box',
           overflowX: 'hidden',
           boxShadow: '0 -4px 12px rgba(0, 0, 0, 0.15)',
-          borderTop: '3px solid #8a1b1f',
+          borderTop: '3px solid #E80D19',
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
@@ -329,7 +329,7 @@ const Footer = () => {
           incrementCount()
         }}
         declineButtonStyle={{
-          background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+          background: '#E80D19',
           color: '#fff',
           fontSize: '15px',
           fontWeight: '600',
