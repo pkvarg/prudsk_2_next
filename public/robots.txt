@@ -1,0 +1,19 @@
+# robots.txt for prud.sk
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /reset-password/
+
+# Disallow test pages
+Disallow: /test
+
+# Sitemap location
+Sitemap: https://prud.sk/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1

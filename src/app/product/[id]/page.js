@@ -202,8 +202,12 @@ export default async function ProductPage({ params }) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
-    description: product.description,
-    image: product.image,
+    description: product.description || `Kresťanská literatúra - ${product.name}`,
+    image: product.image
+      ? product.image.startsWith('http')
+        ? product.image
+        : `https://prud.sk${product.image}`
+      : 'https://prud.sk/images/default-book.jpg',
     url: `https://prud.sk/product/${product.id}`,
     brand: {
       '@type': 'Brand',
@@ -213,11 +217,49 @@ export default async function ProductPage({ params }) {
       '@type': 'Offer',
       price: product.price,
       priceCurrency: 'EUR',
+      priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+        .toISOString()
+        .split('T')[0], // Valid for 1 year
       availability:
         product.countInStock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: {
         '@type': 'Organization',
         name: 'Prúd života',
+      },
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        applicableCountry: 'SK',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        merchantReturnDays: 14,
+        returnMethod: 'https://schema.org/ReturnByMail',
+        returnFees: 'https://schema.org/FreeReturn',
+      },
+      shippingDetails: {
+        '@type': 'OfferShippingDetails',
+        shippingRate: {
+          '@type': 'MonetaryAmount',
+          value: '0',
+          currency: 'EUR',
+        },
+        shippingDestination: {
+          '@type': 'DefinedRegion',
+          addressCountry: 'SK',
+        },
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          handlingTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 1,
+            maxValue: 3,
+            unitCode: 'DAY',
+          },
+          transitTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 2,
+            maxValue: 5,
+            unitCode: 'DAY',
+          },
+        },
       },
     },
     ...(product.author && {
@@ -229,13 +271,31 @@ export default async function ProductPage({ params }) {
     ...(product.isbn && {
       isbn: product.isbn,
     }),
-    ...(reviews.length > 0 && {
+    ...(acknowledgedReviews.length > 0 && {
       aggregateRating: {
         '@type': 'AggregateRating',
-        ratingCount: reviews.length,
+        ratingCount: acknowledgedReviews.length,
         ratingValue:
-          reviews.reduce((sum, review) => sum + (review.rating || 5), 0) / reviews.length,
+          acknowledgedReviews.reduce((sum, review) => sum + (review.rating || 5), 0) /
+          acknowledgedReviews.length,
+        bestRating: '5',
+        worstRating: '1',
       },
+      review: acknowledgedReviews.slice(0, 5).map((review) => ({
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: review.rating || 5,
+          bestRating: '5',
+          worstRating: '1',
+        },
+        author: {
+          '@type': 'Person',
+          name: review.name || 'Anonym',
+        },
+        reviewBody: review.comment || '',
+        datePublished: review.createdAt || new Date().toISOString(),
+      })),
     }),
   }
 
