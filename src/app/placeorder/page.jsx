@@ -26,7 +26,8 @@ const PlaceOrderScreen = () => {
 
   // Calculate Prices
   const itemsPrice = cart.reduce((acc, item) => acc + item.price * item.qty, 0)
-  const shippingPrice = itemsPrice > 100 ? 0 : 4.5
+  const excludeShipping = shippingAddress?.note === 'CBA'
+  const shippingPrice = excludeShipping || itemsPrice > 100 ? 0 : 4.5
   const totalPrice = Number(itemsPrice) + Number(shippingPrice)
 
   useEffect(() => {
