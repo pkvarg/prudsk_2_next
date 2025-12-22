@@ -18,9 +18,95 @@ const Contact = () => {
   const [message, setMessage] = useState(null)
   const [messageSuccess, setMessageSuccess] = useState(null)
 
+  // Bot protection states
+  const [honeypot, setHoneypot] = useState('')
+  const [formStartTime, setFormStartTime] = useState(0)
+
   useLayoutEffect(() => {
     window.scrollTo(0, 200)
   })
+
+  // Initialize form start time for time-based validation
+  useEffect(() => {
+    setFormStartTime(Date.now())
+  }, [])
+
+  // Bot protection: Content validation function
+  const isSpamContent = (text) => {
+    if (!text || text.trim().length < 3) return true
+
+    // Check 1: Excessive special characters (more than 40% of content)
+    const specialChars = text.match(/[^a-zA-Z0-9\s]/g) || []
+    if (specialChars.length / text.length > 0.4) return true
+
+    // Check 2: Random character patterns (less than 20% vowels)
+    const vowels = text.match(/[aeiouAEIOUáéíóúýäëïöüÁÉÍÓÚÝ]/g) || []
+    if (vowels.length / text.length < 0.2) return true
+
+    // Check 3: Excessive uppercase (more than 50% uppercase letters)
+    const uppercase = text.match(/[A-Z]/g) || []
+    const letters = text.match(/[a-zA-Z]/g) || []
+    if (letters && letters.length > 0 && uppercase.length / letters.length > 0.5) return true
+
+    // Check 4: Repetitive characters (same char 5+ times in a row)
+    if (/(.)\1{4,}/.test(text)) return true
+
+    return false
+  }
+
+  // Bot protection: Rate limiting
+  const checkRateLimit = () => {
+    const storageKey = 'contact_form_submissions'
+    const now = Date.now()
+    const oneHour = 60 * 60 * 1000 // 1 hour in milliseconds
+    const maxSubmissions = 3
+
+    try {
+      const stored = localStorage.getItem(storageKey)
+      const submissions = stored ? JSON.parse(stored) : []
+
+      // Filter out submissions older than 1 hour
+      const recentSubmissions = submissions.filter((time) => now - time < oneHour)
+
+      if (recentSubmissions.length >= maxSubmissions) {
+        return false // Rate limit exceeded
+      }
+
+      // Add current submission and save
+      recentSubmissions.push(now)
+      localStorage.setItem(storageKey, JSON.stringify(recentSubmissions))
+      return true
+    } catch (error) {
+      console.error('Rate limit check error:', error)
+      return true // If localStorage fails, allow submission
+    }
+  }
+
+  // Bot protection: Log bot attempts
+  const logBotAttempt = async (detectionType, detectionDetails, timeSpent) => {
+    try {
+      await fetch('/api/bot-log', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          message: mailMessage,
+          honeypot,
+          detectionType,
+          detectionDetails,
+          locale: 'sk',
+          origin: 'PRUDSK2NEXT_CONTACT',
+          timeSpent,
+        }),
+      })
+    } catch (error) {
+      console.error('Error logging bot attempt:', error)
+    }
+  }
 
   const increaseBots = async () => {
     const apiUrl = 'https://hono-api.pictusweb.com/api/bots/prudsk2next/increase'
@@ -117,21 +203,71 @@ const Contact = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault()
+
+    const timeSpent = Date.now() - formStartTime
+
+    // Bot Check 1: Honeypot field
+    if (honeypot !== '') {
+      await logBotAttempt(
+        'honeypot',
+        `Honeypot field filled with value: "${honeypot}"`,
+        timeSpent
+      )
+      setMessage('Neodoslané! Kontaktujte nás telefonicky alebo emailom, prosím')
+      increaseBots()
+      return
+    }
+
+    // Bot Check 2: Time-based validation (minimum 3 seconds)
+    if (timeSpent < 3000) {
+      await logBotAttempt(
+        'time-based',
+        `Form submitted too quickly: ${timeSpent}ms (minimum: 3000ms)`,
+        timeSpent
+      )
+      setMessage('Neodoslané! Kontaktujte nás telefonicky alebo emailom, prosím')
+      increaseBots()
+      return
+    }
+
+    // Bot Check 3: Content validation
+    if (isSpamContent(name) || isSpamContent(mailMessage)) {
+      const spamReason = isSpamContent(name) ? 'name field' : 'message field'
+      await logBotAttempt('content-validation', `Spam content detected in ${spamReason}`, timeSpent)
+      setMessage('Neodoslané! Kontaktujte nás telefonicky alebo emailom, prosím')
+      increaseBots()
+      return
+    }
+
+    // Bot Check 4: Rate limiting
+    if (!checkRateLimit()) {
+      await logBotAttempt(
+        'rate-limit',
+        'Rate limit exceeded: More than 3 submissions in 1 hour',
+        timeSpent
+      )
+      setMessage('Príliš veľa pokusov. Skúste to prosím neskôr.')
+      return
+    }
+
+    // Bot Check 5: Legacy honeypot (password fields)
     if (passwordGroupOne !== x || passwordGroupTwo !== y) {
+      await logBotAttempt('honeypot-legacy', 'Legacy honeypot password fields were modified', timeSpent)
       setMessage('Neodoslané! Kontaktujte nás telefonicky alebo emailom, prosím')
       setName('')
       setEmail('')
       setMailMessage('')
       increaseBots()
       return
-    } else {
-      await sendMail()
-      increaseEmails()
-      setMessageSuccess('Správa úspešne odoslaná')
-      setName('')
-      setEmail('')
-      setMailMessage('')
     }
+
+    // All checks passed - submit the form
+    await sendMail()
+    increaseEmails()
+    setMessageSuccess('Správa úspešne odoslaná')
+    setName('')
+    setEmail('')
+    setMailMessage('')
   }
 
   return (
@@ -208,6 +344,23 @@ const Contact = () => {
                 value={mailMessage}
                 onChange={(e) => setMailMessage(e.target.value)}
                 className="w-full mt-1 text-[17px] border border-gray-300 rounded-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-blue-300 pl-3"
+              />
+            </div>
+
+            {/* Honeypot field - hidden from users, only bots fill this */}
+            <div
+              style={{ position: 'absolute', left: '-9999px', opacity: 0 }}
+              aria-hidden="true"
+            >
+              <label htmlFor="website_url">Website</label>
+              <input
+                type="text"
+                id="website_url"
+                name="website_url"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
               />
             </div>
 
