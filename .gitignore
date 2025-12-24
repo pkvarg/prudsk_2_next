@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# prisma generated files (contains DB credentials)
+/src/prisma/generated/
+
 # vercel
 .vercel
 
