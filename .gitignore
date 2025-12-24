@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+BOT_PROTECTION_SUMMARY.md
+BOT_PROTECTION_TESTS.md
+DATABASE_SETUP.md
+IP_BAN_POLICY.md

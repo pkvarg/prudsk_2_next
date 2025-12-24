@@ -245,6 +245,32 @@ exports.Prisma.VideoScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.IPReputationScalarFieldEnum = {
+  id: 'id',
+  ipAddress: 'ipAddress',
+  violations: 'violations',
+  firstSeen: 'firstSeen',
+  lastSeen: 'lastSeen',
+  bannedUntil: 'bannedUntil',
+  isPermanentBan: 'isPermanentBan',
+  detectionHistory: 'detectionHistory',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BotLogScalarFieldEnum = {
+  id: 'id',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  detectionType: 'detectionType',
+  detectionDetails: 'detectionDetails',
+  formData: 'formData',
+  timeSpent: 'timeSpent',
+  locale: 'locale',
+  origin: 'origin',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -265,7 +291,9 @@ exports.Prisma.ModelName = {
   Product: 'Product',
   Review: 'Review',
   Favorite: 'Favorite',
-  Video: 'Video'
+  Video: 'Video',
+  IPReputation: 'IPReputation',
+  BotLog: 'BotLog'
 };
 
 /**

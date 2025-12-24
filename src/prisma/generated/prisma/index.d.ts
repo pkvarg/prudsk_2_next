@@ -58,6 +58,16 @@ export type Favorite = $Result.DefaultSelection<Prisma.$FavoritePayload>
  * 
  */
 export type Video = $Result.DefaultSelection<Prisma.$VideoPayload>
+/**
+ * Model IPReputation
+ * 
+ */
+export type IPReputation = $Result.DefaultSelection<Prisma.$IPReputationPayload>
+/**
+ * Model BotLog
+ * 
+ */
+export type BotLog = $Result.DefaultSelection<Prisma.$BotLogPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -240,6 +250,26 @@ export class PrismaClient<
     * ```
     */
   get video(): Prisma.VideoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.iPReputation`: Exposes CRUD operations for the **IPReputation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IPReputations
+    * const iPReputations = await prisma.iPReputation.findMany()
+    * ```
+    */
+  get iPReputation(): Prisma.IPReputationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.botLog`: Exposes CRUD operations for the **BotLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BotLogs
+    * const botLogs = await prisma.botLog.findMany()
+    * ```
+    */
+  get botLog(): Prisma.BotLogDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -688,7 +718,9 @@ export namespace Prisma {
     Product: 'Product',
     Review: 'Review',
     Favorite: 'Favorite',
-    Video: 'Video'
+    Video: 'Video',
+    IPReputation: 'IPReputation',
+    BotLog: 'BotLog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -707,7 +739,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "audio" | "counter" | "banner" | "order" | "product" | "review" | "favorite" | "video"
+      modelProps: "user" | "audio" | "counter" | "banner" | "order" | "product" | "review" | "favorite" | "video" | "iPReputation" | "botLog"
       txIsolationLevel: never
     }
     model: {
@@ -1377,6 +1409,154 @@ export namespace Prisma {
           }
         }
       }
+      IPReputation: {
+        payload: Prisma.$IPReputationPayload<ExtArgs>
+        fields: Prisma.IPReputationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IPReputationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IPReputationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IPReputationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IPReputationPayload>
+          }
+          findFirst: {
+            args: Prisma.IPReputationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IPReputationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IPReputationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IPReputationPayload>
+          }
+          findMany: {
+            args: Prisma.IPReputationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IPReputationPayload>[]
+          }
+          create: {
+            args: Prisma.IPReputationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IPReputationPayload>
+          }
+          createMany: {
+            args: Prisma.IPReputationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.IPReputationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IPReputationPayload>
+          }
+          update: {
+            args: Prisma.IPReputationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IPReputationPayload>
+          }
+          deleteMany: {
+            args: Prisma.IPReputationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IPReputationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.IPReputationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IPReputationPayload>
+          }
+          aggregate: {
+            args: Prisma.IPReputationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIPReputation>
+          }
+          groupBy: {
+            args: Prisma.IPReputationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IPReputationGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.IPReputationFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.IPReputationAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.IPReputationCountArgs<ExtArgs>
+            result: $Utils.Optional<IPReputationCountAggregateOutputType> | number
+          }
+        }
+      }
+      BotLog: {
+        payload: Prisma.$BotLogPayload<ExtArgs>
+        fields: Prisma.BotLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BotLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BotLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BotLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BotLogPayload>
+          }
+          findFirst: {
+            args: Prisma.BotLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BotLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BotLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BotLogPayload>
+          }
+          findMany: {
+            args: Prisma.BotLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BotLogPayload>[]
+          }
+          create: {
+            args: Prisma.BotLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BotLogPayload>
+          }
+          createMany: {
+            args: Prisma.BotLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.BotLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BotLogPayload>
+          }
+          update: {
+            args: Prisma.BotLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BotLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.BotLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BotLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.BotLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BotLogPayload>
+          }
+          aggregate: {
+            args: Prisma.BotLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBotLog>
+          }
+          groupBy: {
+            args: Prisma.BotLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BotLogGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.BotLogFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.BotLogAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.BotLogCountArgs<ExtArgs>
+            result: $Utils.Optional<BotLogCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1457,6 +1637,8 @@ export namespace Prisma {
     review?: ReviewOmit
     favorite?: FavoriteOmit
     video?: VideoOmit
+    iPReputation?: IPReputationOmit
+    botLog?: BotLogOmit
   }
 
   /* Types for Logging */
@@ -11667,6 +11849,2040 @@ export namespace Prisma {
 
 
   /**
+   * Model IPReputation
+   */
+
+  export type AggregateIPReputation = {
+    _count: IPReputationCountAggregateOutputType | null
+    _avg: IPReputationAvgAggregateOutputType | null
+    _sum: IPReputationSumAggregateOutputType | null
+    _min: IPReputationMinAggregateOutputType | null
+    _max: IPReputationMaxAggregateOutputType | null
+  }
+
+  export type IPReputationAvgAggregateOutputType = {
+    violations: number | null
+  }
+
+  export type IPReputationSumAggregateOutputType = {
+    violations: number | null
+  }
+
+  export type IPReputationMinAggregateOutputType = {
+    id: string | null
+    ipAddress: string | null
+    violations: number | null
+    firstSeen: Date | null
+    lastSeen: Date | null
+    bannedUntil: Date | null
+    isPermanentBan: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IPReputationMaxAggregateOutputType = {
+    id: string | null
+    ipAddress: string | null
+    violations: number | null
+    firstSeen: Date | null
+    lastSeen: Date | null
+    bannedUntil: Date | null
+    isPermanentBan: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IPReputationCountAggregateOutputType = {
+    id: number
+    ipAddress: number
+    violations: number
+    firstSeen: number
+    lastSeen: number
+    bannedUntil: number
+    isPermanentBan: number
+    detectionHistory: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type IPReputationAvgAggregateInputType = {
+    violations?: true
+  }
+
+  export type IPReputationSumAggregateInputType = {
+    violations?: true
+  }
+
+  export type IPReputationMinAggregateInputType = {
+    id?: true
+    ipAddress?: true
+    violations?: true
+    firstSeen?: true
+    lastSeen?: true
+    bannedUntil?: true
+    isPermanentBan?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IPReputationMaxAggregateInputType = {
+    id?: true
+    ipAddress?: true
+    violations?: true
+    firstSeen?: true
+    lastSeen?: true
+    bannedUntil?: true
+    isPermanentBan?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IPReputationCountAggregateInputType = {
+    id?: true
+    ipAddress?: true
+    violations?: true
+    firstSeen?: true
+    lastSeen?: true
+    bannedUntil?: true
+    isPermanentBan?: true
+    detectionHistory?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type IPReputationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IPReputation to aggregate.
+     */
+    where?: IPReputationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IPReputations to fetch.
+     */
+    orderBy?: IPReputationOrderByWithRelationInput | IPReputationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IPReputationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IPReputations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IPReputations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IPReputations
+    **/
+    _count?: true | IPReputationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IPReputationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IPReputationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IPReputationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IPReputationMaxAggregateInputType
+  }
+
+  export type GetIPReputationAggregateType<T extends IPReputationAggregateArgs> = {
+        [P in keyof T & keyof AggregateIPReputation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIPReputation[P]>
+      : GetScalarType<T[P], AggregateIPReputation[P]>
+  }
+
+
+
+
+  export type IPReputationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IPReputationWhereInput
+    orderBy?: IPReputationOrderByWithAggregationInput | IPReputationOrderByWithAggregationInput[]
+    by: IPReputationScalarFieldEnum[] | IPReputationScalarFieldEnum
+    having?: IPReputationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IPReputationCountAggregateInputType | true
+    _avg?: IPReputationAvgAggregateInputType
+    _sum?: IPReputationSumAggregateInputType
+    _min?: IPReputationMinAggregateInputType
+    _max?: IPReputationMaxAggregateInputType
+  }
+
+  export type IPReputationGroupByOutputType = {
+    id: string
+    ipAddress: string
+    violations: number
+    firstSeen: Date
+    lastSeen: Date
+    bannedUntil: Date | null
+    isPermanentBan: boolean
+    detectionHistory: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: IPReputationCountAggregateOutputType | null
+    _avg: IPReputationAvgAggregateOutputType | null
+    _sum: IPReputationSumAggregateOutputType | null
+    _min: IPReputationMinAggregateOutputType | null
+    _max: IPReputationMaxAggregateOutputType | null
+  }
+
+  type GetIPReputationGroupByPayload<T extends IPReputationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IPReputationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IPReputationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IPReputationGroupByOutputType[P]>
+            : GetScalarType<T[P], IPReputationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IPReputationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ipAddress?: boolean
+    violations?: boolean
+    firstSeen?: boolean
+    lastSeen?: boolean
+    bannedUntil?: boolean
+    isPermanentBan?: boolean
+    detectionHistory?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["iPReputation"]>
+
+
+
+  export type IPReputationSelectScalar = {
+    id?: boolean
+    ipAddress?: boolean
+    violations?: boolean
+    firstSeen?: boolean
+    lastSeen?: boolean
+    bannedUntil?: boolean
+    isPermanentBan?: boolean
+    detectionHistory?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type IPReputationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ipAddress" | "violations" | "firstSeen" | "lastSeen" | "bannedUntil" | "isPermanentBan" | "detectionHistory" | "createdAt" | "updatedAt", ExtArgs["result"]["iPReputation"]>
+
+  export type $IPReputationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IPReputation"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      ipAddress: string
+      violations: number
+      firstSeen: Date
+      lastSeen: Date
+      bannedUntil: Date | null
+      isPermanentBan: boolean
+      detectionHistory: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["iPReputation"]>
+    composites: {}
+  }
+
+  type IPReputationGetPayload<S extends boolean | null | undefined | IPReputationDefaultArgs> = $Result.GetResult<Prisma.$IPReputationPayload, S>
+
+  type IPReputationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IPReputationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IPReputationCountAggregateInputType | true
+    }
+
+  export interface IPReputationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IPReputation'], meta: { name: 'IPReputation' } }
+    /**
+     * Find zero or one IPReputation that matches the filter.
+     * @param {IPReputationFindUniqueArgs} args - Arguments to find a IPReputation
+     * @example
+     * // Get one IPReputation
+     * const iPReputation = await prisma.iPReputation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IPReputationFindUniqueArgs>(args: SelectSubset<T, IPReputationFindUniqueArgs<ExtArgs>>): Prisma__IPReputationClient<$Result.GetResult<Prisma.$IPReputationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IPReputation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IPReputationFindUniqueOrThrowArgs} args - Arguments to find a IPReputation
+     * @example
+     * // Get one IPReputation
+     * const iPReputation = await prisma.iPReputation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IPReputationFindUniqueOrThrowArgs>(args: SelectSubset<T, IPReputationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IPReputationClient<$Result.GetResult<Prisma.$IPReputationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IPReputation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IPReputationFindFirstArgs} args - Arguments to find a IPReputation
+     * @example
+     * // Get one IPReputation
+     * const iPReputation = await prisma.iPReputation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IPReputationFindFirstArgs>(args?: SelectSubset<T, IPReputationFindFirstArgs<ExtArgs>>): Prisma__IPReputationClient<$Result.GetResult<Prisma.$IPReputationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IPReputation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IPReputationFindFirstOrThrowArgs} args - Arguments to find a IPReputation
+     * @example
+     * // Get one IPReputation
+     * const iPReputation = await prisma.iPReputation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IPReputationFindFirstOrThrowArgs>(args?: SelectSubset<T, IPReputationFindFirstOrThrowArgs<ExtArgs>>): Prisma__IPReputationClient<$Result.GetResult<Prisma.$IPReputationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IPReputations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IPReputationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IPReputations
+     * const iPReputations = await prisma.iPReputation.findMany()
+     * 
+     * // Get first 10 IPReputations
+     * const iPReputations = await prisma.iPReputation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const iPReputationWithIdOnly = await prisma.iPReputation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IPReputationFindManyArgs>(args?: SelectSubset<T, IPReputationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IPReputationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IPReputation.
+     * @param {IPReputationCreateArgs} args - Arguments to create a IPReputation.
+     * @example
+     * // Create one IPReputation
+     * const IPReputation = await prisma.iPReputation.create({
+     *   data: {
+     *     // ... data to create a IPReputation
+     *   }
+     * })
+     * 
+     */
+    create<T extends IPReputationCreateArgs>(args: SelectSubset<T, IPReputationCreateArgs<ExtArgs>>): Prisma__IPReputationClient<$Result.GetResult<Prisma.$IPReputationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IPReputations.
+     * @param {IPReputationCreateManyArgs} args - Arguments to create many IPReputations.
+     * @example
+     * // Create many IPReputations
+     * const iPReputation = await prisma.iPReputation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IPReputationCreateManyArgs>(args?: SelectSubset<T, IPReputationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a IPReputation.
+     * @param {IPReputationDeleteArgs} args - Arguments to delete one IPReputation.
+     * @example
+     * // Delete one IPReputation
+     * const IPReputation = await prisma.iPReputation.delete({
+     *   where: {
+     *     // ... filter to delete one IPReputation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IPReputationDeleteArgs>(args: SelectSubset<T, IPReputationDeleteArgs<ExtArgs>>): Prisma__IPReputationClient<$Result.GetResult<Prisma.$IPReputationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IPReputation.
+     * @param {IPReputationUpdateArgs} args - Arguments to update one IPReputation.
+     * @example
+     * // Update one IPReputation
+     * const iPReputation = await prisma.iPReputation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IPReputationUpdateArgs>(args: SelectSubset<T, IPReputationUpdateArgs<ExtArgs>>): Prisma__IPReputationClient<$Result.GetResult<Prisma.$IPReputationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IPReputations.
+     * @param {IPReputationDeleteManyArgs} args - Arguments to filter IPReputations to delete.
+     * @example
+     * // Delete a few IPReputations
+     * const { count } = await prisma.iPReputation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IPReputationDeleteManyArgs>(args?: SelectSubset<T, IPReputationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IPReputations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IPReputationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IPReputations
+     * const iPReputation = await prisma.iPReputation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IPReputationUpdateManyArgs>(args: SelectSubset<T, IPReputationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one IPReputation.
+     * @param {IPReputationUpsertArgs} args - Arguments to update or create a IPReputation.
+     * @example
+     * // Update or create a IPReputation
+     * const iPReputation = await prisma.iPReputation.upsert({
+     *   create: {
+     *     // ... data to create a IPReputation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IPReputation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IPReputationUpsertArgs>(args: SelectSubset<T, IPReputationUpsertArgs<ExtArgs>>): Prisma__IPReputationClient<$Result.GetResult<Prisma.$IPReputationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IPReputations that matches the filter.
+     * @param {IPReputationFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const iPReputation = await prisma.iPReputation.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: IPReputationFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a IPReputation.
+     * @param {IPReputationAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const iPReputation = await prisma.iPReputation.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: IPReputationAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of IPReputations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IPReputationCountArgs} args - Arguments to filter IPReputations to count.
+     * @example
+     * // Count the number of IPReputations
+     * const count = await prisma.iPReputation.count({
+     *   where: {
+     *     // ... the filter for the IPReputations we want to count
+     *   }
+     * })
+    **/
+    count<T extends IPReputationCountArgs>(
+      args?: Subset<T, IPReputationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IPReputationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IPReputation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IPReputationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IPReputationAggregateArgs>(args: Subset<T, IPReputationAggregateArgs>): Prisma.PrismaPromise<GetIPReputationAggregateType<T>>
+
+    /**
+     * Group by IPReputation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IPReputationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IPReputationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IPReputationGroupByArgs['orderBy'] }
+        : { orderBy?: IPReputationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IPReputationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIPReputationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IPReputation model
+   */
+  readonly fields: IPReputationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IPReputation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IPReputationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IPReputation model
+   */
+  interface IPReputationFieldRefs {
+    readonly id: FieldRef<"IPReputation", 'String'>
+    readonly ipAddress: FieldRef<"IPReputation", 'String'>
+    readonly violations: FieldRef<"IPReputation", 'Int'>
+    readonly firstSeen: FieldRef<"IPReputation", 'DateTime'>
+    readonly lastSeen: FieldRef<"IPReputation", 'DateTime'>
+    readonly bannedUntil: FieldRef<"IPReputation", 'DateTime'>
+    readonly isPermanentBan: FieldRef<"IPReputation", 'Boolean'>
+    readonly detectionHistory: FieldRef<"IPReputation", 'Json'>
+    readonly createdAt: FieldRef<"IPReputation", 'DateTime'>
+    readonly updatedAt: FieldRef<"IPReputation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IPReputation findUnique
+   */
+  export type IPReputationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+    /**
+     * Filter, which IPReputation to fetch.
+     */
+    where: IPReputationWhereUniqueInput
+  }
+
+  /**
+   * IPReputation findUniqueOrThrow
+   */
+  export type IPReputationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+    /**
+     * Filter, which IPReputation to fetch.
+     */
+    where: IPReputationWhereUniqueInput
+  }
+
+  /**
+   * IPReputation findFirst
+   */
+  export type IPReputationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+    /**
+     * Filter, which IPReputation to fetch.
+     */
+    where?: IPReputationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IPReputations to fetch.
+     */
+    orderBy?: IPReputationOrderByWithRelationInput | IPReputationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IPReputations.
+     */
+    cursor?: IPReputationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IPReputations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IPReputations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IPReputations.
+     */
+    distinct?: IPReputationScalarFieldEnum | IPReputationScalarFieldEnum[]
+  }
+
+  /**
+   * IPReputation findFirstOrThrow
+   */
+  export type IPReputationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+    /**
+     * Filter, which IPReputation to fetch.
+     */
+    where?: IPReputationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IPReputations to fetch.
+     */
+    orderBy?: IPReputationOrderByWithRelationInput | IPReputationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IPReputations.
+     */
+    cursor?: IPReputationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IPReputations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IPReputations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IPReputations.
+     */
+    distinct?: IPReputationScalarFieldEnum | IPReputationScalarFieldEnum[]
+  }
+
+  /**
+   * IPReputation findMany
+   */
+  export type IPReputationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+    /**
+     * Filter, which IPReputations to fetch.
+     */
+    where?: IPReputationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IPReputations to fetch.
+     */
+    orderBy?: IPReputationOrderByWithRelationInput | IPReputationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IPReputations.
+     */
+    cursor?: IPReputationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IPReputations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IPReputations.
+     */
+    skip?: number
+    distinct?: IPReputationScalarFieldEnum | IPReputationScalarFieldEnum[]
+  }
+
+  /**
+   * IPReputation create
+   */
+  export type IPReputationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+    /**
+     * The data needed to create a IPReputation.
+     */
+    data: XOR<IPReputationCreateInput, IPReputationUncheckedCreateInput>
+  }
+
+  /**
+   * IPReputation createMany
+   */
+  export type IPReputationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IPReputations.
+     */
+    data: IPReputationCreateManyInput | IPReputationCreateManyInput[]
+  }
+
+  /**
+   * IPReputation update
+   */
+  export type IPReputationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+    /**
+     * The data needed to update a IPReputation.
+     */
+    data: XOR<IPReputationUpdateInput, IPReputationUncheckedUpdateInput>
+    /**
+     * Choose, which IPReputation to update.
+     */
+    where: IPReputationWhereUniqueInput
+  }
+
+  /**
+   * IPReputation updateMany
+   */
+  export type IPReputationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IPReputations.
+     */
+    data: XOR<IPReputationUpdateManyMutationInput, IPReputationUncheckedUpdateManyInput>
+    /**
+     * Filter which IPReputations to update
+     */
+    where?: IPReputationWhereInput
+    /**
+     * Limit how many IPReputations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IPReputation upsert
+   */
+  export type IPReputationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+    /**
+     * The filter to search for the IPReputation to update in case it exists.
+     */
+    where: IPReputationWhereUniqueInput
+    /**
+     * In case the IPReputation found by the `where` argument doesn't exist, create a new IPReputation with this data.
+     */
+    create: XOR<IPReputationCreateInput, IPReputationUncheckedCreateInput>
+    /**
+     * In case the IPReputation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IPReputationUpdateInput, IPReputationUncheckedUpdateInput>
+  }
+
+  /**
+   * IPReputation delete
+   */
+  export type IPReputationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+    /**
+     * Filter which IPReputation to delete.
+     */
+    where: IPReputationWhereUniqueInput
+  }
+
+  /**
+   * IPReputation deleteMany
+   */
+  export type IPReputationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IPReputations to delete
+     */
+    where?: IPReputationWhereInput
+    /**
+     * Limit how many IPReputations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IPReputation findRaw
+   */
+  export type IPReputationFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * IPReputation aggregateRaw
+   */
+  export type IPReputationAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * IPReputation without action
+   */
+  export type IPReputationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IPReputation
+     */
+    select?: IPReputationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IPReputation
+     */
+    omit?: IPReputationOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BotLog
+   */
+
+  export type AggregateBotLog = {
+    _count: BotLogCountAggregateOutputType | null
+    _avg: BotLogAvgAggregateOutputType | null
+    _sum: BotLogSumAggregateOutputType | null
+    _min: BotLogMinAggregateOutputType | null
+    _max: BotLogMaxAggregateOutputType | null
+  }
+
+  export type BotLogAvgAggregateOutputType = {
+    timeSpent: number | null
+  }
+
+  export type BotLogSumAggregateOutputType = {
+    timeSpent: number | null
+  }
+
+  export type BotLogMinAggregateOutputType = {
+    id: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    detectionType: string | null
+    detectionDetails: string | null
+    timeSpent: number | null
+    locale: string | null
+    origin: string | null
+    createdAt: Date | null
+  }
+
+  export type BotLogMaxAggregateOutputType = {
+    id: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    detectionType: string | null
+    detectionDetails: string | null
+    timeSpent: number | null
+    locale: string | null
+    origin: string | null
+    createdAt: Date | null
+  }
+
+  export type BotLogCountAggregateOutputType = {
+    id: number
+    ipAddress: number
+    userAgent: number
+    detectionType: number
+    detectionDetails: number
+    formData: number
+    timeSpent: number
+    locale: number
+    origin: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BotLogAvgAggregateInputType = {
+    timeSpent?: true
+  }
+
+  export type BotLogSumAggregateInputType = {
+    timeSpent?: true
+  }
+
+  export type BotLogMinAggregateInputType = {
+    id?: true
+    ipAddress?: true
+    userAgent?: true
+    detectionType?: true
+    detectionDetails?: true
+    timeSpent?: true
+    locale?: true
+    origin?: true
+    createdAt?: true
+  }
+
+  export type BotLogMaxAggregateInputType = {
+    id?: true
+    ipAddress?: true
+    userAgent?: true
+    detectionType?: true
+    detectionDetails?: true
+    timeSpent?: true
+    locale?: true
+    origin?: true
+    createdAt?: true
+  }
+
+  export type BotLogCountAggregateInputType = {
+    id?: true
+    ipAddress?: true
+    userAgent?: true
+    detectionType?: true
+    detectionDetails?: true
+    formData?: true
+    timeSpent?: true
+    locale?: true
+    origin?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BotLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BotLog to aggregate.
+     */
+    where?: BotLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BotLogs to fetch.
+     */
+    orderBy?: BotLogOrderByWithRelationInput | BotLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BotLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BotLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BotLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BotLogs
+    **/
+    _count?: true | BotLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BotLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BotLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BotLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BotLogMaxAggregateInputType
+  }
+
+  export type GetBotLogAggregateType<T extends BotLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateBotLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBotLog[P]>
+      : GetScalarType<T[P], AggregateBotLog[P]>
+  }
+
+
+
+
+  export type BotLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BotLogWhereInput
+    orderBy?: BotLogOrderByWithAggregationInput | BotLogOrderByWithAggregationInput[]
+    by: BotLogScalarFieldEnum[] | BotLogScalarFieldEnum
+    having?: BotLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BotLogCountAggregateInputType | true
+    _avg?: BotLogAvgAggregateInputType
+    _sum?: BotLogSumAggregateInputType
+    _min?: BotLogMinAggregateInputType
+    _max?: BotLogMaxAggregateInputType
+  }
+
+  export type BotLogGroupByOutputType = {
+    id: string
+    ipAddress: string
+    userAgent: string | null
+    detectionType: string
+    detectionDetails: string | null
+    formData: JsonValue | null
+    timeSpent: number | null
+    locale: string | null
+    origin: string | null
+    createdAt: Date
+    _count: BotLogCountAggregateOutputType | null
+    _avg: BotLogAvgAggregateOutputType | null
+    _sum: BotLogSumAggregateOutputType | null
+    _min: BotLogMinAggregateOutputType | null
+    _max: BotLogMaxAggregateOutputType | null
+  }
+
+  type GetBotLogGroupByPayload<T extends BotLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BotLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BotLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BotLogGroupByOutputType[P]>
+            : GetScalarType<T[P], BotLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BotLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    detectionType?: boolean
+    detectionDetails?: boolean
+    formData?: boolean
+    timeSpent?: boolean
+    locale?: boolean
+    origin?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["botLog"]>
+
+
+
+  export type BotLogSelectScalar = {
+    id?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    detectionType?: boolean
+    detectionDetails?: boolean
+    formData?: boolean
+    timeSpent?: boolean
+    locale?: boolean
+    origin?: boolean
+    createdAt?: boolean
+  }
+
+  export type BotLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ipAddress" | "userAgent" | "detectionType" | "detectionDetails" | "formData" | "timeSpent" | "locale" | "origin" | "createdAt", ExtArgs["result"]["botLog"]>
+
+  export type $BotLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BotLog"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      ipAddress: string
+      userAgent: string | null
+      detectionType: string
+      detectionDetails: string | null
+      formData: Prisma.JsonValue | null
+      timeSpent: number | null
+      locale: string | null
+      origin: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["botLog"]>
+    composites: {}
+  }
+
+  type BotLogGetPayload<S extends boolean | null | undefined | BotLogDefaultArgs> = $Result.GetResult<Prisma.$BotLogPayload, S>
+
+  type BotLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BotLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BotLogCountAggregateInputType | true
+    }
+
+  export interface BotLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BotLog'], meta: { name: 'BotLog' } }
+    /**
+     * Find zero or one BotLog that matches the filter.
+     * @param {BotLogFindUniqueArgs} args - Arguments to find a BotLog
+     * @example
+     * // Get one BotLog
+     * const botLog = await prisma.botLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BotLogFindUniqueArgs>(args: SelectSubset<T, BotLogFindUniqueArgs<ExtArgs>>): Prisma__BotLogClient<$Result.GetResult<Prisma.$BotLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BotLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BotLogFindUniqueOrThrowArgs} args - Arguments to find a BotLog
+     * @example
+     * // Get one BotLog
+     * const botLog = await prisma.botLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BotLogFindUniqueOrThrowArgs>(args: SelectSubset<T, BotLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BotLogClient<$Result.GetResult<Prisma.$BotLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BotLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BotLogFindFirstArgs} args - Arguments to find a BotLog
+     * @example
+     * // Get one BotLog
+     * const botLog = await prisma.botLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BotLogFindFirstArgs>(args?: SelectSubset<T, BotLogFindFirstArgs<ExtArgs>>): Prisma__BotLogClient<$Result.GetResult<Prisma.$BotLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BotLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BotLogFindFirstOrThrowArgs} args - Arguments to find a BotLog
+     * @example
+     * // Get one BotLog
+     * const botLog = await prisma.botLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BotLogFindFirstOrThrowArgs>(args?: SelectSubset<T, BotLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__BotLogClient<$Result.GetResult<Prisma.$BotLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BotLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BotLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BotLogs
+     * const botLogs = await prisma.botLog.findMany()
+     * 
+     * // Get first 10 BotLogs
+     * const botLogs = await prisma.botLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const botLogWithIdOnly = await prisma.botLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BotLogFindManyArgs>(args?: SelectSubset<T, BotLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BotLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BotLog.
+     * @param {BotLogCreateArgs} args - Arguments to create a BotLog.
+     * @example
+     * // Create one BotLog
+     * const BotLog = await prisma.botLog.create({
+     *   data: {
+     *     // ... data to create a BotLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends BotLogCreateArgs>(args: SelectSubset<T, BotLogCreateArgs<ExtArgs>>): Prisma__BotLogClient<$Result.GetResult<Prisma.$BotLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BotLogs.
+     * @param {BotLogCreateManyArgs} args - Arguments to create many BotLogs.
+     * @example
+     * // Create many BotLogs
+     * const botLog = await prisma.botLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BotLogCreateManyArgs>(args?: SelectSubset<T, BotLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a BotLog.
+     * @param {BotLogDeleteArgs} args - Arguments to delete one BotLog.
+     * @example
+     * // Delete one BotLog
+     * const BotLog = await prisma.botLog.delete({
+     *   where: {
+     *     // ... filter to delete one BotLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BotLogDeleteArgs>(args: SelectSubset<T, BotLogDeleteArgs<ExtArgs>>): Prisma__BotLogClient<$Result.GetResult<Prisma.$BotLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BotLog.
+     * @param {BotLogUpdateArgs} args - Arguments to update one BotLog.
+     * @example
+     * // Update one BotLog
+     * const botLog = await prisma.botLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BotLogUpdateArgs>(args: SelectSubset<T, BotLogUpdateArgs<ExtArgs>>): Prisma__BotLogClient<$Result.GetResult<Prisma.$BotLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BotLogs.
+     * @param {BotLogDeleteManyArgs} args - Arguments to filter BotLogs to delete.
+     * @example
+     * // Delete a few BotLogs
+     * const { count } = await prisma.botLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BotLogDeleteManyArgs>(args?: SelectSubset<T, BotLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BotLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BotLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BotLogs
+     * const botLog = await prisma.botLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BotLogUpdateManyArgs>(args: SelectSubset<T, BotLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one BotLog.
+     * @param {BotLogUpsertArgs} args - Arguments to update or create a BotLog.
+     * @example
+     * // Update or create a BotLog
+     * const botLog = await prisma.botLog.upsert({
+     *   create: {
+     *     // ... data to create a BotLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BotLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BotLogUpsertArgs>(args: SelectSubset<T, BotLogUpsertArgs<ExtArgs>>): Prisma__BotLogClient<$Result.GetResult<Prisma.$BotLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BotLogs that matches the filter.
+     * @param {BotLogFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const botLog = await prisma.botLog.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: BotLogFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a BotLog.
+     * @param {BotLogAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const botLog = await prisma.botLog.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: BotLogAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of BotLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BotLogCountArgs} args - Arguments to filter BotLogs to count.
+     * @example
+     * // Count the number of BotLogs
+     * const count = await prisma.botLog.count({
+     *   where: {
+     *     // ... the filter for the BotLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends BotLogCountArgs>(
+      args?: Subset<T, BotLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BotLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BotLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BotLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BotLogAggregateArgs>(args: Subset<T, BotLogAggregateArgs>): Prisma.PrismaPromise<GetBotLogAggregateType<T>>
+
+    /**
+     * Group by BotLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BotLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BotLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BotLogGroupByArgs['orderBy'] }
+        : { orderBy?: BotLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BotLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBotLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BotLog model
+   */
+  readonly fields: BotLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BotLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BotLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BotLog model
+   */
+  interface BotLogFieldRefs {
+    readonly id: FieldRef<"BotLog", 'String'>
+    readonly ipAddress: FieldRef<"BotLog", 'String'>
+    readonly userAgent: FieldRef<"BotLog", 'String'>
+    readonly detectionType: FieldRef<"BotLog", 'String'>
+    readonly detectionDetails: FieldRef<"BotLog", 'String'>
+    readonly formData: FieldRef<"BotLog", 'Json'>
+    readonly timeSpent: FieldRef<"BotLog", 'Int'>
+    readonly locale: FieldRef<"BotLog", 'String'>
+    readonly origin: FieldRef<"BotLog", 'String'>
+    readonly createdAt: FieldRef<"BotLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BotLog findUnique
+   */
+  export type BotLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+    /**
+     * Filter, which BotLog to fetch.
+     */
+    where: BotLogWhereUniqueInput
+  }
+
+  /**
+   * BotLog findUniqueOrThrow
+   */
+  export type BotLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+    /**
+     * Filter, which BotLog to fetch.
+     */
+    where: BotLogWhereUniqueInput
+  }
+
+  /**
+   * BotLog findFirst
+   */
+  export type BotLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+    /**
+     * Filter, which BotLog to fetch.
+     */
+    where?: BotLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BotLogs to fetch.
+     */
+    orderBy?: BotLogOrderByWithRelationInput | BotLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BotLogs.
+     */
+    cursor?: BotLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BotLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BotLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BotLogs.
+     */
+    distinct?: BotLogScalarFieldEnum | BotLogScalarFieldEnum[]
+  }
+
+  /**
+   * BotLog findFirstOrThrow
+   */
+  export type BotLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+    /**
+     * Filter, which BotLog to fetch.
+     */
+    where?: BotLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BotLogs to fetch.
+     */
+    orderBy?: BotLogOrderByWithRelationInput | BotLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BotLogs.
+     */
+    cursor?: BotLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BotLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BotLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BotLogs.
+     */
+    distinct?: BotLogScalarFieldEnum | BotLogScalarFieldEnum[]
+  }
+
+  /**
+   * BotLog findMany
+   */
+  export type BotLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+    /**
+     * Filter, which BotLogs to fetch.
+     */
+    where?: BotLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BotLogs to fetch.
+     */
+    orderBy?: BotLogOrderByWithRelationInput | BotLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BotLogs.
+     */
+    cursor?: BotLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BotLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BotLogs.
+     */
+    skip?: number
+    distinct?: BotLogScalarFieldEnum | BotLogScalarFieldEnum[]
+  }
+
+  /**
+   * BotLog create
+   */
+  export type BotLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+    /**
+     * The data needed to create a BotLog.
+     */
+    data: XOR<BotLogCreateInput, BotLogUncheckedCreateInput>
+  }
+
+  /**
+   * BotLog createMany
+   */
+  export type BotLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BotLogs.
+     */
+    data: BotLogCreateManyInput | BotLogCreateManyInput[]
+  }
+
+  /**
+   * BotLog update
+   */
+  export type BotLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+    /**
+     * The data needed to update a BotLog.
+     */
+    data: XOR<BotLogUpdateInput, BotLogUncheckedUpdateInput>
+    /**
+     * Choose, which BotLog to update.
+     */
+    where: BotLogWhereUniqueInput
+  }
+
+  /**
+   * BotLog updateMany
+   */
+  export type BotLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BotLogs.
+     */
+    data: XOR<BotLogUpdateManyMutationInput, BotLogUncheckedUpdateManyInput>
+    /**
+     * Filter which BotLogs to update
+     */
+    where?: BotLogWhereInput
+    /**
+     * Limit how many BotLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BotLog upsert
+   */
+  export type BotLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+    /**
+     * The filter to search for the BotLog to update in case it exists.
+     */
+    where: BotLogWhereUniqueInput
+    /**
+     * In case the BotLog found by the `where` argument doesn't exist, create a new BotLog with this data.
+     */
+    create: XOR<BotLogCreateInput, BotLogUncheckedCreateInput>
+    /**
+     * In case the BotLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BotLogUpdateInput, BotLogUncheckedUpdateInput>
+  }
+
+  /**
+   * BotLog delete
+   */
+  export type BotLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+    /**
+     * Filter which BotLog to delete.
+     */
+    where: BotLogWhereUniqueInput
+  }
+
+  /**
+   * BotLog deleteMany
+   */
+  export type BotLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BotLogs to delete
+     */
+    where?: BotLogWhereInput
+    /**
+     * Limit how many BotLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BotLog findRaw
+   */
+  export type BotLogFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * BotLog aggregateRaw
+   */
+  export type BotLogAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * BotLog without action
+   */
+  export type BotLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BotLog
+     */
+    select?: BotLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BotLog
+     */
+    omit?: BotLogOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11827,6 +14043,38 @@ export namespace Prisma {
   };
 
   export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
+
+
+  export const IPReputationScalarFieldEnum: {
+    id: 'id',
+    ipAddress: 'ipAddress',
+    violations: 'violations',
+    firstSeen: 'firstSeen',
+    lastSeen: 'lastSeen',
+    bannedUntil: 'bannedUntil',
+    isPermanentBan: 'isPermanentBan',
+    detectionHistory: 'detectionHistory',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type IPReputationScalarFieldEnum = (typeof IPReputationScalarFieldEnum)[keyof typeof IPReputationScalarFieldEnum]
+
+
+  export const BotLogScalarFieldEnum: {
+    id: 'id',
+    ipAddress: 'ipAddress',
+    userAgent: 'userAgent',
+    detectionType: 'detectionType',
+    detectionDetails: 'detectionDetails',
+    formData: 'formData',
+    timeSpent: 'timeSpent',
+    locale: 'locale',
+    origin: 'origin',
+    createdAt: 'createdAt'
+  };
+
+  export type BotLogScalarFieldEnum = (typeof BotLogScalarFieldEnum)[keyof typeof BotLogScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12753,6 +15001,164 @@ export namespace Prisma {
     userId?: StringNullableWithAggregatesFilter<"Video"> | string | null
   }
 
+  export type IPReputationWhereInput = {
+    AND?: IPReputationWhereInput | IPReputationWhereInput[]
+    OR?: IPReputationWhereInput[]
+    NOT?: IPReputationWhereInput | IPReputationWhereInput[]
+    id?: StringFilter<"IPReputation"> | string
+    ipAddress?: StringFilter<"IPReputation"> | string
+    violations?: IntFilter<"IPReputation"> | number
+    firstSeen?: DateTimeFilter<"IPReputation"> | Date | string
+    lastSeen?: DateTimeFilter<"IPReputation"> | Date | string
+    bannedUntil?: DateTimeNullableFilter<"IPReputation"> | Date | string | null
+    isPermanentBan?: BoolFilter<"IPReputation"> | boolean
+    detectionHistory?: JsonNullableFilter<"IPReputation">
+    createdAt?: DateTimeFilter<"IPReputation"> | Date | string
+    updatedAt?: DateTimeFilter<"IPReputation"> | Date | string
+  }
+
+  export type IPReputationOrderByWithRelationInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    violations?: SortOrder
+    firstSeen?: SortOrder
+    lastSeen?: SortOrder
+    bannedUntil?: SortOrder
+    isPermanentBan?: SortOrder
+    detectionHistory?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IPReputationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    ipAddress?: string
+    AND?: IPReputationWhereInput | IPReputationWhereInput[]
+    OR?: IPReputationWhereInput[]
+    NOT?: IPReputationWhereInput | IPReputationWhereInput[]
+    violations?: IntFilter<"IPReputation"> | number
+    firstSeen?: DateTimeFilter<"IPReputation"> | Date | string
+    lastSeen?: DateTimeFilter<"IPReputation"> | Date | string
+    bannedUntil?: DateTimeNullableFilter<"IPReputation"> | Date | string | null
+    isPermanentBan?: BoolFilter<"IPReputation"> | boolean
+    detectionHistory?: JsonNullableFilter<"IPReputation">
+    createdAt?: DateTimeFilter<"IPReputation"> | Date | string
+    updatedAt?: DateTimeFilter<"IPReputation"> | Date | string
+  }, "id" | "ipAddress">
+
+  export type IPReputationOrderByWithAggregationInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    violations?: SortOrder
+    firstSeen?: SortOrder
+    lastSeen?: SortOrder
+    bannedUntil?: SortOrder
+    isPermanentBan?: SortOrder
+    detectionHistory?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: IPReputationCountOrderByAggregateInput
+    _avg?: IPReputationAvgOrderByAggregateInput
+    _max?: IPReputationMaxOrderByAggregateInput
+    _min?: IPReputationMinOrderByAggregateInput
+    _sum?: IPReputationSumOrderByAggregateInput
+  }
+
+  export type IPReputationScalarWhereWithAggregatesInput = {
+    AND?: IPReputationScalarWhereWithAggregatesInput | IPReputationScalarWhereWithAggregatesInput[]
+    OR?: IPReputationScalarWhereWithAggregatesInput[]
+    NOT?: IPReputationScalarWhereWithAggregatesInput | IPReputationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IPReputation"> | string
+    ipAddress?: StringWithAggregatesFilter<"IPReputation"> | string
+    violations?: IntWithAggregatesFilter<"IPReputation"> | number
+    firstSeen?: DateTimeWithAggregatesFilter<"IPReputation"> | Date | string
+    lastSeen?: DateTimeWithAggregatesFilter<"IPReputation"> | Date | string
+    bannedUntil?: DateTimeNullableWithAggregatesFilter<"IPReputation"> | Date | string | null
+    isPermanentBan?: BoolWithAggregatesFilter<"IPReputation"> | boolean
+    detectionHistory?: JsonNullableWithAggregatesFilter<"IPReputation">
+    createdAt?: DateTimeWithAggregatesFilter<"IPReputation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"IPReputation"> | Date | string
+  }
+
+  export type BotLogWhereInput = {
+    AND?: BotLogWhereInput | BotLogWhereInput[]
+    OR?: BotLogWhereInput[]
+    NOT?: BotLogWhereInput | BotLogWhereInput[]
+    id?: StringFilter<"BotLog"> | string
+    ipAddress?: StringFilter<"BotLog"> | string
+    userAgent?: StringNullableFilter<"BotLog"> | string | null
+    detectionType?: StringFilter<"BotLog"> | string
+    detectionDetails?: StringNullableFilter<"BotLog"> | string | null
+    formData?: JsonNullableFilter<"BotLog">
+    timeSpent?: IntNullableFilter<"BotLog"> | number | null
+    locale?: StringNullableFilter<"BotLog"> | string | null
+    origin?: StringNullableFilter<"BotLog"> | string | null
+    createdAt?: DateTimeFilter<"BotLog"> | Date | string
+  }
+
+  export type BotLogOrderByWithRelationInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    detectionType?: SortOrder
+    detectionDetails?: SortOrder
+    formData?: SortOrder
+    timeSpent?: SortOrder
+    locale?: SortOrder
+    origin?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BotLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BotLogWhereInput | BotLogWhereInput[]
+    OR?: BotLogWhereInput[]
+    NOT?: BotLogWhereInput | BotLogWhereInput[]
+    ipAddress?: StringFilter<"BotLog"> | string
+    userAgent?: StringNullableFilter<"BotLog"> | string | null
+    detectionType?: StringFilter<"BotLog"> | string
+    detectionDetails?: StringNullableFilter<"BotLog"> | string | null
+    formData?: JsonNullableFilter<"BotLog">
+    timeSpent?: IntNullableFilter<"BotLog"> | number | null
+    locale?: StringNullableFilter<"BotLog"> | string | null
+    origin?: StringNullableFilter<"BotLog"> | string | null
+    createdAt?: DateTimeFilter<"BotLog"> | Date | string
+  }, "id">
+
+  export type BotLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    detectionType?: SortOrder
+    detectionDetails?: SortOrder
+    formData?: SortOrder
+    timeSpent?: SortOrder
+    locale?: SortOrder
+    origin?: SortOrder
+    createdAt?: SortOrder
+    _count?: BotLogCountOrderByAggregateInput
+    _avg?: BotLogAvgOrderByAggregateInput
+    _max?: BotLogMaxOrderByAggregateInput
+    _min?: BotLogMinOrderByAggregateInput
+    _sum?: BotLogSumOrderByAggregateInput
+  }
+
+  export type BotLogScalarWhereWithAggregatesInput = {
+    AND?: BotLogScalarWhereWithAggregatesInput | BotLogScalarWhereWithAggregatesInput[]
+    OR?: BotLogScalarWhereWithAggregatesInput[]
+    NOT?: BotLogScalarWhereWithAggregatesInput | BotLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BotLog"> | string
+    ipAddress?: StringWithAggregatesFilter<"BotLog"> | string
+    userAgent?: StringNullableWithAggregatesFilter<"BotLog"> | string | null
+    detectionType?: StringWithAggregatesFilter<"BotLog"> | string
+    detectionDetails?: StringNullableWithAggregatesFilter<"BotLog"> | string | null
+    formData?: JsonNullableWithAggregatesFilter<"BotLog">
+    timeSpent?: IntNullableWithAggregatesFilter<"BotLog"> | number | null
+    locale?: StringNullableWithAggregatesFilter<"BotLog"> | string | null
+    origin?: StringNullableWithAggregatesFilter<"BotLog"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BotLog"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -13668,6 +16074,180 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type IPReputationCreateInput = {
+    id?: string
+    ipAddress: string
+    violations?: number
+    firstSeen?: Date | string
+    lastSeen?: Date | string
+    bannedUntil?: Date | string | null
+    isPermanentBan?: boolean
+    detectionHistory?: InputJsonValue | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IPReputationUncheckedCreateInput = {
+    id?: string
+    ipAddress: string
+    violations?: number
+    firstSeen?: Date | string
+    lastSeen?: Date | string
+    bannedUntil?: Date | string | null
+    isPermanentBan?: boolean
+    detectionHistory?: InputJsonValue | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IPReputationUpdateInput = {
+    ipAddress?: StringFieldUpdateOperationsInput | string
+    violations?: IntFieldUpdateOperationsInput | number
+    firstSeen?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPermanentBan?: BoolFieldUpdateOperationsInput | boolean
+    detectionHistory?: InputJsonValue | InputJsonValue | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IPReputationUncheckedUpdateInput = {
+    ipAddress?: StringFieldUpdateOperationsInput | string
+    violations?: IntFieldUpdateOperationsInput | number
+    firstSeen?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPermanentBan?: BoolFieldUpdateOperationsInput | boolean
+    detectionHistory?: InputJsonValue | InputJsonValue | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IPReputationCreateManyInput = {
+    id?: string
+    ipAddress: string
+    violations?: number
+    firstSeen?: Date | string
+    lastSeen?: Date | string
+    bannedUntil?: Date | string | null
+    isPermanentBan?: boolean
+    detectionHistory?: InputJsonValue | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IPReputationUpdateManyMutationInput = {
+    ipAddress?: StringFieldUpdateOperationsInput | string
+    violations?: IntFieldUpdateOperationsInput | number
+    firstSeen?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPermanentBan?: BoolFieldUpdateOperationsInput | boolean
+    detectionHistory?: InputJsonValue | InputJsonValue | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IPReputationUncheckedUpdateManyInput = {
+    ipAddress?: StringFieldUpdateOperationsInput | string
+    violations?: IntFieldUpdateOperationsInput | number
+    firstSeen?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastSeen?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPermanentBan?: BoolFieldUpdateOperationsInput | boolean
+    detectionHistory?: InputJsonValue | InputJsonValue | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BotLogCreateInput = {
+    id?: string
+    ipAddress: string
+    userAgent?: string | null
+    detectionType: string
+    detectionDetails?: string | null
+    formData?: InputJsonValue | null
+    timeSpent?: number | null
+    locale?: string | null
+    origin?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BotLogUncheckedCreateInput = {
+    id?: string
+    ipAddress: string
+    userAgent?: string | null
+    detectionType: string
+    detectionDetails?: string | null
+    formData?: InputJsonValue | null
+    timeSpent?: number | null
+    locale?: string | null
+    origin?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BotLogUpdateInput = {
+    ipAddress?: StringFieldUpdateOperationsInput | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    detectionType?: StringFieldUpdateOperationsInput | string
+    detectionDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    formData?: InputJsonValue | InputJsonValue | null
+    timeSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    origin?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BotLogUncheckedUpdateInput = {
+    ipAddress?: StringFieldUpdateOperationsInput | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    detectionType?: StringFieldUpdateOperationsInput | string
+    detectionDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    formData?: InputJsonValue | InputJsonValue | null
+    timeSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    origin?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BotLogCreateManyInput = {
+    id?: string
+    ipAddress: string
+    userAgent?: string | null
+    detectionType: string
+    detectionDetails?: string | null
+    formData?: InputJsonValue | null
+    timeSpent?: number | null
+    locale?: string | null
+    origin?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BotLogUpdateManyMutationInput = {
+    ipAddress?: StringFieldUpdateOperationsInput | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    detectionType?: StringFieldUpdateOperationsInput | string
+    detectionDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    formData?: InputJsonValue | InputJsonValue | null
+    timeSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    origin?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BotLogUncheckedUpdateManyInput = {
+    ipAddress?: StringFieldUpdateOperationsInput | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    detectionType?: StringFieldUpdateOperationsInput | string
+    detectionDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    formData?: InputJsonValue | InputJsonValue | null
+    timeSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    origin?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -14396,6 +16976,136 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type IPReputationCountOrderByAggregateInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    violations?: SortOrder
+    firstSeen?: SortOrder
+    lastSeen?: SortOrder
+    bannedUntil?: SortOrder
+    isPermanentBan?: SortOrder
+    detectionHistory?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IPReputationAvgOrderByAggregateInput = {
+    violations?: SortOrder
+  }
+
+  export type IPReputationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    violations?: SortOrder
+    firstSeen?: SortOrder
+    lastSeen?: SortOrder
+    bannedUntil?: SortOrder
+    isPermanentBan?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IPReputationMinOrderByAggregateInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    violations?: SortOrder
+    firstSeen?: SortOrder
+    lastSeen?: SortOrder
+    bannedUntil?: SortOrder
+    isPermanentBan?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IPReputationSumOrderByAggregateInput = {
+    violations?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type BotLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    detectionType?: SortOrder
+    detectionDetails?: SortOrder
+    formData?: SortOrder
+    timeSpent?: SortOrder
+    locale?: SortOrder
+    origin?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BotLogAvgOrderByAggregateInput = {
+    timeSpent?: SortOrder
+  }
+
+  export type BotLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    detectionType?: SortOrder
+    detectionDetails?: SortOrder
+    timeSpent?: SortOrder
+    locale?: SortOrder
+    origin?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BotLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    detectionType?: SortOrder
+    detectionDetails?: SortOrder
+    timeSpent?: SortOrder
+    locale?: SortOrder
+    origin?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BotLogSumOrderByAggregateInput = {
+    timeSpent?: SortOrder
+  }
+
   export type ProductCreateNestedManyWithoutUserInput = {
     create?: XOR<ProductCreateWithoutUserInput, ProductUncheckedCreateWithoutUserInput> | ProductCreateWithoutUserInput[] | ProductUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutUserInput | ProductCreateOrConnectWithoutUserInput[]
@@ -14959,6 +17669,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideosInput, UserUpdateWithoutVideosInput>, UserUncheckedUpdateWithoutVideosInput>
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -15169,6 +17891,46 @@ export namespace Prisma {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
     isSet?: boolean
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ProductCreateWithoutUserInput = {

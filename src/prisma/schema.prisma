@@ -196,10 +196,40 @@ model Video {
   code        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  
+
   // Relations
   user        User?    @relation(fields: [userId], references: [id])  // Made optional
   userId      String?  @db.ObjectId  // Made optional
 
   @@map("videos")
+}
+
+model IPReputation {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  ipAddress         String   @unique
+  violations        Int      @default(0)
+  firstSeen         DateTime @default(now())
+  lastSeen          DateTime @updatedAt
+  bannedUntil       DateTime?
+  isPermanentBan    Boolean  @default(false)
+  detectionHistory  Json?    // Array of {type, details, timestamp}
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("ip_reputations")
+}
+
+model BotLog {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  ipAddress        String
+  userAgent        String?
+  detectionType    String   // honeypot, time-based, content-validation, rate-limit
+  detectionDetails String?
+  formData         Json?    // name, email, phone, message, honeypot
+  timeSpent        Int?     // milliseconds
+  locale           String?
+  origin           String?  // PRUDSK_CONTACT, PRUDSK_REGISTER
+  createdAt        DateTime @default(now())
+
+  @@map("bot_logs")
 }
