@@ -311,7 +311,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mongodb+srv://pkvarg:PetoMongo8201@proudcz.qoz0kqj.mongodb.net/Proud-Eshop?retryWrites=true&w=majority"
+        "value": "mongodb+srv://pkvarg:PetoMongo8201@prudcluster.qh9fx35.mongodb.net/Prud-Eshop?retryWrites=true&w=majority"
       }
     }
   },
