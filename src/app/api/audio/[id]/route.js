@@ -98,7 +98,7 @@ export async function PUT(request, { params }) {
 
     // Parse request body
     const body = await request.json()
-    const { audioTitle, mp3file, category, subcategory } = body
+    const { audioTitle, mp3file, driveFileName, category, subcategory } = body
 
     // Check if audio exists
     const audio = await prisma.audio.findUnique({
@@ -116,6 +116,7 @@ export async function PUT(request, { params }) {
         userId,
         audioTitle,
         mp3file,
+        driveFileName,
         category,
         subcategory,
       },

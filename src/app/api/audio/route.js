@@ -48,6 +48,7 @@ export async function POST(request) {
         userId: userId, // Link to the authenticated user
         audioTitle: '',
         mp3file: '',
+        driveFileName: '',
         category: '',
         subcategory: '',
       },

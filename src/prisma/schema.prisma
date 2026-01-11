@@ -52,17 +52,18 @@ model User {
 }
 
 model Audio {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  audioTitle  String?
-  mp3file     String?
-  category    String?
-  subcategory String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  audioTitle     String?
+  mp3file        String?
+  driveFileName  String?
+  category       String?
+  subcategory    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
   // Relations
-  user        User?    @relation(fields: [userId], references: [id])  // Made optional
-  userId      String?  @db.ObjectId  // Made optional
+  user           User?    @relation(fields: [userId], references: [id])  // Made optional
+  userId         String?  @db.ObjectId  // Made optional
 
   @@map("audios")
 }
@@ -146,7 +147,7 @@ model Product {
   binding        String?
   pages          String?
   isbn           String?
-  year           Int?
+  year           String?
   searchName     String?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt  
@@ -228,8 +229,24 @@ model BotLog {
   formData         Json?    // name, email, phone, message, honeypot
   timeSpent        Int?     // milliseconds
   locale           String?
-  origin           String?  // PRUDSK_CONTACT, PRUDSK_REGISTER
+  origin           String?  // PROUD2NEXT_CONTACT, PROUD2NEXT_REGISTER
   createdAt        DateTime @default(now())
 
   @@map("bot_logs")
+}
+
+model SubnetReputation {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  subnet            String   @unique  // CIDR notation (e.g., "185.220.101.0/24")
+  violatingIPs      String[]  // Array of IPs from this subnet
+  violations        Int      @default(0)
+  firstSeen         DateTime @default(now())
+  lastSeen          DateTime @updatedAt
+  bannedUntil       DateTime?
+  isPermanentBan    Boolean  @default(false)
+  detectionHistory  Json?    // Array of {type, details, timestamp, ip}
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("subnet_reputations")
 }

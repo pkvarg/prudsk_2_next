@@ -71,7 +71,8 @@ const AudioList = () => {
         (audio) =>
           audio.audioTitle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
           audio.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          audio.mp3file?.toLowerCase().includes(searchTerm.toLowerCase()),
+          audio.mp3file?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          audio.driveFileName?.toLowerCase().includes(searchTerm.toLowerCase()),
       )
       setFilteredAudios(filtered)
     }
@@ -199,6 +200,7 @@ const AudioList = () => {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Súbor
                     </th>
+
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Kategorie
                     </th>
@@ -216,6 +218,7 @@ const AudioList = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {audio.mp3file}
                       </td>
+
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {audio.category}
                       </td>
@@ -273,6 +276,10 @@ const AudioList = () => {
                   <div>
                     <span className="font-medium text-gray-700">Súbor:</span>
                     <span className="ml-2">{audio.mp3file}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-700">Názov súboru:</span>
+                    <span className="ml-2">{audio.driveFileName}</span>
                   </div>
                   <div>
                     <span className="font-medium text-gray-700">Kategorie:</span>

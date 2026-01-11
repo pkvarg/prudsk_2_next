@@ -13,6 +13,7 @@ const AudioEditPage = () => {
 
   const [audioTitle, setAudioTitle] = useState('')
   const [mp3file, setMp3file] = useState('')
+  const [driveFileName, setDriveFileName] = useState('')
   const [category, setCategory] = useState('')
   const [subcategory, setSubcategory] = useState('')
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false)
@@ -85,6 +86,7 @@ const AudioEditPage = () => {
     if (audio && audio.id === audioId) {
       setAudioTitle(audio.audioTitle || '')
       setMp3file(audio.mp3file || '')
+      setDriveFileName(audio.driveFileName || '')
       setCategory(audio.category || '')
       setSubcategory(audio.subcategory || '')
     }
@@ -96,6 +98,7 @@ const AudioEditPage = () => {
       id: audioId,
       audioTitle,
       mp3file,
+      driveFileName,
       category,
       subcategory,
     })
@@ -218,6 +221,21 @@ const AudioEditPage = () => {
                 placeholder="Linka z Google drive"
                 value={mp3file}
                 onChange={(e) => setMp3file(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              />
+            </div>
+
+            {/* Drive File Name */}
+            <div>
+              <label htmlFor="drive-file-name" className="block text-sm font-medium text-gray-700 mb-2">
+                Názov súboru na Google Drive
+              </label>
+              <input
+                type="text"
+                id="drive-file-name"
+                placeholder="Názov súboru"
+                value={driveFileName}
+                onChange={(e) => setDriveFileName(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
               />
             </div>
