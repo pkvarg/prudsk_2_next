@@ -228,8 +228,10 @@ export async function GET(request) {
     if (!user.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
-    // Find all orders with user information
-    const orders = await prisma.order.findMany({})
+    // Find all orders with user information, newest first
+    const orders = await prisma.order.findMany({
+      orderBy: { createdAt: 'desc' },
+    })
 
     return NextResponse.json(orders)
   } catch (error) {
