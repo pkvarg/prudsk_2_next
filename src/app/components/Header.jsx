@@ -348,6 +348,11 @@ const Header = () => {
 
             {/* Desktop navigation */}
             <div className="hidden lg:flex items-center space-x-6 py-4">
+              {/* Darujte 2% */}
+              <Link href="/give_2percent" className="!text-white hover:text-gray-200 transition-colors">
+                Darujte 2%
+              </Link>
+
               {/* Novinky */}
               <div className="relative">
                 <button
@@ -596,7 +601,17 @@ const Header = () => {
             <div className="lg:hidden bg-red-700 pb-4">
               <div className="space-y-2">
                 {/* Mobile navigation items */}
-                <div className="border-t border-red-600 pt-2 ">
+                <div className="border-t border-red-600 pt-2">
+                  <Link
+                    href="/give_2percent"
+                    className="block px-4 py-2 !text-white"
+                    onClick={closeAllDropdowns}
+                  >
+                    Darujte 2%
+                  </Link>
+                </div>
+
+                <div>
                   <button
                     onClick={() => toggleDropdown('mobile-news')}
                     className="w-full text-left px-4 py-2 text-white flex justify-between items-center"
