@@ -29,9 +29,18 @@ export async function GET(request, { params }) {
         isSubscribed: true,
         isRegistered: true,
         isUnsubscribed: true,
+        hwmr: true,
+        lastEbookDownloadAt: true,
+        lastEbookModalSeenAt: true,
         createdAt: true,
         updatedAt: true,
         googleId: true,
+        ebookDownloads: {
+          orderBy: { downloadedAt: 'desc' },
+          include: {
+            ebook: { select: { id: true, name: true, filename: true } },
+          },
+        },
         // password is excluded
       },
     })
@@ -140,6 +149,7 @@ export async function PUT(request, { params }) {
           userData.isRegistered !== undefined ? userData.isRegistered : user.isRegistered,
         isSubscribed:
           userData.isSubscribed !== undefined ? userData.isSubscribed : user.isSubscribed,
+        hwmr: userData.hwmr !== undefined ? userData.hwmr : user.hwmr,
       }
 
       // Handle unsubscribe status
@@ -164,6 +174,8 @@ export async function PUT(request, { params }) {
         isAssistant: updatedUser.isAssistant,
         isRegistered: updatedUser.isRegistered,
         isSubscribed: updatedUser.isSubscribed,
+        hwmr: updatedUser.hwmr,
+        lastEbookDownloadAt: updatedUser.lastEbookDownloadAt,
       })
     }
   } catch (error) {

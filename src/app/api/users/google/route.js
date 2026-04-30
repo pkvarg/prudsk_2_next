@@ -22,6 +22,7 @@ export async function POST(request) {
         isAdmin: user.isAdmin,
         isAssistant: user.isAssistant,
         isSubscribed: user.isSubscribed,
+        hwmr: user.hwmr || false,
       })
     } else {
       // Create new user

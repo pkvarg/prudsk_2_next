@@ -144,6 +144,8 @@ export async function GET(request) {
         isSubscribed: true,
         isRegistered: true,
         isUnsubscribed: true,
+        hwmr: true,
+        lastEbookDownloadAt: true,
         createdAt: true,
       },
     })

@@ -43,6 +43,7 @@ export async function POST(request) {
         isAdmin: user.isAdmin,
         isAssistant: user.isAssistant || false,
         isSubscribed: user.isSubscribed || false,
+        hwmr: user.hwmr || false,
         //favorites: user.favorites || [],
         //token: generateToken(user.id),
       })

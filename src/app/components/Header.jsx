@@ -198,6 +198,13 @@ const Header = () => {
                       Bannery
                     </Link>
                     <Link
+                      href="/admin/ebooklist"
+                      className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
+                      onClick={closeAllDropdowns}
+                    >
+                      Ebooky
+                    </Link>
+                    <Link
                       href="/admin/subscriberslist"
                       className="block px-4 py-2 !text-[#000000] hover:bg-[#24b9d6] text-[15px]"
                       onClick={closeAllDropdowns}
@@ -900,6 +907,13 @@ const Header = () => {
                           onClick={closeAllDropdowns}
                         >
                           Bannery
+                        </Link>
+                        <Link
+                          href="/admin/ebooklist"
+                          className="block py-1 !text-white text-sm"
+                          onClick={closeAllDropdowns}
+                        >
+                          Ebooky
                         </Link>
                         <Link
                           href="/admin/subscriberslist"

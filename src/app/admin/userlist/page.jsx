@@ -107,6 +107,12 @@ const UserListPage = () => {
                   ADMIN
                 </th>
                 <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  HWMR
+                </th>
+                <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  POSL. STIAHNUTIE
+                </th>
+                <th className="py-2 px-4 border-b border-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                   AKCIE
                 </th>
               </tr>
@@ -137,6 +143,18 @@ const UserListPage = () => {
                       ) : (
                         <X className="text-red-500" />
                       )}
+                    </td>
+                    <td className="py-2 px-4 border-b border-gray-200 text-2xl">
+                      {user.hwmr ? (
+                        <Check className="text-green-500" />
+                      ) : (
+                        <X className="text-red-500" />
+                      )}
+                    </td>
+                    <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-600">
+                      {user.lastEbookDownloadAt
+                        ? new Date(user.lastEbookDownloadAt).toLocaleDateString('sk-SK')
+                        : '—'}
                     </td>
                     <td className="py-2 px-4 border-b border-gray-200 space-x-2">
                       <Link

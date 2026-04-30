@@ -34,6 +34,7 @@ const OrderPage = () => {
   } = useOrderStore()
 
   const [error, setError] = useState(null)
+  const [trackingNumber, setTrackingNumber] = useState('')
 
   useEffect(() => {
     if (orderId) {
@@ -43,7 +44,8 @@ const OrderPage = () => {
   }, [orderId])
 
   const deliverHandler = async () => {
-    await deliverOrder(orderId)
+    await deliverOrder(orderId, { trackingNumber: trackingNumber.trim() || undefined })
+    setTrackingNumber('')
     getOrderDetails(orderId)
   }
 
@@ -153,7 +155,15 @@ const OrderPage = () => {
               <h2 className="text-2xl font-semibold mt-6 mb-4">Stav objednávky</h2>
 
               {order.isDelivered ? (
-                <Message variant="success">Odoslané {order.deliveredAt}</Message>
+                <Message variant="success">
+                  Odoslané {order.deliveredAt}
+                  {order.trackingNumber ? (
+                    <>
+                      {' · '}
+                      <span>Sledovacie číslo: {order.trackingNumber}</span>
+                    </>
+                  ) : null}
+                </Message>
               ) : (
                 <Message variant="danger">Neodoslané</Message>
               )}
@@ -242,6 +252,21 @@ const OrderPage = () => {
                 <div className="space-y-2">
                   {!order.isDelivered && (
                     <>
+                      <label
+                        htmlFor="trackingNumber"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        Sledovacie číslo Slovenskej pošty (voliteľné)
+                      </label>
+                      <input
+                        id="trackingNumber"
+                        type="text"
+                        value={trackingNumber}
+                        onChange={(e) => setTrackingNumber(e.target.value)}
+                        maxLength={64}
+                        placeholder="napr. RR123456789SK"
+                        className="w-full mb-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
                       <button
                         onClick={deliverHandler}
                         className={`w-full py-2 px-4 rounded text-white ${
@@ -252,7 +277,9 @@ const OrderPage = () => {
                         {loadingDeliver ? 'Načítava...' : 'Označiť ako odoslané*'}
                       </button>
                       <p className="text-left text-[15px] leading-4 mx-2 mt-1">
-                        * Odosiela sa potvrdenie zákazníkovi aj adminovi.
+                        * Odosiela sa potvrdenie zákazníkovi aj adminovi. Ak zadáte sledovacie
+                        číslo, pošle sa zákazníkovi v emaile spolu s odkazom na stránku Slovenskej
+                        pošty.
                       </p>
                     </>
                   )}

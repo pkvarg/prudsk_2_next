@@ -4,6 +4,7 @@ import Header from './components/Header'
 import { SessionProvider } from 'next-auth/react'
 import GlobalAudioPlayer from './components/GlobalAudioPlayer'
 import Footer from './components/Footer'
+import EbookSessionModal from './components/EbookSessionModal'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
         <SessionProvider>
           <Header />
           {children}
+          <EbookSessionModal />
           <GlobalAudioPlayer />
           <Footer />
         </SessionProvider>

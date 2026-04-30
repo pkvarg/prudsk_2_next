@@ -26,12 +26,17 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ message: 'Objednávka nenájdená' }, { status: 404 })
     }
 
+    const body = await request.json().catch(() => ({}))
+    const rawTracking = typeof body?.trackingNumber === 'string' ? body.trackingNumber.trim() : ''
+    const trackingNumber = rawTracking ? rawTracking.slice(0, 64) : null
+
     // Update the order to delivered status
     const updatedOrder = await prisma.order.update({
       where: { id },
       data: {
         isDelivered: true,
         deliveredAt: new Date(),
+        trackingNumber,
       },
     })
 
@@ -42,6 +47,7 @@ export async function PUT(request, { params }) {
 
     const response = await fetch(apiUrl, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedOrder),
     })
 

@@ -197,11 +197,11 @@ const useOrderStore = create((set, get) => ({
   },
 
   // Deliver Order OK w email notif hono
-  deliverOrder: async (id) => {
+  deliverOrder: async (id, { trackingNumber } = {}) => {
     try {
       set({ loadingDeliver: true, errorDeliver: null })
 
-      const { data } = await axios.put(`/api/orders/${id}/deliver`)
+      const { data } = await axios.put(`/api/orders/${id}/deliver`, { trackingNumber })
 
       set({
         loadingDeliver: false,

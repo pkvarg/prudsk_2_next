@@ -32,6 +32,9 @@ model User {
   isAssistant       Boolean?  @default(false)  // Made optional
   isSubscribed      Boolean?  @default(false)  // Made optional
   isUnsubscribed    Boolean?  @default(false)  // Made optional
+  hwmr              Boolean?  @default(false)
+  lastEbookDownloadAt   DateTime?
+  lastEbookModalSeenAt  DateTime?
   googleId          String?
   passwordChangedAt DateTime?
   passwordResetToken String?
@@ -47,6 +50,7 @@ model User {
   banners           Banner[]
   reviews           Review[]
   favorites         Favorite[]
+  ebookDownloads    EbookDownload[]
 
   @@map("users")
 }
@@ -104,6 +108,7 @@ model Order {
   paidAt                    DateTime?
   isDelivered               Boolean?  @default(false)  // Made optional
   deliveredAt               DateTime?
+  trackingNumber            String?
   isCancelled               Boolean?  @default(false)  // Made optional
   isCancelledOrderNumberUsed Boolean?  @default(false)  // Made optional
   initPaymentId             String?
@@ -233,6 +238,37 @@ model BotLog {
   createdAt        DateTime @default(now())
 
   @@map("bot_logs")
+}
+
+model Ebook {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  type        String    // 'hwmr' | 'other'
+  filename    String    // original PDF filename, for display
+  price       Float     @default(0)
+  language    String    // 'sk' | 'cz' | 'en'
+  qrCode      String?   // full URL to QR image on hono_bun
+  bookImage   String?   // full URL to cover image on hono_bun
+  pdfUrl      String?   // full URL to PDF on hono_bun (gated)
+  available   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  downloads   EbookDownload[]
+
+  @@map("ebooks")
+}
+
+model EbookDownload {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String   @db.ObjectId
+  ebook        Ebook    @relation(fields: [ebookId], references: [id])
+  ebookId      String   @db.ObjectId
+  downloadedAt DateTime @default(now())
+
+  @@map("ebook_downloads")
 }
 
 model SubnetReputation {

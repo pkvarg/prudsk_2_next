@@ -19,6 +19,7 @@ const UserEditPage = () => {
   const [isAssistant, setIsAssistant] = useState(false)
   const [isRegistered, setIsRegistered] = useState(false)
   const [isSubscribed, setIsSubscribed] = useState(false)
+  const [hwmr, setHwmr] = useState(false)
 
   const {
     loading,
@@ -46,6 +47,7 @@ const UserEditPage = () => {
         setIsAssistant(user.isAssistant)
         setIsRegistered(user.isRegistered)
         setIsSubscribed(user.isSubscribed)
+        setHwmr(!!user.hwmr)
       }
     }
   }, [router, userId, user, successUpdate, getUserDetails, resetUserUpdate])
@@ -60,6 +62,7 @@ const UserEditPage = () => {
       isAssistant,
       isRegistered,
       isSubscribed,
+      hwmr,
     })
   }
 
@@ -160,6 +163,42 @@ const UserEditPage = () => {
                 Odoberateľ noviniek?
               </label>
             </div>
+
+            <div className="flex items-center my-2">
+              <input
+                id="hwmr"
+                type="checkbox"
+                checked={hwmr}
+                onChange={(e) => setHwmr(e.target.checked)}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label htmlFor="hwmr" className="ml-2 block text-sm text-gray-700">
+                HWMR (prístup k ebookom)
+              </label>
+            </div>
+
+            <div className="my-2 text-sm text-gray-600">
+              <span className="font-medium">Posledné stiahnutie ebooku:</span>{' '}
+              {user?.lastEbookDownloadAt
+                ? new Date(user.lastEbookDownloadAt).toLocaleString('sk-SK')
+                : '—'}
+            </div>
+
+            {user?.ebookDownloads?.length > 0 && (
+              <div className="my-4 border rounded p-3 bg-gray-50">
+                <h3 className="text-sm font-semibold mb-2">História stiahnutí</h3>
+                <ul className="text-sm space-y-1">
+                  {user.ebookDownloads.map((d) => (
+                    <li key={d.id} className="flex justify-between border-b last:border-b-0 py-1">
+                      <span>{d.ebook?.name || d.ebook?.filename || d.ebookId}</span>
+                      <span className="text-gray-500">
+                        {new Date(d.downloadedAt).toLocaleString('sk-SK')}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <button
               type="submit"

@@ -34,6 +34,7 @@ export default function LoginPage() {
         email: data.email,
         isAdmin: data.isAdmin,
         isAssistant: data.isAssistant,
+        hwmr: data.hwmr,
         id: data.id,
       })
       router.push(callbackUrl)
@@ -87,6 +88,9 @@ export default function LoginPage() {
         email: data.email,
         id: data.id,
         name: data.name,
+        isAdmin: data.isAdmin,
+        isAssistant: data.isAssistant,
+        hwmr: data.hwmr,
         role: data.isAdmin ? 'admin' : 'user',
       })
 
