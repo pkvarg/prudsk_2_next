@@ -11,7 +11,7 @@ export async function GET(request, { params }) {
   try {
     const userLoggedIn = await isAdmin()
 
-    if (!userLoggedIn.isAdmin) {
+    if (!userLoggedIn?.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
@@ -63,7 +63,7 @@ export async function DELETE(request, { params }) {
   try {
     const userLoggedIn = await isAdmin()
 
-    if (!userLoggedIn.isAdmin) {
+    if (!userLoggedIn?.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
@@ -102,7 +102,7 @@ export async function PUT(request, { params }) {
   try {
     const userLoggedIn = await isAdmin()
 
-    if (!userLoggedIn.isAdmin) {
+    if (!userLoggedIn?.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 

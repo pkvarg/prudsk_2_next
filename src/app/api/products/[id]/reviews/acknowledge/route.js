@@ -1,11 +1,18 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc    Acknowledge review
 // @route   PUT /api/products/:id/reviews/acknowledge
-// @access  Private
+// @access  Private/Admin
 export async function PUT(request, { params }) {
   try {
+    const user = await isAdmin()
+
+    if (!user?.isAdmin) {
+      return new Response('Unauthorized', { status: 401 })
+    }
+
     const { id } = await params
 
     const body = await request.json()

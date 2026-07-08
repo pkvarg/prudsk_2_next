@@ -20,7 +20,7 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
     }
 
-    if (user.id !== userId) {
+    if (!user || user.id !== userId) {
       return new Response('Unauthorized', { status: 401 })
     }
 

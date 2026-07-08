@@ -125,7 +125,7 @@ export async function GET(request) {
   try {
     const user = await isAdmin()
 
-    if (!user.isAdmin) {
+    if (!user?.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 

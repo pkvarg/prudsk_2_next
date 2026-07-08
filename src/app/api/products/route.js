@@ -69,7 +69,7 @@ export async function POST(request) {
   try {
     const user = await isAdmin()
 
-    if (!user.isAdmin) {
+    if (!user?.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
     const userId = user.id

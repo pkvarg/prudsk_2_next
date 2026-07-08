@@ -12,7 +12,7 @@ export async function PUT(request, { params }) {
 
     const user = await isAdmin()
 
-    if (!user.isAdmin) {
+    if (!user?.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 
