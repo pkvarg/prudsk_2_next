@@ -394,6 +394,11 @@ const Footer = () => {
                       Obchodné podmienky
                     </p>
                   </Link>
+                  <Link href="/odstupenie" className="no-underline">
+                    <p className="text-[#9b7d57] text-[17px] md:leading-[21.5px] leading-[35px] font-semibold">
+                      Odstúpiť od zmluvy tu
+                    </p>
+                  </Link>
                 </div>
               </div>
               <div>

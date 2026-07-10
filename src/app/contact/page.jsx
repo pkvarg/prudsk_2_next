@@ -24,7 +24,7 @@ const Contact = () => {
 
   useLayoutEffect(() => {
     window.scrollTo(0, 200)
-  })
+  }, [])
 
   // Initialize form start time for time-based validation
   useEffect(() => {
@@ -208,11 +208,7 @@ const Contact = () => {
 
     // Bot Check 1: Honeypot field
     if (honeypot !== '') {
-      await logBotAttempt(
-        'honeypot',
-        `Honeypot field filled with value: "${honeypot}"`,
-        timeSpent
-      )
+      await logBotAttempt('honeypot', `Honeypot field filled with value: "${honeypot}"`, timeSpent)
       setMessage('Neodoslané! Kontaktujte nás telefonicky alebo emailom, prosím')
       increaseBots()
       return
@@ -223,7 +219,7 @@ const Contact = () => {
       await logBotAttempt(
         'time-based',
         `Form submitted too quickly: ${timeSpent}ms (minimum: 3000ms)`,
-        timeSpent
+        timeSpent,
       )
       setMessage('Neodoslané! Kontaktujte nás telefonicky alebo emailom, prosím')
       increaseBots()
@@ -244,7 +240,7 @@ const Contact = () => {
       await logBotAttempt(
         'rate-limit',
         'Rate limit exceeded: More than 3 submissions in 1 hour',
-        timeSpent
+        timeSpent,
       )
       setMessage('Príliš veľa pokusov. Skúste to prosím neskôr.')
       return
@@ -252,7 +248,11 @@ const Contact = () => {
 
     // Bot Check 5: Legacy honeypot (password fields)
     if (passwordGroupOne !== x || passwordGroupTwo !== y) {
-      await logBotAttempt('honeypot-legacy', 'Legacy honeypot password fields were modified', timeSpent)
+      await logBotAttempt(
+        'honeypot-legacy',
+        'Legacy honeypot password fields were modified',
+        timeSpent,
+      )
       setMessage('Neodoslané! Kontaktujte nás telefonicky alebo emailom, prosím')
       setName('')
       setEmail('')
@@ -348,10 +348,7 @@ const Contact = () => {
             </div>
 
             {/* Honeypot field - hidden from users, only bots fill this */}
-            <div
-              style={{ position: 'absolute', left: '-9999px', opacity: 0 }}
-              aria-hidden="true"
-            >
+            <div style={{ position: 'absolute', left: '-9999px', opacity: 0 }} aria-hidden="true">
               <label htmlFor="website_url">Website</label>
               <input
                 type="text"

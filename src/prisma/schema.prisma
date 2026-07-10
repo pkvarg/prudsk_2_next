@@ -124,8 +124,34 @@ model Order {
   // Relations
   user                      User?     @relation(fields: [userId], references: [id])  // Made optional
   userId                    String?   @db.ObjectId  // Made optional
+  withdrawals               Withdrawal[]
 
   @@map("orders")
+}
+
+model Withdrawal {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderNumber  String
+  name         String
+  email        String
+  phone        String?
+  address      String?
+  orderDate    String?
+  items        String?
+  iban         String?
+  reason       String?
+  orderMatched Boolean  @default(false)
+  emailSent    Boolean  @default(false)
+  status       String   @default("received") // received, processed, refunded, rejected
+  ipAddress    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  order        Order?   @relation(fields: [orderId], references: [id])
+  orderId      String?  @db.ObjectId
+
+  @@map("withdrawals")
 }
 
 model Product {

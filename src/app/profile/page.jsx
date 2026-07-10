@@ -219,12 +219,20 @@ const ProfilePage = () => {
                         )}
                       </td>
                       <td className="border border-gray-200 px-4 py-2">
-                        <Link
-                          href={`/order/${order.id}`}
-                          className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1 rounded text-sm"
-                        >
-                          Detaily
-                        </Link>
+                        <div className="flex gap-2">
+                          <Link
+                            href={`/order/${order.id}`}
+                            className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1 rounded text-sm"
+                          >
+                            Detaily
+                          </Link>
+                          <Link
+                            href={`/odstupenie?order=${order.orderNumber}`}
+                            className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1 rounded text-sm whitespace-nowrap"
+                          >
+                            Odstúpiť od zmluvy
+                          </Link>
+                        </div>
                       </td>
                     </tr>
                   ))}
