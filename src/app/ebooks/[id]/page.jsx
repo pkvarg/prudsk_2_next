@@ -5,6 +5,9 @@ import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import useUserStore from '@/store/userStore'
 
+const PAYME_LINK =
+  'https://payme.sk/2/q/PME?IBAN=SK3811000000002620753192&AM=0.00&CC=EUR&PI=&MSG=RO+-+5-7+Matus&CN=Prud'
+
 const Loader = () => (
   <div className="flex justify-center items-center py-8">
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
@@ -108,8 +111,19 @@ const EbookDetailPage = () => {
         )}
         {ebook.qrCode && (
           <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center">
-            <p className="text-sm text-gray-600 mb-3">Naskenujte QR kód a zaplaťte</p>
+            <p className="text-lg md:text-xl font-bold text-gray-900 text-center mb-4">
+              Ak ste na počítači, naskenujte si tento QR kód pomocou mobilnej aplikácie Vášho
+              internet bankingu.
+            </p>
             <img src={ebook.qrCode} alt="QR kód platby" className="max-h-72 object-contain" />
+            <a
+              href={PAYME_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block bg-[#2bb2e6] hover:bg-[#218334] !text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200"
+            >
+              Ak ste na mobile použite túto linku
+            </a>
           </div>
         )}
       </div>

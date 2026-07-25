@@ -120,7 +120,7 @@ const EbookSessionModal = () => {
             {ebooks.map((ebook) => (
               <li key={ebook.id}>
                 <Link
-                  href={`/ebooks/${ebook.id}`}
+                  href="/ebooks"
                   onClick={minimizeHandler}
                   className="block px-3 py-2 rounded border border-gray-200 hover:bg-blue-50 transition-colors"
                 >

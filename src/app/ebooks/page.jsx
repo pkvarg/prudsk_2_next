@@ -25,11 +25,20 @@ const formatDate = (value) => {
 }
 
 const ANNOUNCEMENT = [
-  'Milí svätí,',
-  'rozhodli sme sa sprístupniť publikáciu Sväté slovo na ranné oživenie aj v elektronickom formáte.',
-  'Odteraz bude možné si jeho aktuálne vydanie stiahnuť vo formáte PDF na týchto stránkach.',
-  'Súčasná cena knižnej formy Oživenia sa odvíja od počtu výtlačkov. Ak znížime počet výtlačkov, cena za jeden kus bude vyššia. Takýmto spôsobom by tí, ktorí si objednávajú tlačené knižky, platili stále viac, zatiaľ čo ostatní by mali „PDF zdarma“. Aby sme tomu predišli a mohli sa postarať o všetkých rovnako, poplatok za PDF formát bude rovnaký ako za tlačenú verziu a bude viazaný na používateľa.',
-  'Teda ak chcete niekomu (aj rodinným príslušníkom) preposlať „vaše PDF“, prosím, vráťte sa sem na stránku, uhraďte príslušný počet „preposlaní“ a informujte aj dotyčného, komu ste „vaše Oživenie“ takto preposlali, že nejde o voľne šíriteľnú publikáciu.',
+  { text: 'Milí svätí,' },
+  {
+    text: 'rozhodli sme sa sprístupniť publikáciu Sväté slovo na ranné oživenie aj v elektronickom formáte.',
+  },
+  {
+    text: 'Odteraz bude možné si jeho aktuálne vydanie stiahnuť vo formáte PDF na týchto stránkach.',
+  },
+  {
+    text: 'Súčasná cena knižnej formy Oživenia sa odvíja od počtu výtlačkov. Ak znížime počet výtlačkov, cena za jeden kus bude vyššia. Takýmto spôsobom by tí, ktorí si objednávajú tlačené knižky, platili stále viac, zatiaľ čo ostatní by mali „PDF zdarma“. Aby sme tomu predišli a mohli sa postarať o všetkých rovnako, poplatok za PDF formát bude rovnaký ako za tlačenú verziu a bude viazaný na používateľa.',
+    bold: true,
+  },
+  {
+    text: 'Teda ak chcete niekomu (aj rodinným príslušníkom) preposlať „vaše PDF“, prosím, vráťte sa sem na stránku, uhraďte príslušný počet „preposlaní“ a informujte aj dotyčného, komu ste „vaše Oživenie“ takto preposlali, že nejde o voľne šíriteľnú publikáciu.',
+  },
 ]
 
 const EbooksIndexPage = () => {
@@ -112,7 +121,9 @@ const EbooksIndexPage = () => {
 
       <div className="bg-white rounded-lg shadow p-6 md:p-8 space-y-4 text-gray-800 leading-relaxed">
         {ANNOUNCEMENT.map((para, i) => (
-          <p key={i}>{para}</p>
+          <p key={i} className={para.bold ? 'font-bold' : undefined}>
+            {para.text}
+          </p>
         ))}
         <p>
           Všetko nech je na budovanie.
