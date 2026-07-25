@@ -274,6 +274,7 @@ model Ebook {
   price       Float     @default(0)
   language    String    // 'sk' | 'cz' | 'en'
   qrCode      String?   // full URL to QR image on hono_bun
+  mobileQR    String?   // payment link opened by the mobile button (e.g. payme.sk)
   bookImage   String?   // full URL to cover image on hono_bun
   pdfUrl      String?   // full URL to PDF on hono_bun (gated)
   available   Boolean   @default(true)

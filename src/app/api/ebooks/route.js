@@ -68,6 +68,7 @@ export async function POST(request) {
       price = 0,
       language = 'sk',
       available = true,
+      mobileQR = '',
     } = body
 
     const ebook = await prisma.ebook.create({
@@ -78,6 +79,7 @@ export async function POST(request) {
         price: Number(price) || 0,
         language,
         available: Boolean(available),
+        mobileQR: mobileQR || null,
         deletedAt: null,
       },
     })

@@ -23,6 +23,7 @@ const EbookNewPage = () => {
   const [price, setPrice] = useState('0')
   const [language, setLanguage] = useState('sk')
   const [available, setAvailable] = useState(true)
+  const [mobileQR, setMobileQR] = useState('')
 
   const { loading, error } = ebookCreate
 
@@ -44,6 +45,7 @@ const EbookNewPage = () => {
         price: Number(price) || 0,
         language,
         available,
+        mobileQR,
       })
       if (created?.id) {
         router.push(`/admin/ebook/${created.id}/edit`)
@@ -124,6 +126,22 @@ const EbookNewPage = () => {
                 onChange={(e) => setPrice(e.target.value)}
                 className="w-full p-2 border border-gray-300 rounded"
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Mobilná platobná linka (mobileQR)
+              </label>
+              <input
+                type="url"
+                value={mobileQR}
+                onChange={(e) => setMobileQR(e.target.value)}
+                className="w-full p-2 border border-gray-300 rounded"
+                placeholder="https://payme.sk/..."
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Zobrazí sa používateľom ako tlačidlo „Ak ste na mobile použite túto linku“.
+              </p>
             </div>
 
             <div>

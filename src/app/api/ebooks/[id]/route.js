@@ -90,6 +90,7 @@ export async function PATCH(request, { params }) {
       'language',
       'available',
       'qrCode',
+      'mobileQR',
       'bookImage',
       'pdfUrl',
     ]
