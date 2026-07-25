@@ -49,8 +49,7 @@ export async function POST(request) {
     }
 
     // HONO MAILER
-    const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/forgot-password'
-    //const apiUrl = 'http://localhost:3013/api/prudsk2next/forgot-password'
+    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/prudsk2next/forgot-password`
 
     // Make the API request
     const response = await fetch(apiUrl, {

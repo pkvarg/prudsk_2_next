@@ -55,8 +55,7 @@ const BannerEditPage = () => {
     formData.append('file', file)
     setUploading(true)
     try {
-      //const apiUrl = 'http://localhost:3013/api/upload/prudsk2next'
-      const apiUrl = 'https://hono-api.pictusweb.com/api/upload/prudsk2next'
+      const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/upload/prudsk2next`
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,

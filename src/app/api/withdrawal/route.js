@@ -69,7 +69,7 @@ export async function POST(request) {
 
     // SEND HONO EMAIL - confirmation of receipt on a durable medium (required by law,
     // must include the content of the withdrawal and the date and time of submission)
-    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL}/api/prudsk2next/withdrawal`
+    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/prudsk2next/withdrawal`
 
     let emailSent = false
     try {

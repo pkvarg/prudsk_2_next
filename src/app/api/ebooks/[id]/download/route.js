@@ -38,10 +38,7 @@ export async function GET(request, { params }) {
       return NextResponse.json({ error: 'Ebook nemá nahraté PDF' }, { status: 404 })
     }
 
-    const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
-    const honoBase = isDevelopment
-      ? 'http://localhost:3013'
-      : 'https://hono-api.pictusweb.com'
+    const honoBase = process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'
     const internalUrl = `${honoBase}/api/internal/prudsk2next/ebooks/${id}/pdf`
 
     const secret = process.env.HONO_EBOOK_INTERNAL_SECRET

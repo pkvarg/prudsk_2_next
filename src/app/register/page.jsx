@@ -154,7 +154,7 @@ function RegisterForm() {
 
   // Bot protection: Increase bots counter
   const increaseBots = async () => {
-    const apiUrl = 'https://hono-api.pictusweb.com/api/bots/prudsk2next/increase'
+    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/bots/prudsk2next/increase`
     try {
       await fetch(apiUrl, {
         method: 'PUT',

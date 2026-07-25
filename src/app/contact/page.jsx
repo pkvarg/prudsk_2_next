@@ -109,8 +109,7 @@ const Contact = () => {
   }
 
   const increaseBots = async () => {
-    const apiUrl = 'https://hono-api.pictusweb.com/api/bots/prudsk2next/increase'
-    //const apiUrl = 'http://localhost:3013/api/bots/prudsk2next/increase'
+    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/bots/prudsk2next/increase`
     try {
       await fetch(apiUrl, {
         method: 'PUT',
@@ -124,8 +123,7 @@ const Contact = () => {
   }
 
   const increaseEmails = async () => {
-    const apiUrl = 'https://hono-api.pictusweb.com/api/emails/prudsk2next/increase'
-    //const apiUrl = 'http://localhost:3013/api/emails/prudsk2next//increase'
+    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/emails/prudsk2next/increase`
     try {
       await fetch(apiUrl, {
         method: 'PUT',
@@ -155,8 +153,7 @@ const Contact = () => {
         subject,
       }
 
-      //const apiUrl = 'http://localhost:3013/api/prudsk2next/contact'
-      const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/contact'
+      const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/prudsk2next/contact`
 
       // Make the API request
       const response = await fetch(apiUrl, {

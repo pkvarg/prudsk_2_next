@@ -35,9 +35,8 @@ export async function PUT(request, { params }) {
     order.adminOnly = adminOnly
 
     // SEND HONO EMAIL
-    //const apiUrl = 'http://localhost:3013/api/prudsk2next/order-send-confirmation'
 
-    const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/order-send-confirmation'
+    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/prudsk2next/order-send-confirmation`
 
     const response = await fetch(apiUrl, {
       method: 'POST',

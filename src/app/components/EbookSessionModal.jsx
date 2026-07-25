@@ -37,7 +37,10 @@ const EbookSessionModal = () => {
     let cancelled = false
     const fetchNew = async () => {
       try {
-        const res = await fetch('/api/ebooks/new-for-me', { credentials: 'include' })
+        const res = await fetch('/api/ebooks/new-for-me', {
+          credentials: 'include',
+          cache: 'no-store',
+        })
         if (!res.ok) return
         const data = await res.json()
         if (cancelled) return
@@ -127,6 +130,14 @@ const EbookSessionModal = () => {
               </li>
             ))}
           </ul>
+
+          <Link
+            href="/ebooks"
+            onClick={minimizeHandler}
+            className="mt-4 inline-block text-sm text-blue-600 hover:underline"
+          >
+            Zobraziť všetky ebooky →
+          </Link>
         </div>
       </div>
     )

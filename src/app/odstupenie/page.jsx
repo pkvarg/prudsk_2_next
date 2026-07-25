@@ -131,7 +131,7 @@ const WithdrawalForm = () => {
   }
 
   const increaseBots = async () => {
-    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL}/api/bots/prudsk2next/increase`
+    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/bots/prudsk2next/increase`
     try {
       await fetch(apiUrl, {
         method: 'PUT',
@@ -145,7 +145,7 @@ const WithdrawalForm = () => {
   }
 
   const increaseEmails = async () => {
-    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL}/api/emails/prudsk2next/increase`
+    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/emails/prudsk2next/increase`
     try {
       await fetch(apiUrl, {
         method: 'PUT',

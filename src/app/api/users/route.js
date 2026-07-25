@@ -78,8 +78,7 @@ export async function POST(request) {
       }
 
       // call API
-      const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/register'
-      //const apiUrl = 'http://localhost:3013/api/prudsk2next/register'
+      const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/prudsk2next/register`
 
       try {
         // Make the API request
@@ -153,6 +152,40 @@ export async function GET(request) {
     return NextResponse.json(users)
   } catch (error) {
     console.error('Error fetching users:', error)
+    return NextResponse.json({ message: error.message }, { status: 500 })
+  }
+}
+
+// @desc Batch-update the hwmr flag on multiple users
+// @desc PATCH /api/users
+// @access Private/Admin
+export async function PATCH(request) {
+  try {
+    const user = await isAdmin()
+
+    if (!user?.isAdmin) {
+      return new Response('Unauthorized', { status: 401 })
+    }
+
+    const body = await request.json().catch(() => ({}))
+    const { ids, hwmr } = body
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json({ message: 'Chýba zoznam používateľov' }, { status: 400 })
+    }
+
+    if (typeof hwmr !== 'boolean') {
+      return NextResponse.json({ message: 'Neplatná hodnota hwmr' }, { status: 400 })
+    }
+
+    const result = await prisma.user.updateMany({
+      where: { id: { in: ids } },
+      data: { hwmr },
+    })
+
+    return NextResponse.json({ count: result.count, hwmr })
+  } catch (error) {
+    console.error('Error batch-updating users:', error)
     return NextResponse.json({ message: error.message }, { status: 500 })
   }
 }

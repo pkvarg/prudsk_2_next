@@ -121,9 +121,8 @@ export async function POST(request, { params }) {
     // TODO
 
     // SEND HONO EMAIL
-    //const apiUrl = 'http://localhost:3013/api/prudsk2next/new-review'
 
-    const apiUrl = 'https://hono-api.pictusweb.com/api/prudsk2next/new-review'
+    const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/prudsk2next/new-review`
 
     const response = await fetch(apiUrl, {
       method: 'POST',

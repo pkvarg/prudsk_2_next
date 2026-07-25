@@ -2,11 +2,8 @@
 import { create } from 'zustand'
 import axios from 'axios'
 
-const HONO_UPLOAD_URL = (() => {
-  if (typeof window === 'undefined') return 'https://hono-api.pictusweb.com'
-  if (window.location.hostname === 'localhost') return 'http://localhost:3013'
-  return 'https://hono-api.pictusweb.com'
-})()
+const HONO_UPLOAD_URL =
+  process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'
 
 const useEbookStore = create((set, get) => ({
   ebookList: {

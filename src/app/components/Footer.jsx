@@ -4,8 +4,7 @@
 // import CookieConsent from 'react-cookie-consent'
 
 // const Footer = () => {
-//   const apiUrl = 'https://hono-api.pictusweb.com/api/visitors/prudsk2next/increase'
-//   //const apiUrl = 'http://localhost:3013/api/visitors/prudsk2next/increase'
+//   const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/visitors/prudsk2next/increase`
 
 //   const incrementCount = async () => {
 //     try {
@@ -243,8 +242,7 @@ import Link from 'next/link'
 import CookieConsent from 'react-cookie-consent'
 
 const Footer = () => {
-  const apiUrl = 'https://hono-api.pictusweb.com/api/visitors/prudsk2next/increase'
-  //const apiUrl = 'http://localhost:3013/api/visitors/prudsk2next/increase'
+  const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/visitors/prudsk2next/increase`
 
   const incrementCount = async () => {
     try {

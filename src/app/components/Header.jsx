@@ -126,6 +126,15 @@ const Header = () => {
                     >
                       Môj profil
                     </Link>
+                    {userInfo.hwmr && (
+                      <Link
+                        href="/ebooks"
+                        className="block px-4 py-2 hover:bg-[#24b9d6]  !text-[#000000]"
+                        onClick={closeUserDropdown}
+                      >
+                        Ebooky
+                      </Link>
+                    )}
                     <button
                       onClick={logoutHandler}
                       className="w-full text-left px-4 py-2 hover:bg-[#24b9d6] !text-[#000000]"
@@ -297,6 +306,15 @@ const Header = () => {
                       >
                         Môj profil
                       </Link>
+                      {userInfo.hwmr && (
+                        <Link
+                          href="/ebooks"
+                          className="block px-4 py-2 !text-[#352106] hover:bg-gray-200"
+                          onClick={closeUserDropdown}
+                        >
+                          Ebooky
+                        </Link>
+                      )}
                       <button
                         onClick={logoutHandler}
                         className="w-full text-left px-4 py-2 !text-[#352106] hover:bg-gray-50"
@@ -600,6 +618,17 @@ const Header = () => {
               <Link href="/favorites" className="!text-white hover:text-gray-200 transition-colors">
                 <Icon.HeartFill className="h-5 w-5" />
               </Link>
+
+              {/* Ebooks - HWMR only */}
+              {userInfo?.hwmr && (
+                <Link
+                  href="/ebooks"
+                  className="!text-white hover:text-gray-200 transition-colors"
+                  onClick={closeAllDropdowns}
+                >
+                  Ranné oživenie
+                </Link>
+              )}
             </div>
           </div>
 
@@ -854,6 +883,16 @@ const Header = () => {
                 >
                   Na stiahnutie
                 </Link>
+                {/* Ebooks - HWMR only */}
+                {userInfo?.hwmr && (
+                  <Link
+                    href="/ebooks"
+                    className="block px-4 py-2 !text-white"
+                    onClick={closeAllDropdowns}
+                  >
+                    Ranné oživenie
+                  </Link>
+                )}
                 {/* Add this ADMIN section for mobile */}
                 {userInfo && userInfo.isAdmin && !userInfo.isAssistant && (
                   <div>

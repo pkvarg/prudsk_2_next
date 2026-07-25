@@ -10,6 +10,8 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url)
     const includeDeleted = searchParams.get('includeDeleted') === 'true'
+    // Public/hwmr view — always available-only, even for admins (used by the /ebooks pages)
+    const publicView = searchParams.get('public') === 'true'
 
     const session = await auth()
     let viewer = null
@@ -20,7 +22,7 @@ export async function GET(request) {
       })
     }
 
-    if (viewer?.isAdmin) {
+    if (viewer?.isAdmin && !publicView) {
       const ebooks = await prisma.ebook.findMany({
         where: includeDeleted ? {} : { deletedAt: null },
         orderBy: { createdAt: 'desc' },
@@ -29,7 +31,7 @@ export async function GET(request) {
       return NextResponse.json({ ebooks })
     }
 
-    if (!viewer?.hwmr) {
+    if (!viewer?.hwmr && !viewer?.isAdmin) {
       return NextResponse.json({ ebooks: [] })
     }
 

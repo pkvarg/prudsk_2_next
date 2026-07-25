@@ -15,14 +15,15 @@ const EbookDetailPage = () => {
   const params = useParams()
   const router = useRouter()
   const ebookId = params.id
-  const { userInfo, getUserDetails } = useUserStore()
+  const { userInfo } = useUserStore()
 
   const [ebook, setEbook] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [paid, setPaid] = useState(false)
-  const [downloading, setDownloading] = useState(false)
-  const [downloadError, setDownloadError] = useState(null)
+  const [quantity, setQuantity] = useState(1)
+
+  const unitPrice = Number(ebook?.price || 0)
+  const total = unitPrice * (Number(quantity) || 0)
 
   useEffect(() => {
     if (!userInfo) {
@@ -43,7 +44,10 @@ const EbookDetailPage = () => {
     const load = async () => {
       try {
         setLoading(true)
-        const res = await fetch(`/api/ebooks/${ebookId}`, { credentials: 'include' })
+        const res = await fetch(`/api/ebooks/${ebookId}?public=true`, {
+          credentials: 'include',
+          cache: 'no-store',
+        })
         if (!res.ok) {
           setError('Ebook sa nepodarilo načítať.')
           setLoading(false)
@@ -67,39 +71,6 @@ const EbookDetailPage = () => {
     }
   }, [ebookId, userInfo?.hwmr])
 
-  const downloadHandler = async () => {
-    if (!paid) return
-    setDownloading(true)
-    setDownloadError(null)
-    try {
-      const res = await fetch(`/api/ebooks/${ebookId}/download`, { credentials: 'include' })
-      if (!res.ok) {
-        setDownloadError('Stiahnutie zlyhalo.')
-        setDownloading(false)
-        return
-      }
-      const blob = await res.blob()
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      const cdHeader = res.headers.get('Content-Disposition') || ''
-      const match = /filename="?([^"]+)"?/i.exec(cdHeader)
-      a.download = match?.[1] || `${ebook?.filename || ebook?.name || 'ebook'}.pdf`
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
-      URL.revokeObjectURL(url)
-
-      if (userInfo?.id) {
-        getUserDetails(userInfo.id)
-      }
-    } catch (err) {
-      setDownloadError('Chyba pri sťahovaní.')
-    } finally {
-      setDownloading(false)
-    }
-  }
-
   if (!userInfo?.hwmr) {
     return null
   }
@@ -109,7 +80,7 @@ const EbookDetailPage = () => {
     return (
       <main className="max-w-3xl mx-auto px-4 py-12">
         <p className="text-red-600">{error}</p>
-        <Link href="/" className="text-blue-600 underline">
+        <Link href="/ebooks" className="text-blue-600 underline">
           Späť
         </Link>
       </main>
@@ -119,7 +90,7 @@ const EbookDetailPage = () => {
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-10">
-      <Link href="/" className="inline-block mb-6 text-sm text-blue-600 hover:underline">
+      <Link href="/ebooks" className="inline-block mb-6 text-sm text-blue-600 hover:underline">
         ← Späť
       </Link>
 
@@ -132,50 +103,62 @@ const EbookDetailPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {ebook.bookImage && (
           <div className="bg-white rounded-lg shadow p-4 flex items-center justify-center">
-            <img
-              src={ebook.bookImage}
-              alt={ebook.name}
-              className="max-h-96 object-contain"
-            />
+            <img src={ebook.bookImage} alt={ebook.name} className="max-h-96 object-contain" />
           </div>
         )}
         {ebook.qrCode && (
           <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center">
             <p className="text-sm text-gray-600 mb-3">Naskenujte QR kód a zaplaťte</p>
-            <img
-              src={ebook.qrCode}
-              alt="QR kód platby"
-              className="max-h-72 object-contain"
-            />
+            <img src={ebook.qrCode} alt="QR kód platby" className="max-h-72 object-contain" />
           </div>
         )}
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6 max-w-xl">
-        <label className="flex items-center gap-3 cursor-pointer">
+      <div className="bg-white rounded-lg shadow p-6 max-w-xl mb-6">
+        <div className="flex items-center gap-3 mb-4">
+          <label htmlFor="quantity" className="text-gray-700">
+            Pre koľkých užívateľov kupujete?
+          </label>
           <input
-            type="checkbox"
-            checked={paid}
-            onChange={(e) => setPaid(e.target.checked)}
-            className="h-5 w-5"
+            id="quantity"
+            type="number"
+            min="1"
+            max="100"
+            step="1"
+            value={quantity}
+            onChange={(e) => {
+              const v = parseInt(e.target.value, 10)
+              setQuantity(Number.isNaN(v) ? '' : Math.min(100, Math.max(1, v)))
+            }}
+            className="w-24 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2bb2e6]"
           />
-          <span className="text-gray-800 leading-none">
-            Zaplatil som <strong>{Number(ebook.price || 0).toFixed(2)} €</strong>
-          </span>
-        </label>
+        </div>
+        <p className="text-gray-600 text-sm">
+          {Number(quantity) || 0} × {unitPrice.toFixed(2)} €
+        </p>
+        <p className="text-xl font-bold text-gray-900 mt-1">
+          Pri platbe zadajte sumu spolu: {total.toFixed(2)} €
+        </p>
+      </div>
 
-        <button
-          type="button"
-          disabled={!paid || downloading}
-          onClick={downloadHandler}
-          className="mt-5 w-full bg-[#2bb2e6] hover:bg-blue-700 disabled:bg-gray-300 text-white font-medium py-3 px-4 rounded-lg transition-colors"
-        >
-          {downloading ? 'Sťahujem…' : 'Stiahnuť PDF'}
-        </button>
-
-        {downloadError && (
-          <p className="mt-3 text-sm text-red-600">{downloadError}</p>
-        )}
+      <div className="bg-white rounded-lg shadow p-6 max-w-xl">
+        <p className="text-gray-800 font-medium mb-4">Zaplatili ste za všetkých užívateľov?</p>
+        <div className="flex gap-4">
+          <button
+            type="button"
+            onClick={() => router.push(`/ebooks/${ebookId}/download`)}
+            className="flex-1 bg-[#2bb2e6] hover:bg-[#218334] !text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200"
+          >
+            Áno
+          </button>
+          <button
+            type="button"
+            onClick={() => router.push('/ebooks')}
+            className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            Nie
+          </button>
+        </div>
       </div>
     </main>
   )

@@ -14,6 +14,10 @@ export async function GET(request, { params }) {
       return NextResponse.json({ error: 'Neplatný formát ID ebooku' }, { status: 400 })
     }
 
+    const { searchParams } = new URL(request.url)
+    // Public/hwmr view — always available-only, even for admins (used by the /ebooks pages)
+    const publicView = searchParams.get('public') === 'true'
+
     const session = await auth()
     let viewer = null
     if (session?.user?.email) {
@@ -23,7 +27,7 @@ export async function GET(request, { params }) {
       })
     }
 
-    if (viewer?.isAdmin) {
+    if (viewer?.isAdmin && !publicView) {
       const ebook = await prisma.ebook.findUnique({
         where: { id },
         include: {
@@ -41,7 +45,7 @@ export async function GET(request, { params }) {
       return NextResponse.json(ebook)
     }
 
-    if (!viewer?.hwmr) {
+    if (!viewer?.hwmr && !viewer?.isAdmin) {
       return new Response('Unauthorized', { status: 401 })
     }
 

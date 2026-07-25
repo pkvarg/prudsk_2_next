@@ -311,6 +311,40 @@ const useUserStore = create(
         }
       },
 
+      // Batch-set the hwmr flag on multiple users (admin only)
+      batchSetHwmr: async (ids, hwmr) => {
+        try {
+          set({ loadingBatch: true, errorBatch: null })
+
+          const { userInfo } = get()
+
+          const config = {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${userInfo.token}`,
+            },
+          }
+
+          await axios.patch('/api/users', { ids, hwmr }, config)
+
+          set({ loadingBatch: false })
+
+          // Refresh the user list to reflect new values
+          await get().listUsers()
+
+          return true
+        } catch (error) {
+          set({
+            loadingBatch: false,
+            errorBatch:
+              error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+          })
+          return false
+        }
+      },
+
       // Reset update state
       resetUserUpdate: () => {
         set({
