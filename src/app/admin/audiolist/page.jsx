@@ -252,11 +252,11 @@ const AudioList = () => {
                 key={audio.id}
                 className="bg-white shadow-md rounded-lg p-4 border border-gray-200"
               >
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-lg font-semibold text-gray-900 truncate">
+                <div className="flex justify-between items-start mb-3 gap-2">
+                  <h3 className="text-lg font-semibold text-gray-900 min-w-0 flex-1 break-words">
                     {audio.audioTitle}
                   </h3>
-                  <div className="flex gap-2 ml-2">
+                  <div className="flex gap-2 shrink-0">
                     <Link
                       href={`/admin/audio/${audio.id}/edit`}
                       className="bg-gray-100 hover:bg-gray-200 text-gray-700 p-2 rounded-lg transition-colors"
@@ -275,15 +275,15 @@ const AudioList = () => {
                 <div className="space-y-2 text-sm text-gray-600">
                   <div>
                     <span className="font-medium text-gray-700">Súbor:</span>
-                    <span className="ml-2">{audio.mp3file}</span>
+                    <span className="ml-2 break-all">{audio.mp3file}</span>
                   </div>
                   <div>
                     <span className="font-medium text-gray-700">Názov súboru:</span>
-                    <span className="ml-2">{audio.driveFileName}</span>
+                    <span className="ml-2 break-all">{audio.driveFileName}</span>
                   </div>
                   <div>
                     <span className="font-medium text-gray-700">Kategorie:</span>
-                    <span className="ml-2">{audio.category}</span>
+                    <span className="ml-2 break-words">{audio.category}</span>
                   </div>
                 </div>
               </div>

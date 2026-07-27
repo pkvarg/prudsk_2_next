@@ -208,7 +208,7 @@ const EbookEditPage = () => {
                 placeholder="https://payme.sk/..."
               />
               <p className="text-xs text-gray-500 mt-1">
-                Zobrazí sa používateľom ako tlačidlo „Ak ste na mobile použite túto linku“.
+                Zobrazí sa používateľom ako tlačidlo „Ak ste na mobile použite tento odkaz“.
               </p>
             </div>
 
@@ -303,9 +303,11 @@ const EbookEditPage = () => {
       </div>
 
       {ebook?.downloads?.length > 0 && (
-        <div className="max-w-2xl mx-auto mt-8 bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-bold mb-3">História stiahnutí</h2>
-          <table className="min-w-full text-sm">
+        <div className="max-w-2xl mx-auto mt-8 bg-white shadow rounded-lg p-4 sm:p-6">
+          <h2 className="text-lg font-bold mb-3">História stiahnutí ({ebook.downloads.length})</h2>
+
+          {/* Desktop table */}
+          <table className="hidden sm:table min-w-full text-sm">
             <thead>
               <tr className="text-left text-gray-500 uppercase text-xs">
                 <th className="py-2">Používateľ</th>
@@ -323,6 +325,17 @@ const EbookEditPage = () => {
               ))}
             </tbody>
           </table>
+
+          {/* Mobile list */}
+          <ul className="sm:hidden divide-y divide-gray-100">
+            {ebook.downloads.map((d) => (
+              <li key={d.id} className="py-3">
+                <p className="font-medium text-gray-900 break-words">{d.user?.name || '—'}</p>
+                <p className="text-sm text-blue-600 break-all">{d.user?.email || '—'}</p>
+                <p className="text-xs text-gray-500 mt-0.5">{formatDateTime(d.downloadedAt)}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

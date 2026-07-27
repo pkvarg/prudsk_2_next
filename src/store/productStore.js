@@ -77,15 +77,12 @@ const useProductStore = create((set, get) => ({
   // List products with pagination
   listProducts: async (keyword = '', pageNumber = 1, pageSize = 10) => {
     try {
-      console.log('listProducts called with:', { keyword, pageNumber, pageSize })
-      console.trace('listProducts call stack') // This will show where the call came from
       set({ loading: true })
 
       const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}&t=${Date.now()}`,
+        `/api/products?keyword=${encodeURIComponent(keyword)}&pageNumber=${pageNumber}&pageSize=${pageSize}&t=${Date.now()}`,
       )
 
-      console.log('listProducts response:', data)
       set({
         loading: false,
         products: data.products,

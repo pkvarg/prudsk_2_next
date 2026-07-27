@@ -119,7 +119,7 @@ const EbookDetailPage = () => {
                 rel="noopener noreferrer"
                 className="mt-4 inline-block bg-[#2bb2e6] hover:bg-[#218334] !text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200"
               >
-                Ak ste na mobile použite túto linku
+                Ak ste na mobile použite tento odkaz
               </a>
             )}
           </div>

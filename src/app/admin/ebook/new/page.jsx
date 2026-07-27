@@ -140,7 +140,7 @@ const EbookNewPage = () => {
                 placeholder="https://payme.sk/..."
               />
               <p className="text-xs text-gray-500 mt-1">
-                Zobrazí sa používateľom ako tlačidlo „Ak ste na mobile použite túto linku“.
+                Zobrazí sa používateľom ako tlačidlo „Ak ste na mobile použite tento odkaz“.
               </p>
             </div>
 

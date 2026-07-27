@@ -22,10 +22,16 @@ export const metadata = {
   description: 'Distribúcia kresťanskej literatúry',
 }
 
+// Without this phones render the page in a 980px virtual viewport — everything
+// gets scaled down and the md: breakpoints never switch to the mobile layouts.
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="cs">
-      <head></head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider>
           <Header />

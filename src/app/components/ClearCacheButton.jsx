@@ -28,7 +28,7 @@ export const clearCacheHandler = async () => {
 export const ClearCacheButton = () => {
   return (
     <button
-      className="py-2 px-4 bg-[#f4f019] hover:bg-orange-400 text-black rounded flex items-center gap-1"
+      className="py-2 px-3 sm:px-4 bg-[#f4f019] hover:bg-orange-400 text-black rounded flex items-center justify-center gap-1 text-sm sm:text-base"
       onClick={clearCacheHandler}
     >
       Vymazať Cache

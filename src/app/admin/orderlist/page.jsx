@@ -39,100 +39,168 @@ const OrderListScreen = () => {
   }, [])
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-[#071e46] mb-6">OBJEDNÁVKY</h1>
+    <div className="container mx-auto px-4 py-6 sm:py-8">
+      <h1 className="text-2xl sm:text-3xl font-bold text-[#071e46] mb-6">OBJEDNÁVKY</h1>
 
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <div className="overflow-x-auto bg-white rounded-lg shadow-md">
-          <table className="min-w-full table-auto">
-            <thead className="bg-[#edeae4]">
-              <tr>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Číslo
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Zrušena
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Používateľ
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Datum
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Cena
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Zaplatené
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Odoslané
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
-                  Akcie
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {orders?.map((order) => (
-                <tr key={order.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-4 py-3 text-sm text-gray-900">{order.orderNumber}</td>
-                  <td className="px-4 py-3 text-sm text-red-600">
-                    {order.isCancelled && 'Zrušená'}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{order.email}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900">
-                    {order.createdAt?.substring(0, 10)}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-900 font-medium">
-                    {order.totalPrice} €
-                  </td>
-                  <td className="px-4 py-3 text-sm">
-                    <div className="flex items-center justify-between">
-                      <span>
-                        {order.isPaid ? (
-                          <span className="text-green-600">{order.paidAt?.substring(0, 10)}</span>
-                        ) : (
-                          <X className="text-red-500 w-4 h-4" />
-                        )}
-                      </span>
-                      <span className="ml-4">
-                        {order.paymentMethod === 'Hotovosť' ? (
-                          <CashCoin className="text-[#9b7d57] w-4 h-4" />
-                        ) : (
-                          <CreditCard className="text-[#9b7d57] w-4 h-4" />
-                        )}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-sm">
-                    {order.isDelivered ? (
-                      <span className="text-green-600">{order.deliveredAt?.substring(0, 10)}</span>
-                    ) : (
-                      <X className="text-red-500 w-4 h-4" />
-                    )}
-                  </td>
-                  <td className="px-4 py-3 text-sm">
-                    <Link
-                      href={`/order/${order.id}`}
-                      className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1 rounded text-sm transition-colors no-underline"
-                    >
-                      Detaily
-                    </Link>
-                  </td>
+        <>
+          {/* Desktop table */}
+          <div className="hidden md:block overflow-x-auto bg-white rounded-lg shadow-md">
+            <table className="min-w-full table-auto">
+              <thead className="bg-[#edeae4]">
+                <tr>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
+                    Číslo
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
+                    Zrušena
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
+                    Používateľ
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
+                    Datum
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
+                    Cena
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
+                    Zaplatené
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
+                    Odoslané
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#071e46] border-b">
+                    Akcie
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {orders?.map((order) => (
+                  <tr key={order.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-4 py-3 text-sm text-gray-900">{order.orderNumber}</td>
+                    <td className="px-4 py-3 text-sm text-red-600">
+                      {order.isCancelled && 'Zrušená'}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-900">{order.email}</td>
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {order.createdAt?.substring(0, 10)}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-900 font-medium">
+                      {order.totalPrice} €
+                    </td>
+                    <td className="px-4 py-3 text-sm">
+                      <div className="flex items-center justify-between">
+                        <span>
+                          {order.isPaid ? (
+                            <span className="text-green-600">{order.paidAt?.substring(0, 10)}</span>
+                          ) : (
+                            <X className="text-red-500 w-4 h-4" />
+                          )}
+                        </span>
+                        <span className="ml-4">
+                          {order.paymentMethod === 'Hotovosť' ? (
+                            <CashCoin className="text-[#9b7d57] w-4 h-4" />
+                          ) : (
+                            <CreditCard className="text-[#9b7d57] w-4 h-4" />
+                          )}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-sm">
+                      {order.isDelivered ? (
+                        <span className="text-green-600">{order.deliveredAt?.substring(0, 10)}</span>
+                      ) : (
+                        <X className="text-red-500 w-4 h-4" />
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-sm">
+                      <Link
+                        href={`/order/${order.id}`}
+                        className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1 rounded text-sm transition-colors no-underline"
+                      >
+                        Detaily
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
-          {(!orders || orders.length === 0) && !loading && (
-            <div className="text-center py-8 text-gray-500">Žiadne objednávky neboli nájdené</div>
-          )}
-        </div>
+            {(!orders || orders.length === 0) && !loading && (
+              <div className="text-center py-8 text-gray-500">Žiadne objednávky neboli nájdené</div>
+            )}
+          </div>
+
+          {/* Mobile cards */}
+          <div className="md:hidden space-y-4">
+            {orders?.map((order) => (
+              <div
+                key={order.id}
+                className="bg-white rounded-lg shadow-md p-4 border border-gray-200"
+              >
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div className="min-w-0">
+                    <p className="font-bold text-[#071e46]">#{order.orderNumber}</p>
+                    <p className="text-sm text-gray-700 break-all">{order.email}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">
+                      {order.createdAt?.substring(0, 10)}
+                    </p>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="font-semibold text-gray-900">{order.totalPrice} €</p>
+                    {order.paymentMethod === 'Hotovosť' ? (
+                      <CashCoin className="text-[#9b7d57] w-4 h-4 inline-block mt-1" />
+                    ) : (
+                      <CreditCard className="text-[#9b7d57] w-4 h-4 inline-block mt-1" />
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  {order.isCancelled && (
+                    <span className="px-2 py-0.5 rounded-full bg-red-100 text-red-700 text-xs font-medium">
+                      Zrušená
+                    </span>
+                  )}
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                      order.isPaid ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'
+                    }`}
+                  >
+                    {order.isPaid ? `Zaplatené ${order.paidAt?.substring(0, 10)}` : 'Nezaplatené'}
+                  </span>
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                      order.isDelivered ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'
+                    }`}
+                  >
+                    {order.isDelivered
+                      ? `Odoslané ${order.deliveredAt?.substring(0, 10)}`
+                      : 'Neodoslané'}
+                  </span>
+                </div>
+
+                <Link
+                  href={`/order/${order.id}`}
+                  className="block text-center bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-2 rounded text-sm transition-colors no-underline"
+                >
+                  Detaily
+                </Link>
+              </div>
+            ))}
+
+            {(!orders || orders.length === 0) && (
+              <div className="text-center py-8 text-gray-500 bg-white rounded-lg shadow-md">
+                Žiadne objednávky neboli nájdené
+              </div>
+            )}
+          </div>
+        </>
       )}
     </div>
   )

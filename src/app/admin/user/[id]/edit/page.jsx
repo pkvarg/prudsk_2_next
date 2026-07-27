@@ -67,10 +67,10 @@ const UserEditPage = () => {
   }
 
   return (
-    <main className="mx-8 mt-8">
+    <main className="px-4 sm:px-6 lg:px-8 mt-8">
       <Link
         href="/admin/userlist"
-        className="inline-flex items-center px-4 my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
+        className="inline-flex items-center px-4 my-6 sm:my-8 py-2 bg-[#2bb2e6] !text-white rounded hover:bg-[#218334] transition-colors duration-200"
       >
         Späť
       </Link>
