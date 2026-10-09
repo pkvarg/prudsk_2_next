@@ -1,207 +1,137 @@
-'use client'
-import React, { useLayoutEffect } from 'react'
+import LegalSections from '../components/LegalSections'
 
-const SafetyPrivacy = () => {
-  useLayoutEffect(() => {
-    window.scrollTo(0, 200)
-  })
-
-  return (
-    <div className="min-h-screen">
-      <div className="container mx-auto px-3 md:px-0">
-        <div className="my-3 py-8">
-          <h1 className="text-[#071e46] font-bold text-2xl md:text-3xl mb-6">
-            Bezpečnosť a súkromie
-          </h1>
-
-          <h3 className="text-[#071e46] font-bold text-xl md:text-2xl mb-4">
-            Ochrana osobných údajov na prud.sk
-          </h3>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Prevádzkovateľom internetovej stránky prud.sk je: Občianske združenie Prúd (ďalej len
-            "Prevádzkovateľ"), Špieszova 5, 841 04 Bratislava, admin@prud.sk
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            IČO: 360 765 89, DIČ: 202 202 8173.
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Ochrana fyzických osôb v súvislosti so spracúvaním osobných údajov patrí medzi základné
-            práva. V článku 8 ods. 1 Charty základných práv Európskej únie a v článku 16 ods. 1
-            Zmluvy o fungovaní Európskej únie sa stanovuje, že každý má právo na ochranu osobných
-            údajov, ktoré sa ho týkajú.
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Aby sme Vám mohli poskytnúť všetky služby, potrebujeme o Vás vedieť základné informácie.
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Niektoré z nich majú povahu osobných údajov v zmysle zákona o ochrane osobných údajov a
-            zmeny a doplnení niektorých zákonov, ktorému bolo v zbierke zákonov pridelené číslo
-            18/2018 Z.z. a ktorým sa 25.05.2018 (ďalej len "zákon"). My sa týmto zákonom pri
-            používaní Vašich údajov riadime.
-          </p>
-
-          <h4 className="text-[#071e46] font-semibold text-lg mb-3">
-            Právny základ spracúvania osobných údajov:
-          </h4>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
-            a) spracúvanie osobných údajov je nevyhnutné podľa osobitného predpisu alebo
-            medzinárodnej zmluvy, ktorou je Slovenská republika viazaná. Predovšetkým podľa zákona
-            č. 222/2004 Z.z. o dani z pridanej hodnoty v znení neskorších predpisov
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
-            b) spracúvanie osobných údajov je nevyhnutné na plnenie zmluvy a na základe oprávneného
-            záujmu zákazníka. Prevádzkovateľ teda spracúva osobné údaje dotknutých osôb, za účelom
-            vytvorenia príležitosti uzatvárať zmluvy uzavreté na diaľku alebo mimo prevádzkových
-            priestorov na základe súhlasu so spracovaním osobných údajov dotknutých osôb. Pred
-            nakupovaním v obchode je potrebné zaregistrovať sa. Pri registrácii a nakupovaní je
-            potrebné poskytnúť nasledovné informácie o Vás:
-          </p>
-
-          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
-            <li className="list-disc">
-              meno a priezvisko, presná adresa vrátane krajiny (teda adresa, ktorá ma byť uvedená na
-              faktúre)
-            </li>
-            <li className="list-disc">
-              Vaša e-mailová adresa (slúži na Vašu identifikáciu v systéme a na komunikáciu s Vami v
-              súvislosti s existujúcou objednávkou, prípadne informáciami o nových produktoch).
-            </li>
-            <li className="list-disc">
-              voliteľne ďalšie adresy (ak si želáte doručiť zásielku na inú adresu ako je fakturačná)
-            </li>
-            <li className="list-disc">
-              voliteľne telefónne číslo (pre rýchlejší kontakt s Vami)
-            </li>
-            <li className="list-disc">
-              ak nakupujete ako firma / živnostník, naviac: obchodný názov, IČO a IČ DPH (pre
-              vystavenie faktúry a správne zaúčtovanie).
-            </li>
-          </ul>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Tieto údaje sú uchovávané v databáze na našom serveri, aby ste ich nemuseli nanovo
-            zapisovať pri každej návšteve. Vaše údaje spracovávame pre účely vybavenia a doručenia
-            vašej objednávky. Tieto údaje sú taktiež nutné pre náš účtovný a fakturačný systém. Svoje
-            údaje a ďalšie nastavenia môžete kedykoľvek zmeniť resp. aktualizovať prostredníctvom
-            e-mailu alebo po prihlásení na našej stránke v sekcii Používateľský účet. V prípade, že
-            si želáte zrušiť svoju registráciu, požiadajte nás o to e-mailom. Vaše konto bude zrušené.
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            V našom obchode nezadávate žiadne informácie, ktoré by sa priamo týkali práce s peniazmi.
-            Platba za objednaný tovar prebehne až pri doručení tovaru na vami uvedenú adresu a to
-            dobierkou prostredníctvom Slovenskej pošty, prípadne kuriérskej alebo doručovateľskej
-            spoločnosti. Alternatívnym spôsobom úhrady je platba vopred prevodom na náš účet (262 075
-            3192/1100) , prípadne v hotovosti pri osobnom prebratí objednaného tovaru.
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Počas Vašej návštevy sú na našom serveri uchovávané dočasné informácie, ktoré sú potrebné
-            pre správne fungovanie obchodu (napr. čo ste vložili do nákupného košíka, kedy ste na
-            stránku prišli, odkiaľ ste na stránku prišli).
-          </p>
-
-          <h3 className="text-[#071e46] font-bold text-xl md:text-2xl mb-4 mt-8">
-            Cookies a sledovanie
-          </h3>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Táto webstránka používa nasledujúce typy cookies a technológií:
-          </p>
-
-          <h4 className="text-[#071e46] font-semibold text-lg mb-3">1. Nevyhnutné cookies</h4>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
-            Tieto cookies sú potrebné pre základné fungovanie webu a nemožno ich vypnúť:
-          </p>
-
-          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
-            <li className="list-disc">Uloženie Vášho súhlasu s cookies (CookieConsent) - 365 dní</li>
-            <li className="list-disc">Funkčnosť kontaktného formulára</li>
-          </ul>
-
-          <h4 className="text-[#071e46] font-semibold text-lg mb-3">2. Analytické cookies (voliteľné)</h4>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
-            S Vaším súhlasom používame vlastný analytický nástroj Umami na:
-          </p>
-
-          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
-            <li className="list-disc">Meranie návštevnosti stránky</li>
-            <li className="list-disc">Analýzu správania návštevníkov (anonymne)</li>
-            <li className="list-disc">Zlepšenie používateľského zážitku</li>
-          </ul>
-
-          <h4 className="text-[#071e46] font-semibold text-lg mb-3">3. Čo nepoužívame</h4>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">Nepoužívame:</p>
-
-          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
-            <li className="list-disc">Marketingové cookies</li>
-            <li className="list-disc">Reklamné cookies tretích strán</li>
-            <li className="list-disc">Cookies sociálnych sietí</li>
-            <li className="list-disc">Sledovacie cookies tretích strán</li>
-          </ul>
-
-          <h4 className="text-[#071e46] font-semibold text-lg mb-3">Správa súhlasu</h4>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-4">
-            Váš súhlas s analytickými cookies môžete kedykoľvek zmeniť:
-          </p>
-
-          <ul className="text-[#191817] text-[17px] leading-relaxed mb-6 ml-6 space-y-2">
-            <li className="list-disc">Vymazaním údajov prehliadača</li>
-            <li className="list-disc">Pri návšteve stránky sa banner zobrazí znovu po vymazaní cookies</li>
-          </ul>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Kedykoľvek po prihlásení sa na stránke www.prud.sk, si môžete svoje osobné údaje
-            skontrolovať a v prípade potreby zmeniť v časti "Upraviť".
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Vaše osobné údaje nezverejňujeme, nesprístupňujeme, neposkytujeme žiadnym iným subjektom,
-            s výnimkou organizácií, s ktorými je spolupráca nevyhnutná pre správne vybavenie Vašej
-            objednávky. Sú to najmä: Slovenská pošta, doručovateľské a kuriérske služby, či niektorí
-            vydavatelia a dodávatelia, keď si to vyžaduje povaha objednaného produktu. Tieto údaje sú
-            však vždy poskytnuté jednorazovo pre vybavenie Vašej konkrétnej objednávky. Databázu
-            osobných údajov chránime pred ich poškodením, zničením, stratou a zneužitím.
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Registráciou nám udeľujete súhlas so spracovaním svojich osobných údajov uvedených v
-            objednávke za účelom vybavenia objednávky a dodania tovaru, a to na dobu nevyhnutnú na
-            plnenie zmluvy. V súlade s § 28 zákona máte právo požadovať informáciu o spracovaní
-            vašich osobných údajov, a zoznam osobných údajov, ktoré sú predmetom spracovania, právo
-            na opravu nesprávnych, neúplných alebo neaktuálnych osobných údajov, právo na likvidáciu
-            osobných údajov, ak účel ich spracovania skončil, právo na základe bezplatnej písomnej
-            žiadosti namietať voči využívaniu svojich osobných údajov na marketingové účely.
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-6">
-            Vaše osobné údaje sme oprávnení spracovávať aj po skončení pôvodného účelu spracovania
-            len v nevyhnutnom rozsahu pre účely štatistiky, účtovníctva a prieskumu, a poskytnúť
-            tretím stranám alebo verejnosti súhrnné štatistické informácie o zákazníkoch,
-            návštevnosti, obrate a ďalšie údaje, avšak v anonymizovanej podobe tak, že na ich základe
-            nebude možné nijakým spôsobom identifikovať našich zákazníkov.
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed mb-4 font-medium">
-            Na zachovaní vášho súkromia nám záleží!
-          </p>
-
-          <p className="text-[#191817] text-[17px] leading-relaxed">Tím Prúd.sk</p>
-        </div>
-      </div>
-    </div>
-  )
+export const metadata = {
+  title: 'Bezpečnosť a súkromie | Prúd',
 }
 
-export default SafetyPrivacy
+// Section ids double as anchors, e.g. /safety-privacy#cookies from the cookie banner.
+const sections = [
+  {
+    id: 'prevadzkovatel',
+    title: '1. Prevádzkovateľ',
+    body: [
+      'Prevádzkovateľom osobných údajov je občianske združenie Prúd, Špieszova 3362/5, 841 04 Bratislava – Karlova Ves, IČO: 36 076 589 (ďalej len „prevádzkovateľ“).',
+      'Kontakt v otázkach osobných údajov: eshop@prud.sk, tel. +421 904 060 262.',
+    ],
+  },
+  {
+    id: 'konto-a-objednavky',
+    title: '2. Používateľské konto a objednávky',
+    body: [
+      'Údaje: meno a priezvisko, e-mail, heslo (uložené v zašifrovanej podobe), doručovacia a fakturačná adresa, telefón (nepovinne), pri firmách názov, IČO, DIČ a IČ DPH, obsah objednávok a obľúbený tovar.',
+      'Účel a právny základ: vedenie konta, vybavenie a doručenie objednávky a komunikácia o nej – plnenie zmluvy (čl. 6 ods. 1 písm. b) GDPR); vystavenie faktúry a vedenie účtovníctva – plnenie zákonnej povinnosti (čl. 6 ods. 1 písm. c) GDPR).',
+      'Doba uchovávania: údaje konta do jeho zrušenia; objednávky a faktúry 10 rokov podľa zákona č. 431/2002 Z. z. o účtovníctve.',
+      'Prihlásenie cez Google: ak zvolíte prihlásenie cez Google, dostaneme od spoločnosti Google vaše meno a e-mail. Google sa tým dozvie, že sa prihlasujete na prud.sk; za svoje spracúvanie zodpovedá Google (policies.google.com/privacy).',
+    ],
+  },
+  {
+    id: 'elektronicke-publikacie',
+    title: '3. Elektronické publikácie',
+    body: [
+      'Ak vám prevádzkovateľ sprístupní elektronické publikácie, evidujeme, ktorú publikáciu a kedy ste si stiahli, a kedy ste naposledy videli oznámenie o nových publikáciách. Slúži to na vybavenie zmluvy a kontrolu úhrad (čl. 6 ods. 1 písm. b) GDPR). Tieto záznamy uchovávame počas existencie vášho konta.',
+      'Ak na úhradu použijete tlačidlo platby v mobile, otvorí sa platobná služba payme.sk; údaje o platbe spracúva vaša banka a poskytovateľ tejto služby.',
+    ],
+  },
+  {
+    id: 'novinky',
+    title: '4. E-maily o novinkách',
+    body: [
+      'Ak pri objednávke zaškrtnete súhlas, posielame vám najviac dvakrát ročne e-mail o novinkách a akciách. Právnym základom je váš súhlas (čl. 6 ods. 1 písm. a) GDPR). Súhlas môžete kedykoľvek odvolať v profile po prihlásení alebo e-mailom na eshop@prud.sk; e-mail potom z rozosielania vyradíme.',
+    ],
+  },
+  {
+    id: 'formulare',
+    title: '5. Kontaktný formulár a odstúpenie od zmluvy',
+    body: [
+      'Kontaktný formulár: meno, e-mail, telefón (nepovinne) a správa; spracúvame ich, aby sme vám odpovedali (oprávnený záujem, čl. 6 ods. 1 písm. f) GDPR, prípadne rokovanie o zmluve). Správy uchovávame najviac 2 roky od poslednej komunikácie.',
+      'Formulár na odstúpenie od zmluvy: číslo objednávky, meno, kontaktné údaje, adresa, číslo účtu na vrátenie peňazí a vracaný tovar; spracúvame ich, aby sme vybavili vaše odstúpenie a vrátili platbu (plnenie zákonnej povinnosti, čl. 6 ods. 1 písm. c) GDPR). Uchovávame ich počas premlčacej doby, spravidla 3 roky, a v rozsahu účtovných dokladov 10 rokov.',
+      'Ochrana pred spamom: ak formulár vyhodnotí odoslanie ako automatický spam, zaznamenáme IP adresu, údaje o prehliadači a dôvod vyhodnotenia (oprávnený záujem na ochrane webu). Tieto záznamy mažeme po 90 dňoch; IP adresy opakovane zablokované pre spam môžeme uchovávať dlhšie.',
+    ],
+  },
+  {
+    id: 'recenzie',
+    title: '6. Recenzie',
+    body: [
+      'Ak napíšete recenziu tovaru, zverejníme ju spolu s vaším menom, ako je uvedené vo vašom konte. Recenziu môžete kedykoľvek dať vymazať e-mailom na eshop@prud.sk.',
+    ],
+  },
+  {
+    id: 'navsteva',
+    title: '7. Návšteva webu',
+    body: [
+      'Pri každej návšteve spracúva poskytovateľ hostingu technické údaje potrebné na doručenie stránky a ochranu pred útokmi: IP adresu, typ prehliadača a čas požiadavky (oprávnený záujem na bezpečnom fungovaní webu). Tieto záznamy sa uchovávajú len krátko, spravidla niekoľko týždňov.',
+    ],
+  },
+  {
+    id: 'cookies',
+    title: '8. Cookies a meranie návštevnosti',
+    body: [
+      'Nevyhnutné (bez súhlasu):',
+      [
+        'CookieConsent – zapamätá si vašu voľbu v lište cookies, 365 dní',
+        'prihlasovacie cookies (Auth.js) – udržia vás prihlásených, do odhlásenia alebo vypršania relácie',
+        'cart-storage, user-storage a audio-player-storage (úložisko prehliadača) – obsah košíka a rozpracovanej objednávky, údaje prihláseného používateľa a nastavenie prehrávača',
+        'ebook_modal_shown (úložisko prehliadača počas relácie) – aby sa oznámenie o elektronických publikáciách nezobrazovalo opakovane',
+        'contact_form_submissions, register_form_submissions, withdrawal_form_submissions (úložisko prehliadača) – časy odoslania formulárov kvôli ochrane pred spamom, 1 hodina',
+      ],
+      'Meranie návštevnosti (len s vaším súhlasom): Umami – nástroj na meranie návštevnosti na serveri v Nemecku (Contabo GmbH), ktorý prevádzkuje Pictusweb s.r.o. Nepoužíva cookies, neukladá IP adresu a nevytvára profil návštevníka; vidno len súhrnné štatistiky. Spustí sa až po kliknutí na „Súhlasím“. Ak meranie odmietnete, prehliadač si to zapamätá (umami.disabled).',
+      'Písma sú súčasťou webu a nenačítavajú sa od Google. Nepoužívame Google Analytics, reklamné ani sledovacie cookies.',
+      'Súhlas môžete kedykoľvek zmeniť alebo odvolať odkazom „Nastavenia cookies“ v pätičke webu. Pravidlá pre cookies vychádzajú z § 109 ods. 8 zákona č. 452/2021 Z. z. o elektronických komunikáciách.',
+    ],
+  },
+  {
+    id: 'videa',
+    title: '9. Videá z YouTube',
+    body: [
+      'Videá sú uložené na YouTube (Google Ireland Ltd. / Google LLC). Kým nekliknete na „Prehrať video“, s YouTube sa nenadviaže žiadne spojenie. Po kliknutí sa video načíta z youtube-nocookie.com a Google získa vašu IP adresu a údaje o prehliadači a môže uložiť vlastné cookies. Za toto spracúvanie zodpovedá Google ako samostatný prevádzkovateľ.',
+    ],
+  },
+  {
+    id: 'prijemcovia',
+    title: '10. Kto má k údajom prístup',
+    body: [
+      'Údaje nepredávame. Prístup k nim majú len títo príjemcovia, v rozsahu potrebnom pre ich službu:',
+      [
+        'Pictusweb s.r.o., Nábrežná 4895/42, 940 02 Nové Zámky – vývoj a prevádzka e-shopu vrátane hostingu, odosielania e-mailov a merania návštevnosti',
+        'Contabo GmbH (Nemecko) – servery',
+        'Google (Google Workspace) – e-mailové schránky prud.sk a odosielanie e-mailov s potvrdením objednávok a faktúrami; prihlásenie cez Google a videá, ak ich použijete',
+        'poštové a prepravné služby – meno, adresa a telefón na doručenie zásielky',
+        'banka prevádzkovateľa – pri platbe prevodom a vracaní peňazí',
+        'osoby zabezpečujúce vedenie účtovníctva a orgány verejnej moci, ak to ukladá zákon',
+      ],
+    ],
+  },
+  {
+    id: 'prenos',
+    title: '11. Prenos údajov mimo EÚ',
+    body: [
+      'Google je spoločnosť s materskou spoločnosťou v USA. Prenos sa uskutočňuje len s primeranými zárukami podľa kapitoly V GDPR – na základe rámca EÚ – USA na ochranu osobných údajov (EU-U.S. Data Privacy Framework) alebo štandardných zmluvných doložiek Európskej komisie.',
+    ],
+  },
+  {
+    id: 'prava',
+    title: '12. Vaše práva',
+    body: [
+      'Máte právo na prístup k svojim údajom, ich opravu a vymazanie, na obmedzenie spracúvania, na prenosnosť údajov, právo namietať proti spracúvaniu na základe oprávneného záujmu a právo kedykoľvek odvolať súhlas. Svoje údaje môžete upraviť aj sami po prihlásení v profile. Žiadosti vybavujeme na eshop@prud.sk bez zbytočného odkladu, najneskôr do 1 mesiaca.',
+      'Ak sa domnievate, že vaše údaje spracúvame nezákonne, môžete podať návrh na Úrad na ochranu osobných údajov Slovenskej republiky, Hraničná 12, 820 07 Bratislava 27, www.dataprotection.gov.sk.',
+    ],
+  },
+  {
+    id: 'zmeny',
+    title: '13. Zmeny',
+    body: [
+      'Tieto zásady aktualizujeme, keď sa zmenia používané služby alebo spôsob spracúvania. Toto znenie je účinné od 9. 10. 2026.',
+    ],
+  },
+]
+
+export default function SafetyPrivacy() {
+  return (
+    <LegalSections
+      title="Bezpečnosť a súkromie"
+      effective="Účinné od 9. 10. 2026"
+      intro="Tu nájdete, aké osobné údaje e-shop prud.sk spracúva, prečo, ako dlho, kto k nim má prístup a aké máte práva podľa nariadenia (EÚ) 2016/679 (GDPR) a zákona č. 18/2018 Z. z. o ochrane osobných údajov."
+      sections={sections}
+    />
+  )
+}

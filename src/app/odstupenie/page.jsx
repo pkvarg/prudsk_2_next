@@ -479,16 +479,13 @@ const WithdrawalForm = () => {
             />
           </div>
 
-          <div className="my-3 flex flex-row items-center gap-5">
-            <input
-              type="checkbox"
-              name="gdprCheck"
-              id="gdprCheck"
-              required
-              className="transform lg:translate-y-[20%]"
-            />
-            <p className="text-[15px] lg:text-[20px]">Súhlasím so spracovaním osobných údajov</p>
-          </div>
+          <p className="my-3 text-[15px] lg:text-[17px] leading-relaxed">
+            Údaje z formulára použijeme na vybavenie odstúpenia a vrátenie platby. Viac v{' '}
+            <a href="/safety-privacy#formulare" target="_blank" className="underline">
+              zásadách ochrany osobných údajov
+            </a>
+            .
+          </p>
 
           <button
             type="submit"

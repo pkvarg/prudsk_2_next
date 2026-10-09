@@ -22,6 +22,8 @@ const EbookDownloadPage = () => {
   const [error, setError] = useState(null)
   const [downloading, setDownloading] = useState(false)
   const [downloadError, setDownloadError] = useState(null)
+  // Digital content: the right of withdrawal lapses only with the buyer's express consent.
+  const [withdrawalWaiver, setWithdrawalWaiver] = useState(false)
 
   useEffect(() => {
     if (!userInfo) {
@@ -135,9 +137,26 @@ const EbookDownloadPage = () => {
       <div className="bg-white rounded-lg shadow p-6">
         <p className="text-gray-700 mb-5">Ďakujeme. Vašu publikáciu si môžete stiahnuť nižšie.</p>
 
+        <label className="flex items-start gap-3 mb-5 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={withdrawalWaiver}
+            onChange={(e) => setWithdrawalWaiver(e.target.checked)}
+            className="mt-1 w-4 h-4 flex-shrink-0"
+          />
+          <span className="text-sm text-gray-700 leading-relaxed">
+            Súhlasím so začatím poskytovania digitálneho obsahu pred uplynutím lehoty na odstúpenie
+            od zmluvy a beriem na vedomie, že stiahnutím strácam právo na odstúpenie od zmluvy (
+            <a href="/trade-rules#elektronicke-publikacie" target="_blank" className="underline">
+              obchodné podmienky
+            </a>
+            ).
+          </span>
+        </label>
+
         <button
           type="button"
-          disabled={downloading}
+          disabled={downloading || !withdrawalWaiver}
           onClick={downloadHandler}
           className="w-full bg-[#2bb2e6] hover:bg-[#218334] disabled:bg-gray-300 !text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200"
         >

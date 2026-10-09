@@ -62,7 +62,7 @@ const PlaceOrderScreen = () => {
   const [clicked, setClicked] = useState(false)
 
   const placeOrderhandler = () => {
-    if (gdrpOrderChecked && tradeRulesOrderChecked) {
+    if (tradeRulesOrderChecked) {
       setClicked(true)
       createOrder({
         orderItems: cart,
@@ -78,18 +78,16 @@ const PlaceOrderScreen = () => {
         qtys: prodsQtys,
         discounts: prodsDiscounts,
       })
-      updateUserProfile({
-        id: userInfo.id,
-        isSubscribed: newsletterChecked,
-      })
+      // Only record a new opt-in; leaving the box empty must not unsubscribe anyone.
+      if (newsletterChecked && !userInfo.isSubscribed) {
+        updateUserProfile({
+          id: userInfo.id,
+          isSubscribed: true,
+        })
+      }
     } else {
       setMessage('Potvrďte súhlas nižšie')
     }
-  }
-
-  const [gdrpOrderChecked, setGdprOrderChecked] = useState(false)
-  const handleGdprOrder = () => {
-    setGdprOrderChecked(!gdrpOrderChecked)
   }
 
   const [tradeRulesOrderChecked, setTradeRulesOrderChecked] = useState(false)
@@ -97,7 +95,7 @@ const PlaceOrderScreen = () => {
     setTradeRulesOrderChecked(!tradeRulesOrderChecked)
   }
 
-  const [newsletterChecked, setNewsletterChecked] = useState(true)
+  const [newsletterChecked, setNewsletterChecked] = useState(false)
   const handleNewsletter = () => {
     setNewsletterChecked((prev) => !prev)
   }
@@ -239,24 +237,13 @@ const PlaceOrderScreen = () => {
               {message && <Message variant="danger">{message}</Message>}
 
               <div className="space-y-4 mb-6">
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="gdprCheck"
-                    required
-                    onChange={handleGdprOrder}
-                    className="mt-1 w-4 h-4 text-[#071e46] border-gray-300 rounded focus:ring-[#071e46] focus:ring-2"
-                  />
-                  <span className="text-sm text-gray-700">
-                    <a
-                      href="/safety-privacy"
-                      target="_blank"
-                      className="text-[#071e46] hover:text-[#0a2554] underline"
-                    >
-                      Súhlasím so spracovaním osobných údajov
-                    </a>
-                  </span>
-                </label>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  Osobné údaje spracúvame na vybavenie objednávky podľa{' '}
+                  <a href="/safety-privacy" target="_blank" className="underline">
+                    zásad ochrany osobných údajov
+                  </a>
+                  .
+                </p>
 
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
@@ -277,24 +264,12 @@ const PlaceOrderScreen = () => {
                   </span>
                 </label>
 
-                {/* <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="newsletterCheck"
-                    defaultChecked={newsletterChecked}
-                    onChange={handleNewsletter}
-                    className="mt-1 w-4 h-4 text-[#071e46] border-gray-300 rounded focus:ring-[#071e46] focus:ring-2"
-                  />
-                  <span className="text-sm text-gray-700">
-                    Súhlasím so zasielaním mailov o novinkách a akciách (max. 2x ročne)
-                  </span>
-                </label> */}
 
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"
                     name="newsletterCheck"
-                    defaultChecked={newsletterChecked}
+                    checked={newsletterChecked}
                     onChange={handleNewsletter}
                     className="mt-1 w-4 h-4 min-w-[1rem] min-h-[1rem] text-[#071e46] border-gray-300 rounded focus:ring-[#071e46] focus:ring-2 flex-shrink-0"
                   />
@@ -312,7 +287,7 @@ const PlaceOrderScreen = () => {
                 disabled={cart.length === 0 || clicked || loading}
                 onClick={placeOrderhandler}
               >
-                {loading ? 'Spracovanie...' : 'Záväzne objednať'}
+                {loading ? 'Spracovanie...' : 'Objednať s povinnosťou platby'}
               </button>
             </div>
           </div>

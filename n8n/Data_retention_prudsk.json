@@ -1,0 +1,76 @@
+{
+  "name": "Data_retention_prudsk",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 4 * * *"
+            }
+          ]
+        }
+      },
+      "id": "9325a491-1178-4187-9ca0-9c7b6d5a562a",
+      "name": "Daily at 4:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        256
+      ],
+      "notesInFlow": true,
+      "notes": "Deletes prud.sk spam logs and inactive IP records after 90 days (privacy policy, section 5)"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://prud.sk/api/cron/data-retention",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.PRUDSK_CRON_TOKEN }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "b5bcd7d6-8c25-4657-86bc-5d41cff8d5a7",
+      "name": "Run data retention",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -160,
+        256
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily at 4:00": {
+      "main": [
+        [
+          {
+            "node": "Run data retention",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Bratislava"
+  },
+  "tags": []
+}

@@ -20,9 +20,6 @@ export async function POST(request) {
 
     const body = await request.json()
     const {
-      name,
-      email,
-      phone,
       message,
       honeypot,
       detectionType,
@@ -46,11 +43,10 @@ export async function POST(request) {
         userAgent,
         detectionType,
         detectionDetails: detectionDetails || null,
+        // Names, e-mails and messages may belong to real people flagged by mistake,
+        // so only the honeypot value and message length are kept (see /safety-privacy).
         formData: {
-          name: name || null,
-          email: email || null,
-          phone: phone || null,
-          message: message || null,
+          messageLength: message?.length || 0,
           honeypot: honeypot || null,
         },
         timeSpent: timeSpent || null,

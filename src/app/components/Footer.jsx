@@ -237,11 +237,12 @@
 // export default Footer
 
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import CookieConsent from 'react-cookie-consent'
+import CookieConsent, { getCookieConsentValue } from 'react-cookie-consent'
 
 const Footer = () => {
+  const [bannerVisible, setBannerVisible] = useState('byCookieValue')
   const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/visitors/prudsk2next/increase`
 
   const incrementCount = async () => {
@@ -270,9 +271,37 @@ const Footer = () => {
     }
   }
 
+  // Consent given on an earlier visit: load analytics on every page load.
+  useEffect(() => {
+    if (getCookieConsentValue() === 'true') {
+      loadUmamiScript()
+    }
+  }, [])
+
+  // Umami honours `umami.disabled`, so withdrawing consent stops tracking at once.
+  const decide = (granted) => {
+    try {
+      if (granted) {
+        localStorage.removeItem('umami.disabled')
+      } else {
+        localStorage.setItem('umami.disabled', '1')
+      }
+    } catch {
+      // storage unavailable — the banner simply shows again next visit
+    }
+    if (granted) {
+      loadUmamiScript()
+    }
+    if (bannerVisible === 'byCookieValue') {
+      incrementCount()
+    }
+    setBannerVisible('hidden')
+  }
+
   return (
     <>
       <CookieConsent
+        visible={bannerVisible}
         location="bottom"
         style={{
           background: 'linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%)',
@@ -322,10 +351,7 @@ const Footer = () => {
         buttonText="Súhlasím"
         expires={365}
         enableDeclineButton
-        onAccept={() => {
-          loadUmamiScript()
-          incrementCount()
-        }}
+        onAccept={() => decide(true)}
         declineButtonStyle={{
           background: '#E80D19',
           color: '#fff',
@@ -340,13 +366,11 @@ const Footer = () => {
           boxShadow: '0 2px 6px rgba(239, 68, 68, 0.3)',
         }}
         declineButtonText="Nesúhlasím"
-        onDecline={() => {
-          incrementCount()
-        }}
+        onDecline={() => decide(false)}
       >
         <span className="text-[14px] sm:text-[15px] leading-relaxed">
-          Táto stránka používa len analytické a pre fungovanie webu nevyhnutné cookies pre anonymnú
-          analytiku návštevnosti.{' '}
+          So súhlasom meriame návštevnosť nástrojom Umami – bez cookies a bez ukladania IP adresy.
+          Web funguje aj bez súhlasu.{' '}
           <a
             style={{
               color: '#8a1b1f',
@@ -355,10 +379,10 @@ const Footer = () => {
               textDecoration: 'underline',
               textUnderlineOffset: '3px',
             }}
-            href="/safety-privacy"
+            href="/safety-privacy#cookies"
             className="hover:opacity-80 transition-opacity"
           >
-            GDPR →
+            Viac informácií →
           </a>
         </span>
       </CookieConsent>
@@ -397,6 +421,15 @@ const Footer = () => {
                       Odstúpiť od zmluvy tu
                     </p>
                   </Link>
+                  <button
+                    type="button"
+                    onClick={() => setBannerVisible('show')}
+                    className="text-left bg-transparent border-0 p-0"
+                  >
+                    <p className="text-[#9b7d57] text-[17px] md:leading-[21.5px] leading-[35px]">
+                      Nastavenia cookies
+                    </p>
+                  </button>
                 </div>
               </div>
               <div>

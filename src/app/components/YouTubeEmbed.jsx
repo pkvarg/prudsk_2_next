@@ -11,6 +11,9 @@ const YoutubeEmbed = ({
   className = '',
   aspectRatio = '16/9', // '16/9', '4/3', '1/1'
 }) => {
+  // The iframe is inserted only after a click, so no connection to Google is made
+  // until the visitor asks for the video (see /safety-privacy#videa).
+  const [active, setActive] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const [hasError, setHasError] = useState(false)
 
@@ -21,7 +24,7 @@ const YoutubeEmbed = ({
       : 'https://www.youtube.com/embed'
 
     const params = new URLSearchParams({
-      ...(autoplay && { autoplay: '1' }),
+      ...((autoplay || active) && { autoplay: '1' }),
       ...(showControls && { controls: '1' }),
       rel: '0', // Don't show related videos from other channels
       modestbranding: '1', // Minimal YouTube branding
@@ -67,9 +70,31 @@ const YoutubeEmbed = ({
               d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
             />
           </svg>
-          <p className="text-gray-500 text-sm">Video není k dispozici</p>
+          <p className="text-gray-500 text-sm">Video nie je k dispozícii</p>
         </div>
       </div>
+    )
+  }
+
+  if (!active) {
+    return (
+      <button
+        type="button"
+        onClick={() => setActive(true)}
+        aria-label={`Prehrať video: ${title}`}
+        className={`group relative w-full ${aspectRatioClass} bg-[#071e46] rounded-lg overflow-hidden shadow-md flex flex-col items-center justify-center gap-3 px-6 text-center text-white cursor-pointer ${className}`}
+      >
+        <span className="bg-red-600 rounded-full p-4 transition-transform group-hover:scale-110">
+          <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </span>
+        <span className="text-sm font-semibold uppercase tracking-wider">Prehrať video</span>
+        {title !== 'YouTube video' && <span className="text-sm text-white/80 line-clamp-2">{title}</span>}
+        <span className="text-xs text-white/60 max-w-sm">
+          Video sa prehrá z YouTube (Google). Kliknutím ho načítate a Google môže uložiť cookies.
+        </span>
+      </button>
     )
   }
 
@@ -111,7 +136,7 @@ const YoutubeEmbed = ({
                 d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
               />
             </svg>
-            <p className="text-red-600 text-sm font-medium">Chyba při načítání videa</p>
+            <p className="text-red-600 text-sm font-medium">Chyba pri načítaní videa</p>
             <p className="text-gray-500 text-xs mt-1">Video ID: {embedId}</p>
           </div>
         </div>
