@@ -1,6 +1,7 @@
 // useEbookStore.js
 import { create } from 'zustand'
 import axios from 'axios'
+import { uploadAuthHeaders } from '@/lib/uploadToken'
 
 const HONO_UPLOAD_URL =
   process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'
@@ -162,6 +163,7 @@ const useEbookStore = create((set, get) => ({
     const response = await fetch(`${HONO_UPLOAD_URL}/api/upload/prudsk2next/ebooks`, {
       method: 'POST',
       body: formData,
+      headers: await uploadAuthHeaders(),
     })
 
     if (!response.ok) {

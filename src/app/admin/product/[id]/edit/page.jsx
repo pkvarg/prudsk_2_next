@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import useProductStore from '@/store/productStore'
 import { clearCacheHandler } from '@/app/components/ClearCacheButton'
+import { uploadAuthHeaders } from '@/lib/uploadToken'
 
 const ProductEditScreen = () => {
   const router = useRouter()
@@ -224,6 +225,7 @@ const ProductEditScreen = () => {
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
+        headers: await uploadAuthHeaders(),
       })
 
       if (!response.ok) {

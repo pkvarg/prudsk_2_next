@@ -6,6 +6,7 @@ import { useParams, useRouter } from 'next/navigation'
 import useBannerStore from '@/store/bannerStore'
 import axios from 'axios'
 import { clearCacheHandler } from '@/app/components/ClearCacheButton'
+import { uploadAuthHeaders } from '@/lib/uploadToken'
 
 const BannerEditPage = () => {
   const params = useParams()
@@ -59,6 +60,7 @@ const BannerEditPage = () => {
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
+        headers: await uploadAuthHeaders(),
       })
 
       if (!response.ok) {

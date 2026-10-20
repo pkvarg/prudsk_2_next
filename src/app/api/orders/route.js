@@ -21,73 +21,86 @@ export async function POST(request) {
 
     const data = await request.json()
 
-    const {
-      orderItems,
-      shippingAddress,
-      paymentMethod,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice,
-      user,
-      name,
-      email,
-      discounts,
-      qtys,
-    } = data
+    // Prices, discounts and stock changes are worked out here from the database. Values the browser
+    // sends for them (itemsPrice, totalPrice, shippingPrice, discounts, qtys) are ignored, otherwise a
+    // customer could edit the request and order at any price.
+    const { orderItems, shippingAddress, paymentMethod, user, name, email } = data
 
     // Validate request
     if (!orderItems || orderItems.length === 0) {
       return NextResponse.json({ message: 'Žádné položky objednávky' }, { status: 400 })
     }
 
+    if (!Array.isArray(orderItems) || orderItems.length > 50 || !shippingAddress) {
+      return NextResponse.json({ message: 'Neplatná objednávka' }, { status: 400 })
+    }
+
+    const items = []
+    for (const item of orderItems) {
+      const productId = String(item?.product || '')
+      const qty = Number(item?.qty)
+      if (!/^[0-9a-f]{24}$/i.test(productId) || !Number.isInteger(qty) || qty < 1 || qty > 100) {
+        return NextResponse.json({ message: 'Neplatná položka objednávky' }, { status: 400 })
+      }
+      const product = await prisma.product.findUnique({ where: { id: productId } })
+      if (!product) {
+        return NextResponse.json({ message: 'Produkt sa nenašiel' }, { status: 400 })
+      }
+      // Same rule as the cart: the discounted price applies while the product has a discount.
+      const price = product.discount ? product.discountedPrice : product.price
+      items.push({ product, qty, price: Number(price) || 0, discount: Number(product.discount) || 0 })
+    }
+
+    // Same rules as the cart: 4.50 € shipping, free over 100 € or for CBA pickup.
+    const itemsTotal = items.reduce((acc, item) => acc + item.price * item.qty, 0)
+    const excludeShipping = shippingAddress.note === 'CBA'
+    const shippingPrice = excludeShipping || itemsTotal > 100 ? 0 : 4.5
+    const taxPrice = 0
+    const totalPrice = itemsTotal + shippingPrice
+    const discounts = items.map((item) => ({ product: item.product.id, discount: item.discount }))
+
     const orderNumber = await getOrderNumber()
 
     /* Update Count in stock on purchased products */
-    if (qtys) {
-      for (const key of Object.keys(qtys)) {
-        const purchasedProductId = `${qtys[key].product}`
-        const purchasedProductQty = parseInt(`${qtys[key].qty}`)
+    for (const { product: listed, qty: purchasedProductQty } of items) {
+      const product = await prisma.product.findUnique({
+        where: { id: listed.id },
+      })
 
-        const product = await prisma.product.findUnique({
-          where: { id: purchasedProductId },
-        })
+      if (product) {
+        const updatedCountInStockToDb = product.countInStock - purchasedProductQty
 
-        if (product) {
-          const updatedCountInStockToDb = product.countInStock - purchasedProductQty
+        if (updatedCountInStockToDb <= 10) {
+          await prisma.product.update({
+            where: { id: product.id },
+            data: { countInStock: updatedCountInStockToDb },
+          })
 
-          if (updatedCountInStockToDb <= 10) {
-            await prisma.product.update({
-              where: { id: product.id },
-              data: { countInStock: updatedCountInStockToDb },
-            })
-
-            const productToAdminNotif = {
-              id: product.id,
-              name: product.name,
-              author: product.author,
-              countInStock: updatedCountInStockToDb,
-            }
-
-
-            const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/prudsk2next/low-storage-count`
-
-            const response = await fetch(apiUrl, {
-              method: 'POST',
-              body: JSON.stringify(productToAdminNotif),
-            })
-
-            const data = await response.json()
-
-            if (!data.success) {
-              throw new Error('Nepodarilo sa odoslať Product low storage notification confirmation')
-            }
-          } else {
-            await prisma.product.update({
-              where: { id: product.id },
-              data: { countInStock: updatedCountInStockToDb },
-            })
+          const productToAdminNotif = {
+            id: product.id,
+            name: product.name,
+            author: product.author,
+            countInStock: updatedCountInStockToDb,
           }
+
+
+          const apiUrl = `${process.env.NEXT_PUBLIC_HONO_API_URL || 'https://hono-api.pictusweb.com'}/api/prudsk2next/low-storage-count`
+
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            body: JSON.stringify(productToAdminNotif),
+          })
+
+          const data = await response.json()
+
+          if (!data.success) {
+            throw new Error('Nepodarilo sa odoslať Product low storage notification confirmation')
+          }
+        } else {
+          await prisma.product.update({
+            where: { id: product.id },
+            data: { countInStock: updatedCountInStockToDb },
+          })
         }
       }
     }
@@ -100,12 +113,12 @@ export async function POST(request) {
         email,
         orderNumber,
         // Store as JSON instead of creating relations
-        orderItems: orderItems.map((item) => ({
-          name: item.name,
+        orderItems: items.map((item) => ({
+          name: item.product.name,
           qty: item.qty,
-          image: item.image,
+          image: item.product.image,
           price: item.price,
-          product: item.product, // Just store the ID as string
+          product: item.product.id, // Just store the ID as string
         })),
         shippingAddress: {
           address: shippingAddress.address,
@@ -123,7 +136,7 @@ export async function POST(request) {
           billingDIC: shippingAddress.billingDIC || '',
         },
         paymentMethod,
-        discounts: discounts || [],
+        discounts,
         taxPrice,
         shippingPrice,
         totalPrice,

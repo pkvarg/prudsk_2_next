@@ -1,8 +1,14 @@
 // app/api/cache/invalidate/route.js
 import { revalidateTag, revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
+import isAdmin from '@/lib/isAdmin'
 
 export async function POST(request) {
+  const user = await isAdmin()
+  if (!user?.isAdmin) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     // Option 2: Revalidate specific paths
     revalidatePath('/products') // revalidate products page

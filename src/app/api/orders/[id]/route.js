@@ -22,6 +22,11 @@ export async function GET(request, { params }) {
       },
     })
 
+    // Customers may only read their own orders; ObjectIds are partly predictable.
+    if (order && !user.isAdmin && order.userId !== user.id) {
+      return NextResponse.json({ message: 'Objednávka nenájdená' }, { status: 404 })
+    }
+
     if (order) {
       return NextResponse.json(order)
     } else {

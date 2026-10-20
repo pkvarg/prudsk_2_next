@@ -1,10 +1,16 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
+import isAdmin from '@/lib/isAdmin'
 
 // @desc    Get all subscribed users
 // @route   GET /api/subscribers/subscribed
 // @access  Private/Admin
 export async function GET() {
+  const user = await isAdmin()
+  if (!user?.isAdmin) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     // Find all users where isSubscribed is true
     const subscribers = await prisma.user.findMany({
