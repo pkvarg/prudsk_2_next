@@ -1,12 +1,17 @@
 // src/app/api/users/google/route.js
 import { NextResponse } from 'next/server'
 import prisma from '@/db/db'
+import { auth } from '@/lib/auth'
 
 export async function POST(request) {
   try {
-    // Parse request body to get sessionEmail
-    const body = await request.json()
-    const { name, email, id } = body.user
+    // Identity comes from the signed-in session, never from the request body; otherwise anyone
+    // could read another user's account data or create accounts in their name.
+    const session = await auth()
+    if (!session?.user?.email) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+    }
+    const { name, email, id } = session.user
 
     // Find existing user
     const user = await prisma.user.findUnique({

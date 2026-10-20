@@ -2,44 +2,12 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
+import bcrypt from 'bcryptjs'
+import prisma from '@/db/db'
+import authConfig from './auth.config'
 
-// Export authOptions separately
 export const authOptions = {
-  session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
-  pages: {
-    signIn: '/login',
-    error: '/error',
-  },
-  callbacks: {
-    async jwt({ token, user, account }) {
-      // Initial sign in
-      if (user) {
-        token.id = user.id
-        token.email = user.email
-        token.name = user.name
-        token.role = user.role
-        // Include any other user data you want to pass to the client
-
-        if (account) {
-          token.provider = account.provider
-        }
-      }
-      return token
-    },
-    async session({ session, token }) {
-      // Send properties to the client
-      session.user.id = token.id
-      session.user.role = token.role
-
-      // Add JWT token to user object for API authentication
-      session.user.token = token.id
-
-      return session
-    },
-  },
+  ...authConfig,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -48,36 +16,29 @@ export const authOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: {
-          label: 'Email',
-          type: 'text',
-          placeholder: 'jsmith@yahoo.com',
-        },
-        password: {
-          label: 'Password',
-          type: 'password',
-        },
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
+      // The session is created only after the password is checked here. Identity and role come
+      // from the database, never from what the browser sends.
       async authorize(credentials) {
-        // ONLY allow this if you're confident this path is called AFTER validation
-        if (!credentials.email) return null
+        const email = String(credentials?.email || '').trim()
+        const password = String(credentials?.password || '')
+        if (!email || !password) return null
 
-        // Optionally: decode extra fields if passed in credentials
+        const user = await prisma.user.findUnique({ where: { email } })
+        if (!user?.password || !user.isRegistered) return null
+        if (!(await bcrypt.compare(password, user.password))) return null
+
         return {
-          id: credentials.id,
-          name: credentials.name,
-          email: credentials.email,
-          role: credentials.role,
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.isAdmin ? 'admin' : 'user',
         }
       },
     }),
   ],
 }
 
-// Initialize NextAuth with authOptions
 export const { handlers, auth, signIn, signOut } = NextAuth(authOptions)
-
-// Export middleware to protect routes
-export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
-}

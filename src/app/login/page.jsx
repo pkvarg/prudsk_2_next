@@ -98,10 +98,8 @@ export default function LoginPage() {
       // Manually trigger session creation
       await signIn('credentials', {
         redirect: false,
-        email: data.email,
-        id: data.id,
-        name: data.name,
-        role: data.isAdmin ? 'admin' : 'user',
+        email,
+        password,
       })
 
       router.push(callbackUrl)
